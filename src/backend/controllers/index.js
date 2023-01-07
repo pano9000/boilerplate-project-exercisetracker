@@ -16,11 +16,11 @@ module.exports = {
       post: require("./api/usersPost"),
 
       logs: {
-        get: require("./api/logs")
+        get: require("./api/logsGet")
       },
 
       exercises: {
-        post: require("./api/exercises")
+        post: require("./api/exercisesPost")
       }
 
     },
