@@ -10,7 +10,7 @@ const UserSchema = new dbConnection.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    match: /^[0-9a-z-_]{3,20}$/
+    match: /^[0-9a-z-_]{3,30}$/
   },
 })
 
