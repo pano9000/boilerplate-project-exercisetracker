@@ -12,3 +12,4 @@ Backend:
 FCC Ressources
 * [Github with Original Boilerplate from FCC](https://github.com/freeCodeCamp/boilerplate-project-exercisetracker/)
 * [FCC Version Live Replit Demo](https://exercise-tracker.freecodecamp.rocks/)
+* [FCC Test Cases](https://github.com/freeCodeCamp/freeCodeCamp/blob/main/curriculum/challenges/english/05-back-end-development-and-apis/back-end-development-and-apis-projects/exercise-tracker.md)
