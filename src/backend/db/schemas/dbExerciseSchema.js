@@ -25,7 +25,11 @@ const ExerciseSchema = new dbConnection.Schema({
   },
 
   date: {
-    type: Date
+    type: Date,
+    required: true,
+    default: Date.now,
+    set: (value) => (value === '') ? Date.now() : value,
+  },
   },
 
   _id: {
