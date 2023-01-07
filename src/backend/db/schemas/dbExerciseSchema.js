@@ -28,7 +28,12 @@ const ExerciseSchema = new dbConnection.Schema({
     type: Date
   },
 
+  _id: {
+    type: String,
+    required: true,
+    match: /^[a-zA-Z]{1,5}_[0-9a-f]{24}$/
+  }
+}, { _id: false }) // disable default _id -> necessary to enable custom -
 
-})
 
 module.exports = ExerciseSchema
