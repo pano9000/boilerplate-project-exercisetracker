@@ -2,8 +2,6 @@ const dbConnection = require("../dbConnection");
 
 const ExerciseSchema = new dbConnection.Schema({
 
-  //_id: -> gets auto-added
-
   // TODO: find out how to "link" to UserSchema's _id above 
   // -> model a "one-to-many" relation (one user <> many exercises)
   userId: {
