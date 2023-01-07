@@ -6,6 +6,7 @@ My ~~solution~~ work in Progress for the [Exercise Tracker](https://www.freecode
 Backend:
 * Nodejs
 * Express (for the HTTP Server)
+* MongoDB via Mongoose
 
 ---
 
