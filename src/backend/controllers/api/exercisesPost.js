@@ -14,34 +14,36 @@ async function exercisesPost(req, res) {
 
     console.log("exercise body:", req.body);
     console.log("paran", req.params)
-
+    
     //TODO: less hardcoding? refactor to separate function?
     const exerciseDataForDB = {
 
       userId: req.params._id,
       description: req.body.description,
       duration: req.body.duration,
-      date: req.body.duration || (new Date).toDateString(),
-
+      date: req.body.date
     }
     //TODO: Input validation/sanitation
 
     const saveResult = await createExercise(exerciseDataForDB);
-    console.log("result", saveResult)
+    console.log("saveResult", saveResult)
 
     if (!saveResult) {
       throw new Error("saving failed") //TODO: better error message handling
     }
 
-    // Create response JSON in the format that FCC requires
+    // Create response JSON in the format that FCC requires + additional properties: dateOriginal + exerc_id
     const response = {
       username: "usernameFromDB", //fetch from DB
       description: saveResult.description,
       duration: saveResult.duration,
-      date: saveResult.date,
+      date: (new Date(`"${saveResult.date}"`)).toDateString(), // formatted date, as requested by FCC,
+      dateOriginal: saveResult.date, //original date from DB with time
       _id: saveResult.userId, //-> this is the USERID not the exercise ID
       exerc_id: saveResult._id
     }
+
+    console.log("response", response)
 
     res.status(201).json(response);
 
