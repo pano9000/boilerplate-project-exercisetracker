@@ -6,7 +6,8 @@ async function usersPost(req, res) {
 
     console.log("Username:", req.body.username);
 
-    const saveResult = await createUser(req.body.username);
+    const username = req.body.username
+    const saveResult = await createUser({ username });
     console.log("result", saveResult)
 
     if (!saveResult) {

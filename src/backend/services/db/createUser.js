@@ -1,9 +1,9 @@
 const { UserModel } = require("../../db/").models;
 const saveDoc = require("./saveDoc")
 
-async function createUser(username) {
+async function createUser(userData) {
 
-    const user = new UserModel({ username });
+    const user = new UserModel(userData);
     return await saveDoc(user);
 
 }
