@@ -6,6 +6,7 @@ const routes = require("./src/backend/routes/")
 
 app.use(cors())
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes);
 
