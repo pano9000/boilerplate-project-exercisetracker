@@ -14,6 +14,9 @@ const findUser = {
 
     try {
       const searchResult = (mode === "one") ? await UserModel.findOne(searchObject).exec() : await UserModel.find().exec();
+      if (searchResult === undefined) {
+        throw new Error("Db returned undefined")
+      }
       return searchResult
     }
     catch(error) {
