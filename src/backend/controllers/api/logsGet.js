@@ -75,18 +75,22 @@ async function logs(req, res) {
     console.log("searchObject", searchObject )
     const findResult = await findExercises.findAll(searchObject, queryOptions); //TODO: check if pagination of results should be a thing?
 
-    //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already
+    //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
-      username: "username",
+      username: findUserResult.username,
       count: findResult.length,
-      _id: ""
+      _id: findUserResult._id,
+      log: findResult.map(result => {
+        const { description, duration, date } = result;
+        return { 
+          description, 
+          duration, 
+          date: (new Date(date)).toDateString()
+        }
+      })
     }
-    if (findResult.length > 0) {
 
-    }
-    console.log("findresult", findResult)
-    res.status(200).json(findResult);
-    //res.status(201).json("logs");
+    res.status(200).json(response);
 
   }
   catch(error) {
