@@ -94,7 +94,7 @@ async function logs(req, res) {
 
   }
   catch(error) {
-    res.status(500).json({"error": "Getting Exercise List Failed, Please try again later"});
+    res.status(500).json({"error": `Getting Exercise List Failed, Reason: ${error.message}`});
 
   }
 
