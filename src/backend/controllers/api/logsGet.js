@@ -43,8 +43,17 @@ async function logs(req, res) {
     console.log("userId frpm parasms", userId)
     console.log(filterDateFrom, filterDateTo, filterQty, optionSort)
 
-    //validate -> limit needs to be int, if not -> set to undefined
+    // validate -> limit needs to be int, if not -> set to undefined
     // validate -> sort needs to be asc or desc -> alse set to undefined
+    // validate -> date needs to be date format -> else set to undefined
+
+    const findUserResult = await findUser.findOne({ _id: userId })
+    console.log("finduserresult", findUserResult)
+    if (findUserResult === null) {
+      throw new Error("user not found")
+    }
+
+
     //create search here, depending on what the filters say -> probably refactor to separate function
     const createSearchObject = () => {
       const searchObject = {
