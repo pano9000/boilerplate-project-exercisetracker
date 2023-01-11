@@ -42,9 +42,9 @@ async function exercisesPost(req, res) {
       description: saveResult.description,
       duration: saveResult.duration,
       date: (new Date(`"${saveResult.date}"`)).toDateString(), // formatted date, as requested by FCC,
-      dateOriginal: saveResult.date, //original date from DB with time
+      //dateOriginal: saveResult.date, //original date from DB with time
       _id: saveResult.userId, //-> this is the USERID not the exercise ID
-      exerc_id: saveResult._id
+      //exerc_id: saveResult._id
     }
 
     res.status(201).json(response);
