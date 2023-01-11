@@ -11,7 +11,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
       const res = await fetch(url + '/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+        body: `username=fcc_test_${Date.now()}`
       });
       assert.isTrue(res.ok);
       if(!res.ok) {
@@ -24,7 +24,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
@@ -78,7 +78,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
@@ -114,7 +114,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
@@ -150,7 +150,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
@@ -187,7 +187,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
@@ -228,7 +228,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     })
     if(res.ok){
       const {_id, username} = await res.json();
@@ -271,7 +271,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if(res.ok) {
       const {_id, username} = await res.json();
@@ -448,7 +448,7 @@ describe("freeCodeCamp Project Passing Tests", () => {
     const res = await fetch(url + '/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `username=fcc_test_${Date.now()}`.substring(0, 29)
+      body: `username=fcc_test_${Date.now()}`
     });
     if (res.ok) {
       const { _id, username } = await res.json();
