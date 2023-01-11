@@ -1,4 +1,6 @@
 const createExercise = require("../../services/db/createExercise");
+const findUser = require("../../services/db/findUser");
+
 
 async function exercisesPost(req, res) {
 
@@ -32,9 +34,15 @@ async function exercisesPost(req, res) {
       throw new Error("saving failed") //TODO: better error message handling
     }
 
+    const usernameResult = await findUser.findOne({_id: saveResult.userId})
+
+    if (usernameResult === null) {
+      throw new Error(`Username not found`)
+    }
+
     // Create response JSON in the format that FCC requires + additional properties: dateOriginal + exerc_id
     const response = {
-      username: "usernameFromDB", //fetch from DB
+      username: usernameResult.username,
       description: saveResult.description,
       duration: saveResult.duration,
       date: (new Date(`"${saveResult.date}"`)).toDateString(), // formatted date, as requested by FCC,
