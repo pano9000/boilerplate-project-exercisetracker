@@ -6,6 +6,7 @@ Current Status (`2023 Jan 11`):
 * freeCodeCamp tests are passing
 * Backend Validation is still TODO
 * Frontend work still TODO
+* MongoDB Schemas can still be omptomized (relations need to be modelled still)
 
 Backend:
 * Nodejs
