@@ -17,7 +17,7 @@ async function exercisesPost(req, res) {
     //TODO: less hardcoding? refactor to separate function?
     const exerciseDataForDB = {
 
-      userId: req.params._id,
+      userId: req.params.userId,
       description: req.body.description,
       duration: req.body.duration,
       date: req.body.date

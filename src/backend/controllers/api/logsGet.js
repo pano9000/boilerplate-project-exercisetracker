@@ -33,7 +33,7 @@ async function logs(req, res) {
 
   try {
 
-    const { _id: userId } = req.params;
+    const { userId } = req.params
     if (userId === undefined || userId === null) {
       throw new Error("userId undefined/null is invalid")
     }
