@@ -8,7 +8,6 @@ async function usersPost(req, res) {
 
     const username = req.body.username
     const saveResult = await createUser({ username });
-    console.log("result", saveResult)
 
     if (!saveResult) {
       throw new Error("saving failed")
