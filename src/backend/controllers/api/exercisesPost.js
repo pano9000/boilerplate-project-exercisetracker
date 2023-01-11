@@ -14,9 +14,6 @@ async function exercisesPost(req, res) {
   */
   try {
 
-    console.log("exercise body:", req.body);
-    console.log("paran", req.params)
-    
     //TODO: less hardcoding? refactor to separate function?
     const exerciseDataForDB = {
 
@@ -28,7 +25,6 @@ async function exercisesPost(req, res) {
     //TODO: Input validation/sanitation
 
     const saveResult = await createExercise(exerciseDataForDB);
-    console.log("saveResult", saveResult)
 
     if (!saveResult) {
       throw new Error("saving failed") //TODO: better error message handling
@@ -50,8 +46,6 @@ async function exercisesPost(req, res) {
       _id: saveResult.userId, //-> this is the USERID not the exercise ID
       exerc_id: saveResult._id
     }
-
-    console.log("response", response)
 
     res.status(201).json(response);
 
