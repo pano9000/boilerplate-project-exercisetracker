@@ -3,7 +3,6 @@ const { validationResult } = require("express-validator")
 
 function handler(req, res, next) {
   const validationErrors = validationResult(req);
-  console.log("*************", validationErrors)
 
   if (validationErrors.isEmpty()) {
     next();
@@ -28,12 +27,12 @@ function handler(req, res, next) {
 
   }, {fatalErrors: [], resetParamErrors: [], unknownErrors: []});
 
-  
+
   //TODO: create new ErrorType -> ValidationError? and handle in ErrorMiddleware?
   //const fatalErrors = validationErrors.array().filter(error => error.msg.errorHandling === "sendError")
-  
+
   if (mappedErrors.fatalErrors.length > 0) {
-    
+
     const response = mappedErrors.fatalErrors.map(fatalError => {
       return {
         msg: `Invalid value for field '${fatalError.param}'`,
