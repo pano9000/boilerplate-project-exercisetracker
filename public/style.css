@@ -7,10 +7,13 @@ body {
   margin: 25px;
   color: #222;
   background-color: #f5f5f5;
+  max-width: 80rem;
+  margin: 0 auto;
 }
 
 h1 {
   font-weight: bold;
+  text-align: center;
   
 }
 
@@ -56,4 +59,47 @@ code {
   font-size: 1.2em;
   background-color: #FFFEC4;
   padding: 2px;
+}
+
+
+#nav-wrap {
+
+  gap: 1rem;
+  background-color: bisque;
+  padding: 1rem;
+  border-radius: .25rem;
+}
+
+.btn_nav {
+
+  background-color: aqua;
+  padding: 1rem;
+
+}
+
+#nav-wrap a active{
+
+  background-color: aqua;
+  padding: 1rem;
+
+}
+
+.btn_nav_active {
+  background-color: burlywood;
+}
+
+#navbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.section_action {
+  background-color: lightgrey;
+  padding: 2rem;
+  display: none;
+}
+
+.section_action_active {
+  display: block;
 }

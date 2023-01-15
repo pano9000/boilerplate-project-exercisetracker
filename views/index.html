@@ -8,8 +8,8 @@
   </head>
 
   <body>
-    <div class="container">
-      <h1>Exercise tracker</h1>
+    <main class="container">
+      <h1>Exercise Tracker</h1>
       <form action="/api/users" method="post">
         <h3>Create a New User</h3>
         <p><code>POST /api/users</code></p>
@@ -31,7 +31,55 @@
       </p>
       <p><strong>[ ]</strong> = optional</p>
       <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
-    </div>
+      <div id="nav-wrap">
+        <nav id="navbar">
+          <a id="btn_nav_create" class="btn_nav btn_nav_active" href="#">Create</a>
+          <a id="btn_nav_read" class="btn_nav" href="#">Read</a>
+          <a id="btn_nav_update" class="btn_nav" href="#">Update</a>
+          <a id="btn_nav_delete" class="btn_nav" href="#">Delete</a>
+        </nav>
+      </div>
+      <section id="section_create" class="section_action section_action_active">
+        <div>
+          <h2>Create</h2>
+        </div>
+        <div>
+          <h3>Create New User</h3>
+        </div>
+        <div>
+          <h3>Create/Add New Exercise to User</h3>
+        </div>
+      </section>
+      <section id="section_read" class="section_action">
+        <h2>Read</h2>
+        <div>
+          <div>
+            <h3>Get All Users</h3>
+          </div>
+          <div>
+            <h3>Get One User</h3>
+          </div>
+          <div>
+            <h3>Get User's Exercise Log</h3>
+            <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+          </div>
+        </div>
+      </section>
+      <section id="section_update" class="section_action">
+        <h2>Update</h2>
+        <div>TODO</div>
+      </section>
+      <section id="section_delete" class="section_action">
+        <h2>Delete</h2>
+        <div>Delete User: DELETE /api/users/:userId</div>
+        <div>Delete Exercise: DELETE /api/users/:userId</div>
+      </section>
+    </main>
+    <hr>
+    <footer>
+      <p>Original Boilerplate By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
+      <p>Solution by <a href="https://github.com/pano9000">pano9000</a></p>
+    </footer>
     <script>
       const exerciseForm = document.getElementById("exercise-form");
 
@@ -42,5 +90,8 @@
         exerciseForm.submit();
       });
     </script>
+
+
+  <script src="dist.js"></script>
   </body>
 </html>
