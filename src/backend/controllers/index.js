@@ -15,12 +15,12 @@ module.exports = {
       get: require("./api/usersGet"),
       post: require("./api/usersPost"),
 
-      /* TODO: future route, to get single user info and also update user info
       userId: {
         get: require("./api/userIdGet"),
+        /* TODO: future route, to get single user info and also update user info
         patch: require("./api/userIdPatch")
+        */
       },
-      */
 
       logs: {
         get: require("./api/logsGet")

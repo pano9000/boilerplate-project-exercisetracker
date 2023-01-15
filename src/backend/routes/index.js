@@ -9,6 +9,7 @@ router.post("*", controllers.rateLimiter.post);
 router.get("/", controllers.root.get);
 
 router.get("/api/users", controllers.api.users.get);
+
 router.get(
   "/api/users/:userId/logs",
   validation.check.logsGet,
@@ -24,9 +25,14 @@ router.post(
   controllers.api.users.exercises.post
 );
 
+router.get(
+  "/api/users/:userId",
+  validation.check.userIdGet,
+  validation.handler,
+  controllers.api.users.userId.get
+)
 
 /* future routes
-router.get("/api/users/:userId", controllers.api.users.userId.get)
 router.patch("/api/users/:userId", controllers.api.users.userId.patch)
 */
 
