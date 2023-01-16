@@ -41,21 +41,20 @@
         </nav>
       </div>
       <section id="section_create" class="section_action section_action_active">
-        <div>
-          <h2>Create</h2>
-        </div>
+        <h2>Create</h2>
         <div id="nav-wrap">
 
-          <nav id="navbar_create">
-            <a id="btn-nav-create_user" class="btn-nav btn-nav_active" href="#">Create User</a>
-            <a id="btn-nav-create_exercise" class="btn-nav" href="#">Create Exercise</a>
+          <nav id="navbar-create">
+            <a id="btn-nav-create_createuser" class="btn-nav btn-nav_active" href="#section_createuser">Create User</a>
+            <a id="btn-nav-create_createexercise" class="btn-nav" href="#section_createexercise">Create Exercise</a>
           </nav>
+
         </div>
 
 
-        <div id="" class="section_subaction section_subaction_active">
+        <div id="section_createuser" class="section_action section_subaction section_action_active">
           <h3>Create New User</h3>
-          <form>
+          <form id="" class="">
             <ul>
               <li>Numbers 0-9</li>
               <li>Letters a to z</li>
@@ -68,7 +67,7 @@
           <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users</span></p>
         </div>
 
-        <div id="" class="section_subaction section_subaction_active">
+        <div id="section_createexercise" class="section_action section_subaction">
           <h3>Create New Exercise</h3>
           <form>
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
@@ -83,6 +82,54 @@
       </section>
       <section id="section_read" class="section_action">
         <h2>Read</h2>
+        <div id="nav-wrap">
+
+          <nav id="navbar-read">
+            <a id="btn-nav-read_readoneuser" class="btn-nav btn-nav_active" href="#section_readoneuser">Show One User</a>
+            <a id="btn-nav-read_readallusers" class="btn-nav" href="#section_readallusers">Show All Users</a>
+            <a id="btn-nav-read_readuserexercise" class="btn-nav" href="#section_readuserexercise">Show User's Exercise Log</a>
+          </nav>
+
+        </div>
+
+        <div id="section_readoneuser" class="section_action section_subaction">
+          <h3>Show One User</h3>
+          <form>
+            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+            <input type="text" placeholder="Description" required min="3" max="50">
+            <input type="text" placeholder="Duration" required min="1" max="3">
+            <input type="date" placeholder="date">
+            <button type="submit">Create Exercise</button>
+          </form>
+          <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
+        </div>
+
+        <div id="section_readallusers" class="section_action section_subaction section_action_active">
+          <h3>Show All Users</h3>
+          <pre>
+            abc
+          </pre>  
+          <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users</span></p>
+        </div>
+
+
+
+        <div id="section_readuserexercise" class="section_action section_subaction">
+          <h3>Show User's Exercise Log</h3>
+          <form>
+            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+            <input type="text" placeholder="Description" required min="3" max="50">
+            <input type="text" placeholder="Duration" required min="1" max="3">
+            <input type="date" placeholder="date">
+            <button type="submit">Create Exercise</button>
+          </form>
+          <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span>
+            ?[from][&to][&limit]
+          </p>
+        </div>
+
+
+
         <div>
           <div>
             <h3>Get All Users</h3>

@@ -71,10 +71,16 @@ code {
 }
 
 .btn-nav {
-
   background-color: aqua;
   padding: 1rem;
   transition: 0.3s background-color;
+  text-decoration: none;
+}
+
+
+.btn-nav:hover {
+
+  background-color: aquamarine;
 
 }
 
@@ -86,6 +92,10 @@ code {
 }
 
 .btn-nav_active {
+  background-color: burlywood;
+}
+
+.btn-nav_active:hover {
   background-color: burlywood;
 }
 
@@ -121,3 +131,4 @@ code {
   background-color: coral;
 
 }
+
