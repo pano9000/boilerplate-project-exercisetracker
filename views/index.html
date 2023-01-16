@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Exercise Tracker | freeCodeCamp</title>
+    <title>freeCodeCamp's Exercise Tracker by @pano9000</title>
     <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"  type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
     <link href="style.css" rel="stylesheet" type="text/css" />
@@ -31,24 +31,55 @@
       </p>
       <p><strong>[ ]</strong> = optional</p>
       <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+      <h2>Mock "Admin" Interface</h2>
       <div id="nav-wrap">
-        <nav id="navbar">
-          <a id="btn_nav_create" class="btn_nav btn_nav_active" href="#">Create</a>
-          <a id="btn_nav_read" class="btn_nav" href="#">Read</a>
-          <a id="btn_nav_update" class="btn_nav" href="#">Update</a>
-          <a id="btn_nav_delete" class="btn_nav" href="#">Delete</a>
+        <nav id="navbar-main">
+          <a id="btn-nav-main_create" class="btn-nav btn-nav_active" href="#">Create</a>
+          <a id="btn-nav-main_read" class="btn-nav" href="#">Read</a>
+          <a id="btn-nav-main_update" class="btn-nav" href="#">Update</a>
+          <a id="btn-nav-main_delete" class="btn-nav" href="#">Delete</a>
         </nav>
       </div>
       <section id="section_create" class="section_action section_action_active">
         <div>
           <h2>Create</h2>
         </div>
-        <div>
+        <div id="nav-wrap">
+
+          <nav id="navbar_create">
+            <a id="btn-nav-create_user" class="btn-nav btn-nav_active" href="#">Create User</a>
+            <a id="btn-nav-create_exercise" class="btn-nav" href="#">Create Exercise</a>
+          </nav>
+        </div>
+
+
+        <div id="" class="section_subaction section_subaction_active">
           <h3>Create New User</h3>
+          <form>
+            <ul>
+              <li>Numbers 0-9</li>
+              <li>Letters a to z</li>
+              <li>Minimum length: 3 characters</li>
+              <li>Maximum length: 30 characters</li>
+            </ul>
+            <input type="text" placeholder="Username" required pattern="^[0-9a-z-_]{3,30}$">
+            <button type="submit">Create User</button>
+          </form>
+          <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users</span></p>
         </div>
-        <div>
-          <h3>Create/Add New Exercise to User</h3>
+
+        <div id="" class="section_subaction section_subaction_active">
+          <h3>Create New Exercise</h3>
+          <form>
+            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+            <input type="text" placeholder="Description" required min="3" max="50">
+            <input type="text" placeholder="Duration" required min="1" max="3">
+            <input type="date" placeholder="date">
+            <button type="submit">Create Exercise</button>
+          </form>
+          <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span></p>
         </div>
+
       </section>
       <section id="section_read" class="section_action">
         <h2>Read</h2>

@@ -70,10 +70,11 @@ code {
   border-radius: .25rem;
 }
 
-.btn_nav {
+.btn-nav {
 
   background-color: aqua;
   padding: 1rem;
+  transition: 0.3s background-color;
 
 }
 
@@ -84,14 +85,15 @@ code {
 
 }
 
-.btn_nav_active {
+.btn-nav_active {
   background-color: burlywood;
 }
 
-#navbar {
+#navbar-main {
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  border-radius: .25rem;
 }
 
 .section_action {
@@ -102,4 +104,20 @@ code {
 
 .section_action_active {
   display: block;
+}
+
+.label-rest {
+  padding: 0.25rem;
+  border-radius: .25rem;
+}
+
+.label-api-route {
+
+  background-color: darkcyan;
+}
+
+.label-http-verb {
+
+  background-color: coral;
+
 }
