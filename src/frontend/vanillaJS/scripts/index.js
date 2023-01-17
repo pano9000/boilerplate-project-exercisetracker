@@ -31,9 +31,9 @@ const navbarElements = {
 const classBtnNavActive = "btn-nav_active";
 //const classBtnNav = "btn-nav"
 
-navbarElements.main.addEventListener("click", navbarMainClickHandler)
-navbarElements.create.addEventListener("click", navbarMainClickHandler)
-navbarElements.read.addEventListener("click", navbarMainClickHandler)
+Object.keys(navbarElements).forEach( key => {
+  navbarElements[key].addEventListener("click", navbarMainClickHandler);
+});
 
 function navbarMainClickHandler(event) {
   const currentActiveElem = event.target
