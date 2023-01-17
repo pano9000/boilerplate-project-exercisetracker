@@ -99,7 +99,7 @@ code {
   background-color: burlywood;
 }
 
-#navbar-main {
+#admin-ui_navbar-main {
   display: flex;
   align-items: flex-start;
   justify-content: center;

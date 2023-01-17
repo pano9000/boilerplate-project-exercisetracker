@@ -18,15 +18,18 @@ const sectionElements = {
   readuserexercise: document.getElementById("section_readuserexercise"),
 }
 
-const navbarElements = {
-  main: document.getElementById("navbar-main"),
-  create: document.getElementById("navbar-create"),
-  read: document.getElementById("navbar-read"),
-  update: document.getElementById("navbar-update"),
-  delete: document.getElementById("navbar-delete")
-}
+const navbarElements = (() => {
+  const navElementsAll = Array.from(document.querySelectorAll("nav"));
+  const adminUiNavElements = navElementsAll.filter(elem => elem.id.match(/^admin-ui_navbar-[a-z]+$/))
+  const navbarElements = {};
+  adminUiNavElements.forEach(elem => {
+    const id = elem.id.split("_").pop();
+    const splitId = id.split("-").pop();
+    navbarElements[splitId] =  elem;
+  })
+  return navbarElements
+})()
 
-//const navbarMain = document.getElementById("navbar-main")
 
 const classBtnNavActive = "btn-nav_active";
 //const classBtnNav = "btn-nav"
