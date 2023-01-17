@@ -40,7 +40,7 @@
           <a id="btn-nav-main_delete" class="btn-nav" href="#">Delete</a>
         </nav>
       </div>
-      <section id="section_create" class="section_action section_action_active">
+      <section id="admin-ui_section-create" class="admin-ui_section_action admin-ui_section_action_active">
         <h2>Create</h2>
         <div id="nav-wrap">
 
@@ -52,7 +52,7 @@
         </div>
 
 
-        <div id="section_createuser" class="section_action section_subaction section_action_active">
+        <div id="admin-ui_section-createuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Create New User</h3>
           <form id="" class="">
             <ul>
@@ -67,7 +67,7 @@
           <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users</span></p>
         </div>
 
-        <div id="section_createexercise" class="section_action section_subaction">
+        <div id="admin-ui_section-createexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Create New Exercise</h3>
           <form>
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
@@ -80,7 +80,7 @@
         </div>
 
       </section>
-      <section id="section_read" class="section_action">
+      <section id="admin-ui_section-read" class="admin-ui_section_action">
         <h2>Read</h2>
         <div id="nav-wrap">
 
@@ -92,7 +92,7 @@
 
         </div>
 
-        <div id="section_readoneuser" class="section_action section_subaction">
+        <div id="admin-ui_section-readoneuser" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show One User</h3>
           <form>
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
@@ -104,7 +104,7 @@
           <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
         </div>
 
-        <div id="section_readallusers" class="section_action section_subaction section_action_active">
+        <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Show All Users</h3>
           <pre>
             abc
@@ -114,7 +114,7 @@
 
 
 
-        <div id="section_readuserexercise" class="section_action section_subaction">
+        <div id="admin-ui_section-readuserexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show User's Exercise Log</h3>
           <form>
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
@@ -143,11 +143,11 @@
           </div>
         </div>
       </section>
-      <section id="section_update" class="section_action">
+      <section id="admin-ui_section-update" class="admin-ui_section_action">
         <h2>Update</h2>
         <div>TODO</div>
       </section>
-      <section id="section_delete" class="section_action">
+      <section id="admin-ui_section-delete" class="admin-ui_section_action">
         <h2>Delete</h2>
         <div>Delete User: DELETE /api/users/:userId</div>
         <div>Delete Exercise: DELETE /api/users/:userId</div>

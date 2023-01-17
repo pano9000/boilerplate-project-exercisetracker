@@ -106,13 +106,13 @@ code {
   border-radius: .25rem;
 }
 
-.section_action {
+.admin-ui_section_action {
   background-color: lightgrey;
   padding: 2rem;
   display: none;
 }
 
-.section_action_active {
+.admin-ui_section_action_active {
   display: block;
 }
 
