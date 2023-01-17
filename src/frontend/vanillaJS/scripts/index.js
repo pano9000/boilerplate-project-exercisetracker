@@ -5,18 +5,18 @@ const section_update = document.getElementById("section_update")
 const section_delete = document.getElementById("section_delete")
 */
 
-//TODO: make this dynamic
-const sectionElements = {
-  create: document.getElementById("section_create"),
-  read: document.getElementById("section_read"),
-  update: document.getElementById("section_update"),
-  delete: document.getElementById("section_delete"),
-  createuser: document.getElementById("section_createuser"),
-  createexercise: document.getElementById("section_createexercise"),
-  readallusers: document.getElementById("section_readallusers"),
-  readoneuser: document.getElementById("section_readoneuser"),
-  readuserexercise: document.getElementById("section_readuserexercise"),
-}
+//TODO: refactor into reusable function
+const sectionElements = (() => {
+  const sectionElementsAll = Array.from(document.querySelectorAll(".admin-ui_section_action"));
+  const adminUiSectionElements = sectionElementsAll.filter(elem => elem.id.match(/^admin-ui_section-[a-z]+$/))
+  const sectionElements = {};
+  adminUiSectionElements.forEach(elem => {
+    const id = elem.id.split("_").pop();
+    const splitId = id.split("-").pop();
+    sectionElements[splitId] =  elem;
+  })
+  return sectionElements
+})()
 
 const navbarElements = (() => {
   const navElementsAll = Array.from(document.querySelectorAll("nav"));
@@ -50,8 +50,8 @@ function navbarMainClickHandler(event) {
     previousActiveElem.classList.remove(classBtnNavActive)
     currentActiveElem.classList.add(classBtnNavActive)
     
-    sectionElements[previousSection].classList.remove("section_action_active");
-    sectionElements[currentSection].classList.add("section_action_active");
+    sectionElements[previousSection].classList.remove("admin-ui_section_action_active");
+    sectionElements[currentSection].classList.add("admin-ui_section_action_active");
 
   }
 
