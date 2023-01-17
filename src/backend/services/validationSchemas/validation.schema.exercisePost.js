@@ -7,7 +7,7 @@ const exercisePostSchema = [
   pathParams.userId,
 
   body("description").isLength({min: 2, max: 50}),
-  body("duration").isInt(),
+  body("duration").isInt({min: 1, max: 999}),
   body("date").optional().isDate(),
 
 ]

@@ -21,6 +21,8 @@ const ExerciseSchema = new dbConnection.Schema({
   duration: {
     type: Number,
     required: true,
+    min: 1,
+    max: 999,
     validate: (durationValue) => Number.isInteger(durationValue)
   },
 
