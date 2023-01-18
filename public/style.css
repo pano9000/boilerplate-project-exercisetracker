@@ -132,3 +132,11 @@ code {
 
 }
 
+
+.label-characters {
+	background: lightgray;
+	padding: .25rem;
+	border-radius: .25rem;
+	box-shadow: 2px 2px 2px rgb(0,0,0,.2);
+	display: inline-block;
+}
