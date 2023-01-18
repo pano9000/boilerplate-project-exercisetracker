@@ -9,7 +9,11 @@
 
   <body>
     <main class="container">
-      <h1>Exercise Tracker</h1>
+      <header>
+        <h1>Exercise Tracker</h1>
+        <h2>Mock "Admin" Interface</h2>
+      </header>
+      <!--
       <form action="/api/users" method="post">
         <h3>Create a New User</h3>
         <p><code>POST /api/users</code></p>
@@ -31,7 +35,8 @@
       </p>
       <p><strong>[ ]</strong> = optional</p>
       <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
-      <h2>Mock "Admin" Interface</h2>
+      -->
+
       <div id="nav-wrap">
         <nav id="admin-ui_navbar-main">
           <a id="btn-nav-main_create" class="btn-nav btn-nav_active" href="#">Create</a>
@@ -40,6 +45,7 @@
           <a id="btn-nav-main_delete" class="btn-nav" href="#">Delete</a>
         </nav>
       </div>
+
       <section id="admin-ui_section-create" class="admin-ui_section_action admin-ui_section_action_active">
         <h2>Create</h2>
         <div id="nav-wrap">
@@ -99,23 +105,21 @@
 
         </div>
 
-        <div id="admin-ui_section-readoneuser" class="admin-ui_section_action admin-ui_section_subaction">
+        <div id="admin-ui_section-readoneuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Show One User</h3>
-          <form>
+          <form action="/api/users/:userId" id="admin-ui_form-createexercise" method="get">
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
-            <input type="text" placeholder="Description" required min="3" max="50">
-            <input type="text" placeholder="Duration" required min="1" max="3">
-            <input type="date" placeholder="date">
-            <button type="submit">Create Exercise</button>
+            <button type="submit">Load User</button>
           </form>
           <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
         </div>
 
-        <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
+        <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show All Users</h3>
-          <pre>
-            abc
-          </pre>  
+          <form action="/api/users/" id="admin-ui_form-createexercise" method="get">
+            <p>TODO: add some filtering possibilities here?</p>
+            <button type="submit">Load Users</button>
+          </form>
           <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users</span></p>
         </div>
 
@@ -123,41 +127,58 @@
 
         <div id="admin-ui_section-readuserexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show User's Exercise Log</h3>
-          <form>
+          <form action="/api/users/:userId/logs" id="admin-ui_form-createexercise" method="post">
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
-            <input type="text" placeholder="Description" required min="3" max="50">
-            <input type="text" placeholder="Duration" required min="1" max="3">
+            <div>
+              <h4>Filtering</h4>
+              <input type="date" placeholder="From">
+              <input type="date" placeholder="To">
+              <input type="number" placeholder="Limit To">
+              TODO: Sort options here?
+            </div>
             <input type="date" placeholder="date">
-            <button type="submit">Create Exercise</button>
+            <button type="submit">Show Exercise Log</button>
           </form>
           <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span>
             ?[from][&to][&limit]
           </p>
         </div>
 
-
-
-        <div>
-          <div>
-            <h3>Get All Users</h3>
-          </div>
-          <div>
-            <h3>Get One User</h3>
-          </div>
-          <div>
-            <h3>Get User's Exercise Log</h3>
-            <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
-          </div>
-        </div>
       </section>
+
       <section id="admin-ui_section-update" class="admin-ui_section_action">
         <h2>Update</h2>
         <div>TODO</div>
       </section>
+
       <section id="admin-ui_section-delete" class="admin-ui_section_action">
+
+        <div id="nav-wrap">
+
+          <nav id="admin-ui_navbar-delete">
+            <a id="btn-nav-delete_deleteuser" class="btn-nav btn-nav_active" href="#admin-ui_section-deleteuser">Delete User</a>
+            <a id="btn-nav-delete_deleteexercise" class="btn-nav" href="#admin-ui_section-deleteexercise">Delete Exercise</a>
+          </nav>
+
+        </div>
+
         <h2>Delete</h2>
-        <div>Delete User: DELETE /api/users/:userId</div>
-        <div>Delete Exercise: DELETE /api/users/:userId</div>
+        <div id="admin-ui_section-deleteuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
+          <h3>Delete User</h3>
+          <form action="/api/users/:userId" id="admin-ui_form-deleteuser" method="delete">
+            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+            <button type="submit">Delete User</button>
+          </form>
+          <p>Alternatively: <span class="label-rest label-http-verb">DELETE</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
+
+        </div>
+
+        <div id="admin-ui_section-deleteexercise" class="admin-ui_section_action admin-ui_section_subaction">
+          <h3>Delete User</h3>
+
+          <div>Delete Exercise: DELETE /api/users/:userId</div>
+        </div>
+
       </section>
     </main>
     <hr>
