@@ -54,14 +54,21 @@
 
         <div id="admin-ui_section-createuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Create New User</h3>
-          <form id="" class="">
+          <form action="/api/users" method="post" id="admin-ui_form-createuser" class="">
+            <h4>Username Requirements </h4>
             <ul>
-              <li>Numbers 0-9</li>
-              <li>Letters a to z</li>
+              <li>Allowed characters:
+                <ul>
+                  <li>Numbers: <span class="label-characters">0-9</span></li>
+                  <li>Letters: <span class="label-characters">a-z</span> (lowercase)</li>
+                  <li><span class="label-characters">-</span> (hyphen)</li>
+                  <li><span class="label-characters">_</span> (underscore)</li>
+                </ul>
+              </li>
               <li>Minimum length: 3 characters</li>
               <li>Maximum length: 30 characters</li>
             </ul>
-            <input type="text" placeholder="Username" required pattern="^[0-9a-z-_]{3,30}$">
+            <input type="text" placeholder="Username" name="username" required pattern="^[0-9a-z-_]{3,30}$">
             <button type="submit">Create User</button>
           </form>
           <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users</span></p>
@@ -69,11 +76,11 @@
 
         <div id="admin-ui_section-createexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Create New Exercise</h3>
-          <form>
-            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
-            <input type="text" placeholder="Description" required min="3" max="50">
-            <input type="text" placeholder="Duration" required min="1" max="3">
-            <input type="date" placeholder="date">
+          <form action="/api/users/:userId/exercises" id="admin-ui_form-createexercise" method="post">
+            <input type="text" name="userId" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+            <input type="text" name="description" placeholder="Description" required min="3" max="50">
+            <input type="text" name="duration" placeholder="Duration" required min="1" max="3">
+            <input type="date" name="date" placeholder="date">
             <button type="submit">Create Exercise</button>
           </form>
           <p>Alternatively: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span></p>
