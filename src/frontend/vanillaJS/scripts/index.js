@@ -1,34 +1,5 @@
-/*
-const section_create = document.getElementById("section_create")
-const section_read = document.getElementById("section_read")
-const section_update = document.getElementById("section_update")
-const section_delete = document.getElementById("section_delete")
-*/
-
-//TODO: refactor into reusable function
-const sectionElements = (() => {
-  const sectionElementsAll = Array.from(document.querySelectorAll(".admin-ui_section_action"));
-  const adminUiSectionElements = sectionElementsAll.filter(elem => elem.id.match(/^admin-ui_section-[a-z]+$/))
-  const sectionElements = {};
-  adminUiSectionElements.forEach(elem => {
-    const id = elem.id.split("_").pop();
-    const splitId = id.split("-").pop();
-    sectionElements[splitId] =  elem;
-  })
-  return sectionElements
-})()
-
-const navbarElements = (() => {
-  const navElementsAll = Array.from(document.querySelectorAll("nav"));
-  const adminUiNavElements = navElementsAll.filter(elem => elem.id.match(/^admin-ui_navbar-[a-z]+$/))
-  const navbarElements = {};
-  adminUiNavElements.forEach(elem => {
-    const id = elem.id.split("_").pop();
-    const splitId = id.split("-").pop();
-    navbarElements[splitId] =  elem;
-  })
-  return navbarElements
-})()
+const navbarElements = getElementsList("nav", /^admin-ui_navbar-[a-z]+$/);
+const sectionElements = getElementsList(".admin-ui_section_action", /^admin-ui_section-[a-z]+$/);
 
 
 const classBtnNavActive = "btn-nav_active";
@@ -62,4 +33,18 @@ function getPreviousActiveElem(parentElement) {
   const children = Array.from(parentElement.children)
   const filteredChildren = children.filter(element => element.classList.contains(classBtnNavActive))
   return filteredChildren[0]
+}
+
+
+function getElementsList(querySelector, idRegex) {
+  const elementsAll = Array.from(document.querySelectorAll(querySelector));
+  const adminUiElements = elementsAll.filter(elem => elem.id.match(idRegex));
+  const selectedElements = {};
+  adminUiElements.forEach(elem => {
+    const id = elem.id.split("_").pop();
+    const key = id.split("-").pop();
+    selectedElements[key] =  elem;
+  })
+
+  return selectedElements
 }
