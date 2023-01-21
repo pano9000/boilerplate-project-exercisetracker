@@ -14,3 +14,4 @@ Object.keys(navbarElements).forEach( key => {
 
 formElements.createuser.addEventListener("submit", eventHandlers.createUserFormHandler)
 formElements.createexercise.addEventListener("submit", eventHandlers.createExerciseFormHandler)
+formElements.deleteuser.addEventListener("submit", eventHandlers.deleteUserFormHandler)
