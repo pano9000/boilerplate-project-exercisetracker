@@ -1,5 +1,6 @@
 const navbarElements = getElementsList("nav", /^admin-ui_navbar-[a-z]+$/);
 const sectionElements = getElementsList(".admin-ui_section_action", /^admin-ui_section-[a-z]+$/);
+const formElements = getElementsList(".admin-ui_form", /^admin-ui_form-[a-z]+$/);
 
 
 const classBtnNavActive = "btn-nav_active";
@@ -27,6 +28,41 @@ function navbarMainClickHandler(event) {
   }
 
 }
+
+formElements.createuser.addEventListener("submit", createuserFormHandler)
+formElements.createexercise.addEventListener("submit", createexerciseFormHandler)
+
+async function createuserFormHandler(event) {
+  const element = event.target;
+  console.log(element, event.target, event)
+
+  event.preventDefault();
+  const serverUrl = element.action;
+  const formData = new FormData(element)
+  console.log(formData)
+  const response = await postToAPI(serverUrl, formData);
+
+  console.log(response)
+
+}
+
+async function createexerciseFormHandler(event) {
+  const element = event.target;
+
+  console.log(element, event.target, event)
+
+  event.preventDefault();
+
+  const formData = new FormData(element)
+  const serverUrl = element.action.replace(":userId", formData.get("userId"));
+  console.log(serverUrl)
+  console.log(formData)
+  const response = await postToAPI(serverUrl, formData);
+
+  console.log(response)
+
+}
+
 
 
 function getPreviousActiveElem(parentElement) {
