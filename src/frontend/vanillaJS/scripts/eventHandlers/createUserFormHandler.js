@@ -1,4 +1,4 @@
-const { sendToAPI } = require("../utils")
+const { sendToAPI, showMessage } = require("../utils")
 
 async function createuserFormHandler(event) {
   const element = event.target;
@@ -9,6 +9,11 @@ async function createuserFormHandler(event) {
   const formData = new FormData(element)
   console.log(formData)
   const response = await sendToAPI.post(serverUrl, formData);
+
+  const message = `User Successfully created: ${response.username} / ${response._id}`
+
+  showMessage(element.lastElementChild, message, "ok")
+
 
   console.log(response)
 

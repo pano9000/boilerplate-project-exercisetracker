@@ -1,4 +1,4 @@
-const { sendToAPI } = require("../utils")
+const { sendToAPI, showMessage } = require("../utils");
 
 async function createexerciseFormHandler(event) {
   const element = event.target;
@@ -13,6 +13,11 @@ async function createexerciseFormHandler(event) {
   console.log(formData)
   const response = await sendToAPI.post(serverUrl, formData);
 
+  const message = `User Exercise Successfully created: ${response.username} / ${response._id}`
+
+  showMessage(element.lastElementChild, message, "ok")
+
+  
   console.log(response)
 
 }
