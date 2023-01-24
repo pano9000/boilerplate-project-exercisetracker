@@ -60,13 +60,19 @@ form {
 
 input {
   display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+  padding: .25rem;
+  border-radius: .25rem;
 }
+
+input:not(:placeholder-shown):not(:focus):valid {
+  background-color: var(--color-green);
+}
+
+input:not(:placeholder-shown):not(:focus):invalid {
+  background-color: var(--color-red);
+}
+
+
 
 input[type=submit] {
   font-size: 16px;
