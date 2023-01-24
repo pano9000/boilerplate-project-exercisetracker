@@ -16,7 +16,12 @@ router.get(
   validation.handler,
   controllers.api.users.logs.get);
 
-router.post("/api/users", controllers.api.users.post);
+router.post(
+  "/api/users",
+  validation.check.usersPost,
+  validation.handler,
+  controllers.api.users.post
+);
 
 router.post(
   "/api/users/:userId/exercises",
