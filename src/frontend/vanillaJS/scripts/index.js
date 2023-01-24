@@ -8,10 +8,11 @@ const {
 
 
 Object.keys(navbarElements).forEach( key => {
-  console.log(key ,navbarElements[key])
+  console.log("NavElem", key ,navbarElements[key])
   navbarElements[key].addEventListener("click", eventHandlers.navbarMainClickHandler);
 });
 
-formElements.createuser.addEventListener("submit", eventHandlers.createUserFormHandler)
-formElements.createexercise.addEventListener("submit", eventHandlers.createExerciseFormHandler)
-formElements.deleteuser.addEventListener("submit", eventHandlers.deleteUserFormHandler)
+Object.keys(formElements).forEach( key => {
+  console.log("FormELem:", key ,formElements[key])
+  formElements[key].addEventListener("submit", eventHandlers.submitFormHandler);
+});
