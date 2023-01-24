@@ -69,7 +69,7 @@
 
         <div id="admin-ui_section-createexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Create New Exercise</h3>
-          <form action="/api/users/:userId/exercises" method="post" id="admin-ui_form-createexercise" class="admin-ui_form">
+          <form action="/api/users/:userId:/exercises" method="post" id="admin-ui_form-createexercise" class="admin-ui_form">
             <div class="admin-ui_form-input-wrap">
               <div>
                 <label for="admin-ui_input-createexercise_userid">User Id</label>
@@ -89,10 +89,19 @@
               </div>
               <button type="submit">Create Exercise</button>
             </div>
-            <div class="admin-ui_form-result-wrap" id="admin-ui_form-result-createexercise">
-              <h4>Result</h4>
+            <div class="admin-ui_form-input-wrap">
+              <h4>Requirements</h4>
+              <p>User Id</p>
+
+              <p>Description</p> Length: 2-50
+              Duration: between 1 and 999
+              Date (optional)
             </div>
           </form>
+          <div class="admin-ui_form-result-wrap" id="admin-ui_form-result-createexercise">
+            <h4>Result</h4>
+            <div>resulting stuff</div>
+          </div>
           <p>REST: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span></p>
         </div>
 
@@ -111,8 +120,9 @@
 
         <div id="admin-ui_section-readoneuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Show One User</h3>
-          <form action="/api/users/:userId" id="admin-ui_form-createexercise" method="get">
-            <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
+          <form action="/api/users/:userId:" id="admin-ui_form-readoneuser" class="admin-ui_form" method="get">
+
+            <input type="text" placeholder="User Id" name="userId" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <button type="submit">Load User</button>
           </form>
           <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
@@ -120,7 +130,7 @@
 
         <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show All Users</h3>
-          <form action="/api/users/" id="admin-ui_form-createexercise" method="get">
+          <form action="/api/users/" id="admin-ui_form-readallusers" method="get">
             <p>TODO: add some filtering possibilities here?</p>
             <button type="submit">Load Users</button>
           </form>
@@ -131,7 +141,7 @@
 
         <div id="admin-ui_section-readuserexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show User's Exercise Log</h3>
-          <form action="/api/users/:userId/logs" id="admin-ui_form-createexercise" method="post">
+          <form action="/api/users/:userId:/logs" id="admin-ui_form-readuserexercise" method="post">
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <div>
               <h4>Filtering</h4>
@@ -153,10 +163,10 @@
       <section id="admin-ui_section-update" class="admin-ui_section_action">
         <div class="nav-wrap">
 
-          <nav id="admin-ui_navbar-read" class="admin-ui_navbar">
-            <a id="btn-nav-read_updateoneuser" class="btn-nav btn-nav_active" href="#admin-ui_section-updateuser">Update One User</a>
-            <a id="btn-nav-read_updateallusers" class="btn-nav" href="#admin-ui_section-updateallusers">Update All Users</a>
-            <a id="btn-nav-read_readuserexercise" class="btn-nav" href="#admin-ui_section-updateuserexercise">Show User's Exercise Log</a>
+          <nav id="admin-ui_navbar-update" class="admin-ui_navbar">
+            <a id="btn-nav-update_updateoneuser" class="btn-nav btn-nav_active" href="#admin-ui_section-updateuser">Update One User</a>
+            <a id="btn-nav-update_updateallusers" class="btn-nav" href="#admin-ui_section-updateallusers">Update All Users</a>
+            <a id="btn-nav-update_readuserexercise" class="btn-nav" href="#admin-ui_section-updateuserexercise">Show User's Exercise Log</a>
           </nav>
 
         </div>
@@ -175,7 +185,7 @@
 
         <div id="admin-ui_section-deleteuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Delete User</h3>
-          <form action="/api/users/:userId" id="admin-ui_form-deleteuser" method="delete" class="admin-ui_form">
+          <form action="/api/users/:userId:" id="admin-ui_form-deleteuser" method="delete" class="admin-ui_form">
 
             <input type="text" placeholder="User Id" name="userId" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <button type="submit">Delete User</button>
@@ -191,7 +201,7 @@
         </div>
 
       </section>
-      </section>
+    </section>
     </main>
 
     <footer>
