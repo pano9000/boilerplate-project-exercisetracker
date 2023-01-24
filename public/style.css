@@ -1,5 +1,5 @@
 :root {
-  --box-shadow: 2px 2px 4px rgb(0, 0, 0, 0.2);
+  --box-shadow: 4px 4px 5px rgb(0, 0, 0, 0.2);
 
   /* https://palettes.shecodes.io/palettes/1293 */
   --color-light: #fcfefe;
@@ -7,6 +7,7 @@
   --color-dark: #66bfbf;
   --color-red: #f76b8a;
   --color-green: #6bf7d8;
+  --border-radius: .25rem;
   
 }
 
@@ -16,32 +17,45 @@
 
 body {
   font-family:sans-serif;
-  margin: 25px;
   color: #222;
   background-color: var(--color-light);
-  max-width: 80rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+}
+
+header {
+  text-align: center;
+}
+
+footer {
+  background-color: var(--color-dark);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  text-align: center;
 }
 
 h1 {
   font-weight: bold;
   text-align: center;
-  
-}
-
-p {
-  max-width: 900px;
 }
 
 form {
-  margin-bottom: 25px;
-  padding: 15px;
+  padding: 1rem;
   background-color: var(--color-dark);
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 5px;
+  border-radius: .25rem;
   box-shadow: var(--box-shadow);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 input {
@@ -56,7 +70,7 @@ input {
 
 input[type=submit] {
   font-size: 16px;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: #E4F1FE;
   border: 1px solid grey;
   box-shadow: 2px 2px #999;
@@ -74,21 +88,22 @@ code {
   padding: 2px;
 }
 
-
-#nav-wrap {
-
-  gap: 1rem;
-  background-color: bisque;
-  padding: 1rem;
-  border-radius: .25rem;
-}
-
 .btn-nav {
   background-color: aqua;
   padding: 1rem;
   transition: 0.3s background-color;
   text-decoration: none;
 }
+
+.btn-nav:first-child {
+ border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+
+.btn-nav:last-child {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+ }
+
 
 
 .btn-nav:hover {
@@ -97,12 +112,23 @@ code {
 
 }
 
-#nav-wrap a active{
 
-  background-color: aqua;
-  padding: 1rem;
+.nav-wrap {
+  /*background-color: var(--color-dark);*/
+  /* padding: 1rem 0rem 1rem 0rem; */
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.nav-wrap a {
+
+  font-weight: 600;
+  color: #222;
+
 
 }
+
 
 .btn-nav_active {
   background-color: burlywood;
@@ -112,16 +138,30 @@ code {
   background-color: burlywood;
 }
 
-#admin-ui_navbar-main {
-  display: flex;
+#admin-ui_wrap {
+  background-color: var(--color-medium);
+  border-radius: .5rem;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+}
+
+.admin-ui_navbar {
+  display: inline-flex;
   align-items: flex-start;
   justify-content: center;
   border-radius: .25rem;
+  box-shadow: var(--box-shadow);
+}
+
+
+.admin-ui_section_subaction {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .admin-ui_section_action {
   background-color: var(--color-medium);
-  padding: 2rem;
+  /* padding: 2rem; */
   display: none;
 }
 
@@ -131,7 +171,8 @@ code {
 
 .label-rest {
   padding: 0.25rem;
-  border-radius: .25rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .label-api-route {
@@ -144,7 +185,6 @@ code {
   background-color: coral;
 
 }
-
 
 .label-characters {
 	background: lightgray;
