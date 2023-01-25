@@ -41,7 +41,7 @@
 
         <div id="admin-ui_section-createuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Create New User</h3>
-          <form action="/api/users" method="post" id="admin-ui_form-createuser" class="admin-ui_form">
+          <form action="/api/users" method="post" id="admin-ui_form-createuser" class="admin-ui_form" data-forminfo='["User","Creation"]'>
             <div class="admin-ui_form-input-wrap">
               <h4>Username Requirements </h4>
               <ul>
@@ -69,7 +69,7 @@
 
         <div id="admin-ui_section-createexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Create New Exercise</h3>
-          <form action="/api/users/:userId:/exercises" method="post" id="admin-ui_form-createexercise" class="admin-ui_form">
+          <form action="/api/users/:userId:/exercises" method="post" id="admin-ui_form-createexercise" class="admin-ui_form"           <form action="/api/users" method="post" id="admin-ui_form-createuser" class="admin-ui_form" data-forminfo='["Exercise","Creation"]'>
             <div class="admin-ui_form-input-wrap">
               <div>
                 <label for="admin-ui_input-createexercise_userid">User Id</label>
@@ -120,17 +120,22 @@
 
         <div id="admin-ui_section-readoneuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Show One User</h3>
-          <form action="/api/users/:userId:" id="admin-ui_form-readoneuser" class="admin-ui_form" method="get">
-
+          <form action="/api/users/:userId:" id="admin-ui_form-readoneuser" class="admin-ui_form" method="get" data-forminfo='["User","Fetching"]'>
             <input type="text" placeholder="User Id" name="userId" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <button type="submit">Load User</button>
           </form>
+          <div class="admin-ui_result_wrap">
+            <h4>Result</h4>
+            <div>
+
+            </div>
+          </div>
           <p>Alternatively: <span class="label-rest label-http-verb">GET</span> <span class="label-rest label-api-route">/api/users/:userId</span></p>
         </div>
 
-        <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction">
+        <div id="admin-ui_section-readallusers" class="admin-ui_section_action admin-ui_section_subaction" data-forminfo='["Users","Fetching"]'>
           <h3>Show All Users</h3>
-          <form action="/api/users/" id="admin-ui_form-readallusers" method="get">
+          <form action="/api/users/" id="admin-ui_form-readallusers" class="admin-ui_form" data-forminfo='["User","Fetching","get"]' method="get">
             <p>TODO: add some filtering possibilities here?</p>
             <button type="submit">Load Users</button>
           </form>
@@ -141,7 +146,7 @@
 
         <div id="admin-ui_section-readuserexercise" class="admin-ui_section_action admin-ui_section_subaction">
           <h3>Show User's Exercise Log</h3>
-          <form action="/api/users/:userId:/logs" id="admin-ui_form-readuserexercise" method="post">
+          <form action="/api/users/:userId:/logs" id="admin-ui_form-readuserexercise" method="post" data-forminfo='["Exercise Log","Fetching"]'>
             <input type="text" placeholder="User Id" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <div>
               <h4>Filtering</h4>
@@ -185,7 +190,7 @@
 
         <div id="admin-ui_section-deleteuser" class="admin-ui_section_action admin-ui_section_subaction admin-ui_section_action_active">
           <h3>Delete User</h3>
-          <form action="/api/users/:userId:" id="admin-ui_form-deleteuser" method="delete" class="admin-ui_form">
+          <form action="/api/users/:userId:" id="admin-ui_form-deleteuser" method="delete" class="admin-ui_form" data-forminfo='["User","Deletion","delete"]'>
 
             <input type="text" placeholder="User Id" name="userId" required pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$">
             <button type="submit">Delete User</button>
