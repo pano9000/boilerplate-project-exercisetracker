@@ -199,3 +199,10 @@ code {
 	box-shadow: var(--box-shadow);
 	display: inline-block;
 }
+
+
+.admin-ui_result-label_key {
+	display: inline-block;
+	padding: .25rem;
+	font-weight: 700;
+}
