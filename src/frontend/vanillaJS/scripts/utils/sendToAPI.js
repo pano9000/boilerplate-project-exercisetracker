@@ -28,16 +28,26 @@ const sendToAPI = {
         //ideally do some additional error handling for better error message here
         throw new Error(`Received status: ${(result.status !== undefined) ? result.status : 'undefined status'}`)
       }
-      console.log(result)
+      console.log("ressult in sendtoapi", result)
 
-      const apiData = (result.status !== 204) ? await result.json() : '';
+      const apiData = {
+        status: "ok",
+        msg: "",
+        data: (result.status !== 204) ? await result.json() : {}
+      };
 
       return apiData
     }
 
     catch(error) {
       console.log(error)
-      throw new Error(`Posting to API failed ${error.message}`)
+      //throw new Error(` to API failed ${error.message}`)
+      const apiData = {
+        status: "error",
+        msg: `Communication with API failed: ${error.message}`,
+        data: { error: "error"}
+      };
+      return apiData
     }
 
   }
