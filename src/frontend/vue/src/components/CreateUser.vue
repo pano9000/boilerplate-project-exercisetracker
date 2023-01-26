@@ -49,11 +49,26 @@ import { ref, onMounted } from 'vue';
   }
 
   async function fetchUsers() {
-    const response = await fetch("http://localhost:3002/api/users");
-    if (!response.ok) {
-      throw new Error("fetching failed")
+    try {
+      const response = await fetch("http://localhost:3002/api/users");
+      if (!response.ok) {
+        throw new Error("fetching failed")
+      }
+      return await response.json()
     }
-    return await response.json()
+    catch(error) {
+      const createDummyData = () => {
+        const dummyData = []
+        for (let i=0; i<100; i++) {
+          dummyData.push( { 
+            _id: `user_${i}`,
+            username: `username_${i}`
+          })
+        }
+        return dummyData
+      }
+      return createDummyData()
+    }
     
   }
 
