@@ -6,32 +6,74 @@
 
   </div>
 
+  <h3>mockup</h3>
+  <label for="admin-ui_showentryqty">Show max. entries</label>
+  <select id="admin-ui_showentryqty">
+    <option  v-for="value in [5, 10, 25, 50]" :key="value"> {{value}}</option>
+  </select>
+  <table>
+    <thead>
+      <tr>
+        <td>UserId</td>
+        <td>Username</td>
+        <td>Edit</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="user in userList" :key="user._id">
+        <td>{{ user._id }}</td>
+        <td>{{ user.username }}</td>
+        <td>Edit</td>
+      </tr>
+      <tr>+</tr>
+    </tbody>
+  </table>
+
 </template>
 
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 
-export default {
-  data() {
-    return {
-      title: "Create New User"
-    }
-  },
-  methods: {
-
-
-  }
-}
-
-function submitUser {
+  const title = "Create New User"
+  const userList = ref({})
 
   
+  onMounted(  async () => {
+    userList.value = await fetchUsers();
+  })
+  userList.value = fetchUsers();
 
-}
+  function submitUser() {
+    console.log("yo")
+  }
 
+  async function fetchUsers() {
+    const response = await fetch("http://localhost:3002/api/users");
+    if (!response.ok) {
+      throw new Error("fetching failed")
+    }
+    return await response.json()
+    
+  }
 
 </script>
 
+
+
+
+
+
+
 <style>
+table {
+  width: 100%;
+  border: 1px solid gray;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid gray;
+}
 
 </style>
