@@ -6,6 +6,7 @@ import CreateUser from "./components/CreateUser.vue"
 </script>
 
 <template>
+  <!--
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -14,16 +15,10 @@ import CreateUser from "./components/CreateUser.vue"
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-
-  <div>
-    <button>Create</button>
-    <button>Read</button>
-    <button>Update</button>
-    <button>Delete</button>
-  </div>
+-->
 
   <div id="display-area">
-    <HelloWorld msg="Vite + Vue" />
+    <!--<HelloWorld msg="Vite + Vue" />-->
     <MenuBar />
     <CreateUser />
 
