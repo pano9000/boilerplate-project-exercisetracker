@@ -7,6 +7,7 @@
   </select>
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
+  <p>{{ totalPages }} Pages</p>
   <table>
     <thead>
       <tr>
@@ -32,12 +33,13 @@
 
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
   const title = "User List"
   const userList = ref({})
   const ui_showentryqty = ref(5)
   const paginatedList = userList
+  const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
