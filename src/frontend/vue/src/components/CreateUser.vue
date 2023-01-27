@@ -36,7 +36,7 @@
 import { ref, onMounted, computed } from 'vue';
 
   const title = "User List"
-  const userList = ref({})
+  const userList = ref()
   const ui_showentryqty = ref(5)
   const paginatedList = userList
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
