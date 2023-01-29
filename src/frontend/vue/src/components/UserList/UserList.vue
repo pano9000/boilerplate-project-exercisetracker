@@ -7,12 +7,18 @@
   </select>
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
-  <p>{{ totalPages }} Pages</p>
+  
+  <nav>
+    
+    <p>{{ totalPages }} Pages</p>
+    
+  </nav>
   <table>
     <thead>
       <tr>
         <td>UserId</td>
         <td>Username</td>
+        <td>Selection</td>
         <td>Edit</td>
       </tr>
     </thead>
@@ -20,25 +26,40 @@
       <tr v-for="user in paginatedList" :key="user._id">
         <td>{{ user._id }}</td>
         <td>{{ user.username }}</td>
+        <td><input type="checkbox" v-model="userList['selected']"></td>
         <td>
           <span>✏️</span>
-          <span @click="delUser(user.username)">❌</span>
+          <span @click="delUser([user.username], userList)">❌</span>
         </td>
       </tr>
-      <tr>+</tr>
+      <tr>
+        <td colspan="2"><button type="button">➕ Add New</button></td>
+        <td>
+          <button type="button">O Select All</button>
+        </td>
+        <td>
+          <button type="button" @click="delUser([], userList)">❌ Delete Selected</button>
+        </td>
+      </tr>
     </tbody>
   </table>
+
+  <div>
+    {{ paginatedList }}
+  </div>
 
 </template>
 
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed } from "vue";
+import {fetchUsers, delUser} from "./UserList.functions";
 
   const title = "User List"
   const userList = ref()
   const ui_showentryqty = ref(5)
-  const paginatedList = userList
+  const selectedUsers = ref([]);
+  const paginatedList = computed( () => Array.from(userList.value).slice(0,ui_showentryqty.value));
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
@@ -50,42 +71,6 @@ import { ref, onMounted, computed } from 'vue';
   function submitUser() {
     console.log("yo")
   }
-
-  async function fetchUsers() {
-    try {
-      const response = await fetch("http://localhost:3002/api/users");
-      if (!response.ok) {
-        throw new Error("fetching failed")
-      }
-      return await response.json()
-    }
-    catch(error) {
-      const createDummyData = () => {
-        const dummyData = []
-        for (let i=0; i<100; i++) {
-          dummyData.push( { 
-            _id: `user_${i}`,
-            username: `username_${i}`
-          })
-        }
-        return dummyData
-      }
-      return createDummyData()
-    }
-    
-  }
-
-  async function delUser(username) {
-    if (confirm(`Are you sure you want to delete ${username}`)) {
-      // api call -> delete user
-      // TODO
-
-      // ui-update: -> delete user from list
-      const indexToDelete = userList.value.findIndex( (userEntry) => userEntry.username === username)
-      userList.value.splice(indexToDelete, 1)
-    }
-  }
-
 
 </script>
 

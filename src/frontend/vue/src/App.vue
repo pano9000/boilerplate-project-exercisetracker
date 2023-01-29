@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import MenuBar from "./components/MenuBar.vue"
-import CreateUser from "./components/CreateUser.vue"
+import UserList from "./components/UserList/UserList.vue"
 
 </script>
 
@@ -20,7 +20,7 @@ import CreateUser from "./components/CreateUser.vue"
   <div id="display-area">
     <!--<HelloWorld msg="Vite + Vue" />-->
     <MenuBar />
-    <CreateUser />
+    <UserList />
 
   </div>
 </template>
