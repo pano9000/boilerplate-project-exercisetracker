@@ -9,29 +9,24 @@
 
 <script>
 
-const buttons = {
-  create: {
-    title: "Create"
-  },
-  read: {
-    title: "Read"
-  },
-  update: {
-    title: "Update"
-  },
-  delete: {
-    title: "Delete"
-  }
-}
+
 
 export default {
-  data() {
+  setup() {
+
+  const buttons = {
+    userList: {
+      title: "User List"
+    },
+    exerciseList: {
+      title: "Exercise List"
+    }
+}
+
+
     return {
       buttons
     }
-  },
-  methods: {
-
 
   }
 }
