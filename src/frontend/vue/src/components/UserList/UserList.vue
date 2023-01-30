@@ -26,27 +26,31 @@
       <tr v-for="user in paginatedList" :key="user._id">
         <td>{{ user._id }}</td>
         <td>{{ user.username }}</td>
-        <td><input type="checkbox" v-model="userList['selected']"></td>
+        <td><input type="checkbox" v-model="selectedUsers[user.username]"></td>
         <td>
-          <span>✏️</span>
-          <span @click="delUser([user.username], userList)">❌</span>
+          <button>✏️</button>
+          <button @click="delUser([user.username], userList)">❌</button>
         </td>
       </tr>
-      <tr>
-        <td colspan="2"><button type="button">➕ Add New</button></td>
-        <td>
-          <button type="button">O Select All</button>
-        </td>
-        <td>
-          <button type="button" @click="delUser([], userList)">❌ Delete Selected</button>
-        </td>
-      </tr>
+
+      
     </tbody>
   </table>
 
   <div>
+    <button type="button">➕ Add New</button>
+    <button type="button" @click="selectAll()">O Select All</button>
+    <button type="button" @click="delUser([], userList)">❌ Delete Selected</button>
+  </div>
+
+  <div>
+    {{ selectedUsers }}
+  </div>
+
+  <div>
     {{ paginatedList }}
   </div>
+
 
 </template>
 
@@ -58,8 +62,12 @@ import {fetchUsers, delUser} from "./UserList.functions";
   const title = "User List"
   const userList = ref()
   const ui_showentryqty = ref(5)
-  const selectedUsers = ref([]);
-  const paginatedList = computed( () => Array.from(userList.value).slice(0,ui_showentryqty.value));
+  const selectedUsers = ref({});
+  const paginatedList = computed( () => {
+    return Array.from(userList.value)
+           .slice(0,ui_showentryqty.value)
+  });
+
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
@@ -67,6 +75,12 @@ import {fetchUsers, delUser} from "./UserList.functions";
     console.log(userList.value.slice(0, 4))
   })
   userList.value = fetchUsers();
+
+  function selectAll(selectedUsers) {
+
+    console.log("sad", this.selectedUsers)
+    
+  }
 
   function submitUser() {
     console.log("yo")
@@ -85,9 +99,12 @@ table {
   width: 100%;
   border: 1px solid gray;
   border-collapse: collapse;
+  background-color: beige;
+
 }
 
 td {
+  padding: 1rem;
   border: 1px solid gray;
 }
 
