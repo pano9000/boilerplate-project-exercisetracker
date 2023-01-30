@@ -33,8 +33,24 @@ export async function delUser(usernames, userList) {
     // TODO
     console.log("wawat")
     usernames.forEach(username => {
-      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username)
-      userList.splice(indexToDelete, 1)
+      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username);
+      userList.splice(indexToDelete, 1);
+      apiDeleteUser(userList[indexToDelete]["_id"])
     })
+  }
+}
+
+async function apiDeleteUser(userId, userList) {
+  try {
+    const response = await fetch(`http://localhost:3002/api/users/${userId}`, {
+      method: "delete"
+    });
+    if (!response.ok) {
+      throw new Error("deleting failed")
+    }
+    return true
+  }
+  catch(error) {
+    return false
   }
 }
