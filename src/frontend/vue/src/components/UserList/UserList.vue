@@ -60,21 +60,16 @@ import { ref, onMounted, computed } from "vue";
 import {fetchUsers, delUser} from "./UserList.functions";
 
   const title = "User List"
-  const userList = ref()
+  const userList = ref([])
   const ui_showentryqty = ref(5)
   const selectedUsers = ref({});
-  const paginatedList = computed( () => {
-    return Array.from(userList.value)
-           .slice(0,ui_showentryqty.value)
-  });
+  const paginatedList = computed( () => userList.value.slice(0,ui_showentryqty.value));
 
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
-    console.log(userList.value.slice(0, 4))
   })
-  userList.value = fetchUsers();
 
   function selectAll(selectedUsers) {
 
