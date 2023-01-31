@@ -38,9 +38,15 @@
   </table>
 
   <div>
-    <button type="button">➕ Add New</button>
+    <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
     <button type="button" @click="selectAll()">O Select All</button>
     <button type="button" @click="delUser([], userList)">❌ Delete Selected</button>
+  </div>
+
+  <div v-if="ui_createUserVisible">
+    <CreateUser
+      @close-modal="ui_createUserVisible=false"
+    ></CreateUser>
   </div>
 
   <div>
@@ -56,12 +62,15 @@
 
 
 <script setup>
+import CreateUser from "../CreateUser/CreateUser.vue";
+
 import { ref, onMounted, computed } from "vue";
 import {fetchUsers, delUser} from "./UserList.functions";
 
   const title = "User List"
   const userList = ref([])
   const ui_showentryqty = ref(5)
+  const ui_createUserVisible = ref(false);
   const selectedUsers = ref({});
   const paginatedList = computed( () => userList.value.slice(0,ui_showentryqty.value));
 
