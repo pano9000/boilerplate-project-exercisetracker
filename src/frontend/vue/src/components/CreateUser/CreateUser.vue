@@ -7,9 +7,9 @@
     <form action="" method="post">
       <div>
         <label for="username">Username:</label>
-        <input id="username" type="text" v-model="newusername">
+        <input id="username" name="username" type="text" v-model="newusername">
       </div>
-      <button type="submit" @click="apiAddUser">Add User</button>
+      <button type="submit" @click="addUser($event)">Add User</button>
     </form>
 
   </div>
@@ -19,9 +19,13 @@
 
 
 <script setup>
+
+  import { addUser } from "./CreateUser.functions";
+
   import { ref } from "vue";
   defineEmits(['close-modal'])
   const newusername = ref("")
+
 </script>
 
 <style>
