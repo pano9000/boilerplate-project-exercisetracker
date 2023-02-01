@@ -1,10 +1,9 @@
+import { sendToAPI } from "../../services/apiService.js"
+
 export async function fetchUsers() {
   try {
-    const response = await fetch("http://localhost:3002/api/users");
-    if (!response.ok) {
-      throw new Error("fetching failed")
-    }
-    return await response.json()
+    const apiResponse = await sendToAPI.get("http://localhost:3002/api/users")
+    return apiResponse.data
   }
   catch(error) {
     const createDummyData = () => {
@@ -19,7 +18,7 @@ export async function fetchUsers() {
     }
     return createDummyData()
   }
-  
+
 }
 
 export async function delUser(usernames, userList) {
@@ -29,28 +28,13 @@ export async function delUser(usernames, userList) {
     `Are you sure you want to delete the ${usernames.length} selected users?`;
 
   if (confirm(confirmMessage)) {
-    // api call -> delete user
-    // TODO
-    console.log("wawat")
-    usernames.forEach(username => {
-      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username);
-      userList.splice(indexToDelete, 1);
-      apiDeleteUser(userList[indexToDelete]["_id"])
-    })
-  }
-}
 
-async function apiDeleteUser(userId, userList) {
-  try {
-    const response = await fetch(`http://localhost:3002/api/users/${userId}`, {
-      method: "delete"
-    });
-    if (!response.ok) {
-      throw new Error("deleting failed")
-    }
-    return true
-  }
-  catch(error) {
-    return false
+    await Promise.all(usernames.map(async (username) => {
+      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username);
+      const userIdForDeletion = userList[indexToDelete]["_id"];
+      await sendToAPI.delete(`http://localhost:3002/api/users/${userIdForDeletion}`)
+      userList.splice(indexToDelete, 1);
+    }));
+
   }
 }
