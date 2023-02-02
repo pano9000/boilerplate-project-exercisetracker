@@ -1,12 +1,19 @@
 import { sendToAPI } from "../../services/apiService.js"
 
-export async function addUser(event) {
+export async function addUser(event, usernameref) {
   try {
     event.preventDefault();
-    const formData = new FormData(event.target.form)
+    const formData = new FormData(event.target.form);
+    //TODO: add validation step
     const apiResponse = await sendToAPI.post('http://localhost:3002/api/users/', formData)
     console.log(apiResponse)
     handleApiResponse(apiResponse)
+    if (!apiResponse.statusOK) {
+      throw new Error("Error")
+      //TODO: add proper handling
+    }
+    alert("User added")
+    usernameref = "";
   }
   catch(error) {
     console.log(error)

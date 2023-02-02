@@ -9,7 +9,7 @@
         <label for="username">Username:</label>
         <input id="username" name="username" type="text" v-model="newusername">
       </div>
-      <button type="submit" @click="addUser($event)">Add User</button>
+      <button type="submit" @click="addUser($event, this.newusername)">Add User</button>
     </form>
 
   </div>
