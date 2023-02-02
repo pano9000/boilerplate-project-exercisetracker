@@ -31,7 +31,7 @@ export const sendToAPI = {
       console.log("ressult in sendtoapi", result)
 
       const apiData = {
-        status: "ok",
+        statusOK: true,
         msg: "",
         data: (result.status !== 204) ? await result.json() : {}
       };
@@ -43,7 +43,7 @@ export const sendToAPI = {
       console.log(error)
       //throw new Error(` to API failed ${error.message}`)
       const apiData = {
-        status: "error",
+        statusOK: false,
         msg: `Communication with API failed: ${error.message}`,
         data: { error: "error"}
       };

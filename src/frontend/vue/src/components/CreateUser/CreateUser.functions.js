@@ -16,16 +16,16 @@ export async function addUser(event) {
 };
 
 function handleApiResponse(apiResponse) {
-  if (apiResponse === undefined || apiResponse.status === undefined) {
+  if (apiResponse === undefined || apiResponse.statusOK === undefined) {
     throw new Error("Received an undefined response from the server")
   }
 
-  if (apiResponse.status === "ok") {
+  if (apiResponse.statusOK === true) {
     console.log("all good")
     return
   }
 
-  if (apiResponse.status === "error") {
+  if (apiResponse.statusOK === false) {
     console.log("Something went wrong on the server")
     return;
   }
