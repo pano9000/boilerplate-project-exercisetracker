@@ -34,8 +34,10 @@ export async function delUser(usernames, userList) {
     await Promise.all(usernames.map(async (username) => {
       const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username);
       const userIdForDeletion = userList[indexToDelete]["_id"];
-      await sendToAPI.delete(`http://localhost:3002/api/users/${userIdForDeletion}`)
-      userList.splice(indexToDelete, 1);
+      const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userIdForDeletion}`);
+      if (apiResponse.statusOK) {
+        userList.splice(indexToDelete, 1);
+      }
     }));
 
   }
