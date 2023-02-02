@@ -6,6 +6,7 @@ export async function fetchUsers() {
     return apiResponse.data
   }
   catch(error) {
+    //TODO: remove for production
     const createDummyData = () => {
       const dummyData = []
       for (let i=0; i<100; i++) {
@@ -27,6 +28,7 @@ export async function delUser(usernames, userList) {
     `Are you sure you want to delete the user '${usernames[0]}'` :
     `Are you sure you want to delete the ${usernames.length} selected users?`;
 
+  //TODO: replace by some fancy "popup"
   if (confirm(confirmMessage)) {
 
     await Promise.all(usernames.map(async (username) => {
