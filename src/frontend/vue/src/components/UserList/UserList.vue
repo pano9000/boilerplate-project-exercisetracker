@@ -7,11 +7,12 @@
   </select>
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
-  
+
   <nav>
-    
+
     <p>{{ totalPages }} Pages</p>
-    
+    <div><button v-for="(pg, pgIndex) in totalPages">{{ pg + 1 }}</button></div>
+
   </nav>
   <table>
     <thead>
