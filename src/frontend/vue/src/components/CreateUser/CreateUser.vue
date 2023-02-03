@@ -5,6 +5,19 @@
   <div class="ui_modal">
     <button class="ui_modal_btn_close" type="submit" @click="$emit('close-modal')">X</button>
     <form action="" method="post">
+      <h4>Username Requirements </h4>
+      <ul class="list_requirements">
+        <li>Allowed characters:
+          <ul>
+          <li>Numbers: <span class="spanhighlight">0-9</span></li>
+          <li>Letters: <span class="spanhighlight">a-z</span> (lowercase)</li>
+          <li>Hyphen: <span class="spanhighlight">-</span></li>
+          <li>Underscore: <span class="spanhighlight">_</span></li>
+        </ul>
+      </li>
+        <li>Minimum length: 3 characters</li>
+        <li>Maximum length: 30 characters</li>
+      </ul>
       <div>
         <label for="username">Username:</label>
         <input id="username" name="username" type="text" v-model="newusername">
@@ -29,6 +42,15 @@
 </script>
 
 <style>
+
+input:valid {
+  background-color: green;
+}
+
+input:invalid {
+  background-color: #fe5050;
+}
+
 .blurry-backdrop {
   position: fixed;
   top: 0;
@@ -53,6 +75,17 @@
   right: 0;
   top: 0;
   padding: .25rem;
+}
+
+.spanhighlight {
+  background-color: honeydew;
+  padding: .25rem;
+  border-radius: .25rem;
+  box-shadow: 1px 1px 5px 1px rgb(0,0,0,0.1);
+}
+
+.list_requirements {
+  text-align: left;
 }
 
 </style>
