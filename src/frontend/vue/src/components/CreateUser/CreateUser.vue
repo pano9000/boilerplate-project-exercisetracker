@@ -19,8 +19,14 @@
         <li>Maximum length: 30 characters</li>
       </ul>
       <div>
-        <label for="username">Username:</label>
-        <input id="username" name="username" type="text" v-model="newusername">
+        <label for="input_username">Username:</label>
+        <input
+          id="input_username"
+          name="username"
+          type="text"
+          v-model="newusername"
+          pattern="^[a-z0-9_\-]{3,30}$"
+        >
       </div>
       <button type="submit" @click="addUser($event, this.newusername)">Add User</button>
     </form>
