@@ -40,8 +40,7 @@
 
   <div>
     <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
-    <button type="button" v-if="!hasSelectedUsers" @click="selectionHandler(paginatedList, true)">O Select All</button>
-    <button type="button" v-if="hasSelectedUsers" @click="selectionHandler(paginatedList, false)">O Clear Selection</button>
+    <button type="button" @click="( (!hasSelectedUsers) ? selectionHandler(paginatedList, true) : selectionHandler(paginatedList, false))">{{ (!hasSelectedUsers) ? "Select All" : "Clear Selection"}}</button>
     <button type="button" :disabled="!hasSelectedUsers" :class="hasSelectedUsers ? 'active' : 'inactive'" @click="delUser(selectedUsers, userList)">❌ Delete Selected</button>
   </div>
 
