@@ -30,7 +30,7 @@
         <td><input type="checkbox" v-model="user.selected"></td>
         <td>
           <button>✏️</button>
-          <button @click="delUser([user.username], userList)">❌</button>
+          <button @click="delUser([user], userList)">❌</button>
         </td>
       </tr>
 
