@@ -40,9 +40,9 @@
 
   <div>
     <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
-    <button type="button" v-if="selectedUsers.length===0" @click="selectionHandler(paginatedList, true)">O Select All</button>
-    <button type="button" v-if="selectedUsers.length>0" @click="selectionHandler(paginatedList, false)">O Clear Selection</button>
-    <button type="button" @click="delUser(this.selectedUsers, userList)">❌ Delete Selected</button>
+    <button type="button" v-if="!hasSelectedUsers" @click="selectionHandler(paginatedList, true)">O Select All</button>
+    <button type="button" v-if="hasSelectedUsers" @click="selectionHandler(paginatedList, false)">O Clear Selection</button>
+    <button type="button" :disabled="!hasSelectedUsers" :class="hasSelectedUsers ? 'active' : 'inactive'" @click="delUser(selectedUsers, userList)">❌ Delete Selected</button>
   </div>
 
   <div v-if="ui_createUserVisible">
@@ -79,7 +79,8 @@ import {fetchUsers, delUser, selectionHandler} from "./UserList.functions";
       return user
     })
   });
-  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) )
+  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
+  const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
