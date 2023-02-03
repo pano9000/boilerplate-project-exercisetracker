@@ -22,17 +22,16 @@ export async function fetchUsers() {
 
 }
 
-export async function delUser(usernames, userList) {
+export async function delUser(selectedUsers, userList) {
 
-  const confirmMessage = (!(usernames.length > 1)) ?
-    `Are you sure you want to delete the user '${usernames[0]}'` :
-    `Are you sure you want to delete the ${usernames.length} selected users?`;
-
+  const confirmMessage = (!(selectedUsers.length > 1)) ?
+    `Are you sure you want to delete the user '${selectedUsers[0].username}'` :
+    `Are you sure you want to delete the ${selectedUsers.length} selected users?`;
   //TODO: replace by some fancy "popup"
   if (confirm(confirmMessage)) {
 
-    await Promise.all(usernames.map(async (username) => {
-      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === username);
+    await Promise.all(selectedUsers.map(async (selectedUser) => {
+      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === selectedUser.username);
       const userIdForDeletion = userList[indexToDelete]["_id"];
       const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userIdForDeletion}`);
       if (apiResponse.statusOK) {
