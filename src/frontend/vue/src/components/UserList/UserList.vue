@@ -27,7 +27,7 @@
       <tr v-for="user in paginatedList" :key="user._id">
         <td>{{ user._id }}</td>
         <td>{{ user.username }}</td>
-        <td><input type="checkbox" v-model="selectedUsers[user.username]"></td>
+        <td><input type="checkbox" v-model="user.selected"></td>
         <td>
           <button>✏️</button>
           <button @click="delUser([user.username], userList)">❌</button>
@@ -40,8 +40,9 @@
 
   <div>
     <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
-    <button type="button" @click="selectAll()">O Select All</button>
-    <button type="button" @click="delUser([], userList)">❌ Delete Selected</button>
+    <button type="button" v-if="selectedUsers.length===0" @click="selectionHandler(paginatedList, true)">O Select All</button>
+    <button type="button" v-if="selectedUsers.length>0" @click="selectionHandler(paginatedList, false)">O Clear Selection</button>
+    <button type="button" @click="delUser(this.selectedUsers, userList)">❌ Delete Selected</button>
   </div>
 
   <div v-if="ui_createUserVisible">
@@ -51,7 +52,7 @@
   </div>
 
   <div>
-    {{ selectedUsers }}
+    {{ selectedUsers }} // {{ selectedUsers.length }}
   </div>
 
   <div>
@@ -66,26 +67,24 @@
 import CreateUser from "../CreateUser/CreateUser.vue";
 
 import { ref, onMounted, computed } from "vue";
-import {fetchUsers, delUser} from "./UserList.functions";
+import {fetchUsers, delUser, selectionHandler} from "./UserList.functions";
 
   const title = "User List"
   const userList = ref([])
   const ui_showentryqty = ref(5)
   const ui_createUserVisible = ref(false);
-  const selectedUsers = ref({});
-  const paginatedList = computed( () => userList.value.slice(0,ui_showentryqty.value));
-
+  const paginatedList = computed( () => {
+    return userList.value.slice(0,ui_showentryqty.value).map(user => {
+      user.selected = false;
+      return user
+    })
+  });
+  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) )
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
   })
-
-  function selectAll(selectedUsers) {
-
-    console.log("sad", this.selectedUsers)
-    
-  }
 
   function submitUser() {
     console.log("yo")

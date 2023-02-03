@@ -42,3 +42,12 @@ export async function delUser(usernames, userList) {
 
   }
 }
+
+
+
+export function selectionHandler(paginatedList, mode) {
+
+  paginatedList.forEach(user => user.selected = mode)
+
+}
+
