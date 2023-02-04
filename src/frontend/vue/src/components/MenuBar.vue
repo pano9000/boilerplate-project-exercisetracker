@@ -42,4 +42,9 @@ export default {
     background-color: yellowgreen;
     gap: 1rem;
   }
+
+  button {
+    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
+    margin-right: .5rem;
+  }
 </style>
