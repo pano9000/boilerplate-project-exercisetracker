@@ -45,7 +45,7 @@
     <button type="button" :disabled="!hasSelectedUsers" :class="hasSelectedUsers ? 'active' : 'inactive'" @click="delUser(selectedUsers, userList)">❌ Delete Selected</button>
   </div>
 
-  <div v-if="ui_createUserVisible">
+  <div v-show="ui_createUserVisible">
     <CreateUser
       @close-modal="ui_createUserVisible=false"
     ></CreateUser>
