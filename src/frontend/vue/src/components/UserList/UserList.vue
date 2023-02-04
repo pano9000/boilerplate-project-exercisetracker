@@ -38,6 +38,7 @@
     </tbody>
   </table>
 
+  <!-- turn into component and add on top of list as well-->
   <div>
     <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
     <button type="button" @click="( (!hasSelectedUsers) ? selectionHandler(paginatedList, true) : selectionHandler(paginatedList, false))">{{ (!hasSelectedUsers) ? "Select All" : "Clear Selection"}}</button>
@@ -49,15 +50,6 @@
       @close-modal="ui_createUserVisible=false"
     ></CreateUser>
   </div>
-
-  <div>
-    {{ selectedUsers }} // {{ selectedUsers.length }}
-  </div>
-
-  <div>
-    {{ paginatedList }}
-  </div>
-
 
 </template>
 
