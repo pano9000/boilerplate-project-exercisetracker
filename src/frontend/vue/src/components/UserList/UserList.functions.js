@@ -50,3 +50,11 @@ export function selectionHandler(paginatedList, mode) {
 
 }
 
+export function showUserDetailsHandler(user, currentUserProp, ui_UserDetailsVisible) {
+  console.log("currprop bef", currentUserProp, ui_UserDetailsVisible)
+
+  console.log("showhandl", user, user._id)
+  currentUserProp.value = user._id
+  ui_UserDetailsVisible.value = true;
+  console.log("currprop aft", currentUserProp, ui_UserDetailsVisible)
+}

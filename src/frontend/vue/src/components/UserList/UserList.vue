@@ -29,7 +29,7 @@
         <td>{{ user.username }}</td>
         <td><input type="checkbox" v-model="user.selected"></td>
         <td>
-          <button>✏️</button>
+          <button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)">✏️</button>
           <button @click="delUser([user], userList)">❌</button>
         </td>
       </tr>
@@ -51,18 +51,32 @@
     ></CreateUser>
   </div>
 
+  {{ ui_UserDetailsVisible }}
+  <div v-show="ui_UserDetailsVisible.value === true">
+    <UserDetails
+      :currentUser="currentUser"
+    ></UserDetails>
+  </div>
 </template>
 
 
 <script setup>
 import CreateUser from "../CreateUser/CreateUser.vue";
+import UserDetails from "../UserDetails/UserDetails.vue";
 
-import { ref, onMounted, computed } from "vue";
-import {fetchUsers, delUser, selectionHandler} from "./UserList.functions";
+import { ref, reactive, onMounted, computed } from "vue";
+import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
 
-  const title = "User List"
-  const userList = ref([])
-  const ui_showentryqty = ref(5)
+  const title = "User List";
+  const userList = ref([]);
+  const currentUser =reactive({
+    value: {}
+  })
+  const ui_UserDetailsVisible = reactive({
+    value: false
+  });
+
+  const ui_showentryqty = ref(5);
   const ui_createUserVisible = ref(false);
   const paginatedList = computed( () => {
     return userList.value.slice(0,ui_showentryqty.value).map(user => {
@@ -70,6 +84,7 @@ import {fetchUsers, delUser, selectionHandler} from "./UserList.functions";
       return user
     })
   });
+
   const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
   const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
