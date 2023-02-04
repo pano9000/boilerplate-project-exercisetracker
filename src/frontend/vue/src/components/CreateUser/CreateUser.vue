@@ -5,6 +5,7 @@
   <div class="ui_modal">
     <button class="ui_modal_btn_close" type="submit" @click="$emit('close-modal')">X</button>
     <form action="" method="post">
+      <h3>Add new User</h3>
       <h4>Username Requirements </h4>
       <ul class="list_requirements">
         <li>Allowed characters:
@@ -15,8 +16,7 @@
           <li>Underscore: <span class="spanhighlight">_</span></li>
         </ul>
       </li>
-        <li>Minimum length: 3 characters</li>
-        <li>Maximum length: 30 characters</li>
+        <li>Length: <span class="spanhighlight">3–30</span> characters</li>
       </ul>
       <div>
         <label for="input_username">Username:</label>
