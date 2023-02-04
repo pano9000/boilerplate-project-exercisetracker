@@ -3,21 +3,28 @@ import { sendToAPI } from "../../services/apiService.js"
 export async function addUser(event, usernameref) {
   try {
     event.preventDefault();
-    const formData = new FormData(event.target.form);
-    //TODO: add validation step
+
+    const form = event.target.form;
+
+    if (form.checkValidity() !== true) {
+      throw new Error("Invalid Data Entered")
+    }
+    const formData = new FormData(form);
+
     const apiResponse = await sendToAPI.post('http://localhost:3002/api/users/', formData)
     console.log(apiResponse)
     handleApiResponse(apiResponse)
+  
     if (!apiResponse.statusOK) {
-      throw new Error("Error")
+      throw new Error("Error Server")
       //TODO: add proper handling
     }
     alert("User added")
-    usernameref = "";
+    usernameref.value = "";
   }
   catch(error) {
     console.log(error)
-    alert("something went wrong")
+    alert(`something went wrong, ${error.message}`)
   }
 
 };
@@ -36,4 +43,9 @@ function handleApiResponse(apiResponse) {
     console.log("Something went wrong on the server")
     return;
   }
+}
+
+
+export function formValidityCheck(event, refToUpdate) {
+  refToUpdate.value = event.target.form.checkValidity();
 }
