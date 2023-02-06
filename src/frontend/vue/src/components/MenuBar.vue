@@ -7,12 +7,7 @@
 </template>
 
 
-<script>
-
-
-
-export default {
-  setup() {
+<script setup>
 
   const buttons = {
     userList: {
@@ -21,15 +16,7 @@ export default {
     exerciseList: {
       title: "Exercise List"
     }
-}
-
-
-    return {
-      buttons
-    }
-
   }
-}
 
 </script>
 
