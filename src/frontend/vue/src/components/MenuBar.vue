@@ -1,7 +1,11 @@
 <template>
 
-  <nav >
-    <a v-for="button in buttons" :key="button.title" @click=""> {{ button.title }}</a>
+  <nav>
+    <ul>
+      <li v-for="button in buttons" :key="button.title">
+        <a href="" @click=""> {{ button.title }} </a>
+      </li>
+    </ul>
   </nav>
 
 </template>
