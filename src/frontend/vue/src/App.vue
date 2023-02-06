@@ -3,6 +3,15 @@ import HelloWorld from './components/HelloWorld.vue'
 import MenuBar from "./components/MenuBar.vue"
 import UserList from "./components/UserList/UserList.vue"
 
+const menuItems = {
+    userList: {
+      title: "User List"
+    },
+    exerciseList: {
+      title: "Exercise List"
+    }
+}
+
 </script>
 
 <template>
@@ -19,7 +28,8 @@ import UserList from "./components/UserList/UserList.vue"
 
   <div id="display-area">
     <!--<HelloWorld msg="Vite + Vue" />-->
-    <MenuBar />
+    <MenuBar 
+      :menuItems="menuItems"></MenuBar>
     <UserList />
 
   </div>

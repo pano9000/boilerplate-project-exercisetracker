@@ -1,26 +1,15 @@
 <template>
-
-  <nav>
-    <ul>
-      <li v-for="button in buttons" :key="button.title">
-        <a href="" @click=""> {{ button.title }} </a>
-      </li>
-    </ul>
+  <nav class="nav-btn_wrap">
+    <a v-for="menuItem in menuItems" :key="menuItem.title" class="btn-nav" href="#" @click=""> {{ menuItem.title }} </a>
   </nav>
-
 </template>
 
 
 <script setup>
 
-  const buttons = {
-    userList: {
-      title: "User List"
-    },
-    exerciseList: {
-      title: "Exercise List"
-    }
-  }
+const props = defineProps({
+  menuItems: {}
+})
 
 </script>
 

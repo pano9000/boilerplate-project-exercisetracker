@@ -1,5 +1,8 @@
 <template>
   <!-- show user details, + exercise log-->
+  <MenuBar
+    :menuItems="menuItems">
+  </MenuBar>
   <h2>User Details</h2>
   <section>
     <h3>User Props</h3>
@@ -49,13 +52,23 @@
 
 
 <script setup>
-
+  import MenuBar from "../MenuBar.vue";
   import { ref, onBeforeUpdate, onMounted, onUpdated } from "vue";
   const props = defineProps(["currentUser"]);
 
   const filterProps = ref({
     limit: 5
   });
+
+  const menuItems = {
+    userDetails: {
+      title: "User Details"
+    },
+    userExerciseList: {
+      title: "User Exercise List"
+    }
+  };
+
   const exercises = {
     _id: "123456789",
     username: "username",
