@@ -51,11 +51,13 @@
     </ModalWindow>
   </div>
 
-  {{ ui_UserDetailsVisible }}
   <div v-show="ui_UserDetailsVisible.value === true">
-    <UserDetails
-      :currentUser="currentUser"
-    ></UserDetails>
+    <ModalWindow @close-modal="ui_UserDetailsVisible.value=false">
+      <UserDetails
+        :currentUser="currentUser.value"
+      ></UserDetails>
+    </ModalWindow>
+
   </div>
 </template>
 

@@ -22,6 +22,18 @@ export async function fetchUsers() {
 
 }
 
+export async function fetchUser(userId) {
+  try {
+    console.log("userid", userId)
+    const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId._id}`)
+    return apiResponse.data
+  }
+  catch(error) {
+    console.log("error fetchuser")
+  }
+}
+
+
 export async function delUser(selectedUsers, userList) {
 
   const confirmMessage = (!(selectedUsers.length > 1)) ?
@@ -50,11 +62,9 @@ export function selectionHandler(paginatedList, mode) {
 
 }
 
-export function showUserDetailsHandler(user, currentUserProp, ui_UserDetailsVisible) {
-  console.log("currprop bef", currentUserProp, ui_UserDetailsVisible)
-
-  console.log("showhandl", user, user._id)
-  currentUserProp.value = user._id
+export async function showUserDetailsHandler(user, currentUserProp, ui_UserDetailsVisible) {
+  const userData = await fetchUser(user);
+  currentUserProp.value = userData
   ui_UserDetailsVisible.value = true;
   console.log("currprop aft", currentUserProp, ui_UserDetailsVisible)
 }
