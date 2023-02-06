@@ -1,56 +1,49 @@
 <template>
-  <div class="blurry-backdrop">
+  <form action="" method="post">
+    <h3>Add new User</h3>
 
-  </div>
-  <div class="ui_modal">
-    <button class="ui_modal_btn_close" type="submit" @click="$emit('close-modal')">X</button>
-    <form action="" method="post">
-      <h3>Add new User</h3>
+    <section>
+      <h4>Username Requirements </h4>
+      <ul class="list_requirements">
+        <li>Allowed characters:
+          <ul>
+            <li>Numbers: <span class="spanhighlight">0-9</span></li>
+            <li>Letters: <span class="spanhighlight">a-z</span> (lowercase)</li>
+            <li>Hyphen: <span class="spanhighlight">-</span></li>
+            <li>Underscore: <span class="spanhighlight">_</span></li>
+          </ul>
+        </li>
+      <li>Length: <span class="spanhighlight">3–30</span> characters</li>
+    </ul>
+    </section>
 
-      <section>
-        <h4>Username Requirements </h4>
-        <ul class="list_requirements">
-          <li>Allowed characters:
-            <ul>
-              <li>Numbers: <span class="spanhighlight">0-9</span></li>
-              <li>Letters: <span class="spanhighlight">a-z</span> (lowercase)</li>
-              <li>Hyphen: <span class="spanhighlight">-</span></li>
-              <li>Underscore: <span class="spanhighlight">_</span></li>
-            </ul>
-          </li>
-        <li>Length: <span class="spanhighlight">3–30</span> characters</li>
-      </ul>
-      </section>
+    <section>
+      <fieldset>
+        <legend>User Information</legend>
+        <label for="input_username">Username:</label>
+        <input
+          id="input_username"
+          name="username"
+          type="text"
+          v-model="username.value"
+          @change="formValidityCheck($event, isValidData)"
+          required
+          pattern="^[a-z0-9_\-]{3,30}$"
+          autocomplete="false"
+        >
+      </fieldset>
+    </section>
 
-      <section>
-        <fieldset>
-          <legend>User Information</legend>
-          <label for="input_username">Username:</label>
-          <input
-            id="input_username"
-            name="username"
-            type="text"
-            v-model="username.value"
-            @change="formValidityCheck($event, isValidData)"
-            required
-            pattern="^[a-z0-9_\-]{3,30}$"
-            autocomplete="false"
-          >
-        </fieldset>
-      </section>
-
-      <section>
-        <button 
-          type="submit"
-          :disabled="!isValidData.value"
-          @click="addUser($event, username)"
-          >
-          Add User
-        </button>
-      </section>
-    </form>
-
-  </div>
+    <section>
+      <button 
+        type="submit"
+        :disabled="!isValidData.value"
+        @click="addUser($event, username)"
+        >
+        Add User
+      </button>
+    </section>
+  </form>
 
 </template>
 

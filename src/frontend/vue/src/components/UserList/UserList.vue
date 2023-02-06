@@ -46,9 +46,9 @@
   </div>
 
   <div v-show="ui_createUserVisible">
-    <CreateUser
-      @close-modal="ui_createUserVisible=false"
-    ></CreateUser>
+    <ModalWindow @close-modal="ui_createUserVisible=false">
+      <CreateUser></CreateUser>
+    </ModalWindow>
   </div>
 
   {{ ui_UserDetailsVisible }}
@@ -66,6 +66,7 @@ import UserDetails from "../UserDetails/UserDetails.vue";
 
 import { ref, reactive, onMounted, computed } from "vue";
 import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
+import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
   const userList = ref([]);
