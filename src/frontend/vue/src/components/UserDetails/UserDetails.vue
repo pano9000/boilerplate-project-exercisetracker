@@ -3,14 +3,16 @@
   <MenuBar
     :menuItems="menuItems">
   </MenuBar>
+
+
   <h2>User Details</h2>
-  <section>
+  <section v-if="menuItems.userDetails.visible">
     <h3>User Props</h3>
     <p>User Id: {{ currentUser._id }}</p>
     <p>Username: {{ currentUser.username }}</p>
   </section>
 
-  <section>
+  <section v-if="menuItems.userExerciseList.visible">
     <h3>User Exercise Log</h3>
     Number of Exercises: {{ exercises.count }}
     exercise log
@@ -60,14 +62,18 @@
     limit: 5
   });
 
-  const menuItems = {
+  const menuItems = ref({
     userDetails: {
-      title: "User Details"
+      title: "User Details",
+      visible: true,
+      id: "userDetails",
     },
     userExerciseList: {
-      title: "User Exercise List"
+      title: "User Exercise List",
+      visible: false,
+      id: "userExerciseList"
     }
-  };
+  });
 
   const exercises = {
     _id: "123456789",

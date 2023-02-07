@@ -1,6 +1,6 @@
 <template>
   <nav class="nav-btn_wrap">
-    <a v-for="menuItem in menuItems" :key="menuItem.title" class="btn-nav" href="#" @click=""> {{ menuItem.title }} </a>
+    <a v-for="menuItem in menuItems" :key="menuItem.id" class="btn-nav" :class="(menuItem.visible) ? 'btn-nav-active' : ''" href="#" @click="toggleVisibleSection(menuItem.id, menuItems)"> {{ menuItem.title }} </a>
   </nav>
 </template>
 
@@ -10,6 +10,14 @@
 const props = defineProps({
   menuItems: {}
 })
+
+function toggleVisibleSection(clickedMenuItemId, menuItems) {
+
+  for (const menuItem in menuItems) {
+    menuItems[menuItem].visible = (menuItems[menuItem].id === clickedMenuItemId) ? true : false;
+  }
+
+}
 
 </script>
 
