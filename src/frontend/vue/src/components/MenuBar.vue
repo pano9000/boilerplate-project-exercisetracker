@@ -14,6 +14,11 @@ const props = defineProps({
 </script>
 
 <style>
+ button {
+    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
+    margin-right: .5rem;
+  }
+
   nav {
     display: flex;
     align-items: stretch  ;
@@ -23,8 +28,29 @@ const props = defineProps({
     gap: 1rem;
   }
 
-  button {
-    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
-    margin-right: .5rem;
+  .nav-btn_wrap {
+    display: inline-flex;
+    background-color: bisque;
+    gap: 0rem;
   }
+
+  .btn-nav {
+    display: block;
+    background-color: lightgray;
+    padding: 2rem;
+
+  }
+
+
+  .nav-btn_wrap .btn-nav:first-of-type {
+    border-radius: 5px 0 0 5px;
+
+  }
+
+  .nav-btn_wrap .btn-nav:last-of-type {
+    border-radius: 0 5px 5px 0;
+  }
+
+
+
 </style>
