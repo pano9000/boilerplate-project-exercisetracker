@@ -7,13 +7,28 @@
   </select>
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
-
+  {{ totalBtns }}
   <nav>
 
-    <p>{{ totalPages }} Pages</p>
-    <div><button v-for="(pg, pgIndex) in totalPages">{{ pg + 1 }}</button></div>
+    <p>{{ totalPages }} Pages</p> // 
+    <div>
+      <button>&lt; Previous</button>
+      <button v-for="(pg, pgIndex) in totalBtns[0]">{{ pg }}</button>
+      ...
+      <button v-for="(pg, pgIndex) in totalBtns[1]">{{ pg }}</button>
+      <button>Next &gt;</button>
+      <div>
+        <label>Jump To</label>
+        <input 
+          type="number"
+          min="1"
+          :max="totalPages"
+          v-model="ui_jumpToPage">
+      </div>
+    </div>
 
   </nav>
+
   <table>
     <thead>
       <tr>
@@ -79,6 +94,7 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
     value: false
   });
 
+  const ui_jumpToPage = ref(1)
   const ui_showentryqty = ref(5);
   const ui_createUserVisible = ref(false);
   const paginatedList = computed( () => {
@@ -90,7 +106,18 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
   const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
-  const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value) )
+  const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value));
+  
+  const totalBtns = computed( () => {
+
+    const totalBtns = [[], []];
+    for (let i=1; i<=totalPages.value; i++) {
+      if (i<=3) totalBtns[0].push(i);
+      if (i >= totalPages.value - 1) totalBtns[1].push(i);
+    };
+    return totalBtns;
+
+  });
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
