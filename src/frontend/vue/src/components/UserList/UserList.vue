@@ -8,22 +8,27 @@
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
   {{ totalBtns }}
+  <p>{{ totalPages }} Pages</p>
+  {{ visibleBtns }}
+  {{ activePage }}
   <nav>
 
-    <p>{{ totalPages }} Pages</p> // 
     <div>
-      <button>&lt; Previous</button>
-      <button v-for="(pg, pgIndex) in totalBtns[0]">{{ pg }}</button>
-      ...
-      <button v-for="(pg, pgIndex) in totalBtns[1]">{{ pg }}</button>
-      <button>Next &gt;</button>
+      <button @click="activePage--">&lt; Previous</button>
+      <button v-for="(pg, pgIndex) in visibleBtns[0]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
+      &hellip;
+      <button v-for="(pg, pgIndex) in visibleBtns[1]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
+      &hellip;
+      <button v-for="(pg, pgIndex) in visibleBtns[2]" @click="activePage=pg">{{ pg }}</button>
+      <button @click="activePage++">Next &gt;</button>
       <div>
-        <label>Jump To</label>
+        <label>Jump To Page</label>
         <input 
           type="number"
           min="1"
           :max="totalPages"
           v-model="ui_jumpToPage">
+          <button @click="activePage=ui_jumpToPage">Jump</button>
       </div>
     </div>
 
@@ -110,14 +115,36 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   
   const totalBtns = computed( () => {
 
-    const totalBtns = [[], []];
+    const totalBtns = [];
     for (let i=1; i<=totalPages.value; i++) {
-      if (i<=3) totalBtns[0].push(i);
-      if (i >= totalPages.value - 1) totalBtns[1].push(i);
+      totalBtns.push(i);
     };
     return totalBtns;
-
   });
+
+  const activePage = ref(1);
+  /*
+  const visibleBtns = computed( () => {
+
+    const visibleBtns = [[], []];
+    for (let i=activePage.value; i<=totalPages.value; i++) {
+      if (i<=3) visibleBtns[0].push(i);
+      if (i >= totalPages.value - 1) visibleBtns[1].push(i);
+    };
+    return visibleBtns;
+
+  })
+  */
+  const visibleBtns = computed( () => {
+
+    const visibleBtns = [[], [], []];
+    visibleBtns[0] = totalBtns.value.slice(0, 2)
+    visibleBtns[1] = totalBtns.value.slice(activePage.value - 2, activePage.value + 1)
+    visibleBtns[2] = totalBtns.value.slice(totalPages.value-2, totalPages.value)
+    
+    return visibleBtns;
+
+})
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
