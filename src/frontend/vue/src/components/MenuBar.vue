@@ -31,12 +31,13 @@ function toggleVisibleSection(clickedMenuItemId, menuItems) {
     display: flex;
     align-items: stretch  ;
     justify-content: center;
-    padding: 1rem;
+    padding: 1rem 1rem;
     background-color: yellowgreen;
-    gap: 1rem;
   }
-
+  
   .nav-btn_wrap {
+    border-radius: .5rem;
+    box-shadow: 0px 0px 1px 2px rgba(0,0,0,0.2) inset;
     display: inline-flex;
     background-color: bisque;
     gap: 0rem;
@@ -46,6 +47,12 @@ function toggleVisibleSection(clickedMenuItemId, menuItems) {
     display: block;
     background-color: lightgray;
     padding: 2rem;
+    transition: background-color 0.3s;
+
+  }
+
+  .btn-nav-active {
+    background-color: burlywood;
 
   }
 
