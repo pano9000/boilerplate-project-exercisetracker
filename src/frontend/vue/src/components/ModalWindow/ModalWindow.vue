@@ -38,11 +38,25 @@
   background-color: aliceblue;
   padding: 2rem;
   max-width: 50%;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 2px 2px 10px 8px rgb(0,0,0,0.2);
+}
+
+/*
+.ui_modal {
+  border-radius: .5rem;
+  position: fixed;
+  background-color: aliceblue;
+  padding: 2rem;
+  max-width: 50%;
   top: 50%;
-  left: 50%; /* move to the middle of the screen (assumes relative parent is the body/viewport) */
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 2px 2px 10px 8px rgb(0,0,0,0.2);
 }
+*/
 
 .ui_modal_btn_close {
   position: absolute;
