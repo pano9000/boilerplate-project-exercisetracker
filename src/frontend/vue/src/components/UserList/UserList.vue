@@ -147,7 +147,7 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
       visibleBtns[0] = totalBtns.value.slice(0, 6)
       visibleBtns[1] = []
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
-      return visibleBtns;
+      return visibleBtns.flatMap(elem => elem);
     }
     if (activePage.value > totalPages.value-4) {
       visibleBtns[0] = totalBtns.value.slice(0, 1);
@@ -156,15 +156,15 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
       visibleBtns[2] = totalBtns.value.slice(totalPages.value - 6, totalPages.value)
 
-      return visibleBtns;
+      return visibleBtns.flatMap(elem => elem);
     } else {
 
       visibleBtns[0] = totalBtns.value.slice(0, 1)
       visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
     }
-    
-    return visibleBtns
+
+    return visibleBtns.flatMap(elem => elem);
 
 })
 
@@ -196,6 +196,14 @@ table {
 td {
   padding: 1rem;
   border: 1px solid gray;
+}
+
+.activePg {
+  font-weight: 700;
+}
+
+.btn-pagination {
+  min-width: 4.25rem;
 }
 
 </style>
