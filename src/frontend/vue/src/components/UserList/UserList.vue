@@ -14,13 +14,12 @@
   <nav>
 
     <div>
-      <button @click="activePage--">&lt; Previous</button>
+      <button :disabled="!ui_previousPossible" @click="activePage--">&lt; Previous</button>
+      <!--<button v-for="(pg, pgIndex) in [...visibleBtns]">{{pg}}</button>-->
       <button v-for="(pg, pgIndex) in visibleBtns[0]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
-      &hellip;
       <button v-for="(pg, pgIndex) in visibleBtns[1]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
-      &hellip;
-      <button v-for="(pg, pgIndex) in visibleBtns[2]" @click="activePage=pg">{{ pg }}</button>
-      <button @click="activePage++">Next &gt;</button>
+      <button v-for="(pg, pgIndex) in visibleBtns[2]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
+      <button :disabled="!ui_forwardPossible" @click="activePage++">Next &gt;</button>
       <div>
         <label>Jump To Page</label>
         <input 
@@ -102,8 +101,13 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const ui_jumpToPage = ref(1)
   const ui_showentryqty = ref(5);
   const ui_createUserVisible = ref(false);
+  const ui_forwardPossible = computed( () => (activePage.value < totalPages.value) ? true : false);
+  const ui_previousPossible = computed( () => (activePage.value > 1) ? true : false); 
+
   const paginatedList = computed( () => {
-    return userList.value.slice(0,ui_showentryqty.value).map(user => {
+    const listStart = ui_showentryqty.value*(activePage.value-1);
+    const listEnd = ui_showentryqty.value*activePage.value;
+    return userList.value.slice(listStart,listEnd).map(user => {
       user.selected = false;
       return user
     })
@@ -137,12 +141,30 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   */
   const visibleBtns = computed( () => {
 
+    //TODO: Refactor and simplify
     const visibleBtns = [[], [], []];
-    visibleBtns[0] = totalBtns.value.slice(0, 2)
-    visibleBtns[1] = totalBtns.value.slice(activePage.value - 2, activePage.value + 1)
-    visibleBtns[2] = totalBtns.value.slice(totalPages.value-2, totalPages.value)
+    if (activePage.value < 5) {
+      visibleBtns[0] = totalBtns.value.slice(0, 6)
+      visibleBtns[1] = []
+      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+      return visibleBtns;
+    }
+    if (activePage.value > totalPages.value-4) {
+      visibleBtns[0] = totalBtns.value.slice(0, 1);
+      //visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
+      visibleBtns[1] = []
+
+      visibleBtns[2] = totalBtns.value.slice(totalPages.value - 6, totalPages.value)
+
+      return visibleBtns;
+    } else {
+
+      visibleBtns[0] = totalBtns.value.slice(0, 1)
+      visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
+      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+    }
     
-    return visibleBtns;
+    return visibleBtns
 
 })
 
