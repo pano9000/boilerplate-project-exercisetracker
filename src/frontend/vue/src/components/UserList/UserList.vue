@@ -3,7 +3,7 @@
   <h3>mockup</h3>
   <label for="admin-ui_showentryqty">Show max. entries</label>
   <select id="admin-ui_showentryqty" v-model="ui_showentryqty">
-    <option v-for="value in [5, 10, 25, 50]" :key="value"> {{value}}</option>
+    <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
   </select>
 
   <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
@@ -14,17 +14,24 @@
   <nav>
 
     <div>
-      <button :disabled="!ui_previousPossible" @click="activePage--">&lt; Previous</button>
-      <!--<button v-for="(pg, pgIndex) in [...visibleBtns]">{{pg}}</button>-->
-      <button v-for="(pg, pgIndex) in visibleBtns[0]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
-      <button v-for="(pg, pgIndex) in visibleBtns[1]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
-      <button v-for="(pg, pgIndex) in visibleBtns[2]" @click="activePage=pg" :class="(pg == activePage) ? 'activePg' : ''">{{ pg }}</button>
-      <button :disabled="!ui_forwardPossible" @click="activePage++">Next &gt;</button>
+      <button :disabled="!ui_previousPossible" @click="activePage--">&lt;</button>
+      <button 
+        class="btn-pagination"
+        type="button"
+        v-for="(pg, pgIndex) in visibleBtns"
+        @click="activePage=pg"
+        :class="(pg == activePage) ? 'activePg' : ''"
+        :disabled="pg == '…'"
+      >
+        {{ pg }}
+      </button>
+      <button :disabled="!ui_forwardPossible" @click="activePage++">&gt;</button>
       <div>
         <label>Jump To Page</label>
         <input 
           type="number"
           min="1"
+          @keydown.enter="activePage=ui_jumpToPage"
           :max="totalPages"
           v-model="ui_jumpToPage">
           <button @click="activePage=ui_jumpToPage">Jump</button>
@@ -91,7 +98,7 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
   const userList = ref([]);
-  const currentUser =reactive({
+  const currentUser = reactive({
     value: {}
   })
   const ui_UserDetailsVisible = reactive({
@@ -141,29 +148,37 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   */
   const visibleBtns = computed( () => {
 
-    //TODO: Refactor and simplify
+    /**
+     * always show: "<" | "first page" | "last page" | ">" 
+     * middle part with 2 pages before and 2 pages after for easier access
+     * e.g.: < 1 ... 3 4 `5` 6 7 ... 10 >
+     */
+    //TODO: Refactor and simplify - looks ugly and hackish
     const visibleBtns = [[], [], []];
-    if (activePage.value < 5) {
-      visibleBtns[0] = totalBtns.value.slice(0, 6)
-      visibleBtns[1] = []
-      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+    if (totalPages.value < 7) {
+      visibleBtns[0] = totalBtns.value.slice(0, (totalPages.value>5) ? 6 : totalPages.value)
       return visibleBtns.flatMap(elem => elem);
-    }
-    if (activePage.value > totalPages.value-4) {
-      visibleBtns[0] = totalBtns.value.slice(0, 1);
-      //visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
-      visibleBtns[1] = []
 
+    }
+    if (activePage.value < 5) {
+      visibleBtns[0] = totalBtns.value.slice(0, (totalPages.value>5) ? 6 : totalPages.value)
+      visibleBtns[1] = ["…"]
+      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+    }
+    else if (activePage.value > totalPages.value-4) {
+      visibleBtns[0] = totalBtns.value.slice(0, 1);
+      visibleBtns[1] = ["…"]
       visibleBtns[2] = totalBtns.value.slice(totalPages.value - 6, totalPages.value)
 
-      return visibleBtns.flatMap(elem => elem);
-    } else {
+     } else {
 
       visibleBtns[0] = totalBtns.value.slice(0, 1)
       visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+      visibleBtns[1].push("…");
+      visibleBtns[1].unshift("…");
+      
     }
-
     return visibleBtns.flatMap(elem => elem);
 
 })
@@ -204,6 +219,10 @@ td {
 
 .btn-pagination {
   min-width: 4.25rem;
+}
+
+button:disabled {
+  pointer-events: none;
 }
 
 </style>
