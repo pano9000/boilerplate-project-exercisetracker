@@ -1,40 +1,45 @@
 <template>
   <h2> {{ title }} </h2>
   <h3>mockup</h3>
-  <label for="admin-ui_showentryqty">Show max. entries</label>
-  <select id="admin-ui_showentryqty" v-model="ui_showentryqty">
-    <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
-  </select>
 
-  <p>Showing {{ ui_showentryqty }} entries of total {{ userList.length }}</p>
-  {{ totalBtns }}
+
+  <p>Showing entries {{ ui_qtyVisible }}  of total {{ userList.length }}</p>
+
+  
   <p>{{ totalPages }} Pages</p>
-  {{ visibleBtns }}
-  {{ activePage }}
+  <div>
+    <label for="admin-ui_showentryqty">Show max. entries</label>
+    <select id="admin-ui_showentryqty" v-model="ui_showentryqty" @change="updateActivePage">
+      <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
+    </select>
+  </div>
   <nav>
 
     <div>
-      <button :disabled="!ui_previousPossible" @click="activePage--">&lt;</button>
+      <button :disabled="!ui_previousPossible" @click="ui_activePage--">&lt;</button>
       <button 
         class="btn-pagination"
         type="button"
         v-for="(pg, pgIndex) in visibleBtns"
-        @click="activePage=pg"
-        :class="(pg == activePage) ? 'activePg' : ''"
+        @click="ui_activePage=pg"
+        :class="(pg == ui_activePage) ? 'activePg' : ''"
         :disabled="pg == '…'"
       >
         {{ pg }}
       </button>
-      <button :disabled="!ui_forwardPossible" @click="activePage++">&gt;</button>
+      <button :disabled="!ui_forwardPossible" @click="ui_activePage++">&gt;</button>
+    </div>
+    <div>
+
       <div>
         <label>Jump To Page</label>
         <input 
           type="number"
           min="1"
-          @keydown.enter="activePage=ui_jumpToPage"
+          @keydown.enter="ui_activePage=ui_jumpToPage"
           :max="totalPages"
           v-model="ui_jumpToPage">
-          <button @click="activePage=ui_jumpToPage">Jump</button>
+          <button @click="ui_activePage=ui_jumpToPage">Jump</button>
       </div>
     </div>
 
@@ -91,6 +96,7 @@
 <script setup>
 import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
+import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 import { ref, reactive, onMounted, computed } from "vue";
 import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
@@ -105,15 +111,24 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
     value: false
   });
 
+  const ui_activePage = ref(1);
   const ui_jumpToPage = ref(1)
   const ui_showentryqty = ref(5);
   const ui_createUserVisible = ref(false);
-  const ui_forwardPossible = computed( () => (activePage.value < totalPages.value) ? true : false);
-  const ui_previousPossible = computed( () => (activePage.value > 1) ? true : false); 
+  const ui_forwardPossible = computed( () => (ui_activePage.value < totalPages.value) ? true : false);
+  const ui_previousPossible = computed( () => (ui_activePage.value > 1) ? true : false); 
+ 
+  const ui_qtyVisible = computed( () => {
+    const from = (ui_showentryqty.value * (ui_activePage.value-1)) + 1;
+    const calcTo = ui_showentryqty.value * ui_activePage.value;
+    const to = (calcTo > userList.value.length) ? userList.value.length : calcTo;
+    return `${from}–${to}`
+  });
+
 
   const paginatedList = computed( () => {
-    const listStart = ui_showentryqty.value*(activePage.value-1);
-    const listEnd = ui_showentryqty.value*activePage.value;
+    const listStart = ui_showentryqty.value*(ui_activePage.value-1);
+    const listEnd = ui_showentryqty.value*ui_activePage.value;
     return userList.value.slice(listStart,listEnd).map(user => {
       user.selected = false;
       return user
@@ -124,6 +139,12 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
   const totalPages = computed( () => Math.ceil(userList.value.length / ui_showentryqty.value));
   
+  function updateActivePage() {
+    if (ui_activePage.value > totalPages.value) {
+      ui_activePage.value = totalPages.value
+    }
+  }
+  
   const totalBtns = computed( () => {
 
     const totalBtns = [];
@@ -133,19 +154,8 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
     return totalBtns;
   });
 
-  const activePage = ref(1);
-  /*
-  const visibleBtns = computed( () => {
 
-    const visibleBtns = [[], []];
-    for (let i=activePage.value; i<=totalPages.value; i++) {
-      if (i<=3) visibleBtns[0].push(i);
-      if (i >= totalPages.value - 1) visibleBtns[1].push(i);
-    };
-    return visibleBtns;
 
-  })
-  */
   const visibleBtns = computed( () => {
 
     /**
@@ -160,12 +170,12 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
       return visibleBtns.flatMap(elem => elem);
 
     }
-    if (activePage.value < 5) {
+    if (ui_activePage.value < 5) {
       visibleBtns[0] = totalBtns.value.slice(0, (totalPages.value>5) ? 6 : totalPages.value)
       visibleBtns[1] = ["…"]
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
     }
-    else if (activePage.value > totalPages.value-4) {
+    else if (ui_activePage.value > totalPages.value-4) {
       visibleBtns[0] = totalBtns.value.slice(0, 1);
       visibleBtns[1] = ["…"]
       visibleBtns[2] = totalBtns.value.slice(totalPages.value - 6, totalPages.value)
@@ -173,7 +183,7 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
      } else {
 
       visibleBtns[0] = totalBtns.value.slice(0, 1)
-      visibleBtns[1] = totalBtns.value.slice(activePage.value - 3, activePage.value + 2)
+      visibleBtns[1] = totalBtns.value.slice(ui_activePage.value - 3, ui_activePage.value + 2)
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
       visibleBtns[1].push("…");
       visibleBtns[1].unshift("…");
@@ -205,6 +215,7 @@ table {
   border: 1px solid gray;
   border-collapse: collapse;
   background-color: beige;
+  table-layout: fixed;
 
 }
 
