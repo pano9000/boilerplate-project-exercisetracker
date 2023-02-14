@@ -70,6 +70,7 @@
 <script setup>
   import MenuBar from "../MenuBar.vue";
   import { ref, onBeforeUpdate, onMounted, onUpdated } from "vue";
+  import CreatExercise from "../CreateExercise/CreatExercise.vue";
   const props = defineProps(["currentUser"]);
 
   const filterProps = ref({
@@ -86,6 +87,11 @@
       title: "User Exercise List",
       visible: false,
       id: "userExerciseList"
+    },
+    userCreateExercise: {
+      title: "Create Exercise",
+      visible: false,
+      id: "userCreateExercise"
     }
   });
 
@@ -112,19 +118,6 @@
     ]
   }
 
-  const a = ref({})
-  onMounted( async () => {
-    //console.log(currentUser)
-
-  });
-
-  onBeforeUpdate(
-    async () => {
-      console.log("yoo on before", props.currentUser);
-
-
-
-    })
 
 
 
