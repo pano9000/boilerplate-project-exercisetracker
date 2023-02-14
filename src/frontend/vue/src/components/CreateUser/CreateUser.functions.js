@@ -1,4 +1,4 @@
-import { sendToAPI } from "../../services/apiService.js"
+import { sendToAPI, handleApiResponse } from "../../services/apiService.js"
 
 export async function addUser(event, usernameref) {
   try {
@@ -28,24 +28,3 @@ export async function addUser(event, usernameref) {
   }
 
 };
-
-function handleApiResponse(apiResponse) {
-  if (apiResponse === undefined || apiResponse.statusOK === undefined) {
-    throw new Error("Received an undefined response from the server")
-  }
-
-  if (apiResponse.statusOK === true) {
-    console.log("all good")
-    return
-  }
-
-  if (apiResponse.statusOK === false) {
-    console.log("Something went wrong on the server")
-    return;
-  }
-}
-
-
-export function formValidityCheck(event, refToUpdate) {
-  refToUpdate.value = event.target.form.checkValidity();
-}
