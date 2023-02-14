@@ -50,7 +50,8 @@
 
 <script setup>
 
-  import { addUser, formValidityCheck } from "./CreateUser.functions";
+  import { addUser } from "./CreateUser.functions";
+  import { formValidityCheck } from "../../services/utils"
   import { ref, reactive } from "vue";
   defineEmits(['close-modal']);
 
