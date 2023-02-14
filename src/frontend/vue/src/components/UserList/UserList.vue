@@ -69,12 +69,13 @@
     </tbody>
   </table>
 
-  <!-- turn into component and add on top of list as well-->
-  <div>
-    <button type="button" @click="ui_createUserVisible = true">➕ Add New</button>
-    <button type="button" @click="( (!hasSelectedUsers) ? selectionHandler(paginatedList, true) : selectionHandler(paginatedList, false))">{{ (!hasSelectedUsers) ? "Select All" : "Clear Selection"}}</button>
-    <button type="button" :disabled="!hasSelectedUsers" :class="hasSelectedUsers ? 'active' : 'inactive'" @click="delUser(selectedUsers, userList)">❌ Delete Selected</button>
-  </div>
+  <ListActionButtons
+    @click-addNew="ui_createUserVisible = true"
+    @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList, true) : selectionHandler(paginatedList, false))"
+    @click-delSelected="delUser(selectedUsers, userList)"
+    :hasSelection="hasSelectedUsers"
+  >
+  </ListActionButtons>
 
   <div v-show="ui_createUserVisible">
     <ModalWindow @close-modal="ui_createUserVisible=false">
@@ -97,6 +98,7 @@
 import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
+import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 
 import { ref, reactive, onMounted, computed } from "vue";
 import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
