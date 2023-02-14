@@ -26,7 +26,7 @@
           name="username"
           type="text"
           v-model="username.value"
-          @change="formValidityCheck($event, isValidData)"
+          @input="formValidityCheck($event, isValidData)"
           required
           pattern="^[a-z0-9_\-]{3,30}$"
           autocomplete="false"
