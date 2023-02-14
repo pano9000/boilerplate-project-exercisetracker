@@ -48,17 +48,17 @@
   <table>
     <thead>
       <tr>
-        <td>UserId</td>
-        <td>Username</td>
-        <td>Selection</td>
-        <td>Edit</td>
+        <td class="list-header list-header-narrow">Selection</td>
+        <td class="list-header list-header-flex">UserId</td>
+        <td class="list-header list-header-flex">Username</td>
+        <td class="list-header list-header-medium">Edit</td>
       </tr>
     </thead>
     <tbody>
       <tr v-for="user in paginatedList" :key="user._id">
+        <td><input type="checkbox" v-model="user.selected"></td>
         <td>{{ user._id }}</td>
         <td>{{ user.username }}</td>
-        <td><input type="checkbox" v-model="user.selected"></td>
         <td>
           <button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)">✏️</button>
           <button @click="delUser([user], userList)">❌</button>
@@ -216,7 +216,7 @@ table {
   border-collapse: collapse;
   background-color: beige;
   table-layout: fixed;
-
+  word-break: break-all;
 }
 
 td {
@@ -234,6 +234,14 @@ td {
 
 button:disabled {
   pointer-events: none;
+}
+
+.list-header-narrow {
+  width: 5rem;
+}
+
+.list-header-medium {
+  width: 10rem;
 }
 
 </style>
