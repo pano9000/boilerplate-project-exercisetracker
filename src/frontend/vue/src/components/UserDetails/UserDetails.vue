@@ -5,11 +5,18 @@
   </MenuBar>
 
 
-  <h2>User Details</h2>
   <section v-if="menuItems.userDetails.visible">
-    <h3>User Props</h3>
-    <p>User Id: {{ currentUser._id }}</p>
-    <p>Username: {{ currentUser.username }}</p>
+    <h2>User Details</h2>
+    <div>
+      <label for="userId">User ID</label>
+      <input id="userId" disabled type="text" :value="currentUser._id">
+    </div>
+    <div>
+      <label>Username</label>
+      <input disabled type="text" :value="currentUser.username">
+      <button @click="">✏️</button>
+    </div>
+
   </section>
 
   <section v-if="menuItems.userExerciseList.visible">
