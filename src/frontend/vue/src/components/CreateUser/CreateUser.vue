@@ -66,14 +66,22 @@
 </script>
 
 <style>
+input:not(:placeholder-shown) {
+  background-color: #fdfdff;
+}
+
+input:placeholder-shown {
+  background-color: #fdfdff;
+}
 
 input:valid {
-  background-color: green;
+  background-color: lightgreen;
 }
 
 input:invalid {
   background-color: #fe5050;
 }
+
 
 .blurry-backdrop {
   position: fixed;
