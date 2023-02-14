@@ -1,49 +1,40 @@
+<template>
+  <div>
+    <label>Select UI</label>
+    <select v-model="active_ui">
+      <option v-for="ui in ['Admin', 'User']" :key="ui" :value="ui.toLowerCase()">{{ ui }}</option>
+    </select>
+  </div>
+
+  <section v-if="active_ui==='admin'">
+    <UiAdmin
+      :userList="userList">
+    </UiAdmin>
+  </section>
+
+  <section v-if="active_ui==='user'">
+    <UiUser
+     :userList="userList">
+    </UiUser>
+  </section>
+</template>
+
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import MenuBar from "./components/MenuBar.vue"
-import UserList from "./components/UserList/UserList.vue"
-import { ref } from 'vue';
-const menuItems = ref({
-  userList: {
-    title: "User List",
-    visible: true,
-    id: "userList",
-  },
-  exerciseList: {
-    title: "Exercise List",
-    visible: false,
-    id: "exerciseList",
-  }
-})
+  import UiAdmin from "./UiAdmin.vue"
+  import UiUser from "./UiUser.vue"
+  import { ref, onMounted } from 'vue';
+  import { fetchUsers } from "./components/UserList/UserList.functions";
+
+  const active_ui = ref("admin")
+
+  const userList = ref([]);
+
+  onMounted(  async () => {
+    userList.value = await fetchUsers();
+  })
 
 
 </script>
-
-<template>
-  <!--
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
--->
-
-  <div id="display-area">
-    <!--<HelloWorld msg="Vite + Vue" />-->
-    <MenuBar 
-      :menuItems="menuItems"></MenuBar>
-      <section v-show="menuItems.userList.visible">
-        <UserList />
-      </section>
-      <section v-show="menuItems.exerciseList.visible">
-        <h2>Todo</h2>
-      </section>
-
-  </div>
-</template>
 
 <style scoped>
 .logo {
