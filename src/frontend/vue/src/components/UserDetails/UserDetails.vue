@@ -28,25 +28,32 @@
       </select>
       <button @click="loadExerciseHandler(userId)">Load Exercises</button>
     </form>
+      <section>
+        {{ filterProps }}
 
-    {{ filterProps }}
-    {{ a }}
-    <table>
-      <thead>
-        <tr>
-          <td>Date</td>
-          <td>Description</td>
-          <td>Duration</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(exercise, index) in exercises.logs" :key="`exercise_${index}`">
-          <td>{{ exercise.date }}</td>
-          <td>{{ exercise.description }}</td>
-          <td>{{ exercise.duration }}</td>
-        </tr>
-      </tbody>
-    </table>
+        <table>
+          <thead>
+            <tr>
+              <td>Date</td>
+              <td>Description</td>
+              <td>Duration</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(exercise, index) in exercises.logs" :key="`exercise_${index}`">
+              <td>{{ exercise.date }}</td>
+              <td>{{ exercise.description }}</td>
+              <td>{{ exercise.duration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+  </section>
+
+  <section v-if="menuItems.userCreateExercise.visible">
+    <CreatExercise
+    :currentUser="currentUser._id"
+    ></CreatExercise>
   </section>
 
 </template>
