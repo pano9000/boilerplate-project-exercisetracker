@@ -2,11 +2,12 @@
 
 My ~~solution~~ work in Progress for the [Exercise Tracker](https://www.freecodecamp.org/learn/back-end-development-and-apis/back-end-development-and-apis-projects/url-shortener-microservice) project from [freeCodeCamp](https://www.freecodecamp.org/).
 
-Current Status (`2023 Jan 17`):
+Current Status (`2023 Feb 15`):
 * freeCodeCamp tests are passing
 * Backend Validation is DONE
-* Frontend work is WIP (first a vanillaJS approach, later maybe a Vue3 based solution)
-* MongoDB Schemas can still be omptomized (relations need to be modelled still)
+* Frontend work is WIP ~~(first a vanillaJS approach, later maybe a Vue3 based solution)~~
+  * concentrating on creating a `Vue.js` based UI, mocking an "Admin Interface"
+* MongoDB Schemas can still be optimized (relations need to be modelled still)
 
 Backend:
 * Nodejs
