@@ -44,7 +44,13 @@
     </div>
 
   </nav>
-
+  <ListActionButtons
+    @click-addNew="ui_createUserVisible = true"
+    @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList, true) : selectionHandler(paginatedList, false))"
+    @click-delSelected="delUser(selectedUsers, userList)"
+    :hasSelection="hasSelectedUsers"
+  >
+  </ListActionButtons>
   <table>
     <thead>
       <tr>
@@ -244,6 +250,20 @@ button:disabled {
 
 .list-header-medium {
   width: 10rem;
+}
+
+
+.ui-jumpToPage {
+  width: 4ch;
+}
+
+.ui_pagination-nav {
+  display: block;
+}
+
+.ui_pagination-row-actions {
+  display: flex;
+  justify-content: center;
 }
 
 </style>
