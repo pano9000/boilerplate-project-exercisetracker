@@ -20,41 +20,10 @@
   </section>
 
   <section v-if="menuItems.userExerciseList.visible">
-    <h3>User Exercise Log</h3>
-    Number of Exercises: {{ exercises.count }}
-    exercise log
-    <form>
-      <label>Date From</label>
-      <input type="date" v-model="filterProps.dateFrom">
-      <label>Date To</label>
-      <input type="date" v-model="filterProps.dateTo">
+    <ExerciseList
+    :currentUser="currentUser._id"
+    ></ExerciseList>
 
-      <label>Limit</label>
-      <select v-model="filterProps.limit">
-        <option v-for="limit in [5, 10, 25, 50]" :key="limit">{{ limit }}</option>
-      </select>
-      <button @click="loadExerciseHandler(userId)">Load Exercises</button>
-    </form>
-      <section>
-        {{ filterProps }}
-
-        <table>
-          <thead>
-            <tr>
-              <td>Date</td>
-              <td>Description</td>
-              <td>Duration</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(exercise, index) in exercises.logs" :key="`exercise_${index}`">
-              <td>{{ exercise.date }}</td>
-              <td>{{ exercise.description }}</td>
-              <td>{{ exercise.duration }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
   </section>
 
   <section v-if="menuItems.userCreateExercise.visible">
@@ -71,11 +40,10 @@
   import MenuBar from "../MenuBar.vue";
   import { ref, onBeforeUpdate, onMounted, onUpdated } from "vue";
   import CreatExercise from "../CreateExercise/CreatExercise.vue";
+  import ExerciseList from "../ExerciseList/ExerciseList.vue";
   const props = defineProps(["currentUser"]);
 
-  const filterProps = ref({
-    limit: 5
-  });
+
 
   const menuItems = ref({
     userDetails: {
@@ -94,30 +62,6 @@
       id: "userCreateExercise"
     }
   });
-
-  const exercises = {
-    _id: "123456789",
-    username: "username",
-    count: 3,
-    logs: [
-      {
-        description: "test1",
-        duration: 1,
-        date: "Sat Feb 04 2023"
-      },
-      {
-        description: "test2",
-        duration: 53,
-        date: "Sat Feb 04 2023"
-      },
-      {
-        description: "test3",
-        duration: 24,
-        date: "Sat Feb 04 2023"
-      },
-    ]
-  }
-
 
 
 
