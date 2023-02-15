@@ -3,19 +3,13 @@
   <h3>mockup</h3>
 
 
-  <p>Showing entries {{ ui_qtyVisible }}  of total {{ userList.length }}</p>
-
   
-  <p>{{ totalPages }} Pages</p>
-  <div>
-    <label for="admin-ui_showentryqty">Show max. entries</label>
-    <select id="admin-ui_showentryqty" v-model="ui_showentryqty" @change="updateActivePage">
-      <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
-    </select>
-  </div>
-  <nav>
+  
 
-    <div>
+
+  <nav class="ui_pagination-nav">
+
+    <div class="ui_pagination-row-buttons">
       <button :disabled="!ui_previousPossible" @click="ui_activePage--">&lt;</button>
       <button 
         class="btn-pagination"
@@ -29,7 +23,15 @@
       </button>
       <button :disabled="!ui_forwardPossible" @click="ui_activePage++">&gt;</button>
     </div>
-    <div>
+    <div class="ui_pagination-row-actions">
+      <div>
+
+        <label for="admin-ui_showentryqty">Show max. entries</label>
+        <select id="admin-ui_showentryqty" v-model="ui_showentryqty" @change="updateActivePage">
+          <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
+        </select>
+
+      </div>
 
       <div>
         <label>Jump To Page</label>
@@ -38,10 +40,14 @@
           min="1"
           @keydown.enter="ui_activePage=ui_jumpToPage"
           :max="totalPages"
-          v-model="ui_jumpToPage">
-          <button @click="ui_activePage=ui_jumpToPage">Jump</button>
+          v-model="ui_jumpToPage"
+          class="ui-jumpToPage"
+        >
+        <button @click="ui_activePage=ui_jumpToPage">Jump</button>
       </div>
+
     </div>
+    <p>Showing entries {{ ui_qtyVisible }}  of total {{ userList.length }}</p>
 
   </nav>
   <ListActionButtons
