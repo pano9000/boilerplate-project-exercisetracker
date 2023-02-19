@@ -86,7 +86,7 @@ export function handleApiResponse(apiResponse) {
   }
 
   if (apiResponse.statusOK === false) {
-    console.log("Something went wrong on the server")
+    console.log("Something went wrong on the server", apiResponse.msg)
     return;
   }
 }
