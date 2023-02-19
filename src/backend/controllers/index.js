@@ -27,6 +27,10 @@ module.exports = {
         get: require("./api/logsGet")
       },
 
+      logsAll: {
+        get: require("./api/logsGetAll")
+      },
+
       exercises: {
         post: require("./api/exercisesPost")
       }
