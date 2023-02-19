@@ -13,6 +13,7 @@
           name="userId" 
           placeholder="User Id" 
           required 
+          disabled
           pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$"
           v-model="createExerciseForm.userId">
       </div>
