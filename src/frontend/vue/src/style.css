@@ -59,6 +59,10 @@ input {
 
 }
 
+input:not(:placeholder-shown):not(:focus):invalid {
+  background-color: initial;
+}
+
 input[type="number"] {
   appearance: textfield;
 }
