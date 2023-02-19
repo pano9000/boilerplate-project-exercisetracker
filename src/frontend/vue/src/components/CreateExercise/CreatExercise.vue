@@ -49,16 +49,16 @@
 </template>
 
 <script setup>
-import { addExercise } from "./CreateExercise.functions"
-import { ref, reactive } from "vue";
-const props = defineProps(["currentUser"]);
-console.log("props", props)
-const createExerciseForm = reactive( {
-  userId: props.currentUser,
-  description: "",
-  duration: "",
-  date: "",
-})
+  import { addExercise } from "./CreateExercise.functions";
+  import { ref, reactive } from "vue";
+  const props = defineProps(["currentUser"]);
+  console.log("props", props)
+  const createExerciseForm = reactive( {
+    userId: props.currentUser,
+    description: "",
+    duration: "",
+    date: new Date().toLocaleDateString("fr-CA", {   year: "numeric",   month: "2-digit",   day: "2-digit" }).replace(/\//g, "-"),
+  });
 
 </script>
 
