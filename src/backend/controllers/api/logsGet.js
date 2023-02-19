@@ -1,5 +1,7 @@
 const findExercises = require("../../services/db/findExercises");
 const findUser = require("../../services/db/findUser");
+const createSearchObject = require("../../services/db/createSearchObject")
+
 
 async function logs(req, res) {
 
@@ -50,25 +52,12 @@ async function logs(req, res) {
       throw new Error("user not found")
     }
 
-
-    //create search here, depending on what the filters say -> probably refactor to separate function
-    const createSearchObject = () => {
-      const searchObject = {
-        userId
-      }
-
-      if (filterDateFrom !== undefined && filterDateTo === undefined) searchObject.date = { $gte: filterDateFrom};
-      if (filterDateTo !== undefined && filterDateFrom === undefined) searchObject.date = { $lte: filterDateTo};
-      if (filterDateFrom !== undefined && filterDateTo !== undefined) searchObject.date = { $lte: filterDateTo, $gte: filterDateFrom};
-
-      return searchObject
-    }
     const queryOptions = {
       sort: { date: optionSort || "asc" },
       limit: filterQty || 0
     }
 
-    const searchObject = createSearchObject()
+    const searchObject = createSearchObject.exerciseLog( { userId, filterDateFrom, filterDateTo } )
 
     const findResult = await findExercises.findAll(searchObject, queryOptions); //TODO: check if pagination of results should be a thing?
 
