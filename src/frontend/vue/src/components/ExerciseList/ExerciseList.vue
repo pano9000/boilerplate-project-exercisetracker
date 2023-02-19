@@ -1,6 +1,6 @@
 <template>
   <h3>User Exercise Log</h3>
-  Number of Exercises: {{ exerciseList.value.count }}
+  Number of Exercises: {{ exerciseCount.value }}
   exercise log
  <div> {{ currentUser }} </div> 
   <form>
@@ -15,8 +15,20 @@
     </select>
     <button @click="loadExerciseHandler(currentUser, filterProps, exerciseList)">Load Exercises</button>
   </form>
+  {{ filterProps }}
+  {{ paginatedList }}
+
     <section>
-      {{ filterProps }}
+
+
+     <PaginationBar
+     v-if="exerciseList.value.length > 0"
+     :listToPaginate="exerciseList.value"
+      :allowSelection="false"
+      @updatePaginatedList="paginatedListFunc"
+    >
+    </PaginationBar>
+
 
       <table>
         <thead>
@@ -27,7 +39,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(exercise, index) in exerciseList.value.log" :key="`exercise_${index}`">
+          <tr v-for="(exercise, index) in exerciseList.value" :key="`exercise_${index}`">
             <td>{{ exercise.date }}</td>
             <td>{{ exercise.description }}</td>
             <td>{{ exercise.duration }}</td>
@@ -40,38 +52,27 @@
 <script setup>
   import { ref, reactive, onMounted } from "vue";
   import { sendToAPI } from "../../services/apiService";
+  import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 const props = defineProps(["currentUser"])
 const filterProps = ref({
     limit: 5
   });
 
-  const exerciseList = reactive({
+  const exerciseCount = reactive({
     value: ""
   });
+  const exerciseList = reactive({
+    value: []
+  });
 
-const exercises = {
-    _id: "123456789",
-    username: "username",
-    count: 3,
-    logs: [
-      {
-        description: "test1",
-        duration: 1,
-        date: "Sat Feb 04 2023"
-      },
-      {
-        description: "test2",
-        duration: 53,
-        date: "Sat Feb 04 2023"
-      },
-      {
-        description: "test3",
-        duration: 24,
-        date: "Sat Feb 04 2023"
-      },
-    ]
+
+
+  function paginatedListFunc(value) {
+    console.log("exercissss", value)
+    paginatedList.value = value
   }
+  const paginatedList = reactive({ value: []});
 
   async function loadExerciseHandler(currentUser, filterProps, exerciseList) {
 
@@ -79,7 +80,8 @@ const exercises = {
         console.log("currentUser", currentUser)
         const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${currentUser}/logs?limit=${filterProps.limit}`)
         console.log(apiResponse)
-        exerciseList.value = apiResponse.data
+        exerciseCount.value = apiResponse.data.count
+        exerciseList.value = apiResponse.data.log
         //return apiResponse.data
       }
       catch(error) {
