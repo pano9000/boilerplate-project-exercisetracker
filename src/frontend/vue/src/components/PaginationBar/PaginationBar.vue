@@ -29,14 +29,14 @@
       <div>
         <label>Page</label>
         <input 
+          class="ui-jumpToPage"
           type="number"
           min="1"
-          @keydown.enter="ui_activePage=ui_jumpToPage"
           :max="totalPages"
+          @keydown.enter="jumpToPageHandler"
           v-model="ui_jumpToPage"
-          class="ui-jumpToPage"
         >
-        <button @click="ui_activePage=ui_jumpToPage">Jump to Page</button>
+        <button :disabled="!validPageSelection" @click="jumpToPageHandler">Jump to Page</button>
       </div>
 
     </div>
@@ -65,6 +65,12 @@ import { ref, reactive, onMounted, computed, isReactive, isRef, toRefs, watch } 
   const ui_forwardPossible = computed( () => (ui_activePage.value < totalPages.value) ? true : false);
   const ui_previousPossible = computed( () => (ui_activePage.value > 1) ? true : false); 
   const totalPages = computed( () => Math.ceil(listToPaginate.value.length / ui_showentryqty.value));
+
+  const validPageSelection = computed( () => {
+    //TODO: fix decimal numbers -> should not be true
+    return (ui_jumpToPage.value <= totalPages.value && ui_jumpToPage.value > 0) ? true : false
+
+  });
 
   const ui_qtyVisible = computed( () => {
     const from = (ui_showentryqty.value * (ui_activePage.value-1)) + 1;
@@ -135,6 +141,13 @@ import { ref, reactive, onMounted, computed, isReactive, isRef, toRefs, watch } 
   function updateActivePage() {
     if (ui_activePage.value > totalPages.value) {
       ui_activePage.value = totalPages.value
+    }
+  }
+
+
+  function jumpToPageHandler() {
+    if (validPageSelection.value) {
+      ui_activePage.value = ui_jumpToPage.value
     }
   }
 
