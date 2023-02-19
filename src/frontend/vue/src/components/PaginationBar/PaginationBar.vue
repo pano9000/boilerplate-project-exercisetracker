@@ -50,7 +50,7 @@
 <script setup>
 
 
-import { ref, reactive, onMounted, computed, isReactive, isRef, toRefs, watch } from "vue";
+import { ref, onMounted, computed, toRefs, watch } from "vue";
 
   const props = defineProps(["listToPaginate", "paginatedList", "allowSelection"]);
   const emit = defineEmits(["updatePaginatedList"]);
