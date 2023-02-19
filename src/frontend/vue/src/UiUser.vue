@@ -5,11 +5,11 @@
     <input type="text" v-model="currentUser" list="userlist">
     <datalist id="userlist">
 
-      <option v-for="userId in userList" :key="userList"> {{ userId.username }}</option>
+      <option v-for="(userId, index) in userList" :key="`${userList}_${index}`"> {{ userId.username }}</option>
     </datalist>
 
     <p>
-      {{ currentUser }}
+
     </p>
   </div>
 
