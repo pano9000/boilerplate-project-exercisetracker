@@ -18,11 +18,10 @@
   {{ filterProps }}
   {{ paginatedList }}
 
-    <section>
+    <section v-if="exerciseList.value.length > 0">
 
 
      <PaginationBar
-     v-if="exerciseList.value.length > 0"
      :listToPaginate="exerciseList.value"
       :allowSelection="false"
       @updatePaginatedList="paginatedListFunc"
