@@ -23,8 +23,10 @@ async function logsGetAll(req, res) {
     const response = {
       count: findResult.length,
       log: findResult.map(result => {
-        const { description, duration, date } = result;
+        const { description, duration, date, _id, userId } = result;
         return { 
+          _id,
+          userId,
           description, 
           duration, 
           date: (new Date(date)).toDateString()
