@@ -49,7 +49,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(exercise, index) in exerciseList.value" :key="`exercise_${index}`">
+          <tr v-for="(exercise, index) in paginatedList.value" :key="`exercise_${index}`">
             <td>{{ exercise.date }}</td>
             <td>{{ exercise.description }}</td>
             <td>{{ exercise.duration }}</td>
