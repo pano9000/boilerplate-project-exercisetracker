@@ -6,15 +6,17 @@
       <section v-show="menuItems.userList.visible">
         <UserList />
       </section>
-      <section v-show="menuItems.exerciseList.visible">
-        <h2>Todo</h2>
+      <section v-if="menuItems.exerciseList.visible">
+        <ExerciseListAll>
+        </ExerciseListAll>
       </section>
   </div>
 </template>
 
 <script setup>
-  import MenuBar from "./components/MenuBar.vue"
-  import UserList from "./components/UserList/UserList.vue"
+  import MenuBar from "./components/MenuBar.vue";
+  import UserList from "./components/UserList/UserList.vue";
+  import ExerciseListAll from "./components/ExerciseListAll/ExerciseListAll.vue";
   import { ref } from 'vue';
   const menuItems = ref({
     userList: {
