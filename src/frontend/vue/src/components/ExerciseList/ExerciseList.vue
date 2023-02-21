@@ -4,15 +4,26 @@
   exercise log
  <div> {{ currentUser }} </div> 
   <form>
-    <label>Date From</label>
-    <input type="date" v-model="filterProps.dateFrom">
-    <label>Date To</label>
-    <input type="date" v-model="filterProps.dateTo">
+    <h4>Filter for Exercises</h4>
+    <div class="ui_filterwrap">
 
-    <label>Limit</label>
-    <select v-model="filterProps.limit">
-      <option v-for="limit in [5, 10, 25, 50]" :key="limit">{{ limit }}</option>
-    </select>
+      <div>
+        <label>Date From</label>
+        <input type="date" v-model="filterProps.dateFrom">
+      </div>
+      <div>
+        <label>Date To</label>
+        <input type="date" v-model="filterProps.dateTo">
+      </div>
+
+      <div>
+
+        <label>Limit</label>
+        <select v-model="filterProps.limit">
+          <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
+        </select>
+      </div>
+    </div>
     <button @click="loadExerciseHandler(currentUser, filterProps, exerciseList)">Load Exercises</button>
   </form>
   {{ filterProps }}
@@ -92,5 +103,11 @@ const filterProps = ref({
 </script>
 
 <style>
+
+.ui_filterwrap {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
 
 </style>
