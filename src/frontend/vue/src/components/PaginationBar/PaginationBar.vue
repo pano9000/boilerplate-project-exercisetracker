@@ -56,7 +56,6 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   const emit = defineEmits(["updatePaginatedList"]);
   const { listToPaginate, paginatedList, allowSelection } = toRefs(props);
 
-  console.log("inpagination", props, listToPaginate, listToPaginate.value.length, paginatedList)
 
 
   const ui_activePage = ref(1);
@@ -152,7 +151,6 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   }
 
   watch(ui_activePage, () => {
-    console.log("changeg activepg")
     emit("updatePaginatedList", paginatedListComp)
   })
 
