@@ -85,9 +85,11 @@
   import { sendToAPI } from "../../services/apiService";
   import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
-const props = defineProps(["currentUser"])
-const filterProps = ref({
-    limit: 5
+  const props = defineProps(["currentUser"])
+  const filterProps = ref({
+    limit: 0,
+    dateFrom: "",
+    dateTo: (new Date()).toISOString().slice(0,10)
   });
 
   const exerciseCount = reactive({
