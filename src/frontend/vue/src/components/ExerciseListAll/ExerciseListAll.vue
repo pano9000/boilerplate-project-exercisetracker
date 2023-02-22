@@ -112,7 +112,7 @@
   async function loadExerciseHandler(filterProps, exerciseList) {
 
       try {
-        const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${filterProps.limit}`)
+        const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${filterProps.limit}&from=${filterProps.dateFrom}&to=${filterProps.dateTo}`)
         console.log(apiResponse)
         exerciseCount.value = apiResponse.data.count
         exerciseList.value = apiResponse.data.log
