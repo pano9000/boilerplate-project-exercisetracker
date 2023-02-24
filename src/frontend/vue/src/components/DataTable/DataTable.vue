@@ -16,8 +16,7 @@ avc
       <tr v-for="(data, index) in dataList.value" :key="`${data}_${index}`">
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
-        <td @click="selectedItem.value = data">
-          <button v-for="dataAction in dataActions" :title="dataAction.description" @click="$emit(dataAction.actionFn, data)">{{ dataAction.title }}</button>
+        <td @mouseenter="selectedItem.value = data">
           <slot name="actionButtons"></slot>
         </td>
       </tr>
@@ -30,25 +29,20 @@ avc
 
 <script setup>
 
-import { reactive, computed } from "vue";
+import { ref, reactive, watch } from "vue";
 
   const props = defineProps(["tableOptions", "tableHeadings", "dataList", "dataKeys", "dataActions"])
   //const emits = defineEmits(props.dataActions.map(elem => elem.actionFn))
-
+  const emit = defineEmits(["updateSelectedItem"])
   const selectedItem = reactive({
     value: ""
   });
   const propsToEmit = Object.keys(props.dataActions)
 
-  const emits = computed(() => {
-  const result = {}
-  propsToEmit.forEach(prop => {
-    result[prop] = (event) => {
-      ctx.emit(prop, event)
-    }
+  watch(selectedItem, () => {
+    emit("updateSelectedItem", selectedItem)
+
   })
-  return result
-})
 
 
 </script>
