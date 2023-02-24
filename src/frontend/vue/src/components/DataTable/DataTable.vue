@@ -55,35 +55,35 @@ import { reactive, computed } from "vue";
 
 
 <style>
-table {
-  width: 100%;
-  border: 1px solid gray;
-  border-collapse: collapse;
-  background-color: beige;
-  table-layout: fixed;
-  word-break: break-all;
-}
+  table {
+    width: 100%;
+    border: 1px solid gray;
+    border-collapse: collapse;
+    background-color: beige;
+    table-layout: fixed;
+    word-break: break-all;
+  }
 
-thead {
-  background-color: bisque;
-  font-weight: 600;
-}
+  thead {
+    background-color: bisque;
+    font-weight: 600;
+  }
 
-td {
-  padding: 1rem;
-  border: 1px solid gray;
-}
+  td {
+    padding: 1rem;
+    border: 1px solid gray;
+  }
 
-button:disabled {
-  pointer-events: none;
-}
+  button:disabled {
+    pointer-events: none;
+  }
 
-.list-header-narrow {
-  width: 5rem;
-}
+  .list-header-narrow {
+    width: 5rem;
+  }
 
-.list-header-medium {
-  width: 10rem;
-}
+  .list-header-medium {
+    width: 10rem;
+  }
 
 </style>
