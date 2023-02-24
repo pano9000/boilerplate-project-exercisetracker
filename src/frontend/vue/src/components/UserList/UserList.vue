@@ -18,6 +18,25 @@
   >
   </ListActionButtons>
  
+
+<DataTable
+  :tableOptions="{showSelection: true, showAction: true}"
+  :tableHeadings="['UserId', 'Username']"
+  :dataList="paginatedList"
+  :dataKeys="['_id', 'username']"
+  @updateSelectedItem="updateSelectedItemFunc"
+>
+  <template v-slot:actionButtons>
+    <button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)" title="Edit">✏️</button>
+    <button @click="delUser([currentUser.value], userList.value)" title="Delete">❌</button>
+    <!-- future TODO; use for context menu
+    <li @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
+    <li @click="delUser([currentUser.value], userList.value)" title="Delete">❌ Delete</li>
+  -->
+  </template>
+
+</DataTable>
+
   <table>
     <thead>
       <tr>
@@ -74,6 +93,7 @@ import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
 import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
+import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted, computed, isReactive } from "vue";
 import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
@@ -96,7 +116,13 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   function paginatedListFunc(value) {
     console.log(value)
     paginatedList.value = value
-  }
+  };
+
+  function updateSelectedItemFunc(value) {
+    console.log("updSel", value)
+    currentUser.value = value.value
+  };
+
   const paginatedList = reactive({ value: []});
 
   console.log("inUserList paginiated", paginatedList)
