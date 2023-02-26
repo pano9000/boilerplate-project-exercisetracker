@@ -7,6 +7,7 @@
       type="submit" 
       title="Close"
       @click="$emit('close-modal')"
+      @keydown.esc="$emit('close-modal')"
     >
       ✖
     </button>
