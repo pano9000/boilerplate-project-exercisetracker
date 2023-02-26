@@ -4,7 +4,7 @@
     <button 
       ref="closeBtn"
       class="ui_modal_btn_close"
-      type="submit" 
+      type="button" 
       title="Close"
       @click="$emit('close-modal')"
       @keydown.esc="$emit('close-modal')"
