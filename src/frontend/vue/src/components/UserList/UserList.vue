@@ -27,13 +27,9 @@
   :dataKeyId="'_id'"
   @updateSelectedItem="updateSelectedItemFunc"
 >
-  <template v-slot:actionButtons>
-    <button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)" title="Edit">✏️</button>
-    <button @click="delUser([currentUser.value], userList.value)" title="Delete">❌</button>
-    <!-- future TODO; use for context menu
-    <li @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
+  <template v-slot:actionMenuEntries>
+    <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
     <li @click="delUser([currentUser.value], userList.value)" title="Delete">❌ Delete</li>
-  -->
   </template>
 
 </DataTable>
