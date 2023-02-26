@@ -17,7 +17,7 @@ avc
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td @click="selectedItem.value = data">
-          <button @click="actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId)">☰</button>
+          <button class="actionMenu_btn" @click="actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId)">☰</button>
           <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
             <slot name="actionMenuEntries"></slot>
           </menu>
