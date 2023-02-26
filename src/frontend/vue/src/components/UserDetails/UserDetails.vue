@@ -9,11 +9,11 @@
     <h2>User Details</h2>
     <div>
       <label for="userId">User ID</label>
-      <input id="userId" disabled type="text" :value="currentUser._id">
+      <input id="userId" disabled type="text" :value="currentUser.value._id">
     </div>
     <div>
       <label>Username</label>
-      <input disabled type="text" :value="currentUser.username">
+      <input disabled type="text" :value="currentUser.value.username">
       <button @click="">✏️</button>
     </div>
 
@@ -21,14 +21,14 @@
 
   <section v-if="menuItems.userExerciseList.visible">
     <ExerciseList
-    :currentUser="currentUser._id"
+    :currentUser="currentUser.value._id"
     ></ExerciseList>
 
   </section>
 
   <section v-if="menuItems.userCreateExercise.visible">
     <CreatExercise
-    :currentUser="currentUser._id"
+    :currentUser="currentUser.value._id"
     ></CreatExercise>
   </section>
 
