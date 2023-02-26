@@ -15,6 +15,7 @@
     @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList.value, true) : selectionHandler(paginatedList.value, false))"
     @click-delSelected="delUser(selectedUsers, userList.value)"
     :hasSelection="hasSelectedUsers"
+    :textAddNew="'Add New User'"
   >
   </ListActionButtons>
  
@@ -63,6 +64,7 @@
     @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList.value, true) : selectionHandler(paginatedList.value, false))"
     @click-delSelected="delUser(selectedUsers, userList.value)"
     :hasSelection="hasSelectedUsers"
+    :textAddNew="'Add New User'"
   >
   </ListActionButtons>
 
