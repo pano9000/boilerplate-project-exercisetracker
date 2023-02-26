@@ -24,6 +24,7 @@
   :tableHeadings="['UserId', 'Username']"
   :dataList="paginatedList"
   :dataKeys="['_id', 'username']"
+  :dataKeyId="'_id'"
   @updateSelectedItem="updateSelectedItemFunc"
 >
   <template v-slot:actionButtons>
