@@ -2,7 +2,8 @@
   <div class="blurry-backdrop" @click="$emit('close-modal')"></div>
   <div class="ui_modal">
     <button 
-      class="ui_modal_btn_close" 
+      ref="closeBtn"
+      class="ui_modal_btn_close"
       type="submit" 
       title="Close"
       @click="$emit('close-modal')"
@@ -17,7 +18,14 @@
 
 
 <script setup>
+import { onMounted, ref } from 'vue';
+
   defineEmits(['close-modal']);
+  const closeBtn = ref(null);
+
+  onMounted( () => {
+    closeBtn.value.focus()
+  })
 </script>
 
 <style>
