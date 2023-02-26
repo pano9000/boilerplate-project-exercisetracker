@@ -40,8 +40,6 @@ import { ref, reactive, watch, onMounted, onBeforeUnmount } from "vue";
     "dataList", 
     "dataKeyId",
     "dataKeys", 
-    "dataActions",
-
   ])
   const emit = defineEmits(["updateSelectedItem"])
   const selectedItem = reactive({
