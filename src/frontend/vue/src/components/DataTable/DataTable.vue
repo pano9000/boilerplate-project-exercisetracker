@@ -16,8 +16,11 @@ avc
       <tr v-for="(data, index) in dataList.value" :key="data[dataKeyId]">
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
-        <td @mouseenter="selectedItem.value = data">
-          <slot name="actionButtons"></slot>
+        <td @click="selectedItem.value = data">
+          <button @click="actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId)">☰</button>
+          <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
+            <slot name="actionMenuEntries"></slot>
+          </menu>
         </td>
       </tr>
 
@@ -45,11 +48,25 @@ import { ref, reactive, watch } from "vue";
     value: ""
   });
 
+
+  const actionMenuVisible = reactive({value: {}})
+
+  /**
+   * 
+   * @param {Object} selectedItem - reactive object to store the currently selected/active data to
+   * @param {Object} data - data object from the data list of the current row
+   * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
+   * @param {String} dataKeyId the data lists key Id prop name
+   */
+  function actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId) {
+    selectedItem.value = data;
+    actionMenuVisible.value = selectedItem.value[dataKeyId];
+  }
+  
   watch(selectedItem, () => {
     emit("updateSelectedItem", selectedItem)
 
   })
-
 
 </script>
 
@@ -85,5 +102,31 @@ import { ref, reactive, watch } from "vue";
   .list-header-medium {
     width: 10rem;
   }
+
+  .actionMenu_menu {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    background-color: #fdfdfd;
+    text-align: left;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    position: absolute;
+  }
+
+  .actionMenu_menu li {
+    transition: background-color 0.2s;
+    border-radius: var(--border-radius);
+    padding: .25rem;
+
+  }
+
+  .actionMenu_menu li:hover {
+
+    background-color: #646cff;
+    cursor: pointer;
+
+  }
+
 
 </style>
