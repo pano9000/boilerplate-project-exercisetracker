@@ -40,12 +40,10 @@ import { ref, reactive, watch } from "vue";
     "dataActions",
 
   ])
-  //const emits = defineEmits(props.dataActions.map(elem => elem.actionFn))
   const emit = defineEmits(["updateSelectedItem"])
   const selectedItem = reactive({
     value: ""
   });
-  const propsToEmit = Object.keys(props.dataActions)
 
   watch(selectedItem, () => {
     emit("updateSelectedItem", selectedItem)
