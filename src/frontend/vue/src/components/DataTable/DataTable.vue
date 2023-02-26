@@ -13,7 +13,7 @@ avc
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in dataList.value" :key="`${data}_${index}`">
+      <tr v-for="(data, index) in dataList.value" :key="data[dataKeyId]">
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td @mouseenter="selectedItem.value = data">
@@ -31,7 +31,15 @@ avc
 
 import { ref, reactive, watch } from "vue";
 
-  const props = defineProps(["tableOptions", "tableHeadings", "dataList", "dataKeys", "dataActions"])
+  const props = defineProps([
+    "tableOptions", 
+    "tableHeadings", 
+    "dataList", 
+    "dataKeyId",
+    "dataKeys", 
+    "dataActions",
+
+  ])
   //const emits = defineEmits(props.dataActions.map(elem => elem.actionFn))
   const emit = defineEmits(["updateSelectedItem"])
   const selectedItem = reactive({
