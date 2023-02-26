@@ -32,7 +32,7 @@ avc
 
 <script setup>
 
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, watch, onMounted, onBeforeUnmount } from "vue";
 
   const props = defineProps([
     "tableOptions", 
@@ -67,6 +67,41 @@ import { ref, reactive, watch } from "vue";
     emit("updateSelectedItem", selectedItem)
 
   })
+
+  function actionMenuDisableVisibility(actionMenuVisible) {
+    if (actionMenuVisible.value !== "") {
+      actionMenuVisible.value = ""
+    }
+  }
+
+  function actionMenuHandleEscKey(event) {
+    if (event.key === "Escape") {
+      actionMenuDisableVisibility(actionMenuVisible)
+    }
+  }
+
+  function actionMenuHandleEmptyClick(event) {
+    if (!event.target.classList.contains("actionMenu_btn")) {
+      actionMenuDisableVisibility(actionMenuVisible)
+    }
+  }
+
+  const windowEventListeners = {
+    escapeKey: ["keydown", actionMenuHandleEscKey],
+    emptyClick: ["click", actionMenuHandleEmptyClick]
+  };
+
+  onMounted( () => {
+    for (const eventListener in windowEventListeners) {
+      window.addEventListener(...windowEventListeners[eventListener])
+    }
+  });
+
+  onBeforeUnmount( () => {
+    for (const eventListener in windowEventListeners) {
+      window.removeEventListener(...windowEventListeners[eventListener])
+    }
+  });
 
 </script>
 
