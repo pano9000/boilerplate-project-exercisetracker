@@ -89,18 +89,14 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const ui_createUserVisible = ref(false);
 
   function paginatedListFunc(value) {
-    console.log(value)
     paginatedList.value = value
   };
 
   function updateSelectedItemFunc(value) {
-    console.log("updSel", value)
     currentUser.value = value.value
   };
 
   const paginatedList = reactive({ value: []});
-
-  console.log("inUserList paginiated", paginatedList)
 
   const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
   const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
