@@ -75,18 +75,17 @@ import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./U
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
-  const userList = reactive( {
-    value: []
-  });
+  const userList = reactive({ value: [] });
+  const paginatedList = reactive({ value: [] });
+  const currentUser = reactive({ value: {} });
 
-  const currentUser = reactive({value: {}
-  });
-
-  const ui_UserDetailsVisible = reactive({
-    value: false
-  });
-
+  const ui_UserDetailsVisible = reactive({ value: false });
   const ui_createUserVisible = ref(false);
+
+  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
+  const hasSelectedUsers = computed( () => (selectedUsers.value.length > 0) ? true : false );
+
+
 
   function paginatedListFunc(updatedValue) {
     paginatedList.value = updatedValue
@@ -95,11 +94,6 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   function updateSelectedItemFunc(updatedValue) {
     currentUser.value = updatedValue.value
   };
-
-  const paginatedList = reactive({ value: []});
-
-  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
-  const hasSelectedUsers = computed( () => selectedUsers.value.length > 0 ? true : false)
 
   onMounted(  async () => {
     userList.value = await fetchUsers();
