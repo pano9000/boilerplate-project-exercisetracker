@@ -88,12 +88,12 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const ui_createUserVisible = ref(false);
 
-  function paginatedListFunc(value) {
-    paginatedList.value = value
+  function paginatedListFunc(updatedValue) {
+    paginatedList.value = updatedValue
   };
 
-  function updateSelectedItemFunc(value) {
-    currentUser.value = value.value
+  function updateSelectedItemFunc(updatedValue) {
+    currentUser.value = updatedValue.value
   };
 
   const paginatedList = reactive({ value: []});
