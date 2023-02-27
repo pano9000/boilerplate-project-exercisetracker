@@ -1,9 +1,4 @@
 <template>
-avc
-  {{ tableHeadings }}
-  {{ tableOptions }}
-  {{ dataList }}
-  {{ selectedItem }}
   <table>
     <thead>
       <tr>
