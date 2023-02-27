@@ -9,7 +9,7 @@ avc
       <tr>
         <td v-if="tableOptions.showSelection === true" class="list-header list-header-narrow">Selection</td>
         <td v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</td>
-        <td v-if="tableOptions.showAction === true" class="list-header list-header-medium">Actions</td>
+        <td v-if="tableOptions.showAction === true" class="list-header list-header-narrow">Actions</td>
       </tr>
     </thead>
     <tbody>
