@@ -1,4 +1,14 @@
 <template>
+
+  <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
+    @click-addNew="$emit('click-addNew')"
+    @click-selection="((!hasSelectedItems) ? selectionHandler(dataList.value, true) : selectionHandler(dataList.value, false))"
+    @click-delSelected="$emit('click-delSelected')"
+    :hasSelection="hasSelectedItems"
+    :textAddNew="listActionButtonsOptions.textAddNew"
+  >
+  </ListActionButtons>
+
   <table>
     <thead>
       <tr>
@@ -22,12 +32,21 @@
     </tbody>
   </table>
 
+  <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
+    @click-addNew="$emit('click-addNew')"
+    @click-selection="((!hasSelectedItems) ? selectionHandler(dataList.value, true) : selectionHandler(dataList.value, false))"
+    @click-delSelected="$emit('click-delSelected')"
+    :hasSelection="hasSelectedItems"
+    :textAddNew="listActionButtonsOptions.textAddNew"
+  >
+  </ListActionButtons>
 </template>
 
 
 <script setup>
 
-import { ref, reactive, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, reactive, watch, computed, onMounted, onBeforeUnmount } from "vue";
+import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 
   const props = defineProps([
     "tableOptions", 
@@ -35,12 +54,21 @@ import { ref, reactive, watch, onMounted, onBeforeUnmount } from "vue";
     "dataList", 
     "dataKeyId",
     "dataKeys", 
+    "listActionButtonsOptions"
   ]);
 
-  const emit = defineEmits(["updateSelectedItem"]);
+  const emit = defineEmits(["updateSelectedItem", "click-addNew", "click-delSelected"]);
 
   const selectedItem = reactive({ value: "" });
   const actionMenuVisible = reactive({ value: {} });
+
+  const selectedItems = computed( () => props.dataList.value.filter(item => item.selected === true) );
+  const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
+
+
+  function selectionHandler(dataList, mode) {
+    dataList.forEach(item => item.selected = mode)
+  }
 
   /**
    * 
