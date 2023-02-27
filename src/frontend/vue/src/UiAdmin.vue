@@ -1,7 +1,5 @@
 <template>
   <MenuBar 
-    <MenuBar 
-  <MenuBar 
     :menuItems="menuItems"
   >
   </MenuBar>
