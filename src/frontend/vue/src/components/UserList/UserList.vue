@@ -79,7 +79,7 @@
   <div v-show="ui_UserDetailsVisible.value === true">
     <ModalWindow @close-modal="ui_UserDetailsVisible.value=false">
       <UserDetails
-        :currentUser="currentUser.value"
+        :currentUser="currentUser"
       ></UserDetails>
     </ModalWindow>
 
