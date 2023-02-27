@@ -35,30 +35,6 @@
 
 </DataTable>
 
-  <table>
-    <thead>
-      <tr>
-        <td class="list-header list-header-narrow">Selection</td>
-        <td class="list-header list-header-flex">UserId</td>
-        <td class="list-header list-header-flex">Username</td>
-        <td class="list-header list-header-medium">Edit</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="user in paginatedList.value" :key="user._id">
-        <td><input type="checkbox" v-model="user.selected"></td>
-        <td>{{ user._id }}</td>
-        <td>{{ user.username }}</td>
-        <td>
-          <button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)">✏️</button>
-          <button @click="delUser([user], userList.value)">❌</button>
-        </td>
-      </tr>
-
-      
-    </tbody>
-  </table>
-
   <ListActionButtons
     @click-addNew="ui_createUserVisible = true"
     @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList.value, true) : selectionHandler(paginatedList.value, false))"
