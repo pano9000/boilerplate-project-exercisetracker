@@ -10,23 +10,16 @@
 
   </PaginationBar>
 
-  <ListActionButtons
-    @click-addNew="ui_createUserVisible = true"
-    @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList.value, true) : selectionHandler(paginatedList.value, false))"
-    @click-delSelected="delUser(selectedUsers, userList.value)"
-    :hasSelection="hasSelectedUsers"
-    :textAddNew="'Add New User'"
-  >
-  </ListActionButtons>
- 
-
 <DataTable
   :tableOptions="{showSelection: true, showAction: true}"
+  :listActionButtonsOptions="{showBottom: true, showTop: true, textAddNew: 'Add New User'}"
   :tableHeadings="['UserId', 'Username']"
   :dataList="paginatedList"
   :dataKeys="['_id', 'username']"
   :dataKeyId="'_id'"
   @updateSelectedItem="updateSelectedItemFunc"
+  @click-addNew="ui_createUserVisible = true"
+  @click-delSelected="delUser(selectedUsers, userList.value)"
 >
   <template v-slot:actionMenuEntries>
     <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
@@ -34,17 +27,6 @@
   </template>
 
 </DataTable>
-
-  <ListActionButtons
-    @click-addNew="ui_createUserVisible = true"
-    @click-selection="((!hasSelectedUsers) ? selectionHandler(paginatedList.value, true) : selectionHandler(paginatedList.value, false))"
-    @click-delSelected="delUser(selectedUsers, userList.value)"
-    :hasSelection="hasSelectedUsers"
-    :textAddNew="'Add New User'"
-  >
-  </ListActionButtons>
-
-
 
   <div v-show="ui_createUserVisible">
     <ModalWindow @close-modal="ui_createUserVisible=false">
@@ -70,7 +52,7 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
-import { ref, reactive, onMounted, computed, isReactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
@@ -81,11 +63,6 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const ui_UserDetailsVisible = reactive({ value: false });
   const ui_createUserVisible = ref(false);
-
-  const selectedUsers = computed( () => paginatedList.value.filter(user => user.selected === true) );
-  const hasSelectedUsers = computed( () => (selectedUsers.value.length > 0) ? true : false );
-
-
 
   function paginatedListFunc(updatedValue) {
     paginatedList.value = updatedValue
