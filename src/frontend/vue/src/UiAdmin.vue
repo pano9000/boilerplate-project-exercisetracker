@@ -1,16 +1,20 @@
 <template>
-  <div id="display-area">
-    <!--<HelloWorld msg="Vite + Vue" />-->
+  <MenuBar 
     <MenuBar 
-      :menuItems="menuItems"></MenuBar>
-      <section v-show="menuItems.userList.visible">
-        <UserList />
-      </section>
-      <section v-if="menuItems.exerciseList.visible">
-        <ExerciseListAll>
-        </ExerciseListAll>
-      </section>
-  </div>
+  <MenuBar 
+    :menuItems="menuItems"
+  >
+  </MenuBar>
+
+  <section class="ui_section" v-show="menuItems.userList.visible">
+    <UserList/>
+  </section>
+
+  <section class="ui_section" v-if="menuItems.exerciseList.visible">
+    <ExerciseListAll>
+    </ExerciseListAll>
+  </section>
+
 </template>
 
 <script setup>
@@ -34,5 +38,18 @@
 </script>
 
 <style>
+.ui_section {
+  background-color: #f1f1f1;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-top: 2rem;
+}
+
+.ui_section h2 {
+
+  margin: 0;
+
+}
 
 </style>
