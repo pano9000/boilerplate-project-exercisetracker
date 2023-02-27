@@ -35,14 +35,12 @@ import { ref, reactive, watch, onMounted, onBeforeUnmount } from "vue";
     "dataList", 
     "dataKeyId",
     "dataKeys", 
-  ])
-  const emit = defineEmits(["updateSelectedItem"])
-  const selectedItem = reactive({
-    value: ""
-  });
+  ]);
 
+  const emit = defineEmits(["updateSelectedItem"]);
 
-  const actionMenuVisible = reactive({value: {}})
+  const selectedItem = reactive({ value: "" });
+  const actionMenuVisible = reactive({ value: {} });
 
   /**
    * 
