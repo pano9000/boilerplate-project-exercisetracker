@@ -53,7 +53,7 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
-import {fetchUsers, delUser, selectionHandler, showUserDetailsHandler} from "./UserList.functions";
+import {fetchUsers, delUser, showUserDetailsHandler} from "./UserList.functions";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";

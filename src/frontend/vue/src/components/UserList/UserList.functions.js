@@ -54,14 +54,6 @@ export async function delUser(selectedUsers, userList) {
   }
 }
 
-
-
-export function selectionHandler(paginatedList, mode) {
-
-  paginatedList.forEach(user => user.selected = mode)
-
-}
-
 export async function showUserDetailsHandler(user, currentUserProp, ui_UserDetailsVisible) {
   const userData = await fetchUser(user);
   currentUserProp.value = userData
