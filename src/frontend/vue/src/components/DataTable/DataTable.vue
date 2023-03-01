@@ -12,7 +12,9 @@
   <table>
     <thead>
       <tr>
-        <td v-if="tableOptions.showSelection === true" class="list-header list-header-narrow">Selection</td>
+        <td v-if="tableOptions.showSelection === true" class="list-header list-header-narrow">
+          <input type="checkbox" :checked="hasSelectedItems" :key="toggleSelection"  @click.prevent="toggleSelectionHandler(dataList.value, allItemsSelected)" :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'">
+        </td>
         <td v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</td>
         <td v-if="tableOptions.showAction === true" class="list-header list-header-narrow">Actions</td>
       </tr>
@@ -61,10 +63,21 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 
   const selectedItem = reactive({ value: "" });
   const actionMenuVisible = reactive({ value: {} });
+  const toggleSelection = ref(Date.now());
 
   const selectedItems = computed( () => props.dataList.value.filter(item => item.selected === true) );
+  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.value.length) ? true : false )
   const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
 
+  watch( hasSelectedItems, () => {
+    toggleSelection.value = Date.now();
+    //https://michaelnthiessen.com/force-re-render/
+  });
+
+  function toggleSelectionHandler(dataList, allItemsSelected) {
+    const valueToSet = (allItemsSelected.value === true) ? false : true;
+    dataList.forEach(item => item.selected = valueToSet)
+  }
 
   function selectionHandler(dataList, mode) {
     dataList.forEach(item => item.selected = mode)
