@@ -2,7 +2,7 @@
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-addNew="$emit('click-addNew')"
-    @click-selection="((!hasSelectedItems) ? selectionHandler(dataList.value, true) : selectionHandler(dataList.value, false))"
+    @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
     @click-delSelected="$emit('click-delSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
@@ -36,7 +36,7 @@
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-addNew="$emit('click-addNew')"
-    @click-selection="((!hasSelectedItems) ? selectionHandler(dataList.value, true) : selectionHandler(dataList.value, false))"
+    @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
     @click-delSelected="$emit('click-delSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
@@ -78,9 +78,6 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     dataList.forEach(item => item.selected = !allItemsSelected);
   }
 
-  function selectionHandler(dataList, mode) {
-    dataList.forEach(item => item.selected = mode)
-  }
 
   /**
    * 
