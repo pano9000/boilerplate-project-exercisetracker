@@ -75,8 +75,7 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
   });
 
   function toggleSelectionHandler(dataList, allItemsSelected) {
-    const valueToSet = (allItemsSelected.value === true) ? false : true;
-    dataList.forEach(item => item.selected = valueToSet)
+    dataList.forEach(item => item.selected = !allItemsSelected);
   }
 
   function selectionHandler(dataList, mode) {
