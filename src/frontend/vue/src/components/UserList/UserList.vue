@@ -49,7 +49,6 @@
 import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
-import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
