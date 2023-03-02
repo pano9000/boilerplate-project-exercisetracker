@@ -59,7 +59,7 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     "listActionButtonsOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "clickAddNew", "clickDelSelected"]);
+  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
 
   const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: {} });
@@ -95,7 +95,9 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     emit("updateCurrentItem", currentItem)
   });
 
-  })
+  watch(selectedItems, () => {
+    emit("updateSelectedItems", selectedItems)
+  });
 
   function actionMenuDisableVisibility(actionMenuVisible) {
     if (actionMenuVisible.value !== "") {

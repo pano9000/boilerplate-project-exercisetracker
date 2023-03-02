@@ -18,8 +18,9 @@
   :data-keys="['_id', 'username']"
   :data-key-id="'_id'"
   @update-current-item="updateCurrentItemFunc"
+  @update-selected-items="updateSelectedItemsFunc"
   @click-add-new="ui_createUserVisible = true"
-  @click-del-selected="delUser(selectedUsers, userList.value)"
+  @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
     <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
@@ -59,6 +60,7 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const userList = reactive({ value: [] });
   const paginatedList = reactive({ value: [] });
   const currentUser = reactive({ value: {} });
+  const selectedUsers = reactive({ value: [] });
 
   const ui_UserDetailsVisible = reactive({ value: false });
   const ui_createUserVisible = ref(false);
@@ -69,6 +71,10 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   function updateCurrentItemFunc(updatedValue) {
     currentUser.value = updatedValue.value
+  };
+  
+  function updateSelectedItemsFunc(updatedValue) {
+    selectedUsers.value = updatedValue.value;
   };
 
   onMounted(  async () => {
