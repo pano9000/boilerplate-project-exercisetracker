@@ -23,8 +23,8 @@
       <tr v-for="(data, index) in dataList.value" :key="data[dataKeyId]">
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
-        <td @click="selectedItem.value = data">
-          <button class="actionMenu_btn" @click="actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId)">☰</button>
+        <td @click="currentItem.value = data">
+          <button class="actionMenu_btn" @click="actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId)">☰</button>
           <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
             <slot name="actionMenuEntries"></slot>
           </menu>
@@ -59,9 +59,9 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     "listActionButtonsOptions"
   ]);
 
-  const emit = defineEmits(["updateSelectedItem", "clickAddNew", "clickDelSelected"]);
+  const emit = defineEmits(["updateCurrentItem", "clickAddNew", "clickDelSelected"]);
 
-  const selectedItem = reactive({ value: "" });
+  const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: {} });
   const toggleSelection = ref(Date.now());
 
@@ -81,18 +81,19 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
 
   /**
    * 
-   * @param {Object} selectedItem - reactive object to store the currently selected/active data to
+   * @param {Object} currentItem - reactive object to store the currently selected/active data to
    * @param {Object} data - data object from the data list of the current row
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  function actionButtonHandler(selectedItem, actionMenuVisible, data, dataKeyId) {
-    selectedItem.value = data;
-    actionMenuVisible.value = selectedItem.value[dataKeyId];
+  function actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId) {
+    currentItem.value = data;
+    actionMenuVisible.value = currentItem.value[dataKeyId];
   }
   
-  watch(selectedItem, () => {
-    emit("updateSelectedItem", selectedItem)
+  watch(currentItem, () => {
+    emit("updateCurrentItem", currentItem)
+  });
 
   })
 
