@@ -3,23 +3,23 @@
   <h3>mockup</h3>
 
   <PaginationBar
-   :listToPaginate="userList.value"
-   :allowSelection="true"
-   @updatePaginatedList="paginatedListFunc"
+   :list-to-paginate="userList.value"
+   :allow-selection="true"
+   @update-paginated-list="paginatedListFunc"
    >
 
   </PaginationBar>
 
 <DataTable
-  :tableOptions="{showSelection: true, showAction: true}"
-  :listActionButtonsOptions="{showBottom: true, showTop: true, textAddNew: 'Add New User'}"
-  :tableHeadings="['UserId', 'Username']"
-  :dataList="paginatedList"
-  :dataKeys="['_id', 'username']"
-  :dataKeyId="'_id'"
-  @updateSelectedItem="updateSelectedItemFunc"
-  @click-addNew="ui_createUserVisible = true"
-  @click-delSelected="delUser(selectedUsers, userList.value)"
+  :table-options="{showSelection: true, showAction: true}"
+  :list-action-buttons-options="{showBottom: true, showTop: true, textAddNew: 'Add New User'}"
+  :table-headings="['UserId', 'Username']"
+  :data-list="paginatedList"
+  :data-keys="['_id', 'username']"
+  :data-key-id="'_id'"
+  @update-selected-item="updateSelectedItemFunc"
+  @click-add-new="ui_createUserVisible = true"
+  @click-del-selected="delUser(selectedUsers, userList.value)"
 >
   <template v-slot:actionMenuEntries>
     <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
@@ -37,7 +37,7 @@
   <div v-show="ui_UserDetailsVisible.value === true">
     <ModalWindow @close-modal="ui_UserDetailsVisible.value=false">
       <UserDetails
-        :currentUser="currentUser"
+        :current-user="currentUser"
       ></UserDetails>
     </ModalWindow>
 
