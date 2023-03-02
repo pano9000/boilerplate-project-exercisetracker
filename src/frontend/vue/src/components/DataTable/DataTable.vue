@@ -1,9 +1,9 @@
 <template>
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
-    @click-addNew="$emit('click-addNew')"
+    @click-add-new="$emit('clickAddNew')"
     @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
-    @click-delSelected="$emit('click-delSelected')"
+    @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
   >
@@ -35,9 +35,9 @@
   </table>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
-    @click-addNew="$emit('click-addNew')"
+    @click-add-new="$emit('clickAddNew')"
     @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
-    @click-delSelected="$emit('click-delSelected')"
+    @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
   >
@@ -59,7 +59,7 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     "listActionButtonsOptions"
   ]);
 
-  const emit = defineEmits(["updateSelectedItem", "click-addNew", "click-delSelected"]);
+  const emit = defineEmits(["updateSelectedItem", "clickAddNew", "clickDelSelected"]);
 
   const selectedItem = reactive({ value: "" });
   const actionMenuVisible = reactive({ value: {} });
