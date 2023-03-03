@@ -23,8 +23,8 @@
   @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
-    <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit">✏️ Edit</li>
-    <li @click="delUser([currentUser.value], userList.value)" title="Delete">❌ Delete</li>
+    <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit User">✏️ Edit User</li>
+    <li @click="delUser([currentUser.value], userList.value)" title="Delete User">❌ Delete User</li>
   </template>
 
 </DataTable>
