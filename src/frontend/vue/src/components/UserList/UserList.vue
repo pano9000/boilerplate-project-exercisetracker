@@ -17,8 +17,8 @@
   :data-list="paginatedList"
   :data-keys="['_id', 'username']"
   :data-key-id="'_id'"
-  @update-current-item="updateCurrentItemFunc"
-  @update-selected-items="updateSelectedItemsFunc"
+  @update-current-item="(newValue) => updateValue(newValue, currentUser)"
+  @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
   @click-add-new="ui_createUserVisible = true"
   @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
@@ -69,12 +69,8 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
     paginatedList.value = updatedValue
   };
 
-  function updateCurrentItemFunc(updatedValue) {
-    currentUser.value = updatedValue.value
-  };
-  
-  function updateSelectedItemsFunc(updatedValue) {
-    selectedUsers.value = updatedValue.value;
+  function updateValue(newValue, itemToUpdate) {
+    itemToUpdate.value = newValue.value
   };
 
   onMounted(  async () => {
