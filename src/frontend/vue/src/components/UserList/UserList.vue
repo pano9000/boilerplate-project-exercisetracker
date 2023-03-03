@@ -5,7 +5,7 @@
   <PaginationBar
    :list-to-paginate="userList.value"
    :allow-selection="true"
-   @update-paginated-list="paginatedListFunc"
+   @update-paginated-list="updatePaginatedListFunc"
    >
 
   </PaginationBar>
@@ -65,7 +65,8 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const ui_UserDetailsVisible = reactive({ value: false });
   const ui_createUserVisible = ref(false);
 
-  function paginatedListFunc(updatedValue) {
+  //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
+  function updatePaginatedListFunc(updatedValue) {
     paginatedList.value = updatedValue
   };
 
