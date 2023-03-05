@@ -112,7 +112,6 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
   function updatePaginatedListFunc(updatedValue) {
-    console.log("oasdas", updatedValue, paginatedList)
     paginatedList.value = updatedValue
   };
 
