@@ -52,9 +52,9 @@
 
 import { ref, onMounted, computed, toRefs, watch } from "vue";
 
-  const props = defineProps(["listToPaginate", "paginatedList", "allowSelection"]);
+  const props = defineProps(["listToPaginate", "allowSelection"]);
   const emit = defineEmits(["updatePaginatedList"]);
-  const { listToPaginate, paginatedList, allowSelection } = toRefs(props);
+  const { listToPaginate, allowSelection } = toRefs(props);
 
 
 
@@ -90,7 +90,6 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
       return elem
     })
   });
-
 
   const totalBtns = computed( () => {
     const totalBtns = [];
