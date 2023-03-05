@@ -1,8 +1,15 @@
 <template>
+  <PaginationBar
+   :list-to-paginate="dataList.value"
+   :allow-selection="paginationbarOptions.allowSelection"
+   @update-paginated-list="updatePaginatedListFunc"
+   >
+
+  </PaginationBar>
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
@@ -13,14 +20,14 @@
     <thead>
       <tr>
         <td v-if="tableOptions.showSelection === true" class="list-header list-header-narrow">
-          <input type="checkbox" :checked="hasSelectedItems" :key="toggleSelection"  @click.prevent="toggleSelectionHandler(dataList.value, allItemsSelected)" :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'">
+          <input type="checkbox" :checked="hasSelectedItems" :key="toggleSelection"  @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)" :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'">
         </td>
         <td v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</td>
         <td v-if="tableOptions.showAction === true" class="list-header list-header-narrow">Actions</td>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in dataList.value" :key="data[dataKeyId]">
+      <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
         <td><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td @click="currentItem.value = data">
@@ -36,7 +43,7 @@
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(dataList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :textAddNew="listActionButtonsOptions.textAddNew"
@@ -49,6 +56,7 @@
 
 import { ref, reactive, watch, computed, onMounted, onBeforeUnmount } from "vue";
 import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
+import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const props = defineProps([
     "tableOptions", 
@@ -56,7 +64,8 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
     "dataList", 
     "dataKeyId",
     "dataKeys", 
-    "listActionButtonsOptions"
+    "listActionButtonsOptions",
+    "paginationbarOptions"
   ]);
 
   const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
@@ -65,8 +74,10 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
   const actionMenuVisible = reactive({ value: {} });
   const toggleSelection = ref(Date.now());
 
-  const selectedItems = computed( () => props.dataList.value.filter(item => item.selected === true) );
-  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.value.length) ? true : false )
+  const paginatedList = reactive({ value: [] });
+
+  const selectedItems = computed( () => paginatedList.value.filter(item => item.selected === true) );
+  const allItemsSelected = computed( () => (selectedItems.value.length === paginatedList.value.length) ? true : false )
   const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
 
   watch( hasSelectedItems, () => {
@@ -98,6 +109,13 @@ import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
   watch(selectedItems, () => {
     emit("updateSelectedItems", selectedItems)
   });
+
+  //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
+  function updatePaginatedListFunc(updatedValue) {
+    console.log("oasdas", updatedValue, paginatedList)
+    paginatedList.value = updatedValue
+  };
+
 
   function actionMenuDisableVisibility(actionMenuVisible) {
     if (actionMenuVisible.value !== "") {

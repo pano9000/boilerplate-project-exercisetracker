@@ -2,19 +2,12 @@
   <h2> {{ title }} </h2>
   <h3>mockup</h3>
 
-  <PaginationBar
-   :list-to-paginate="userList.value"
-   :allow-selection="true"
-   @update-paginated-list="updatePaginatedListFunc"
-   >
-
-  </PaginationBar>
-
 <DataTable
   :table-options="{showSelection: true, showAction: true}"
   :list-action-buttons-options="{showBottom: true, showTop: true, textAddNew: 'Add New User'}"
+  :paginationbar-options="{allowSelection: true}"
   :table-headings="['UserId', 'Username']"
-  :data-list="paginatedList"
+  :data-list="userList"
   :data-keys="['_id', 'username']"
   :data-key-id="'_id'"
   @update-current-item="(newValue) => updateValue(newValue, currentUser)"
@@ -65,10 +58,6 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const ui_UserDetailsVisible = reactive({ value: false });
   const ui_createUserVisible = ref(false);
 
-  //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
-  function updatePaginatedListFunc(updatedValue) {
-    paginatedList.value = updatedValue
-  };
 
   function updateValue(newValue, itemToUpdate) {
     itemToUpdate.value = newValue.value
