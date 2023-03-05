@@ -1,5 +1,6 @@
 <template>
   <PaginationBar
+   v-if="paginationbarOptions.showTop === true"
    :list-to-paginate="dataList.value"
    :allow-selection="paginationbarOptions.allowSelection"
    @update-paginated-list="updatePaginatedListFunc"
