@@ -87,52 +87,5 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
 
 <style>
-table {
-  width: 100%;
-  border: 1px solid gray;
-  border-collapse: collapse;
-  background-color: beige;
-  table-layout: fixed;
-  word-break: break-all;
-}
-
-td {
-  padding: 1rem;
-  border: 1px solid gray;
-}
-
-.activePg {
-  font-weight: 700;
-}
-
-.btn-pagination {
-  min-width: 4.25rem;
-}
-
-button:disabled {
-  pointer-events: none;
-}
-
-.list-header-narrow {
-  width: 5rem;
-}
-
-.list-header-medium {
-  width: 10rem;
-}
-
-
-.ui-jumpToPage {
-  width: 4ch;
-}
-
-.ui_pagination-nav {
-  display: block;
-}
-
-.ui_pagination-row-actions {
-  display: flex;
-  justify-content: center;
-}
 
 </style>
