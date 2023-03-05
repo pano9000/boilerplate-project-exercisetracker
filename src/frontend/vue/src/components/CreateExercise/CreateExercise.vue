@@ -52,7 +52,6 @@
   import { addExercise } from "./CreateExercise.functions";
   import { ref, reactive } from "vue";
   const props = defineProps(["currentUser"]);
-  console.log("props", props)
   const createExerciseForm = reactive( {
     userId: props.currentUser,
     description: "",
