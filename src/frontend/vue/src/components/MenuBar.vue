@@ -32,7 +32,6 @@ function toggleVisibleSection(clickedMenuItemId, menuItems) {
     align-items: stretch  ;
     justify-content: center;
     padding: 1rem 1rem;
-    background-color: yellowgreen;
   }
   
   .nav-btn_wrap {
