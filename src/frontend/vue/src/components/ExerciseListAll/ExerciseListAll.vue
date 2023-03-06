@@ -1,8 +1,5 @@
 <template>
-  <h3>User Exercise Log</h3>
-  Number of Exercises: {{ exerciseCount.value }}
-  exercise log
- <div> {{ currentUser }} </div> 
+  <h3> {{ title }}</h3>
   <form>
     <h4>Filter for Exercises</h4>
     <div class="ui_filterwrap">
@@ -17,60 +14,53 @@
       </div>
 
       <div>
-
         <label>Limit</label>
         <select v-model="filterProps.limit">
           <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
         </select>
       </div>
     </div>
-    <button @click="loadExerciseHandler(filterProps, exerciseList)">Load Exercises</button>
+    <button @click="loadExerciseHandler(filterProps, exerciseList)">Show Exercises</button>
   </form>
   {{ filterProps }}
-  {{ paginatedList }}
 
-    <section v-if="exerciseList.value.length > 0">
+  <section v-if="exerciseList.value.length > 0">
+ 
+  <DataTable
+    :table-options="{showSelection: true, showAction: true}"
+    :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New Exercise'}"
+    :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
+    :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
+    :data-list="exerciseList"
+    :dataKeys="[ 
+      'userId',
+      '_id',
+      'date',
+      'description',
+      'duration',
+    ]"
+    :dataKeyId="'_id'"
+    @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
+    @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
+    @click-add-new="uiVisibility.value.createUser = true"
+    @click-del-selected="delUser(selectedExercises.value, userList.value)"
+  >
+    <template v-slot:actionMenuEntries>
+      <li @click="uiVisibilityHandler(currentExercise.value, currentExercise, uiVisibility, 'userDetails')" title="Edit User">✏️ Edit User</li>
+      <li @click="delUser([currentExercise.value], userList.value)" title="Delete Exercise">❌ Delete Exercise</li>
+    </template>
+
+  </DataTable>
 
 
-     <PaginationBar
-     :listToPaginate="exerciseList.value"
-      :allowSelection="false"
-      @updatePaginatedList="paginatedListFunc"
+  <section v-if="ui_createExerciseVisible">
+    <CreateExercise
+      :currentUser="currentUser.value"
     >
-    </PaginationBar>
 
-    
+    </CreateExercise>
 
-    {{ selectedExercises }}
-
-    <table>
-    <thead>
-      <tr>
-        <td class="list-header list-header-narrow">Selection</td>
-        <td class="list-header list-header-flex">User Id</td>
-        <td class="list-header list-header-flex">Exercise Id</td>
-        <td class="list-header list-header-flex">Date</td>
-        <td class="list-header list-header-flex">Description</td>
-        <td class="list-header list-header-flex">Duration (min)</td>
-        <td class="list-header list-header-medium">Edit</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="exercise in paginatedList.value" :key="exercise._id">
-        <td><input type="checkbox" v-model="exercise.selected"></td>
-        <td>{{ exercise.userId }}</td>
-        <td>{{ exercise._id }}</td>
-        <td>{{ exercise.date }}</td>
-        <td>{{ exercise.description }}</td>
-        <td>{{ exercise.duration }}</td>
-        <td>
-          <!--<button @click="showUserDetailsHandler(user, currentUser, ui_UserDetailsVisible)">✏️</button>-->
-          <!--<button @click="delUser([user], userList.value)">❌</button>-->
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
+  </section>
 
 </section>
 
@@ -83,9 +73,16 @@
 <script setup>
   import { ref, reactive, onMounted, computed } from "vue";
   import { sendToAPI } from "../../services/apiService";
-  import PaginationBar from "../PaginationBar/PaginationBar.vue";
+  import CreateExercise from "../CreateExercise/CreateExercise.vue";
+  import DataTable from "../DataTable/DataTable.vue";
 
-  const props = defineProps(["currentUser"])
+
+  const title = "User Exercise Logs";
+  const userList = reactive({ value: [] });
+  const currentExercise = reactive({ value: {} });
+  const selectedExercises = reactive({ value: [] });
+
+
   const filterProps = ref({
     limit: 0,
     dateFrom: "",
@@ -99,15 +96,8 @@
     value: []
   });
 
+  const ui_createExerciseVisible = ref(false);
 
-
-  function paginatedListFunc(value) {
-    console.log("exercissss", value)
-    paginatedList.value = value
-  }
-  const paginatedList = reactive({ value: []});
-
-  const selectedExercises = computed( () => paginatedList.value.filter(exercise => exercise.selected === true) );
 
   async function loadExerciseHandler(filterProps, exerciseList) {
 
@@ -122,6 +112,12 @@
         console.log("error fetchexercise", error)
       }
   }
+
+
+
+  function updateValue(newValue, itemToUpdate) {
+    itemToUpdate.value = newValue.value
+  };
 
 
 </script>
