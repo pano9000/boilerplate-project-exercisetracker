@@ -36,7 +36,16 @@
         :current-user="currentUser"
       ></UserDetails>
     </ModalWindow>
+  </div>
 
+  <div v-if="uiVisibility.value.createExercise">
+    <ModalWindow
+      @close-modal="uiVisibility.value.createExercise = false"
+    >
+      <CreateExercise
+        :current-user="currentUser"
+      ></CreateExercise>
+    </ModalWindow>
   </div>
 </template>
 
@@ -45,6 +54,7 @@
 import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
 
+import CreateExercise from "../CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
