@@ -12,24 +12,26 @@
   :data-key-id="'_id'"
   @update-current-item="(newValue) => updateValue(newValue, currentUser)"
   @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
-  @click-add-new="ui_createUserVisible = true"
+  @click-add-new="uiVisibility.value.createUser = true"
   @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
-    <li @click="showUserDetailsHandler(currentUser.value, currentUser, ui_UserDetailsVisible)" title="Edit User">✏️ Edit User</li>
+    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'userDetails')" title="Edit User">✏️ Edit User</li>
     <li @click="delUser([currentUser.value], userList.value)" title="Delete User">❌ Delete User</li>
+    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'createExercise')" title="Add Exercise">➕ Add Exercise</li>
+    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'exerciseLog')" title="Show Exercise Log">🔍 Show Exercise Log</li>
   </template>
 
 </DataTable>
 
-  <div v-show="ui_createUserVisible">
-    <ModalWindow @close-modal="ui_createUserVisible=false">
+  <div v-if="uiVisibility.value.createUser">
+    <ModalWindow @close-modal="uiVisibility.value.createUser=false">
       <CreateUser></CreateUser>
     </ModalWindow>
   </div>
 
-  <div v-show="ui_UserDetailsVisible.value === true">
-    <ModalWindow @close-modal="ui_UserDetailsVisible.value=false">
+  <div v-if="uiVisibility.value.userDetails">
+    <ModalWindow @close-modal="uiVisibility.value.userDetails = false">
       <UserDetails
         :current-user="currentUser"
       ></UserDetails>
@@ -46,7 +48,7 @@ import UserDetails from "../UserDetails/UserDetails.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
-import {fetchUsers, delUser, showUserDetailsHandler} from "./UserList.functions";
+import {fetchUsers, delUser, uiVisibilityHandler} from "./UserList.functions";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
@@ -54,9 +56,14 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
   const currentUser = reactive({ value: {} });
   const selectedUsers = reactive({ value: [] });
 
-  const ui_UserDetailsVisible = reactive({ value: false });
-  const ui_createUserVisible = ref(false);
-
+  const uiVisibility = reactive( {
+    value: {
+      userDetails: false,
+      createUser: false,
+      createExercise: false,
+      exerciseLog: false
+    }
+  });
 
   function updateValue(newValue, itemToUpdate) {
     itemToUpdate.value = newValue.value
