@@ -176,7 +176,7 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
   }
 
   .ui-datatable thead th {
-    background-color: bisque;
+    background-color: hsl(33, 100%, 80%);
     font-weight: 600;
   }
 
