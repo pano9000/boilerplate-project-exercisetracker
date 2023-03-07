@@ -180,7 +180,7 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     font-weight: 600;
   }
 
-  .ui-datatable tbody tr {
+  .ui-datatable tbody td {
     transition: background-color 0.2s;
   }
 
