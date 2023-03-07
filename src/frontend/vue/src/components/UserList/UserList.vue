@@ -42,7 +42,7 @@
 <script setup>
 import CreateUser from "../CreateUser/CreateUser.vue";
 import UserDetails from "../UserDetails/UserDetails.vue";
-import PaginationBar from "../PaginationBar/PaginationBar.vue";
+
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
@@ -51,7 +51,6 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
   const userList = reactive({ value: [] });
-  const paginatedList = reactive({ value: [] });
   const currentUser = reactive({ value: {} });
   const selectedUsers = reactive({ value: [] });
 
