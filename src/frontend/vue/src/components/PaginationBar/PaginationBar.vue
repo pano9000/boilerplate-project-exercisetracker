@@ -66,9 +66,9 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   const totalPages = computed( () => Math.ceil(listToPaginate.value.length / ui_showentryqty.value));
 
   const validPageSelection = computed( () => {
-    //TODO: fix decimal numbers -> should not be true
-    return (ui_jumpToPage.value <= totalPages.value && ui_jumpToPage.value > 0) ? true : false
-
+    return (Number.isInteger(ui_jumpToPage.value) 
+            && ui_jumpToPage.value <= totalPages.value 
+            && ui_jumpToPage.value > 0) ? true : false
   });
 
   const ui_qtyVisible = computed( () => {
