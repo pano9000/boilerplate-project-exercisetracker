@@ -16,22 +16,21 @@
     :textAddNew="listActionButtonsOptions.textAddNew"
   >
   </ListActionButtons>
-
-  <table>
+  <table class="ui-datatable">
     <thead>
       <tr>
-        <td v-if="tableOptions.showSelection === true" class="list-header list-header-narrow">
+        <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
           <input type="checkbox" :checked="hasSelectedItems" :key="toggleSelection"  @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)" :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'">
-        </td>
-        <td v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</td>
-        <td v-if="tableOptions.showAction === true" class="list-header list-header-narrow">Actions</td>
+        </th>
+        <th v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</th>
+        <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
-        <td><input type="checkbox" v-model="data.selected"></td>
+        <td class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
-        <td @click="currentItem.value = data">
+        <td class="list-cell_center" @click="currentItem.value = data">
           <button class="actionMenu_btn" @click="actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId)">☰</button>
           <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
             <slot name="actionMenuEntries"></slot>
@@ -156,35 +155,76 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 
 <style>
-  table {
+  .ui-datatable {
     width: 100%;
-    border: 1px solid gray;
     border-collapse: collapse;
-    background-color: beige;
     table-layout: fixed;
     word-break: break-all;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: left;
   }
 
-  thead {
+  .ui-datatable thead th {
     background-color: bisque;
     font-weight: 600;
   }
 
-  td {
-    padding: 1rem;
-    border: 1px solid gray;
+  .ui-datatable tbody tr {
+    transition: background-color 0.2s;
   }
 
-  button:disabled {
-    pointer-events: none;
+  .ui-datatable tr:first-child th:first-child {
+    border-radius: 8px 0px 0px 0px;
+  }
+
+  .ui-datatable tr:first-child th:last-child {
+    border-radius: 0px 8px 0px 0px;
+  }
+
+  .ui-datatable tr:last-child td:last-child {
+    border-radius: 0px 0px 8px 0px;
+  }
+
+  .ui-datatable tr:last-child td:first-child {
+    border-radius: 0px 0px 0px 8px;
+  }
+
+  .ui-datatable tbody tr:nth-child(even) td {
+    background-color: hsl(60, 56%, 91%);
+  }
+
+  .ui-datatable tbody tr:nth-child(odd) td {
+    background-color: hsl(60, 56%, 87%);
+  }
+
+  .ui-datatable tbody tr:hover td {
+    background-color: hsl(60, 56%, 94%);
+  }
+
+  .ui-datatable td, .ui-datatable th {
+    padding: .75rem;
+  }
+
+  .ui-datatable input[type=checkbox] {
+    margin: 0;
+  }
+
+  .list-cell_center {
+    text-align: center;
   }
 
   .list-header-narrow {
-    width: 5rem;
+    width: 2rem;
   }
 
   .list-header-medium {
-    width: 10rem;
+    width: 4rem;
+  }
+
+  .actionMenu_btn {
+    margin: 0;
+    padding: 0.4rem 0.8rem;
   }
 
   .actionMenu_menu {
