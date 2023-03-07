@@ -13,7 +13,12 @@
     @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
-    :textAddNew="listActionButtonsOptions.textAddNew"
+    :options="{ 
+      textAddNew: listActionButtonsOptions.textAddNew, 
+      showAdd: listActionButtonsOptions.showAdd,
+      showSelect: listActionButtonsOptions.showSelect,
+      showDelete: listActionButtonsOptions.showDelete
+    }"
   >
   </ListActionButtons>
   <table class="ui-datatable">
@@ -46,7 +51,12 @@
     @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
-    :textAddNew="listActionButtonsOptions.textAddNew"
+    :options="{ 
+      textAddNew: listActionButtonsOptions.textAddNew, 
+      showAdd: listActionButtonsOptions.showAdd,
+      showSelect: listActionButtonsOptions.showSelect,
+      showDelete: listActionButtonsOptions.showDelete
+    }"
   >
   </ListActionButtons>
 </template>
