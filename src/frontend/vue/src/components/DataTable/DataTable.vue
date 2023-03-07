@@ -204,6 +204,11 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   .ui-datatable td, .ui-datatable th {
     padding: .75rem;
+    border-right: 1px dotted rgb(10,10,10,0.3);
+  }
+
+  .ui-datatable tr td:last-child, .ui-datatable tr th:last-child {
+    border-right: none;
   }
 
   .ui-datatable input[type=checkbox] {
