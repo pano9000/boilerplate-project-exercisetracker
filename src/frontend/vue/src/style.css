@@ -87,6 +87,9 @@ button {
   transition: border-color 0.25s;
 }
 
+button:disabled {
+  pointer-events: none;
+}
 
 button:hover {
   border-color: #646cff;
