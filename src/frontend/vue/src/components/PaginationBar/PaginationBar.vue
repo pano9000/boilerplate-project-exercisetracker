@@ -176,19 +176,6 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   min-width: 4.25rem;
 }
 
-button:disabled {
-  pointer-events: none;
-}
-
-.list-header-narrow {
-  width: 5rem;
-}
-
-.list-header-medium {
-  width: 10rem;
-}
-
-
 .ui-jumpToPage {
   width: 4ch;
 }
