@@ -1,24 +1,20 @@
 <template>
-  <div class="ui_list-action-buttons">
-    <button type="button" @click="$emit('clickAddNew')">➕ {{ (textAddNew) ? textAddNew : 'Add New'}}</button>
-    <button type="button" @click="$emit('clickSelection')">{{ (!hasSelection) ? "Select All" : "Clear Selection" }}</button>
-    <button type="button" :disabled="!hasSelection" :class="hasSelection ? 'active' : 'inactive'" @click="$emit('clickDelSelected')">❌ Delete Selected</button>
-  </div>
+  <section class="ui_list-action-btn_wrap">
+    <button v-if="(options.showAdd !== undefined) ? options.showAdd : true" type="button" @click="$emit('clickAddNew')">➕ {{ (textAddNew) ? textAddNew : 'Add New'}}</button>
+    <button v-if="(options.showSelect !== undefined) ? options.showSelect : true" type="button" @click="$emit('clickSelection')">{{ (!hasSelection) ? "Select All" : "Clear Selection" }}</button>
+    <button v-if="(options.showDelete !== undefined) ? options.showDelete : true" type="button" :disabled="!hasSelection" :class="hasSelection ? 'ui_list-action-btn_active' : 'ui_list-action-btn_inactive'" @click="$emit('clickDelSelected')">❌ Delete Selected</button>
+  </section>
 </template>
 
 <script setup>
 
   defineEmits(["clickAddNew", "clickSelection", "clickDelSelected" ]);
-  defineProps(["hasSelection", "textAddNew"]);
+  defineProps(["hasSelection", "options"]);
 
 </script>
 
 <style>
-
-.ui_list-action-buttons {
-
-  background-color: bisque;
+.ui_list-action-btn_wrap {
   padding: 1rem;
-
 }
 </style>
