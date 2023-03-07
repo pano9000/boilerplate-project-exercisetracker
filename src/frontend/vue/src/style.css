@@ -59,6 +59,7 @@ input, select {
   background-color: #fdfdfd;
   cursor: pointer;
   transition: border-color 0.25s;
+  box-shadow: var(--box-shadow);
 
 }
 
