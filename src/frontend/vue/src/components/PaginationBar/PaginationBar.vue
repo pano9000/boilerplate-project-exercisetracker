@@ -1,26 +1,26 @@
 <template>
 
-  <nav class="ui_pagination-nav">
+  <nav class="ui-pagination_nav">
 
-    <div class="ui_pagination-row-buttons">
-      <button :disabled="!ui_previousPossible" @click="ui_activePage--">&lt;</button>
+    <section class="ui-pagination_row-buttons">
+      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--">&lt;</button>
       <button 
-        class="btn-pagination"
+        class="ui-pagination_btn"
         type="button"
         v-for="(pg) in visibleBtns"
         @click="ui_activePage=pg"
-        :class="(pg == ui_activePage) ? 'activePg' : ''"
+        :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
         :disabled="pg == '…'"
       >
         {{ pg }}
       </button>
-      <button :disabled="!ui_forwardPossible" @click="ui_activePage++">&gt;</button>
-    </div>
-    <div class="ui_pagination-row-actions">
-      <div>
+      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++">&gt;</button>
+    </section>
+    <div class="ui-pagination_row-actions">
 
-        <label for="admin-ui_showentryqty">Show max. entries</label>
-        <select id="admin-ui_showentryqty" v-model="ui_showentryqty" @change="updateActivePage">
+      <div>
+        <label for="ui-pagination_showEntryQty">Show max. entries</label>
+        <select id="ui-pagination_showEntryQty" class="ui-pagination_showEntryQty" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries  to show">
           <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
         </select>
 
@@ -169,25 +169,44 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
 
 <style>
 
-.activePg {
+.ui-pagination_nav select, .ui-pagination_nav input, .ui-pagination_nav button {
+  text-align: center;
+}
+
+.ui-pagination_nav label {
+  display: inline-block
+}
+
+.ui-pagination_btn-activePg {
   font-weight: 700;
 }
 
-.btn-pagination {
+.ui-pagination_btn {
   min-width: 4.25rem;
 }
 
-.ui-jumpToPage {
+.ui-pagination_goToPage {
   width: 4ch;
+  padding: 0.5rem;
 }
 
-.ui_pagination-nav {
+.ui-pagination_showEntryQty {
+  padding: 0.5rem;
+}
+
+.ui-pagination_nav {
   display: block;
 }
 
-.ui_pagination-row-actions {
+.ui-pagination_row-actions {
   display: flex;
   justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.ui-pagination_row-actions > * > * {
+  margin: 0rem 0.5rem;
 }
 
 </style>
