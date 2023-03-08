@@ -3,7 +3,7 @@
   <nav class="ui-pagination_nav">
 
     <section class="ui-pagination_row-buttons">
-      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--">&lt;</button>
+      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">&lt;</button>
       <button 
         class="ui-pagination_btn"
         type="button"
@@ -11,10 +11,11 @@
         @click="ui_activePage=pg"
         :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
         :disabled="pg == '…'"
+        :title="`Page ${pg}`"
       >
         {{ pg }}
       </button>
-      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++">&gt;</button>
+      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">&gt;</button>
     </section>
     <div class="ui-pagination_row-actions">
 
