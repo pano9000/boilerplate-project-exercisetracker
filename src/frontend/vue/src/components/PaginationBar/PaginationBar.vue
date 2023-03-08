@@ -1,7 +1,7 @@
 <template>
 
   <nav class="ui-pagination_nav">
-
+    <h3>Pages</h3>
     <section class="ui-pagination_row-buttons">
       <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">&lt;</button>
       <button 
