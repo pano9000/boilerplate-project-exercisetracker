@@ -42,7 +42,7 @@
       </div>
 
     </div>
-    <p>Showing entries {{ ui_qtyVisible }}  of total {{ listToPaginate.length }}</p>
+    <p>Entries {{ ui_qtyVisible }} of {{ listToPaginate.length }}</p>
 
   </nav>
 
