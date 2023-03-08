@@ -30,28 +30,24 @@ export const sendToAPI = {
       }
       console.log("ressult in sendtoapi", result)
 
-      const apiData = {
-        statusOK: true,
-        msg: "",
-        data: (result.status !== 204) ? await result.json() : {}
-      };
+      const apiData = (result.status !== 204) ? await result.json() : {};
 
-      return apiData
+      return new ApiResponseStatus(true, "", apiData);
     }
 
     catch(error) {
       console.log(error)
-      //throw new Error(` to API failed ${error.message}`)
-      const apiData = {
-        statusOK: false,
-        msg: `Communication with API failed: ${error.message}`,
-        data: { error: "error"}
-      };
-      return apiData
+      return new ApiResponseStatus(false, `Communication with API failed: ${error.message}`, {})
     }
 
   }
 
+}
+
+function ApiResponseStatus(statusOK, msg, data) {
+  this.statusOK = statusOK;
+  this.msg = msg;
+  this.data = data;
 }
 
 
