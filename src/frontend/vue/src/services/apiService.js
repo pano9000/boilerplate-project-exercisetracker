@@ -60,12 +60,11 @@ function createFetchOption(httpMethod, sendData) {
     }
   }
 
-  if (httpMethod === "GET") return option
+  if (httpMethod !== "GET") {
+    option.headers["Content-Type"] = "application/x-www-form-urlencoded"
+    option.body = new URLSearchParams(sendData)
+  }
 
-  option.headers["Content-Type"] = "application/x-www-form-urlencoded"
-  option.body = new URLSearchParams(sendData)
-
-    console.log("yoo in create", option)
   return option
 
 }
