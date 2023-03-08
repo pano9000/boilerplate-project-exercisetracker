@@ -36,7 +36,7 @@
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
-          <button class="actionMenu_btn" @click="actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId)">☰</button>
+          <button class="actionMenu_btn" @click="actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId)" title="Show Actions">☰</button>
           <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
             <slot name="actionMenuEntries"></slot>
           </menu>
