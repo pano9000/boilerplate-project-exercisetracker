@@ -27,16 +27,17 @@
       </div>
 
       <div>
-        <label>Page</label>
+        <label for="ui-pagination_goToPage">Go To Page</label>
         <input 
-          class="ui-jumpToPage"
+          id="ui-pagination_goToPage"
+          class="ui-pagination_goToPage"
           type="number"
           min="1"
           :max="totalPages"
-          @keydown.enter="jumpToPageHandler"
-          v-model="ui_jumpToPage"
+          @keydown.enter="goToPageHandler"
+          v-model="ui_goToPage"
         >
-        <button :disabled="!validPageSelection" @click="jumpToPageHandler">Jump to Page</button>
+        <button :disabled="!validPageSelection" @click="goToPageHandler">Go</button>
       </div>
 
     </div>
@@ -59,16 +60,16 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
 
 
   const ui_activePage = ref(1);
-  const ui_jumpToPage = ref(1)
+  const ui_goToPage = ref(1)
   const ui_showentryqty = ref(5);
   const ui_forwardPossible = computed( () => (ui_activePage.value < totalPages.value) ? true : false);
   const ui_previousPossible = computed( () => (ui_activePage.value > 1) ? true : false); 
   const totalPages = computed( () => Math.ceil(listToPaginate.value.length / ui_showentryqty.value));
 
   const validPageSelection = computed( () => {
-    return (Number.isInteger(ui_jumpToPage.value) 
-            && ui_jumpToPage.value <= totalPages.value 
-            && ui_jumpToPage.value > 0) ? true : false
+    return (Number.isInteger(ui_goToPage.value) 
+            && ui_goToPage.value <= totalPages.value 
+            && ui_goToPage.value > 0) ? true : false
   });
 
   const ui_qtyVisible = computed( () => {
@@ -143,9 +144,9 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   }
 
 
-  function jumpToPageHandler() {
+  function goToPageHandler() {
     if (validPageSelection.value) {
-      ui_activePage.value = ui_jumpToPage.value
+      ui_activePage.value = ui_goToPage.value
     }
   }
 
