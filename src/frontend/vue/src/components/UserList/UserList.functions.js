@@ -1,37 +1,5 @@
 import { sendToAPI } from "../../services/apiService.js"
 
-export async function fetchUsers() {
-  try {
-    const apiResponse = await sendToAPI.get("http://localhost:3002/api/users")
-    return apiResponse.data
-  }
-  catch(error) {
-    //TODO: remove for production
-    const createDummyData = () => {
-      const dummyData = []
-      for (let i=0; i<100; i++) {
-        dummyData.push( { 
-          _id: `user_${i}`,
-          username: `username_${i}`
-        })
-      }
-      return dummyData
-    }
-    return createDummyData()
-  }
-
-}
-
-export async function fetchUser(userId) {
-  try {
-    console.log("userid", userId)
-    const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId._id}`)
-    return apiResponse.data
-  }
-  catch(error) {
-    console.log("error fetchuser")
-  }
-}
 
 
 export async function delUser(selectedUsers, userList) {
