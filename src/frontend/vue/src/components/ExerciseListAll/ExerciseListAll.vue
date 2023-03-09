@@ -1,28 +1,37 @@
 <template>
-  <h3> {{ title }}</h3>
+  <h2> {{ title }}</h2>
   <form>
     <h4>Filter for Exercises</h4>
-    <div class="ui_filterwrap">
+    <div class="ui-exercise-filter_wrap">
 
       <div>
-        <label>Date From</label>
-        <input type="date" v-model="filterProps.dateFrom">
-      </div>
-      <div>
-        <label>Date To</label>
-        <input type="date" v-model="filterProps.dateTo">
+        <label for="filter-dateFrom">Date From</label>
+        <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
       </div>
 
       <div>
-        <label>Limit</label>
-        <select v-model="filterProps.limit">
+        <label for="filter-dateTo">Date To</label>
+        <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
+      </div>
+
+      <div>
+        <label for="filter-limit">Limit</label>
+        <select id="filter-limit" v-model="exerciseFilters.limit">
           <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
         </select>
       </div>
+
+      <div>
+        <label for="filter-sortby">Sort By</label>
+        <select id="filter-sortby" v-model="exerciseFilters.sortBy">
+          <option v-for="sortby in ['TODO']" :key="sortby">{{ sortby }}</option>
+        </select>
+      </div>
+
     </div>
-    <button @click="loadExerciseHandler(filterProps, exerciseList)">Show Exercises</button>
+
+    <button @click="loadExerciseHandler(exerciseFilters, exerciseList)">Show Exercises</button>
   </form>
-  {{ filterProps }}
 
   <section v-if="exerciseList.value.length > 0">
  
@@ -83,7 +92,7 @@
   const selectedExercises = reactive({ value: [] });
 
 
-  const filterProps = ref({
+  const exerciseFilters = ref({
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10)
@@ -99,10 +108,12 @@
   const ui_createExerciseVisible = ref(false);
 
 
-  async function loadExerciseHandler(filterProps, exerciseList) {
+  async function loadExerciseHandler(exerciseFilters, exerciseList) {
+
+    const { limit, dateFrom, dateTo} = exerciseFilters
 
       try {
-        const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${filterProps.limit}&from=${filterProps.dateFrom}&to=${filterProps.dateTo}`)
+        const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${limit}&from=${dateFrom}&to=${dateTo}`)
         console.log(apiResponse)
         exerciseCount.value = apiResponse.data.count
         exerciseList.value = apiResponse.data.log
@@ -123,5 +134,7 @@
 </script>
 
 <style>
-
+.ui-exercise-filter_wrap {
+  margin-bottom: 2rem;
+}
 </style>
