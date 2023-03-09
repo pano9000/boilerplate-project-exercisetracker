@@ -29,7 +29,7 @@
         <label for="admin-ui_input-createexercise_date">Date</label>
         <input id="admin-ui_input-createexercise_date" type="date" name="date" placeholder="date" v-model="createExerciseForm.date">
       </div>
-      <button type="submit" @click.prevent="addExercise($event, createExerciseForm)">Create Exercise</button>
+      <button type="submit" @click.prevent="addExerciseHandler($event, createExerciseForm)">Create Exercise</button>
     </div>
     <div class="admin-ui_form-input-wrap">
       <h4>Requirements</h4>
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-  import { addExercise } from "./CreateExercise.functions";
+  import { addExerciseHandler } from "./CreateExercise.functions";
   import { ref, reactive } from "vue";
   const props = defineProps(["currentUser"]);
   const createExerciseForm = reactive( {

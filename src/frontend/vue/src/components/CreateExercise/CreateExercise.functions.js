@@ -1,6 +1,8 @@
-import { sendToAPI, handleApiResponse } from "../../services/apiService.js"
+import { handleApiResponse } from "../../services/apiService.js"
+import { addExercise } from "../../services/apiEndpoints.js";
 
-export async function addExercise(event, userExerciseRef) {
+//@TODO: this is an exact copy of addUserHandler -> DRY!
+export async function addExerciseHandler(event, userExerciseRef) {
   try {
     event.preventDefault();
 
@@ -10,9 +12,9 @@ export async function addExercise(event, userExerciseRef) {
       throw new Error("Invalid Data Entered")
     }
     const formData = new FormData(form);
-    console.log("userexercref", userExerciseRef)
-    const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/${userExerciseRef.userId}/exercises`, formData)
-    console.log(apiResponse)
+
+    const apiResponse = await addExercise(userExerciseRef.userId, formData)
+
     handleApiResponse(apiResponse)
   
     if (!apiResponse.statusOK) {
