@@ -5,11 +5,11 @@
     <h2>User Details</h2>
     <div>
       <label for="userId">User ID</label>
-      <input id="userId" disabled type="text" :value="currentUser.value._id">
+      <input id="userId" disabled type="text" :value="userData.value._id">
     </div>
     <div>
       <label>Username</label>
-      <input disabled type="text" :value="currentUser.value.username">
+      <input disabled type="text" :value="userData.value.username">
       <button @click="">✏️</button>
     </div>
 
@@ -20,8 +20,16 @@
 
 
 <script setup>
-  import { ref, onBeforeUpdate, onMounted, onUpdated } from "vue";
+  import { onBeforeMount, reactive } from "vue";
+  import { fetchUser } from "../../services/apiEndpoints";
   const props = defineProps(["currentUser"]);
 
+  const userData = reactive( {
+    value: {}
+  });
+
+  onBeforeMount( async () => {
+    userData.value = await fetchUser(props.currentUser.value._id);
+  });
 
 </script>
