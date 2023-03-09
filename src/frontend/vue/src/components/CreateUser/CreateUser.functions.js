@@ -4,6 +4,7 @@ import { addUser } from "../../services/apiEndpoints.js";
 export async function addUserHandler(event, usernameref) {
   try {
     event.preventDefault();
+    event.target.disabled = true;
 
     const form = event.target.form;
 
@@ -11,6 +12,8 @@ export async function addUserHandler(event, usernameref) {
       throw new Error("Invalid Data Entered")
     }
     const formData = new FormData(form);
+
+    //todo: show some loading spinner?
 
     const apiResponse = await addUser(formData)
     console.log(apiResponse)
@@ -22,6 +25,8 @@ export async function addUserHandler(event, usernameref) {
     }
     alert("User added")
     usernameref.value = "";
+    event.target.disabled = false;
+
   }
   catch(error) {
     console.log(error)
