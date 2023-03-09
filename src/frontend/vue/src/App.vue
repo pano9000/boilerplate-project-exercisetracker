@@ -9,8 +9,7 @@
 -->
 
   <section v-if="active_ui==='admin'">
-    <UiAdmin
-      :userList="userList">
+    <UiAdmin>
     </UiAdmin>
   </section>
   <!-- User UI
@@ -26,16 +25,18 @@
   import UiAdmin from "./UiAdmin.vue"
   import UiUser from "./UiUser.vue"
   import { ref, onMounted } from 'vue';
-  import { fetchUsers } from "./components/UserList/UserList.functions";
+  //import { fetchUsers } from "./components/UserList/UserList.functions";
 
   const active_ui = ref("admin")
 
-  const userList = ref([]);
+  //todo: remove from final / only for dev
+  //  const userList = ref([]);
+  /*  onMounted(  async () => {
+      //todo: remove from final / only for dev
+      //userList.value = await fetchUsers();
+    })
+  */
 
-  onMounted(  async () => {
-    //todo: remove from final / only for dev
-    //userList.value = await fetchUsers();
-  })
 
 
 </script>
