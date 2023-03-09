@@ -54,9 +54,6 @@ export async function delUser(selectedUsers, userList) {
   }
 }
 
-export async function showUserDetailsHandler(user, currentUserProp, ui_UserDetailsVisible) {
-  const userData = await fetchUser(user);
-  currentUserProp.value = userData
-  ui_UserDetailsVisible.value = true;
-  console.log("currprop aft", currentUserProp, ui_UserDetailsVisible)
+export async function uiVisibilityHandler(uiVisibility, uiElement) {
+  uiVisibility.value[uiElement] = true;
 }
