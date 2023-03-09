@@ -1,6 +1,6 @@
 import { sendToAPI } from "../../services/apiService.js"
 
-
+import { deleteUserById } from "../../services/apiEndpoints.js";
 
 export async function delUser(selectedUsers, userList) {
 
@@ -13,7 +13,7 @@ export async function delUser(selectedUsers, userList) {
     await Promise.all(selectedUsers.map(async (selectedUser) => {
       const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === selectedUser.username);
       const userIdForDeletion = userList[indexToDelete]["_id"];
-      const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userIdForDeletion}`);
+      const apiResponse = await deleteUserById(userIdForDeletion);
       if (apiResponse.statusOK) {
         userList.splice(indexToDelete, 1);
       }
