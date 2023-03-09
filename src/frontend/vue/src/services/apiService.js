@@ -19,16 +19,12 @@ export const sendToAPI = {
   async fetchAPI(serverUrl, httpMethod, sendData) {
 
     try {
-
       const result = await fetch(serverUrl, createFetchOption(httpMethod, sendData))
-
-      console.log("resss status", result.status, result.ok)
 
       if (result.ok !== true) {
         //ideally do some additional error handling for better error message here
         throw new Error(`Received status: ${(result.status !== undefined) ? result.status : 'undefined status'}`)
       }
-      console.log("ressult in sendtoapi", result)
 
       const apiData = (result.status !== 204) ? await result.json() : {};
 
