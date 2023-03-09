@@ -24,7 +24,6 @@
         <select id="ui-pagination_showEntryQty" class="ui-pagination_showEntryQty" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries  to show">
           <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
         </select>
-
       </div>
 
       <div>
@@ -80,6 +79,7 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
     return `${from}–${to}`
   });
 
+  //@TODO: move this to DataTable instead?
   const paginatedListComp = computed( () => {
     const listStart = ui_showentryqty.value*(ui_activePage.value-1);
     const listEnd = ui_showentryqty.value*ui_activePage.value;
@@ -145,6 +145,7 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
   }
 
 
+  //TODO: add arguments -> caution: refs pass values only, reactive pass the proxy object, which is what we want here
   function goToPageHandler() {
     if (validPageSelection.value) {
       ui_activePage.value = ui_goToPage.value
