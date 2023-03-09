@@ -21,7 +21,7 @@
 
 <script setup>
   import { onBeforeMount, reactive } from "vue";
-  import { fetchUser } from "../../services/apiEndpoints";
+  import { getUserById } from "../../services/apiEndpoints";
   const props = defineProps(["currentUser"]);
 
   const userData = reactive( {
@@ -29,7 +29,7 @@
   });
 
   onBeforeMount( async () => {
-    userData.value = await fetchUser(props.currentUser.value._id);
+    userData.value = await getUserById(props.currentUser.value._id);
   });
 
 </script>
