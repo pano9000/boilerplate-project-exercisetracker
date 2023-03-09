@@ -53,7 +53,7 @@
   import { ref, reactive } from "vue";
   const props = defineProps(["currentUser"]);
   const createExerciseForm = reactive( {
-    userId: props.currentUser,
+    userId: props.currentUser.value._id,
     description: "",
     duration: "",
     date: new Date().toLocaleDateString("fr-CA", {   year: "numeric",   month: "2-digit",   day: "2-digit" }).replace(/\//g, "-"),
