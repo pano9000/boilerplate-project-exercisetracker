@@ -1,6 +1,7 @@
-import { sendToAPI, handleApiResponse } from "../../services/apiService.js"
+import { handleApiResponse } from "../../services/apiService.js"
+import { addUser } from "../../services/apiEndpoints.js";
 
-export async function addUser(event, usernameref) {
+export async function addUserHandler(event, usernameref) {
   try {
     event.preventDefault();
 
@@ -11,7 +12,7 @@ export async function addUser(event, usernameref) {
     }
     const formData = new FormData(form);
 
-    const apiResponse = await sendToAPI.post('http://localhost:3002/api/users/', formData)
+    const apiResponse = await addUser(formData)
     console.log(apiResponse)
     handleApiResponse(apiResponse)
   

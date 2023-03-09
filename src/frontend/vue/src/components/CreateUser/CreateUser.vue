@@ -38,7 +38,7 @@
       <button 
         type="submit"
         :disabled="!isValidData.value"
-        @click="addUser($event, username)"
+        @click="addUserHandler($event, username)"
         >
         Add User
       </button>
@@ -50,7 +50,7 @@
 
 <script setup>
 
-  import { addUser } from "./CreateUser.functions";
+  import { addUserHandler } from "./CreateUser.functions";
   import { formValidityCheck } from "../../services/utils"
   import { ref, reactive } from "vue";
   defineEmits(['close-modal']);
