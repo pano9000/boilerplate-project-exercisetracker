@@ -16,3 +16,9 @@ export async function getUserById(userId) {
     const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}`)
     return apiResponse.data
 }
+
+
+export async function deleteUserById(userId) {
+  const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userId}`)
+  return apiResponse
+}
