@@ -58,7 +58,8 @@ import CreateExercise from "../CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
-import {fetchUsers, delUser, uiVisibilityHandler} from "./UserList.functions";
+import { delUser, uiVisibilityHandler} from "./UserList.functions";
+import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
   const title = "User List";
@@ -79,8 +80,8 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
     itemToUpdate.value = newValue.value
   };
 
-  onMounted(  async () => {
-    userList.value = await fetchUsers();
+  onMounted( async () => {
+    userList.value = await getAllUsers();
   })
 
 </script>
