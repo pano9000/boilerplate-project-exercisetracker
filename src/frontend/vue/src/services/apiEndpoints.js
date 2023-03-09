@@ -22,6 +22,11 @@ export async function getAllExercises(params) {
   return apiResponse
 }
 
+export async function getExercisesByUserId(userId, params) {
+  const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}/logs?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
+  return apiResponse
+}
+
 export async function deleteUserById(userId) {
   const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userId}`)
   return apiResponse
