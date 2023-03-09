@@ -16,10 +16,10 @@
   @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
-    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'userDetails')" title="Edit User">✏️ Edit User</li>
+    <li @click="uiVisibilityHandler(uiVisibility, 'userDetails')" title="Edit User">✏️ Edit User</li>
     <li @click="delUser([currentUser.value], userList.value)" title="Delete User">❌ Delete User</li>
-    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'createExercise')" title="Add Exercise">➕ Add Exercise</li>
-    <li @click="uiVisibilityHandler(currentUser.value, currentUser, uiVisibility, 'exerciseLog')" title="Show Exercise Log">🔍 Show Exercise Log</li>
+    <li @click="uiVisibilityHandler(uiVisibility, 'createExercise')" title="Add Exercise">➕ Add Exercise</li>
+    <li @click="uiVisibilityHandler(uiVisibility, 'exerciseLog')" title="Show Exercise Log">🔍 Show Exercise Log</li>
   </template>
 
 </DataTable>
