@@ -6,6 +6,7 @@
 
       <section class="ui-exercise-filter_section">
         <h5>Date Range</h5>
+
         <div>
           <label for="filter-dateFrom">Date From</label>
           <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
@@ -14,6 +15,15 @@
         <div>
           <label for="filter-dateTo">Date To</label>
           <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
+        </div>
+
+        <div>
+        <!-- TODO: add funct-->
+        Set Date To:
+          <button type="button">Today</button>
+          <button type="button">This Week</button>
+          <button type="button">This Month</button>
+          <button type="button">This Year</button>
         </div>
 
       </section>
