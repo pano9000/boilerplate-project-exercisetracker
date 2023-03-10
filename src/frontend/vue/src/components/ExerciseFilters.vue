@@ -21,12 +21,23 @@
         </select>
       </div>
 
-      <div>
-        <label for="filter-sortby">Sort By</label>
-        <select id="filter-sortby" v-model="exerciseFilters.sortBy">
-          <option v-for="sortby in ['TODO']" :key="sortby">{{ sortby }}</option>
-        </select>
-      </div>
+      <section>
+        <h5>Sorting</h5>
+        <div>
+          <label for="filter-sortby">Sort By</label>
+          <select id="filter-sortby" v-model="exerciseFilters.sortBy">
+            <option v-for="sortby in ['TODO']" :key="sortby">{{ sortby }}</option>
+          </select>
+        </div>
+
+        <div> <!-- TODO: replace this with a button -->
+          <label for="filter-sortorder">Sort Order</label>
+          <select id="filter-sortorder" v-model="exerciseFilters.sortOrder">
+            <option v-for="sortOrder in ['Ascending', 'Descending']" :key="sortOrder">{{ sortOrder }}</option>
+          </select>
+        </div>
+
+      </section>
 
     </div>
 
@@ -46,7 +57,9 @@ import { ref } from 'vue';
   const exerciseFilters = ref({
     limit: 0,
     dateFrom: "",
-    dateTo: (new Date()).toISOString().slice(0,10)
+    dateTo: (new Date()).toISOString().slice(0,10),
+    sortBy: "TODO",
+    sortOrder: "Ascending"
   });
 
 
