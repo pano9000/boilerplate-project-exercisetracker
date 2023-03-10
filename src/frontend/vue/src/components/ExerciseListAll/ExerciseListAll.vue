@@ -98,7 +98,4 @@
 </script>
 
 <style>
-.ui-exercise-filter_wrap {
-  margin-bottom: 2rem;
-}
 </style>
