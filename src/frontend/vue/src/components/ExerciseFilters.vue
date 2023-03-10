@@ -4,24 +4,22 @@
     <h4>Filter for Exercises</h4>
     <div class="ui-exercise-filter_wrap">
 
-      <div>
-        <label for="filter-dateFrom">Date From</label>
-        <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
-      </div>
+      <section class="ui-exercise-filter_section">
+        <h5>Date Range</h5>
+        <div>
+          <label for="filter-dateFrom">Date From</label>
+          <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
+        </div>
 
-      <div>
-        <label for="filter-dateTo">Date To</label>
-        <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
-      </div>
+        <div>
+          <label for="filter-dateTo">Date To</label>
+          <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
+        </div>
 
-      <div>
-        <label for="filter-limit">Limit</label>
-        <select id="filter-limit" v-model="exerciseFilters.limit">
-          <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
-        </select>
-      </div>
+      </section>
 
-      <section>
+
+      <section class="ui-exercise-filter_section">
         <h5>Sorting</h5>
         <div>
           <label for="filter-sortby">Sort By</label>
@@ -40,8 +38,17 @@
       </section>
 
     </div>
-
-    <button @click="$emit('clickLoadExercises', exerciseFilters)">Show Exercises</button>
+    <section class="ui-exercise-filter_section">
+      <h5>as</h5>
+      <div>
+      <label for="filter-limit">Limit</label>
+      <select id="filter-limit" v-model="exerciseFilters.limit">
+        <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
+      </select>
+      </div>
+      <hr>
+      <button @click="$emit('clickLoadExercises', exerciseFilters)">Load Exercises</button>
+    </section>
 
   </form>
 
