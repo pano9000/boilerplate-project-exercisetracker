@@ -1,37 +1,10 @@
 <template>
   <h2> {{ title }}</h2>
-  <form>
-    <h4>Filter for Exercises</h4>
-    <div class="ui-exercise-filter_wrap">
+  <ExerciseFilters
+    @click-load-exercises="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
+  >
 
-      <div>
-        <label for="filter-dateFrom">Date From</label>
-        <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
-      </div>
-
-      <div>
-        <label for="filter-dateTo">Date To</label>
-        <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
-      </div>
-
-      <div>
-        <label for="filter-limit">Limit</label>
-        <select id="filter-limit" v-model="exerciseFilters.limit">
-          <option v-for="limit in ['Show All', 5, 10, 25, 50]" :key="limit" :value="(limit == 'Show All')? 0 : limit">{{ limit }}</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="filter-sortby">Sort By</label>
-        <select id="filter-sortby" v-model="exerciseFilters.sortBy">
-          <option v-for="sortby in ['TODO']" :key="sortby">{{ sortby }}</option>
-        </select>
-      </div>
-
-    </div>
-
-    <button @click="loadExerciseHandler(exerciseFilters, exerciseList)">Show Exercises</button>
-  </form>
+  </ExerciseFilters>
 
   <section v-if="exerciseList.value.length > 0">
  
@@ -84,19 +57,12 @@
   import { sendToAPI } from "../../services/apiService";
   import CreateExercise from "../CreateExercise/CreateExercise.vue";
   import DataTable from "../DataTable/DataTable.vue";
-
+  import ExerciseFilters from "../ExerciseFilters.vue";
 
   const title = "User Exercise Logs";
   const userList = reactive({ value: [] });
   const currentExercise = reactive({ value: {} });
   const selectedExercises = reactive({ value: [] });
-
-
-  const exerciseFilters = ref({
-    limit: 0,
-    dateFrom: "",
-    dateTo: (new Date()).toISOString().slice(0,10)
-  });
 
   const exerciseCount = reactive({
     value: ""
