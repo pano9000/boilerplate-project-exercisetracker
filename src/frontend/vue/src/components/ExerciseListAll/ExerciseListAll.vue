@@ -54,7 +54,7 @@
 
 <script setup>
   import { ref, reactive, onMounted, computed } from "vue";
-  import { sendToAPI } from "../../services/apiService";
+  import { getAllExercises } from "../../services/apiEndpoints";
   import CreateExercise from "../CreateExercise/CreateExercise.vue";
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
@@ -76,10 +76,8 @@
 
   async function loadExerciseHandler(exerciseFilters, exerciseList) {
 
-    const { limit, dateFrom, dateTo} = exerciseFilters
-
       try {
-        const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${limit}&from=${dateFrom}&to=${dateTo}`)
+        const apiResponse = await getAllExercises(exerciseFilters);
         console.log(apiResponse)
         exerciseCount.value = apiResponse.data.count
         exerciseList.value = apiResponse.data.log
