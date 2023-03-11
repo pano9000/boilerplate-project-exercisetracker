@@ -230,11 +230,11 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
   }
 
   .list-header-narrow {
-    width: 2rem;
+    width: 3rem;
   }
 
   .list-header-medium {
-    width: 4rem;
+    width: 6rem;
   }
 
   .actionMenu_btn {
