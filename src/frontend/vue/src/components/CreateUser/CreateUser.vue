@@ -71,7 +71,7 @@
   background-color: honeydew;
   padding: .25rem;
   border-radius: .25rem;
-  box-shadow: 1px 1px 5px 1px rgb(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .list_requirements {
