@@ -75,6 +75,23 @@ input:not(:placeholder-shown):not(:focus):invalid {
   background-color: initial;
 }
 
+input:not(:placeholder-shown) {
+  background-color: #fdfdff;
+}
+
+input:placeholder-shown {
+  background-color: #fdfdff;
+}
+
+input:valid {
+  background-color: lightgreen;
+}
+
+input:invalid {
+  background-color: #fe5050;
+}
+
+
 input[type="number"] {
   appearance: textfield;
 }
