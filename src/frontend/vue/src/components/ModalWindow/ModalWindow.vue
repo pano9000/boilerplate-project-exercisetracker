@@ -1,37 +1,38 @@
 <template>
-  <div class="blurry-backdrop" @click="$emit('close-modal')"></div>
-  <div class="ui_modal">
+  <div class="ui-modal_backdrop" @click="$emit('closeModal')"></div>
+  <section class="ui-modal">
     <button 
       ref="closeBtn"
-      class="ui_modal_btn_close"
+      class="ui-modal_btn-close"
       type="button" 
       title="Close"
-      @click="$emit('close-modal')"
-      @keydown.esc="$emit('close-modal')"
+      @click="$emit('closeModal')"
+      @keydown.esc="$emit('closeModal')"
     >
       ✖
     </button>
     <slot></slot>
 
-  </div>
+  </section>
 
 </template>
 
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from "vue";
 
-  defineEmits(['close-modal']);
+  defineEmits(['closeModal']);
   const closeBtn = ref(null);
 
-  onMounted( () => {
+  onMounted(() => {
     closeBtn.value.focus()
   })
+
 </script>
 
 <style>
 
-.blurry-backdrop {
+.ui-modal_backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -41,7 +42,7 @@ import { onMounted, ref } from 'vue';
   backdrop-filter: blur(5px);
 }
 
-.ui_modal {
+.ui-modal {
   border-radius: .5rem;
   position: fixed;
   background-color: aliceblue;
@@ -67,12 +68,13 @@ import { onMounted, ref } from 'vue';
 }
 */
 
-.ui_modal_btn_close {
+.ui-modal_btn-close {
   position: absolute;
   right: 0;
   top: 0;
   padding: .25rem;
   line-height: 1rem;
+  margin: 0.5rem;
 }
 
 </style>
