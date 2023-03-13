@@ -1,10 +1,12 @@
+import { handleApiResponse } from "./apiService";
+
 export function formValidityCheck(event, refToUpdate) {
   refToUpdate.value = event.target.form.checkValidity();
 }
 
 
 
-export async function submitFormHandler(event, usernameref, apiFunction, apiResponseHandler) {
+export async function submitFormHandler(event, usernameref, apiFunction, apiResponseHandler = handleApiResponse) {
   try {
     event.preventDefault();
     event.target.disabled = true;
