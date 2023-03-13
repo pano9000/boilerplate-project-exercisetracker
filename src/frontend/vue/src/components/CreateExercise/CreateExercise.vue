@@ -1,51 +1,73 @@
 <template>
-  {{ currentUser }}
-  {{ createExerciseForm }}
-  <div id="admin-ui_section-createexercise" class="admin-ui_section_action admin-ui_section_subaction">
-  <h3>Create New Exercise</h3>
-  <form action="/api/users/:userId:/exercises" method="post" id="admin-ui_form-createexercise" class="admin-ui_form">
-    <div class="admin-ui_form-input-wrap">
-      <div>
-        <label for="admin-ui_input-createexercise_userid">User Id</label>
-        <input
-          id="admin-ui_input-createexercise_userid" 
-          type="text" 
-          name="userId" 
-          placeholder="User Id" 
-          required 
-          disabled
-          pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$"
-          v-model="createExerciseForm.userId">
-      </div>
-      <div>
-        <label for="admin-ui_input-createexercise_description">Description</label>
-        <input id="admin-ui_input-createexercise_description" type="text" name="description" placeholder="Description" required min="3" max="50" v-model="createExerciseForm.description">
-      </div>
-      <div>
-        <label for="admin-ui_input-createexercise_duration">Duration (in Minutes)</label>
-        <input id="admin-ui_input-createexercise_duration" type="number" name="duration" placeholder="Duration" required min="1" max="999" v-model="createExerciseForm.duration">
-      </div>
-      <div>
-        <label for="admin-ui_input-createexercise_date">Date</label>
-        <input id="admin-ui_input-createexercise_date" type="date" name="date" placeholder="date" v-model="createExerciseForm.date">
-      </div>
-      <button type="submit" @click.prevent="addExerciseHandler($event, createExerciseForm)">Create Exercise</button>
+  <h3>Add New Exercise</h3>
+  <form class="ui-createexercise_form ui-form">
+    <div class="ui-input_wrap ui-input_wrap_required">
+      <label for="ui-createexercise_input-userid">User Id</label>
+      <input
+        id="ui-createexercise_input-userid"
+        type="text"
+        name="userId"
+        placeholder=""
+        required
+        disabled
+        pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$"
+        v-model="createExerciseForm.userId"
+      >
     </div>
-    <div class="admin-ui_form-input-wrap">
-      <h4>Requirements</h4>
-      <p>User Id</p>
 
-      <p>Description</p> Length: 2-50
-      Duration: between 1 and 999
-      Date (optional)
+    <div class="ui-input_wrap ui-input_wrap_required">
+      <label for="ui-createexercise_input-description">
+        <span class="ui-input-label_title">Description</span>
+        <span class="ui-input-label_hint">Please enter a description for the exercise</span>
+      </label>
+      <input 
+        id="ui-createexercise_input-description"
+        type="text"
+        name="description"
+        placeholder=""
+        required
+        min="3"
+        max="50"
+        v-model="createExerciseForm.description"
+      >
+      <span class="ui-input-label_hint">Format: Minimum Length 3, Maximum Length 50</span>
     </div>
+
+    <div class="ui-input_wrap ui-input_wrap_required">
+      <label for="ui-createexercise_input-duration">
+        <span class="ui-input-label_title">Duration</span>
+        <span class="ui-input-label_hint">Please enter the duration of the exercise in minutes</span>
+      </label>
+      <input
+        id="ui-createexercise_input-duration"
+        type="number"
+        name="duration"
+        placeholder=""
+        required
+        min="1"
+        max="999"
+        v-model="createExerciseForm.duration"
+      >
+      <span class="ui-input-label_hint ui-input-label_reqs">Format: A Number between 1 and 999</span>
+    </div>
+
+    <div class="ui-input_wrap ui-input_wrap_required">
+      <label for="ui-createexercise_input-date">
+        <span class="ui-input-label_title">Date</span>
+        <span class="ui-input-label_hint">Please enter the date of the exercise</span>
+      </label>
+      <input
+        id="ui-createexercise_input-date"
+        type="date"
+        name="date"
+        placeholder=""
+        required
+        v-model="createExerciseForm.date"
+      >
+    </div>
+
+    <button type="submit" @click.prevent="addExerciseHandler($event, createExerciseForm)">Create Exercise</button>
   </form>
-  <div class="admin-ui_form-result-wrap" id="admin-ui_form-result-createexercise">
-    <h4>Result</h4>
-    <div>resulting stuff</div>
-  </div>
-  <p>REST: <span class="label-rest label-http-verb">POST</span> <span class="label-rest label-api-route">/api/users/:userId/exercises</span></p>
-</div>
 </template>
 
 <script setup>
@@ -62,5 +84,31 @@
 </script>
 
 <style>
+
+.ui-input_wrap {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.ui-input_wrap input {
+  width: 100%;
+}
+
+
+.ui-input_wrap label {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.ui-input-label_hint {
+  font-weight: 400;
+  font-size: 0.8rem;
+  display: block;
+}
+
+.ui-input_wrap_required .ui-input-label_title::after {
+  content: "*";
+  font-size: 1rem;
+}
 
 </style>
