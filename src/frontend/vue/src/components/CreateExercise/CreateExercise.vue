@@ -26,8 +26,8 @@
         name="description"
         placeholder=""
         required
-        min="3"
-        max="50"
+        minlength="3"
+        maxlength="50"
         v-model="createExerciseForm.description"
       >
       <span class="ui-input-label_hint">Format: Minimum Length 3, Maximum Length 50</span>
