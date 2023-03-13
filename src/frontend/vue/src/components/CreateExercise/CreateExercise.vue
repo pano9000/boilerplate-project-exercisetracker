@@ -71,6 +71,7 @@
     <button 
       type="submit" 
       @click.prevent="submitFormHandler($event, createExerciseForm, addExercise)"
+      :disabled="!isValidData.value"
     >Create Exercise</button>
   </form>
 </template>
