@@ -25,7 +25,13 @@
     <thead>
       <tr>
         <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
-          <input type="checkbox" :checked="hasSelectedItems" :key="toggleSelection"  @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)" :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'">
+          <input
+            type="checkbox"
+            :checked="hasSelectedItems"
+            :key="toggleSelection"
+            :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
+            @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+          >
         </th>
         <th v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</th>
         <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
