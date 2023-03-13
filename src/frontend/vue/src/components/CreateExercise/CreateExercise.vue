@@ -29,6 +29,7 @@
         minlength="3"
         maxlength="50"
         v-model="createExerciseForm.description"
+        @input="formValidityCheck($event, isValidData)"
       >
       <span class="ui-input-label_hint">Format: Minimum Length 3, Maximum Length 50</span>
     </div>
@@ -47,6 +48,7 @@
         min="1"
         max="999"
         v-model="createExerciseForm.duration"
+        @input="formValidityCheck($event, isValidData)"
       >
       <span class="ui-input-label_hint ui-input-label_reqs">Format: A Number between 1 and 999</span>
     </div>
@@ -63,6 +65,7 @@
         placeholder=""
         required
         v-model="createExerciseForm.date"
+        @input="formValidityCheck($event, isValidData)"
       >
     </div>
 
@@ -73,13 +76,18 @@
 <script setup>
   import { addExerciseHandler } from "./CreateExercise.functions";
   import { ref, reactive } from "vue";
+  import { formValidityCheck } from "../../services/utils";
+
   const props = defineProps(["currentUser"]);
+
   const createExerciseForm = reactive( {
     userId: props.currentUser.value._id,
     description: "",
     duration: "",
     date: new Date().toISOString().slice(0,10),
   });
+
+  const isValidData = reactive( { value: false } );
 
 </script>
 
