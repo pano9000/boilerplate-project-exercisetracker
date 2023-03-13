@@ -68,15 +68,17 @@
         @input="formValidityCheck($event, isValidData)"
       >
     </div>
-
-    <button type="submit" @click.prevent="addExerciseHandler($event, createExerciseForm)">Create Exercise</button>
+    <button 
+      type="submit" 
+      @click.prevent="submitFormHandler($event, createExerciseForm, addExercise)"
+    >Create Exercise</button>
   </form>
 </template>
 
 <script setup>
-  import { addExerciseHandler } from "./CreateExercise.functions";
   import { ref, reactive } from "vue";
-  import { formValidityCheck } from "../../services/utils";
+  import { submitFormHandler, formValidityCheck } from "../../services/utils";
+  import { addExercise } from "../../services/apiEndpoints";
 
   const props = defineProps(["currentUser"]);
 
