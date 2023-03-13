@@ -53,7 +53,6 @@
   import { addUserHandler } from "./CreateUser.functions";
   import { formValidityCheck } from "../../services/utils"
   import { ref, reactive } from "vue";
-  defineEmits(['close-modal']);
 
   const isValidData = reactive({
     value: false
