@@ -9,7 +9,7 @@
         name="userId"
         placeholder=""
         required
-        disabled
+        readonly
         pattern="^[a-zA-Z]{1,5}_[0-9a-f]{24}$"
         v-model="createExerciseForm.userId"
       >
