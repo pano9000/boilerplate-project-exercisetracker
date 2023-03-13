@@ -28,7 +28,7 @@ export async function submitFormHandler(event, usernameref, apiFunction, apiResp
       throw new Error("Error Server")
       //TODO: add proper handling
     }
-    alert("User added")
+    alert("Success") //TODO: handle better
     usernameref.value = "";
     event.target.disabled = false;
 
