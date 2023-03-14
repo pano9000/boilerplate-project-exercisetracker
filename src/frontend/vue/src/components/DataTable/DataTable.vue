@@ -42,15 +42,20 @@
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
-          <button class="actionMenu_btn" @click="actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId)" title="Show Actions">☰</button>
-          <menu class="actionMenu_menu" v-show="actionMenuVisible.value === data._id">
-            <slot name="actionMenuEntries"></slot>
-          </menu>
+          <button 
+            class="actionMenu_btn" 
+            @click="actionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+            title="Show Actions"
+          >
+            ☰
+          </button>
         </td>
       </tr>
-
     </tbody>
   </table>
+  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+    <slot name="actionMenuEntries"></slot>
+  </menu>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
@@ -86,8 +91,10 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
 
+  const actionMenu = ref(null);
   const currentItem = reactive({ value: {} });
-  const actionMenuVisible = reactive({ value: {} });
+  const actionMenuVisible = reactive({ value: false });
+
   const toggleSelection = ref(Date.now());
 
   const paginatedList = reactive({ value: [] });
@@ -113,9 +120,23 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  function actionButtonHandler(currentItem, actionMenuVisible, data, dataKeyId) {
-    currentItem.value = data;
-    actionMenuVisible.value = currentItem.value[dataKeyId];
+  function actionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
+    currentItem.value = currentData;
+
+    const actionButtonRect = event.target.getBoundingClientRect();
+    const actionMenuRect = actionMenu.value.getBoundingClientRect();
+
+    const x = (actionButtonRect.left - actionMenuRect.width + window.scrollX).toFixed();
+    const y = (actionButtonRect.top + window.scrollY).toFixed();
+
+    // Set the position for menu
+    actionMenu.value.style.left = `${x}px`;
+    actionMenu.value.style.top = `${y}px`;
+
+    actionMenuVisible.value = true;
+
+    actionMenu.value.firstElementChild.focus();
+
   }
   
   watch(currentItem, () => {
@@ -133,8 +154,8 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 
   function actionMenuDisableVisibility(actionMenuVisible) {
-    if (actionMenuVisible.value !== "") {
-      actionMenuVisible.value = ""
+    if (actionMenuVisible.value !== false) {
+      actionMenuVisible.value = false
     }
   }
 
