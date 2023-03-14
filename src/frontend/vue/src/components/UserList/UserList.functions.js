@@ -1,5 +1,3 @@
-import { sendToAPI } from "../../services/apiService.js"
-
 import { deleteUserById } from "../../services/apiEndpoints.js";
 
 export async function deleteUserHandler(selectedUsers, userList) {
