@@ -65,7 +65,7 @@ input, select {
   font-weight: 500;
   font-family: inherit;
   background-color: #fdfdfd;
-  cursor: pointer;
+  /*cursor: pointer;*/
   transition: border-color 0.25s;
   box-shadow: var(--box-shadow);
 }
