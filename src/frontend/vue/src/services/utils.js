@@ -30,7 +30,7 @@ export async function submitFormHandler(event, usernameref, apiFunction, apiResp
     }
     alert("Success") //TODO: handle better
     usernameref.value = "";
-    event.target.disabled = false;
+    //event.target.disabled = false;
 
   }
   catch(error) {
