@@ -16,10 +16,43 @@
   @click-del-selected="delUser(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
-    <li @click="uiVisibilityHandler(uiVisibility, 'userDetails')" title="Edit User">✏️ Edit User</li>
-    <li @click="delUser([currentUser.value], userList.value)" title="Delete User">❌ Delete User</li>
-    <li @click="uiVisibilityHandler(uiVisibility, 'createExercise')" title="Add Exercise">➕ Add Exercise</li>
-    <li @click="uiVisibilityHandler(uiVisibility, 'exerciseLog')" title="Show Exercise Log">🔍 Show Exercise Log</li>
+    <li 
+      tabindex="0" 
+      @click="uiVisibilityHandler(uiVisibility, 'userDetails')"
+      @keyup.enter="uiVisibilityHandler(uiVisibility, 'userDetails')"
+      @keyup.space="uiVisibilityHandler(uiVisibility, 'userDetails')"
+      title="Edit User"
+    >
+      ✏️ Edit User
+    </li>
+    <li 
+      tabindex="0" 
+      @click="deleteUserHandler([currentUser.value], userList.value)"
+      @keyup.enter="deleteUserHandler([currentUser.value], userList.value)"
+      @keyup.space="deleteUserHandler([currentUser.value], userList.value)"
+      title="Delete User"
+    >
+      ❌ Delete User
+    </li>
+    <li 
+      tabindex="0" 
+      @click="uiVisibilityHandler(uiVisibility, 'createExercise')"
+      @keyup.enter="uiVisibilityHandler(uiVisibility, 'createExercise')"
+      @keyup.space="uiVisibilityHandler(uiVisibility, 'createExercise')"
+      title="Add Exercise"
+    >
+      ➕ Add Exercise
+    </li>
+    <li 
+      tabindex="0" 
+      @click="uiVisibilityHandler(uiVisibility, 'exerciseLog')"
+      @keyup.enter="uiVisibilityHandler(uiVisibility, 'exerciseLog')" 
+      @keyup.space="uiVisibilityHandler(uiVisibility, 'exerciseLog')" 
+
+      title="Show Exercise Log"
+    >
+      🔍 Show Exercise Log
+    </li>
   </template>
 
 </DataTable>
