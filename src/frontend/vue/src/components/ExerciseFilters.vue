@@ -17,15 +17,15 @@
           <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
         </div>
 
+        <!-- TODO: add funct
         <div>
-        <!-- TODO: add funct-->
         Set Date To:
-          <button type="button">Today</button>
-          <button type="button">This Week</button>
-          <button type="button">This Month</button>
-          <button type="button">This Year</button>
+          <button type="button" @click="quickDateButtonsHandler('D', exerciseFilters)">Today</button>
+          <button type="button" @click="quickDateButtonsHandler('W', exerciseFilters)">This Week</button>
+          <button type="button" @click="quickDateButtonsHandler('M', exerciseFilters)">This Month</button>
+          <button type="button" @click="quickDateButtonsHandler('Y', exerciseFilters)">This Year</button>
         </div>
-
+        -->
       </section>
 
 
