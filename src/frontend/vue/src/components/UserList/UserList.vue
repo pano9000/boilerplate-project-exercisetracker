@@ -13,7 +13,7 @@
   @update-current-item="(newValue) => updateValue(newValue, currentUser)"
   @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
   @click-add-new="uiVisibility.value.createUser = true"
-  @click-del-selected="delUser(selectedUsers.value, userList.value)"
+  @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
     <li 
@@ -91,7 +91,7 @@ import CreateExercise from "../CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
-import { delUser, uiVisibilityHandler} from "./UserList.functions";
+import { deleteUserHandler, uiVisibilityHandler} from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 

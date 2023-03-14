@@ -2,7 +2,7 @@ import { sendToAPI } from "../../services/apiService.js"
 
 import { deleteUserById } from "../../services/apiEndpoints.js";
 
-export async function delUser(selectedUsers, userList) {
+export async function deleteUserHandler(selectedUsers, userList) {
 
   const confirmMessage = (!(selectedUsers.length > 1)) ?
     `Are you sure you want to delete the user '${selectedUsers[0].username}'` :
