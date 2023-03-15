@@ -6,8 +6,8 @@ export async function getAllUsers() {
 }
 
 export async function getUserById(userId) {
-    const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}`)
-    return apiResponse.data
+  const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}`)
+  return apiResponse.data
 }
 
 export async function getAllExercises(params) {
