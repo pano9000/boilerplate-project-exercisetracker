@@ -25,6 +25,11 @@ export async function deleteUserById(userId) {
   return apiResponse
 }
 
+export async function deleteExerciseById(formData) {
+  const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`)
+  return apiResponse
+}
+
 export async function addUser(formData) {
   const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/`, formData)
   return apiResponse
@@ -32,5 +37,15 @@ export async function addUser(formData) {
 
 export async function addExercise(formData) {
   const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/${formData.get("userId")}/exercises`, formData)
+  return apiResponse
+}
+
+export async function updateUserById(formData) {
+  const apiResponse = await sendToAPI.put(`http://localhost:3002/api/users/${formData.get("userId")}`)
+  return apiResponse
+}
+
+export async function updateExerciseById(formData) {
+  const apiResponse = await sendToAPI.put(`http://localhost:3002/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`, formData)
   return apiResponse
 }
