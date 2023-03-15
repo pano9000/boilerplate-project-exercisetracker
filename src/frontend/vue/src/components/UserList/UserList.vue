@@ -91,9 +91,10 @@ import CreateExercise from "../CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
-import { deleteUserHandler, uiVisibilityHandler} from "./UserList.functions";
+import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
+import { uiVisibilityHandler, updateValue } from "../../services/utils";
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -108,10 +109,6 @@ import ModalWindow from "../ModalWindow/ModalWindow.vue";
       exerciseLog: false
     }
   });
-
-  function updateValue(newValue, itemToUpdate) {
-    itemToUpdate.value = newValue.value
-  };
 
   onMounted( async () => {
     userList.value = await getAllUsers();
