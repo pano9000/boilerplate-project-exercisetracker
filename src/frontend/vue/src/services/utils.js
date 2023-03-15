@@ -38,6 +38,11 @@ export async function submitFormHandler(event, usernameref, apiFunction, apiResp
     alert(`something went wrong, ${error.message}`)
   }
 };
+
+export async function uiVisibilityHandler(uiVisibility, uiElement) {
+  uiVisibility.value[uiElement] = true;
+};
+
 export function updateValue(newValue, itemToUpdate) {
   itemToUpdate.value = newValue.value
 };
