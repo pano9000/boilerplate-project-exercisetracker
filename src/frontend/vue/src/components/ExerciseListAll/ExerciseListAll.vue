@@ -35,14 +35,6 @@
   </DataTable>
 
 
-  <section v-if="ui_createExerciseVisible">
-    <CreateExercise
-      :currentUser="currentUser.value"
-    >
-
-    </CreateExercise>
-
-  </section>
 
 </section>
 
@@ -55,7 +47,6 @@
 <script setup>
   import { ref, reactive, onMounted, computed } from "vue";
   import { getAllExercises } from "../../services/apiEndpoints";
-  import CreateExercise from "../CreateExercise/CreateExercise.vue";
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler } from "../../services/utils";
