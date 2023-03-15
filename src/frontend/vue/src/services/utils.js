@@ -38,3 +38,6 @@ export async function submitFormHandler(event, usernameref, apiFunction, apiResp
     alert(`something went wrong, ${error.message}`)
   }
 };
+export function updateValue(newValue, itemToUpdate) {
+  itemToUpdate.value = newValue.value
+};
