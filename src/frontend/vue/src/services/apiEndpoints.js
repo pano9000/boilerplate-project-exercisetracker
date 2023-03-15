@@ -37,7 +37,7 @@ export async function addUser(formData) {
   return apiResponse
 }
 
-export async function addExercise(userId, formData) {
-  const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/${userId}/exercises`, formData)
+export async function addExercise(formData) {
+  const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/${formData.get("userId")}/exercises`, formData)
   return apiResponse
 }
