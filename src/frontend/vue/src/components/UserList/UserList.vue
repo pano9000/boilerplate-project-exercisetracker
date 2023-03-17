@@ -1,6 +1,5 @@
 <template>
   <h2> {{ title }} </h2>
-  <h3>mockup</h3>
 
 <DataTable
   :table-options="{showSelection: true, showAction: true}"
