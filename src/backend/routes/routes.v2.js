@@ -10,16 +10,16 @@ router.get("/", controllers.root.get);
 
 router.get("/api/users", controllers.api.users.get);
 
-//all user's logs
+//all user's exercises
 router.get(
-  "/api/users/logs",
+  "/api/users/exercises",
   validation.check.logsGetAll,
   validation.handler,
   controllers.api.users.logsAll.get)
 
-//single user's log
+//single user's exercises
 router.get(
-  "/api/users/:userId/logs",
+  "/api/users/:userId/exercises",
   validation.check.logsGet,
   validation.handler,
   controllers.api.users.logs.get);
