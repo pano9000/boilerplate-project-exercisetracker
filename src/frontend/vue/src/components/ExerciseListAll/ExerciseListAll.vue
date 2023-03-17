@@ -25,11 +25,11 @@
     @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
     @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
     @click-add-new="uiVisibility.value.createUser = true"
-    @click-del-selected="delUser(selectedExercises.value, userList.value)"
+    @click-del-selected="deleteExerciseHandler(selectedExercises.value, userList.value)"
   >
     <template v-slot:actionMenuEntries>
       <li @click="uiVisibilityHandler(uiVisibility, 'exerciseDetails')" title="Edit Exercise">✏️ Edit Exercise</li>
-      <li @click="delUser([currentExercise.value], userList.value)" title="Delete Exercise">❌ Delete Exercise</li>
+      <li @click="deleteExerciseHandler([currentExercise.value], userList.value)" title="Delete Exercise">❌ Delete Exercise</li>
     </template>
 
   </DataTable>
@@ -84,6 +84,10 @@
       catch(error) {
         console.log("error fetchexercise", error)
       }
+  }
+
+  async function deleteExerciseHandler() {
+    //#TODO
   }
 
 
