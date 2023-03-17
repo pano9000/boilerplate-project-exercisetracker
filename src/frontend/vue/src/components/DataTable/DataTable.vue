@@ -1,6 +1,6 @@
 <template>
   <PaginationBar
-   v-if="paginationbarOptions.showTop === true"
+   v-if="paginationbarOptions.showTop === true && dataList.value.length > 0"
    :list-to-paginate="dataList.value"
    :allow-selection="paginationbarOptions.allowSelection"
    @update-paginated-list="updatePaginatedListFunc"
@@ -22,7 +22,7 @@
     }"
   >
   </ListActionButtons>
-  <table class="ui-datatable">
+  <table class="ui-datatable" v-if="dataList.value.length > 0">
     <thead>
       <tr>
         <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
@@ -55,7 +55,12 @@
         </td>
       </tr>
     </tbody>
+    <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+      <slot name="actionMenuEntries"></slot>
+    </menu>
   </table>
+
+  <div v-else>No Data Found</div>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
