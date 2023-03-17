@@ -20,8 +20,14 @@
         <span class="ui-input-label_title">Description</span>
         <span class="ui-input-label_hint">Please enter a description for the exercise</span>
       </label>
+      <InputStatusIcon
+        :isValidData="isValidData.value"
+        :required="true"
+        :inputElemRef="inputDescription"
+      >
+      </InputStatusIcon>
       <input 
-        id="ui-createexercise_input-description"
+        ref="inputDescription"
         type="text"
         name="description"
         placeholder=""
@@ -39,7 +45,15 @@
         <span class="ui-input-label_title">Duration</span>
         <span class="ui-input-label_hint">Please enter the duration of the exercise in minutes</span>
       </label>
+
+      <InputStatusIcon
+        :isValidData="isValidData.value"
+        :required="false"
+        :inputElemRef="inputDuration"  
+      >
+      </InputStatusIcon>
       <input
+        ref="inputDuration"
         id="ui-createexercise_input-duration"
         type="number"
         name="duration"
@@ -78,10 +92,13 @@
 
 <script setup>
   import { ref, reactive } from "vue";
-  import { submitFormHandler, formValidityCheck } from "../../../services/utils";
-  import { addExercise } from "../../../services/apiEndpoints";
-
+  import { submitFormHandler, formValidityCheck } from "../../services/utils";
+  import { addExercise } from "../../services/apiEndpoints";
+  import InputStatusIcon from "../Input-StatusIcon.vue";
   const props = defineProps(["currentUser"]);
+
+  const inputDescription = ref(null);
+  const inputDuration = ref(null);
 
   const createExerciseForm = reactive( {
     userId: props.currentUser.value._id,
