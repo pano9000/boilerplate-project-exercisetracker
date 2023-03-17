@@ -10,7 +10,7 @@
  
   <DataTable
     :table-options="{showSelection: true, showAction: true}"
-    :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New Exercise'}"
+    :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
     :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
     :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
     :data-list="exerciseList"
@@ -24,7 +24,6 @@
     :dataKeyId="'_id'"
     @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
     @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-    @click-add-new="uiVisibility.value.createUser = true"
     @click-del-selected="deleteExerciseHandler(selectedExercises.value, userList.value)"
   >
     <template v-slot:actionMenuEntries>
@@ -63,7 +62,6 @@
     value: []
   });
 
-  const ui_createExerciseVisible = ref(false);
 
   const uiVisibility = reactive( {
     value: {
