@@ -11,8 +11,9 @@ app.use(cors())
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/v2", routes.v2);
-app.use("/", routes.v1);
+app.use("/api/v2", routes.apiV2);
+app.use("/api", routes.apiV1);
+app.use("/", routes.frontend);
 
 
 module.exports = app

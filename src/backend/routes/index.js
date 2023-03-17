@@ -1,4 +1,5 @@
 module.exports = {
-  v1: require("./routes.v1"),
-  v2: require("./routes.v2")
+  apiV1: require("./routes.api.v1"),
+  apiV2: require("./routes.api.v2"),
+  frontend: require("./routes.frontend")
 };
