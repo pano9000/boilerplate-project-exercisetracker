@@ -4,7 +4,7 @@
 
 <DataTable
   :table-options="{showSelection: true, showAction: true}"
-  :list-action-buttons-options="{showBottom: true, showTop: true, textAddNew: 'Add New User'}"
+  :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
   :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
   :table-headings="['UserId', 'Username']"
   :data-list="userList"
