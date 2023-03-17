@@ -49,7 +49,7 @@
   import { getAllExercises } from "../../services/apiEndpoints";
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
-  import { uiVisibilityHandler } from "../../services/utils";
+  import { uiVisibilityHandler, updateValue } from "../../services/utils";
 
   const title = "User Exercise Logs";
   const userList = reactive({ value: [] });
@@ -87,10 +87,6 @@
   }
 
 
-
-  function updateValue(newValue, itemToUpdate) {
-    itemToUpdate.value = newValue.value
-  };
 
 
 </script>
