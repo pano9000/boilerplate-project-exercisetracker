@@ -16,6 +16,7 @@
 
   --box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
   --border-radius: 8px;
+  --input-border: 2rem solid;
 }
 
 
@@ -71,11 +72,14 @@ input, select {
 }
 
 input:not(:focus):valid {
-  border-left: 1rem solid lightgreen;
+  border-left: var(--input-border);
+  border-left-color: lightgreen;
+
 }
 
 input:not(:focus):not(:placeholder-shown):invalid {
-  border-left: 1rem solid #fe5050;
+  border-left: var(--input-border);
+  border-left-color: #fe5050;
 }
 
 input:not(:focus):not(:placeholder-shown):invalid + .ui-input-label_hint {
@@ -84,11 +88,13 @@ input:not(:focus):not(:placeholder-shown):invalid + .ui-input-label_hint {
 }
 
 input:placeholder-shown {
-  border-left: 1rem solid lightgray;
+  border-left: var(--input-border);
+  border-left-color: lightgray;
 }
 
 input:focus {
-  border-left: 1rem solid darkgrey;
+  border-left: var(--input-border);
+  border-left-color: darkgrey;
 }
 
 input[type="number"] {
