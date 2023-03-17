@@ -20,6 +20,3 @@ export async function deleteUserHandler(selectedUsers, userList) {
   }
 }
 
-export async function uiVisibilityHandler(uiVisibility, uiElement) {
-  uiVisibility.value[uiElement] = true;
-}
