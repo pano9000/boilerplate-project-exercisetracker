@@ -10,33 +10,36 @@ module.exports = {
 
   api: {
 
-    users: {
+    v1: {
 
-      get: require("./api/v1/usersGet"),
-      post: require("./api/v1/usersPost"),
+      users: {
 
-      userId: {
-        get: require("./api/v1/userIdGet"),
-        delete: require("./api/v1/userIdDelete"),
-        /* TODO: future route, to get single user info and also update user info
-        patch: require("./api/v1/userIdPatch")
-        */
+        get: require("./api/v1/usersGet"),
+        post: require("./api/v1/usersPost"),
+
+        userId: {
+          get: require("./api/v1/userIdGet"),
+          delete: require("./api/v1/userIdDelete"),
+          /* TODO: future route, to get single user info and also update user info
+          patch: require("./api/v1/userIdPatch")
+          */
+        },
+
+        logs: {
+          get: require("./api/v1/logsGet")
+        },
+
+        logsAll: {
+          get: require("./api/v1/logsGetAll")
+        },
+
+        exercises: {
+          post: require("./api/v1/exercisesPost")
+        }
+
       },
-
-      logs: {
-        get: require("./api/v1/logsGet")
-      },
-
-      logsAll: {
-        get: require("./api/v1/logsGetAll")
-      },
-
-      exercises: {
-        post: require("./api/v1/exercisesPost")
-      }
 
     },
-
   },
 
   rateLimiter: {
