@@ -40,6 +40,35 @@ module.exports = {
       },
 
     },
+
+    v2: {
+
+      users: {
+
+        get: require("./api/v2/usersGet"),
+        post: require("./api/v2/usersPost"),
+
+        userId: {
+          get: require("./api/v2/userIdGet"),
+          delete: require("./api/v2/userIdDelete"),
+        },
+
+        logs: {
+          get: require("./api/v2/logsGet")
+        },
+
+        logsAll: {
+          get: require("./api/v2/logsGetAll")
+        },
+
+        exercises: {
+          post: require("./api/v2/exercisesPost")
+        }
+
+      }
+
+    }
+
   },
 
   rateLimiter: {
