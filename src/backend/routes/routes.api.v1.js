@@ -6,42 +6,41 @@ const validation = require("../services/validationSchemas/validation.index")
 router.get("*", controllers.rateLimiter.get);
 router.post("*", controllers.rateLimiter.post);
 
-
-router.get("/users", controllers.api.users.get);
+router.get("/users", controllers.api.v1.users.get);
 
 //all user's logs
 router.get(
   "/users/logs",
   validation.check.logsGetAll,
   validation.handler,
-  controllers.api.users.logsAll.get)
+  controllers.api.v1.users.logsAll.get)
 
 //single user's log
 router.get(
   "/users/:userId/logs",
   validation.check.logsGet,
   validation.handler,
-  controllers.api.users.logs.get);
+  controllers.api.v1.users.logs.get);
 
 router.post(
   "/users",
   validation.check.usersPost,
   validation.handler,
-  controllers.api.users.post
+  controllers.api.v1.users.post
 );
 
 router.post(
   "/users/:userId/exercises",
   validation.check.exercisePost,
   validation.handler,
-  controllers.api.users.exercises.post
+  controllers.api.v1.users.exercises.post
 );
 
 router.get(
   "/users/:userId",
   validation.check.userIdGet,
   validation.handler,
-  controllers.api.users.userId.get
+  controllers.api.v1.users.userId.get
 );
 
 
@@ -50,7 +49,7 @@ router.delete(
   validation.check.userIdGet,
   validation.handler,
   //authentication check,
-  controllers.api.users.userId.delete
+  controllers.api.v1.users.userId.delete
 );
 
 
