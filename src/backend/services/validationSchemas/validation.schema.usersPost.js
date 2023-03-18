@@ -4,7 +4,7 @@ const { body } = require("express-validator")
 
 const usersPostSchema = [
 
-  body("username")
+  body("username", { errorHandling: "fatalError" })
     .trim()
     .matches(/^[0-9a-z]{3,30}$/)
 
