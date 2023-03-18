@@ -1,4 +1,4 @@
-const findUser = require("../../services/db/findUser");
+const findUser = require("../../../services/db/findUser");
 
 
 async function userGet(req, res) {

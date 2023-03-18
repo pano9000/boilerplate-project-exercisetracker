@@ -12,27 +12,27 @@ module.exports = {
 
     users: {
 
-      get: require("./api/usersGet"),
-      post: require("./api/usersPost"),
+      get: require("./api/v1/usersGet"),
+      post: require("./api/v1/usersPost"),
 
       userId: {
-        get: require("./api/userIdGet"),
-        delete: require("./api/userIdDelete"),
+        get: require("./api/v1/userIdGet"),
+        delete: require("./api/v1/userIdDelete"),
         /* TODO: future route, to get single user info and also update user info
-        patch: require("./api/userIdPatch")
+        patch: require("./api/v1/userIdPatch")
         */
       },
 
       logs: {
-        get: require("./api/logsGet")
+        get: require("./api/v1/logsGet")
       },
 
       logsAll: {
-        get: require("./api/logsGetAll")
+        get: require("./api/v1/logsGetAll")
       },
 
       exercises: {
-        post: require("./api/exercisesPost")
+        post: require("./api/v1/exercisesPost")
       }
 
     },

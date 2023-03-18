@@ -1,4 +1,4 @@
-const createUser = require("../../services/db/createUser");
+const createUser = require("../../../services/db/createUser");
 
 async function usersPost(req, res) {
 

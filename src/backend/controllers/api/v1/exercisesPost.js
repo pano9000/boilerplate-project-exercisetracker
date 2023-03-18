@@ -1,5 +1,5 @@
-const createExercise = require("../../services/db/createExercise");
-const findUser = require("../../services/db/findUser");
+const createExercise = require("../../../services/db/createExercise");
+const findUser = require("../../../services/db/findUser");
 
 
 async function exercisesPost(req, res) {

@@ -1,4 +1,4 @@
-const deleteUser = require("../../services/db/deleteUser");
+const deleteUser = require("../../../services/db/deleteUser");
 
 
 async function userDelete(req, res) {

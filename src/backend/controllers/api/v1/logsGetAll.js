@@ -1,6 +1,6 @@
-const findExercises = require("../../services/db/findExercises");
-const findUser = require("../../services/db/findUser");
-const createSearchObject = require("../../services/db/createSearchObject")
+const findExercises = require("../../../services/db/findExercises");
+const findUser = require("../../../services/db/findUser");
+const createSearchObject = require("../../../services/db/createSearchObject")
 
 
 async function logsGetAll(req, res) {
