@@ -5,6 +5,7 @@ const { body } = require("express-validator")
 const usersPostSchema = [
 
   body("username")
+    .trim()
     .matches(/^[0-9a-z]{3,30}$/)
 
 ]
