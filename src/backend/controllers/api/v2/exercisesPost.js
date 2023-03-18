@@ -42,7 +42,7 @@ async function exercisesPost(req, res) {
   catch(error) {
 
     console.log("error in exercisesPost", error.message)
-    res.status(500).json({"error": "Creating exercise Failed, Please try again later"});
+    res.status(500).json({"error": `Creating exercise Failed, Reason: ${error.message}`});
 
   }
 
