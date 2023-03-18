@@ -36,15 +36,13 @@ async function exercisesPost(req, res) {
       throw new Error(`Username not found`)
     }
 
-    // Create response JSON in the format that FCC requires + additional properties: dateOriginal + exerc_id
     const response = {
+      exerc_id: saveResult._id,
+      user_id: saveResult.userId,
       username: usernameResult.username,
       description: saveResult.description,
       duration: saveResult.duration,
-      date: (new Date(`"${saveResult.date}"`)).toDateString(), // formatted date, as requested by FCC,
-      //dateOriginal: saveResult.date, //original date from DB with time
-      _id: saveResult.userId, //-> this is the USERID not the exercise ID
-      //exerc_id: saveResult._id
+      date: (new Date(`"${saveResult.date}"`)).toISOString(), // formatted date, as requested by FCC,
     }
 
     res.status(201).json(response);
