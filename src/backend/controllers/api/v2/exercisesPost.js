@@ -4,17 +4,8 @@ const findUser = require("../../../services/db/findUser");
 
 async function exercisesPost(req, res) {
 
-
-  /*
-    1. gather data from body and param
-    2. validate/sanitize input
-    3. save data to DB
-    4. prepare response in required JSON format
-    5. send response as JSON back to client
-  */
   try {
 
-    //TODO: less hardcoding? refactor to separate function?
     const exerciseDataForDB = {
 
       userId: req.params.userId,
@@ -22,7 +13,6 @@ async function exercisesPost(req, res) {
       duration: req.body.duration,
       date: req.body.date
     }
-    //TODO: Input validation/sanitation
 
     const saveResult = await createExercise(exerciseDataForDB);
 
