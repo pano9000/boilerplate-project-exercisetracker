@@ -3,7 +3,7 @@ const findUser = require("../../../services/db/findUser");
 const createSearchObject = require("../../../services/db/createSearchObject")
 
 
-async function logs(req, res) {
+async function userIdExercisesGetAll(req, res) {
 
   try {
 
@@ -56,4 +56,4 @@ async function logs(req, res) {
 
 }
 
-module.exports = logs
+module.exports = userIdExercisesGetAll
