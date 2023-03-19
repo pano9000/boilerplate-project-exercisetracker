@@ -76,7 +76,7 @@
 <script setup>
 
 import { ref, reactive, watch, computed, onMounted, onBeforeUnmount } from "vue";
-import ListActionButtons from "../ListActionButtons/ListActionButtons.vue";
+import ListActionButtons from "./ListActionButtons.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const props = defineProps([
