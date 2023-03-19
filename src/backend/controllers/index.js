@@ -53,12 +53,12 @@ module.exports = {
           delete: require("./api/v2/userIdDelete"),
         },
 
-        logs: {
-          get: require("./api/v2/logsGet")
+        userIdExercisesAll: {
+          get: require("./api/v2/userIdExercisesGetAll")
         },
 
-        logsAll: {
-          get: require("./api/v2/logsGetAll")
+        exercisesGetAll: {
+          get: require("./api/v2/exercisesGetAll")
         },
 
         exercises: {
