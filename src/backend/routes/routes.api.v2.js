@@ -13,14 +13,14 @@ router.get(
   "/users/exercises",
   validation.check.logsGetAll,
   validation.handler,
-  controllers.api.v2.users.logsAll.get)
+  controllers.api.v2.users.exercisesGetAll.get)
 
 //single user's exercises
 router.get(
   "/users/:userId/exercises",
   validation.check.logsGet,
   validation.handler,
-  controllers.api.v2.users.logs.get);
+  controllers.api.v2.users.userIdExercisesAll.get);
 
 router.post(
   "/users",
