@@ -3,7 +3,7 @@ const findUser = require("../../../services/db/findUser");
 const createSearchObject = require("../../../services/db/createSearchObject")
 
 
-async function logsGetAll(req, res) {
+async function exercisesGetAll(req, res) {
 
   try {
     
@@ -45,4 +45,4 @@ async function logsGetAll(req, res) {
 
 }
 
-module.exports = logsGetAll
+module.exports = exercisesGetAll
