@@ -29,7 +29,7 @@ async function exercisesGetAll(req, res) {
           userId,
           description, 
           duration, 
-          date: (new Date(date)).toDateString()
+          date
         }
       })
     }
