@@ -1,26 +1,31 @@
 const router = require("express").Router();
-const controllers = require("../controllers")
-const validation = require("../services/validationSchemas/validation.index")
+const controllers = require("../controllers");
+const validation = require("../services/validationSchemas/validation.index");
 
 
 router.get("*", controllers.rateLimiter.get);
 router.post("*", controllers.rateLimiter.post);
 
-router.get("/users", controllers.api.v2.users.get);
+router.get(
+  "/users", 
+  controllers.api.v2.users.get
+);
 
 //all user's exercises
 router.get(
   "/users/exercises",
   validation.check.logsGetAll,
   validation.handler,
-  controllers.api.v2.users.exercisesGetAll.get)
+  controllers.api.v2.users.exercisesGetAll.get
+);
 
 //single user's exercises
 router.get(
   "/users/:userId/exercises",
   validation.check.logsGet,
   validation.handler,
-  controllers.api.v2.users.userIdExercisesAll.get);
+  controllers.api.v2.users.userIdExercisesAll.get
+);
 
 router.post(
   "/users",
@@ -58,6 +63,6 @@ router.patch("/users/:userId", controllers.api.v2.users.userId.patch)
 */
 
 //404 Handling
-router.get("*", controllers.unknown.get)
+router.get("*", controllers.unknown.get);
 
 module.exports = router;
