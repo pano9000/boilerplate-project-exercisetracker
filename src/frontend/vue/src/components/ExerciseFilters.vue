@@ -37,14 +37,14 @@
           <div>
             <label for="filter-sortby">Sort By</label>
             <select id="filter-sortby" v-model="exerciseFilters.sortBy">
-              <option v-for="sortby in ['TODO']" :key="sortby">{{ sortby }}</option>
+              <option select v-for="sortby in ['Date']" :key="sortby">{{ sortby }}</option>
             </select>
           </div>
 
           <div> <!-- TODO: replace this with a button -->
             <label for="filter-sortorder">Sort Order</label>
             <select id="filter-sortorder" v-model="exerciseFilters.sortOrder">
-              <option v-for="sortOrder in ['Ascending', 'Descending']" :key="sortOrder">{{ sortOrder }}</option>
+              <option v-for="sortOrder in sortOrders" :key="sortOrder" :value="sortOrder.value">{{ sortOrder.name }}</option>
             </select>
           </div>
 
@@ -79,9 +79,20 @@ import { ref } from 'vue';
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
-    sortBy: "TODO",
-    sortOrder: "Ascending"
+    sortBy: "Date",
+    sortOrder: "asc"
   });
+
+  const sortOrders = [
+    {
+      value: "asc",
+      name: "Ascending"
+    },
+    {
+      value: "desc",
+      name: "Descending"
+    }
+  ]
 
 
 </script>
