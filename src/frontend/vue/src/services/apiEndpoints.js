@@ -11,7 +11,7 @@ export async function getUserById(userId) {
 }
 
 export async function getAllExercises(params) {
-  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
+  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sort=${params.sortOrder}`)
 }
 
 export async function getExercisesByUserId(userId, params) {
