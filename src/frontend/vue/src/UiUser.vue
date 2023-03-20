@@ -25,7 +25,7 @@
 <script setup>
   import { ref, onMounted } from "vue";
   import MenuBar from "./components/MenuBar.vue"
-  import UserDetails from "./components/UserDetails/UserDetails.vue";
+  import UserDetails from "./components/Forms/UserDetails/UserDetails.vue";
   defineProps(["userList"])
   const currentUser = ref("");
   const menuItems = ref({
