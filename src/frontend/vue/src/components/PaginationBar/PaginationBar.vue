@@ -3,7 +3,9 @@
   <nav class="ui-pagination_nav">
     <h3>Pages</h3>
     <section class="ui-pagination_row-buttons">
-      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">&lt;</button>
+      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">
+        <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
+      </button>
       <button 
         class="ui-pagination_btn"
         type="button"
@@ -15,7 +17,9 @@
       >
         {{ pg }}
       </button>
-      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">&gt;</button>
+      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">
+        <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
+      </button>
     </section>
     <div class="ui-pagination_row-actions">
 
@@ -52,6 +56,7 @@
 
 
 import { ref, onMounted, computed, toRefs, watch } from "vue";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate", "allowSelection"]);
   const emit = defineEmits(["updatePaginatedList"]);
