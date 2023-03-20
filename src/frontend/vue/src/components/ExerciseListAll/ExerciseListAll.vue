@@ -78,7 +78,10 @@
         const apiResponse = await getAllExercises(exerciseFilters);
         console.log(apiResponse)
         exerciseCount.value = apiResponse.data.count
-        exerciseList.value = apiResponse.data.log
+        exerciseList.value = apiResponse.data.log.map(entry => {
+          entry.date = new Date(entry.date).toLocaleDateString()
+          return entry
+        });
         //return apiResponse.data
       }
       catch(error) {
