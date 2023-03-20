@@ -1,51 +1,43 @@
 import { sendToAPI } from "./apiService";
 
+const baseUrl = "http://localhost:3002"
+
 export async function getAllUsers() {
-  const apiResponse = await sendToAPI.get("http://localhost:3002/api/users") //@TODO: add support for future pagination
-  return apiResponse.data
+  return await sendToAPI.get(`${baseUrl}/api/users`) //@TODO: add support for future pagination
 }
 
 export async function getUserById(userId) {
-  const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}`)
-  return apiResponse.data
+  return await sendToAPI.get(`${baseUrl}/api/users/${userId}`)
 }
 
 export async function getAllExercises(params) {
-  const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/logs?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
-  return apiResponse
+  return await sendToAPI.get(`${baseUrl}/api/users/logs?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
 }
 
 export async function getExercisesByUserId(userId, params) {
-  const apiResponse = await sendToAPI.get(`http://localhost:3002/api/users/${userId}/logs?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
-  return apiResponse
+  return await sendToAPI.get(`${baseUrl}/api/users/${userId}/logs?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
 }
 
 export async function deleteUserById(userId) {
-  const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${userId}`)
-  return apiResponse
+  return await sendToAPI.delete(`${baseUrl}/api/users/${userId}`)
 }
 
 export async function deleteExerciseById(formData) {
-  const apiResponse = await sendToAPI.delete(`http://localhost:3002/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`)
-  return apiResponse
+  return await sendToAPI.delete(`${baseUrl}/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`)
 }
 
 export async function addUser(formData) {
-  const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/`, formData)
-  return apiResponse
+  return await sendToAPI.post(`${baseUrl}/api/users/`, formData)
 }
 
 export async function addExercise(formData) {
-  const apiResponse = await sendToAPI.post(`http://localhost:3002/api/users/${formData.get("userId")}/exercises`, formData)
-  return apiResponse
+  return await sendToAPI.post(`${baseUrl}/api/users/${formData.get("userId")}/exercises`, formData)
 }
 
 export async function updateUserById(formData) {
-  const apiResponse = await sendToAPI.put(`http://localhost:3002/api/users/${formData.get("userId")}`)
-  return apiResponse
+  return await sendToAPI.put(`${baseUrl}/api/users/${formData.get("userId")}`)
 }
 
 export async function updateExerciseById(formData) {
-  const apiResponse = await sendToAPI.put(`http://localhost:3002/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`, formData)
-  return apiResponse
+  return await sendToAPI.put(`${baseUrl}/api/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`, formData)
 }
