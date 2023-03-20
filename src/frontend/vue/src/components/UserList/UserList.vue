@@ -115,7 +115,7 @@ import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
   });
 
   onMounted( async () => {
-    userList.value = await getAllUsers();
+    userList.value = (await getAllUsers()).data;
   })
 
 </script>
