@@ -27,8 +27,8 @@
     @click-del-selected="deleteExerciseHandler(selectedExercises.value, userList.value)"
   >
     <template v-slot:actionMenuEntries>
-      <li @click="uiVisibilityHandler(uiVisibility, 'exerciseDetails')" title="Edit Exercise">✏️ Edit Exercise</li>
-      <li @click="deleteExerciseHandler([currentExercise.value], userList.value)" title="Delete Exercise">❌ Delete Exercise</li>
+      <li @click="uiVisibilityHandler(uiVisibility, 'exerciseDetails')" title="Edit Exercise"><IconPencil></IconPencil> Edit Exercise</li>
+      <li @click="deleteExerciseHandler([currentExercise.value], userList.value)" title="Delete Exercise"><IconX></IconX> Delete Exercise</li>
     </template>
 
   </DataTable>
@@ -49,6 +49,8 @@
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
+  import { IconX, IconPencil } from "@tabler/icons-vue"
+
 
   const title = "User Exercise Logs";
   const userList = reactive({ value: [] });
