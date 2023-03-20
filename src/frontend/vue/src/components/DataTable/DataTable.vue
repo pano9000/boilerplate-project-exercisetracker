@@ -284,6 +284,9 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     transition: background-color 0.2s;
     border-radius: var(--border-radius);
     padding: .25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
   }
 
