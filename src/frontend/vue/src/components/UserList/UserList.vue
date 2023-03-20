@@ -98,6 +98,7 @@ import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 import { uiVisibilityHandler, updateValue } from "../../services/utils";
+import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 
   const title = "User List";
   const userList = reactive({ value: [] });
