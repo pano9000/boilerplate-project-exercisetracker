@@ -22,7 +22,8 @@
       @keyup.space="uiVisibilityHandler(uiVisibility, 'userDetails')"
       title="Edit User"
     >
-      ✏️ Edit User
+      <IconPencil></IconPencil>
+      Edit User
     </li>
     <li 
       tabindex="0" 
@@ -31,7 +32,8 @@
       @keyup.space="deleteUserHandler([currentUser.value], userList.value)"
       title="Delete User"
     >
-      ❌ Delete User
+      <IconX></IconX>
+      Delete User
     </li>
     <li 
       tabindex="0" 
@@ -40,7 +42,8 @@
       @keyup.space="uiVisibilityHandler(uiVisibility, 'createExercise')"
       title="Add Exercise"
     >
-      ➕ Add Exercise
+      <IconPlus></IconPlus>
+      Add Exercise
     </li>
     <li 
       tabindex="0" 
@@ -50,7 +53,8 @@
 
       title="Show Exercise Log"
     >
-      🔍 Show Exercise Log
+      <IconListDetails></IconListDetails>
+      Show Exercise Log
     </li>
   </template>
 
