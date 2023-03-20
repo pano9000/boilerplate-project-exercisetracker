@@ -21,7 +21,7 @@
 
 <script setup>
   import { onBeforeMount, reactive } from "vue";
-  import { getUserById } from "../../services/apiEndpoints";
+  import { getUserById } from "../../../services/apiEndpoints";
   const props = defineProps(["currentUser"]);
 
   const userData = reactive( {

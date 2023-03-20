@@ -78,8 +78,8 @@
 
 <script setup>
   import { ref, reactive } from "vue";
-  import { submitFormHandler, formValidityCheck } from "../../services/utils";
-  import { addExercise } from "../../services/apiEndpoints";
+  import { submitFormHandler, formValidityCheck } from "../../../services/utils";
+  import { addExercise } from "../../../services/apiEndpoints";
 
   const props = defineProps(["currentUser"]);
 

@@ -1,5 +1,5 @@
-import { handleApiResponse } from "../../services/apiService.js"
-import { addUser } from "../../services/apiEndpoints.js";
+import { handleApiResponse } from "../../../services/apiService.js"
+import { addUser } from "../../../services/apiEndpoints.js";
 
 export async function addUserHandler(event, usernameref) {
   try {

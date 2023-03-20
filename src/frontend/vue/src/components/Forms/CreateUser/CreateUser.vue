@@ -34,10 +34,10 @@
 
 <script setup>
 
-  import { formValidityCheck } from "../../services/utils"
+  import { formValidityCheck } from "../../../services/utils"
   import { reactive } from "vue";
-  import { submitFormHandler } from "../../services/utils.js";
-  import { addUser } from "../../services/apiEndpoints";
+  import { submitFormHandler } from "../../../services/utils.js";
+  import { addUser } from "../../../services/apiEndpoints";
 
 
   const isValidData = reactive({

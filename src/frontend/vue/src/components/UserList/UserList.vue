@@ -83,10 +83,10 @@
 
 
 <script setup>
-import CreateUser from "../CreateUser/CreateUser.vue";
-import UserDetails from "../UserDetails/UserDetails.vue";
+import CreateUser from "../Forms/CreateUser/CreateUser.vue";
+import UserDetails from "../Forms/UserDetails/UserDetails.vue";
 
-import CreateExercise from "../CreateExercise/CreateExercise.vue";
+import CreateExercise from "../Forms/CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
 import { ref, reactive, onMounted } from "vue";
