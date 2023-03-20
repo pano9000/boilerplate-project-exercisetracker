@@ -3,7 +3,7 @@
   <nav class="ui-pagination_nav">
     <h3>Pages</h3>
     <section class="ui-pagination_row-buttons">
-      <button class="ui-pagination_btn" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">
+      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">
         <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
       </button>
       <button 
@@ -17,7 +17,7 @@
       >
         {{ pg }}
       </button>
-      <button class="ui-pagination_btn" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">
+      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">
         <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
       </button>
     </section>
@@ -214,6 +214,18 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_row-actions > * > * {
   margin: 0rem 0.5rem;
+}
+
+.ui-pagination_btn-arrow svg {
+  transition: transform 0.25s;
+}
+
+.ui-pagination_btn-arrow_right:hover svg {
+  transform: translate(.25rem, 0);
+}
+
+.ui-pagination_btn-arrow_left:hover svg {
+  transform: translate(-.25rem, 0);
 }
 
 </style>
