@@ -12,6 +12,10 @@
     </UiUser>
   </section>
   -->
+  <footer>
+    <p>Boilerplate By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
+    <p>Solution by <a href="https://github.com/pano9000">pano9000</a></p>
+  </footer>
 </template>
 
 <script setup>
