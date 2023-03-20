@@ -8,7 +8,7 @@ const routes = require("./src/backend/routes/")
 app.use(morgan("combined"))
 
 app.use(cors())
-app.use(express.static('public'))
+app.use(express.static('dist'))
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", routes);

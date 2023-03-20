@@ -5,7 +5,7 @@ module.exports = {
   },
 
   root: {
-    get: (req, res) => res.sendFile(process.cwd() + "/views/index.html"),
+    get: (req, res) => res.sendFile(process.cwd() + "/dist/index.html"),
   },
 
   api: {
