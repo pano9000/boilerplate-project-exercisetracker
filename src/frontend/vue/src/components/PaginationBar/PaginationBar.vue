@@ -36,7 +36,7 @@
           id="ui-pagination_goToPage"
           class="ui-pagination_goToPage"
           type="number"
-          min="1"
+          size="5"
           :max="totalPages"
           @keydown.enter="goToPageHandler"
           v-model="ui_goToPage"
@@ -193,7 +193,6 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_goToPage {
-  width: 4ch;
   padding: 0.5rem;
 }
 
