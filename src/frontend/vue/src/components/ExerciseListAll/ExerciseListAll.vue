@@ -33,7 +33,15 @@
 
   </DataTable>
 
-
+  <ModalWindow
+    v-if="uiVisibility.value.exerciseDetails"
+    @close-modal="uiVisibility.value.exerciseDetails = false"
+  >
+    <ExerciseDetails
+      :current-exercise="currentExercise"
+    >
+    </ExerciseDetails>
+  </ModalWindow>
 
 </section>
 
@@ -50,6 +58,8 @@
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
+  import ExerciseDetails from "../Forms/ExerciseDetails.vue";
+  import ModalWindow from "../ModalWindow/ModalWindow.vue";
 
 
   const title = "User Exercise Logs";
