@@ -57,6 +57,10 @@ module.exports = {
           get: require("./api/v2/userIdExercisesGetAll")
         },
 
+        userIdExerciseGetOne: {
+          get: require("./api/v2/userIdExerciseGetOne")
+        },
+
         exercisesGetAll: {
           get: require("./api/v2/exercisesGetAll")
         },
