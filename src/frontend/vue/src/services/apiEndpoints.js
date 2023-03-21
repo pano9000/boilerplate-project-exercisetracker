@@ -26,8 +26,8 @@ export async function deleteUserById(userId) {
   return await sendToAPI.delete(`${baseUrl}/users/${userId}`)
 }
 
-export async function deleteExerciseById(formData) {
-  return await sendToAPI.delete(`${baseUrl}/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`)
+export async function deleteExerciseById(userId, exerciseId) {
+  return await sendToAPI.delete(`${baseUrl}/users/${userId}/exercises/${exerciseId}`)
 }
 
 export async function addUser(formData) {
