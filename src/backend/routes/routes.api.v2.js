@@ -62,7 +62,7 @@ router.get(
   "/users/:userId/exercises/:exerciseId",
   validation.check.exerciseGetOneSchema,
   validation.handler,
-  controllers.api.v2.users.userIdExerciseGetOne.get
+  controllers.api.v2.users.userIdExerciseOne.get
 );
 
 //get single user's single exercise
@@ -71,7 +71,7 @@ router.delete(
   validation.check.exerciseGetOneSchema,
   validation.handler,
   //authentication check,
-  controllers.api.v2.users.userIdExerciseGetOne.delete
+  controllers.api.v2.users.userIdExerciseOne.delete
 );
 
 
