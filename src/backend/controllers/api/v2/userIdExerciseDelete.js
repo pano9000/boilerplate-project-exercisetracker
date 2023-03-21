@@ -1,7 +1,6 @@
 const deleteExercise = require("../../../services/db/deleteExercise");
 
-
-async function exerciseDelete(req, res) {
+module.exports = async function exerciseDelete(req, res) {
 
   try {
     const { exerciseId } = req.params
@@ -20,5 +19,3 @@ async function exerciseDelete(req, res) {
   }
 
 }
-
-module.exports = exerciseDelete

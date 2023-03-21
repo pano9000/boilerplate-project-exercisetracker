@@ -1,6 +1,6 @@
 const findExercises = require("../../../services/db/findExercises");
 
-async function userIdExerciseGetOne(req, res) {
+module.exports = async function userIdExerciseGet(req, res) {
 
   try {
 
@@ -30,7 +30,4 @@ async function userIdExerciseGetOne(req, res) {
     res.status(500).json({"error": `Getting Exercise Failed, Reason: ${error.message}`});
   }
 
-
 }
-
-module.exports = userIdExerciseGetOne
