@@ -57,6 +57,14 @@ router.delete(
   controllers.api.v2.users.userId.delete
 );
 
+//get single user's single exercise
+router.get(
+  "/users/:userId/exercises/:exerciseId",
+  validation.check.exerciseGetOneSchema,
+  validation.handler,
+  controllers.api.v2.users.userIdExerciseGetOne.get
+);
+
 
 /* future routes
 router.patch("/users/:userId", controllers.api.v2.users.userId.patch)
