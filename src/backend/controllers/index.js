@@ -58,7 +58,8 @@ module.exports = {
         },
 
         userIdExerciseGetOne: {
-          get: require("./api/v2/userIdExerciseGetOne")
+          get: require("./api/v2/userIdExerciseGetOne"),
+          delete: require("./api/v2/userIdExerciseDelete"),
         },
 
         exercisesGetAll: {
