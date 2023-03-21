@@ -18,6 +18,10 @@ export async function getExercisesByUserId(userId, params) {
   return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
 }
 
+export async function getExerciseById(userId, exerciseId) {
+  return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises/${exerciseId}`)
+}
+
 export async function deleteUserById(userId) {
   return await sendToAPI.delete(`${baseUrl}/users/${userId}`)
 }
