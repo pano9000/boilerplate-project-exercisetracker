@@ -6,7 +6,7 @@ const usersPostSchema = [
 
   body("username", { errorHandling: "fatalError" })
     .trim()
-    .matches(/^[0-9a-z]{3,30}$/)
+    .matches(/^[0-9a-z\-_]{3,30}$/)
 
 ]
 
