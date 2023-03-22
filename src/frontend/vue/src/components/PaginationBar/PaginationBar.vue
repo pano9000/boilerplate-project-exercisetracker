@@ -1,53 +1,67 @@
 <template>
 
+
   <nav class="ui-pagination_nav" aria-label="Pagination Navigation">
-    <section class="ui-pagination_row-buttons">
-      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page" aria-label="Previous Page">
-        <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
-      </button>
-      <button 
-        class="ui-pagination_btn"
-        type="button"
-        v-for="(pg) in visibleBtns"
-        @click="ui_activePage=pg"
-        :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
-        :aria-current="pg == ui_activePage"
-        :disabled="pg == '…'"
-        :title="`Go to Page ${pg}`"
-        :aria-label="(pg == ui_activePage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
-      >
-        {{ pg }}
-      </button>
-      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page" aria-label="Next Page">
-        <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
-      </button>
-    </section>
-    <div class="ui-pagination_row-actions">
-
-      <div>
-        <label for="ui-pagination_showEntryQty">Show per Page</label>
-        <select id="ui-pagination_showEntryQty" class="ui-pagination_showEntryQty" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
-          <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="ui-pagination_goToPage">Go To Page</label>
-        <input 
-          id="ui-pagination_goToPage"
-          class="ui-pagination_goToPage"
-          type="number"
-          size="5"
-          :max="totalPages"
-          @keydown.enter="goToPageHandler"
-          v-model="ui_goToPage"
-          aria-label="Enter the page number to go to"
+      <ol class="ui-pagination_pagebuttons">
+        <button 
+          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left"
+          :disabled="!ui_previousPossible"
+          title="Previous Page"
+          aria-label="Previous Page"
+          @click="ui_activePage--"
         >
-        <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
-      </div>
+          <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
+        </button>
 
+        <button 
+          class="ui-pagination_btn"
+          type="button"
+          v-for="(pg) in visibleBtns"
+          @click="ui_activePage=pg"
+          :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
+          :aria-current="pg == ui_activePage"
+          :disabled="pg == '…'"
+          :title="`Go to Page ${pg}`"
+          :aria-label="(pg == ui_activePage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
+        >
+          {{ pg }}
+        </button>
+
+        <button
+          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right"
+          :disabled="!ui_forwardPossible"
+          title="Next Page"
+          aria-label="Next Page"
+          @click="ui_activePage++"
+        >
+          <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
+        </button>
+      </ol>
+
+    <div class="ui-pagination_goToPage">
+      <label for="ui-pagination_goToPage-input">Go To</label>
+      <input 
+        id="ui-pagination_goToPage-input"
+        type="number"
+        min="1"
+        :max="totalPages"
+        @keydown.enter="goToPageHandler"
+        v-model="ui_goToPage"
+        aria-label="Enter the page number to go to"
+      >
+      <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
     </div>
-    <p>Entries {{ ui_qtyVisible }} of {{ listToPaginate.length }}</p>
+
+    <div class="ui-pagination_showEntryQty">
+      <label for="ui-pagination_showEntryQty-select">Show</label>
+      <select id="ui-pagination_showEntryQty-select" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
+        <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
+      </select>
+    </div>
+    <div class="ui-pagination_entriesinfo">
+      <span>{{ ui_qtyVisible }} of {{ listToPaginate.length }} entries</span>
+    </div>
+
 
   </nav>
 
@@ -139,7 +153,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
       visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
       visibleBtns[1].push("…");
       visibleBtns[1].unshift("…");
-      
+
     }
     return visibleBtns.flatMap(elem => elem);
 
@@ -178,12 +192,42 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 <style>
 
+.ui-pagination_nav {
+  background-color: lightgrey;
+  border-radius: var(--border-radius);
+  box-shadow: inset var(--box-shadow);
+  display: flex;
+  gap: 1.5rem;
+  justify-content: start;
+  margin: 1rem 0rem;
+}
+
 .ui-pagination_nav select, .ui-pagination_nav input, .ui-pagination_nav button {
   text-align: center;
 }
 
+.ui-pagination_nav ol {
+  margin: 0;
+  text-align: left;
+}
+
 .ui-pagination_nav label {
   display: inline-block
+}
+
+.pagination_entriesinfo {
+  display: flex;
+  align-items: center;
+}
+
+.ui-pagination_pagebuttons, 
+.ui-pagination_goToPage,
+.ui-pagination_showEntryQty,
+.ui-pagination_entriesinfo {
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  background-color: azure;
 }
 
 .ui-pagination_btn-activePg {
@@ -191,30 +235,18 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_btn {
-  min-width: 4.25rem;
+  /*min-width: 4.25rem;*/
+  padding: 0.6rem 0.8rem;
 }
 
-.ui-pagination_goToPage {
-  padding: 0.5rem;
+.ui-pagination_goToPage input {
+  padding: 0.6rem 0.8rem;
+  width: 4rem;
+  margin: 0rem .5rem;
 }
 
-.ui-pagination_showEntryQty {
-  padding: 0.5rem;
-}
-
-.ui-pagination_nav {
-  display: block;
-}
-
-.ui-pagination_row-actions {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 1rem;
-}
-
-.ui-pagination_row-actions > * > * {
-  margin: 0rem 0.5rem;
+.ui-pagination_goToPage button, .ui-pagination_showEntryQty select {
+  padding: 0.6rem 0.8rem;
 }
 
 .ui-pagination_btn-arrow svg {
