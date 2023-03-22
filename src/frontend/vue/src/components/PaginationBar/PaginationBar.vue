@@ -1,9 +1,8 @@
 <template>
 
-  <nav class="ui-pagination_nav">
-    <h3>Pages</h3>
+  <nav class="ui-pagination_nav" aria-label="Pagination Navigation">
     <section class="ui-pagination_row-buttons">
-      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page">
+      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left" :disabled="!ui_previousPossible" @click="ui_activePage--" title="Previous Page" aria-label="Previous Page">
         <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
       </button>
       <button 
@@ -12,20 +11,22 @@
         v-for="(pg) in visibleBtns"
         @click="ui_activePage=pg"
         :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
+        :aria-current="pg == ui_activePage"
         :disabled="pg == '…'"
-        :title="`Page ${pg}`"
+        :title="`Go to Page ${pg}`"
+        :aria-label="(pg == ui_activePage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
       >
         {{ pg }}
       </button>
-      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page">
+      <button class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right" :disabled="!ui_forwardPossible" @click="ui_activePage++" title="Next Page" aria-label="Next Page">
         <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
       </button>
     </section>
     <div class="ui-pagination_row-actions">
 
       <div>
-        <label for="ui-pagination_showEntryQty">Show max. entries</label>
-        <select id="ui-pagination_showEntryQty" class="ui-pagination_showEntryQty" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries  to show">
+        <label for="ui-pagination_showEntryQty">Show per Page</label>
+        <select id="ui-pagination_showEntryQty" class="ui-pagination_showEntryQty" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
           <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
         </select>
       </div>
@@ -40,8 +41,9 @@
           :max="totalPages"
           @keydown.enter="goToPageHandler"
           v-model="ui_goToPage"
+          aria-label="Enter the page number to go to"
         >
-        <button :disabled="!validPageSelection" @click="goToPageHandler">Go</button>
+        <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
       </div>
 
     </div>
