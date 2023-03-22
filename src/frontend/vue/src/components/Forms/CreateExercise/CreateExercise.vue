@@ -115,7 +115,7 @@
   const createExerciseForm = reactive( {
     userId: ReactiveFormItem(props.currentUser.value._id),
     description: ReactiveFormItem(),
-    duration: ReactiveFormItem("", false),
+    duration: ReactiveFormItem(),
     date: ReactiveFormItem(new Date().toISOString().slice(0,10))
   });
 
