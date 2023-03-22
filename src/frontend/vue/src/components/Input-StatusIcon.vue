@@ -1,17 +1,17 @@
 <template>
-  <span class="ui-input-statusicon_wrap" v-if="isValid !== null">
-    <Transition>
-      <IconCircleCheck v-if="isValid" :key="'valid'"></IconCircleCheck>
-      <IconCircleX v-else :key="'invalid'"></IconCircleX>
-    </Transition>
-  </span>
+  <Transition mode="out-in">
+    <span class="ui-input-statusicon_wrap" v-if="isValid !== null">
+      <Transition mode="out-in">
+        <IconCircleCheck v-if="isValid"></IconCircleCheck>
+        <IconCircleX v-else></IconCircleX>
+      </Transition>
+    </span>
 
-  <span class="ui-input-statusicon_wrap" v-else>
-    <Transition>
-      <IconCircle v-if="required===true" :key="'required'"></IconCircle>
-      <IconCircleDotted v-else :key="'optional'"></IconCircleDotted>
-    </Transition>
-  </span>
+    <span class="ui-input-statusicon_wrap" v-else>
+      <IconCircle v-if="required===true"></IconCircle>
+      <IconCircleDotted v-else></IconCircleDotted>
+    </span>
+  </Transition>
 </template>
 
 
@@ -23,19 +23,12 @@
 
 <style>
 
-  .v-enter-active,
-  .v-leave-active {
-    transition: all 0.5s ease;
+  .v-enter-active, .v-leave-active {
+    transition: all .25s ease;
   }
 
-  .v-enter-from {
+  .v-enter-from, .v-leave-to {
     opacity: 0;
-    transform: translateY(-2rem);
-  }
-
-  .v-leave-to {
-    opacity: 0;
-    transform: translateY(2rem);
   }
 
   .ui-input-statusicon_wrap svg {
