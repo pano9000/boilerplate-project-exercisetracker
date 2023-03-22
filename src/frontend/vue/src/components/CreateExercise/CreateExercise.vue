@@ -113,29 +113,19 @@
   const props = defineProps(["currentUser"]);
 
   const createExerciseForm = reactive( {
-    userId: {
-      value: props.currentUser.value._id,
-      valid: true,
-      required: true,
-    },
-    description: {
-      value: "",
-      valid: null,
-      required: true,
-    },
-    duration: {
-      value: "",
-      valid: null,
-      required: false
-    },
-    date: {
-      value: new Date().toISOString().slice(0,10),
-      valid: true,
-      required: true,
-    }
+    userId: ReactiveFormItem(props.currentUser.value._id),
+    description: ReactiveFormItem(),
+    duration: ReactiveFormItem("", false),
+    date: ReactiveFormItem(new Date().toISOString().slice(0,10))
   });
 
-
+  function ReactiveFormItem(value = "", required = true) {
+    return {
+      value,
+      valid: (value !== "") ? true : null,
+      required
+    }
+  }
 
   const isValidData = computed(() => {
     for (let item in createExerciseForm) {
