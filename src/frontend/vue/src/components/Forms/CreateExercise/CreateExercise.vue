@@ -107,9 +107,9 @@
 
 <script setup>
   import { ref, reactive, computed } from "vue";
-  import { submitFormHandler, formValidityCheck } from "../../services/utils";
-  import { addExercise } from "../../services/apiEndpoints";
-  import InputStatusIcon from "../Input-StatusIcon.vue";
+  import { submitFormHandler, formValidityCheck } from "../../../services/utils";
+  import { addExercise } from "../../../services/apiEndpoints";
+  import InputStatusIcon from "../../Input-StatusIcon.vue";
   const props = defineProps(["currentUser"]);
 
   const createExerciseForm = reactive( {
