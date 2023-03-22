@@ -1,61 +1,50 @@
 <template>
-  <span class="ui-input-statusicon_wrap">
-      <IconCircleCheck v-if="true"></IconCircleCheck>
-      <IconCircleX v-else></IconCircleX>
-      <IconCircle v-if="required"></IconCircle>
-      <IconCircleDotted v-else></IconCircleDotted>
+  <span class="ui-input-statusicon_wrap" v-if="isValid !== null">
+    <Transition>
+      <IconCircleCheck v-if="isValid" :key="'valid'"></IconCircleCheck>
+      <IconCircleX v-else :key="'invalid'"></IconCircleX>
+    </Transition>
   </span>
 
-  {{ inputElemRef?.validity.valid }} / {{ validInput }}
-
+  <span class="ui-input-statusicon_wrap" v-else>
+    <Transition>
+      <IconCircle v-if="required===true" :key="'required'"></IconCircle>
+      <IconCircleDotted v-else :key="'optional'"></IconCircleDotted>
+    </Transition>
+  </span>
 </template>
 
 
 <script setup>
   import { IconCircleCheck, IconCircleX, IconCircleDotted, IconCircle } from '@tabler/icons-vue';
-  import { nextTick, onMounted, watchEffect, isReactive, isRef, toRefs } from 'vue';
-  const props = defineProps(["isValidData", "required", "inputElemRef"]);
-
-  const { inputElemRef } = toRefs(props)
-
-  nextTick( () => {
-
-   console.log("inpelem not in mon", props.inputElemRef.validity.valid);
-  });
-
-  onMounted( () => {
-
-    nextTick( () => {
-      console.log(new Date(), "a")
-      console.log("inpelem nexttick", props.inputElemRef.validity.valid);
-      console.log(new Date(), "b")
-      console.log(isReactive(inputElemRef), isRef(inputElemRef), inputElemRef.value)
-    })
-
-    console.log(new Date(), "c")
-
-  })
-
-
-  watchEffect(inputElemRef, () => {
-    console.log("watcheff", props.inputElemRef?.validity) // => input
-  })
-
-
+  const props = defineProps(["isValid", "required"]);
 
 </script>
 
 <style>
-  .ui-input-statusicon_wrap svg {
-    height: auto;
-    width: 1.5rem;
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: all 0.5s ease;
   }
 
-  .ui-input-statusicon_wrap {
+  .v-enter-from {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+
+  .v-leave-to {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  .ui-input-statusicon_wrap svg {
     display: inline-block;
     line-height: 0;
-    position: relative;
-    top: calc(1.5rem * 2 - 1.5rem / 2);
+    position: absolute;
+    top: calc(1.5rem / 4);
     left: .25rem;
+    height: auto;
+    width: 1.5rem;
   }
 </style>
