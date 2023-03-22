@@ -85,6 +85,27 @@ input, select {
 .ui-form input:not(:focus):not(:placeholder-shown):invalid + .ui-input-label_hint {
   font-weight: 700;
   color: #fe5050;
+  opacity: 1;
+}
+
+.ui-input-label_reqs {
+  opacity: 0;
+  transition: opacity .25s;
+  cursor: default;
+}
+
+.ui-form input:focus + .ui-input-label_reqs {
+    opacity: 1;
+}
+
+.ui-form input:focus:invalid + .ui-input-label_reqs {
+  font-weight: 700;
+  color: #fe5050;
+}
+
+.ui-form input:focus:empty + .ui-input-label_reqs {
+  font-weight: inherit;
+  color: inherit;
 }
 
 .ui-form input:placeholder-shown {
