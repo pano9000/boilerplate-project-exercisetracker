@@ -39,8 +39,8 @@
           @input="inputHandler($event, 'description', createExerciseForm)"
         >
 
+        <span class="ui-input-label_hint ui-input-label_reqs">Format: minimum length 3, maximum length 50</span>
       </div>
-      <span class="ui-input-label_hint">Format: Minimum Length 3, Maximum Length 50</span>
     </div>
 
     <div class="ui-input_wrap ui-input_wrap_required">
@@ -67,9 +67,9 @@
           @input="inputHandler($event, 'duration', createExerciseForm)"
         >
 
+        <span class="ui-input-label_hint ui-input-label_reqs">Format: A number between 1 and 999</span>
       </div>
 
-      <span class="ui-input-label_hint ui-input-label_reqs">Format: A Number between 1 and 999</span>
     </div>
 
     <div class="ui-input_wrap ui-input_wrap_required">
@@ -94,6 +94,8 @@
           v-model="createExerciseForm.date.value"
           @input="inputHandler($event, 'date', createExerciseForm)"
         >
+        <span class="ui-input-label_hint ui-input-label_reqs">Format: A valid date</span>
+
       </div>
 
     </div>
