@@ -46,3 +46,12 @@ export async function uiVisibilityHandler(uiVisibility, uiElement) {
 export function updateValue(newValue, itemToUpdate) {
   itemToUpdate.value = newValue.value
 };
+
+
+export function ReactiveFormItem(value = "", required = true) {
+  return {
+    value,
+    valid: (value !== "") ? true : null,
+    required
+  }
+}

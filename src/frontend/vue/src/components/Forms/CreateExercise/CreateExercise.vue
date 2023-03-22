@@ -109,7 +109,7 @@
 
 <script setup>
   import { ref, reactive, computed } from "vue";
-  import { submitFormHandler, formValidityCheck } from "../../../services/utils";
+  import { submitFormHandler, ReactiveFormItem } from "../../../services/utils";
   import { addExercise } from "../../../services/apiEndpoints";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
   const props = defineProps(["currentUser"]);
@@ -121,13 +121,7 @@
     date: ReactiveFormItem(new Date().toISOString().slice(0,10))
   });
 
-  function ReactiveFormItem(value = "", required = true) {
-    return {
-      value,
-      valid: (value !== "") ? true : null,
-      required
-    }
-  }
+
 
   const isValidData = computed(() => {
     for (let item in createExerciseForm) {
