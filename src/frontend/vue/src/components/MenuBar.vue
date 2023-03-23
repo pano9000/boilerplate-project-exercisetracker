@@ -89,7 +89,7 @@
     display: flex;
   }
 
-  .ui-mainmenu_nav ul li a {
+  .ui-mainmenu_nav-btn {
     height: 100%;
   }
 
