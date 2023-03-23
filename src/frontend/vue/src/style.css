@@ -51,8 +51,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  /*place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
 }
@@ -132,7 +130,7 @@ input[type="checkbox"] {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -144,8 +142,9 @@ button {
 }
 
 button {
-  box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
-  margin-right: .5rem;
+  box-shadow: var(--box-shadow);
+  margin-right: .25rem;
+  margin-left: .25rem;
 }
 
 button:disabled {
@@ -160,10 +159,6 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-.card {
-  padding: 2em;
 }
 
 label {
