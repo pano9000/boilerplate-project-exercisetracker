@@ -7,6 +7,7 @@
    >
 
   </PaginationBar>
+  <section class="ui-datatable_wrap">
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
@@ -53,9 +54,6 @@
       </tr>
     </tbody>
   </table>
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
-    <slot name="actionMenuEntries"></slot>
-  </menu>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
@@ -70,6 +68,12 @@
     }"
   >
   </ListActionButtons>
+
+  </section>
+
+  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+    <slot name="actionMenuEntries"></slot>
+  </menu>
 </template>
 
 
@@ -192,13 +196,25 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 
 <style>
+
+  .ui-datatable_wrap {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .ui-datatable_wrap > *:first-child {
+    border-radius: var(--border-radius-top);
+  }
+
+  .ui-datatable_wrap > *:last-child {
+    border-radius:  var(--border-radius-bottom);
+  }
+
   .ui-datatable {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     word-break: break-all;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     text-align: left;
   }
 
@@ -211,19 +227,19 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     transition: background-color 0.2s;
   }
 
-  .ui-datatable tr:first-child th:first-child {
+  .ui-datatable_wrap > .ui-datatable:first-child tr:first-child th:first-child {
     border-radius: 8px 0px 0px 0px;
   }
 
-  .ui-datatable tr:first-child th:last-child {
+  .ui-datatable_wrap > .ui-datatable:first-child tr:first-child th:last-child {
     border-radius: 0px 8px 0px 0px;
   }
 
-  .ui-datatable tr:last-child td:last-child {
+  .ui-datatable_wrap > .ui-datatable:last-child tr:last-child td:last-child {
     border-radius: 0px 0px 8px 0px;
   }
 
-  .ui-datatable tr:last-child td:first-child {
+  .ui-datatable_wrap > .ui-datatable:last-child tr:last-child td:first-child {
     border-radius: 0px 0px 0px 8px;
   }
 
