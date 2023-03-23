@@ -15,47 +15,25 @@
   @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
 >
   <template v-slot:actionMenuEntries>
-    <li 
-      tabindex="0" 
-      @click="uiVisibilityHandler(uiVisibility, 'userDetails')"
-      @keyup.enter="uiVisibilityHandler(uiVisibility, 'userDetails')"
-      @keyup.space="uiVisibilityHandler(uiVisibility, 'userDetails')"
-      title="Edit User"
-    >
+    <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
       <IconPencil></IconPencil>
       Edit User
-    </li>
-    <li 
-      tabindex="0" 
-      @click="deleteUserHandler([currentUser.value], userList.value)"
-      @keyup.enter="deleteUserHandler([currentUser.value], userList.value)"
-      @keyup.space="deleteUserHandler([currentUser.value], userList.value)"
-      title="Delete User"
-    >
+    </ActionMenuEntry>
+
+    <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], userList.value)">
       <IconX></IconX>
       Delete User
-    </li>
-    <li 
-      tabindex="0" 
-      @click="uiVisibilityHandler(uiVisibility, 'createExercise')"
-      @keyup.enter="uiVisibilityHandler(uiVisibility, 'createExercise')"
-      @keyup.space="uiVisibilityHandler(uiVisibility, 'createExercise')"
-      title="Add Exercise"
-    >
+    </ActionMenuEntry>
+
+    <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'createExercise')">
       <IconPlus></IconPlus>
       Add Exercise
-    </li>
-    <li 
-      tabindex="0" 
-      @click="uiVisibilityHandler(uiVisibility, 'exerciseLog')"
-      @keyup.enter="uiVisibilityHandler(uiVisibility, 'exerciseLog')" 
-      @keyup.space="uiVisibilityHandler(uiVisibility, 'exerciseLog')" 
+    </ActionMenuEntry>
 
-      title="Show Exercise Log"
-    >
+    <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseLog')">
       <IconListDetails></IconListDetails>
       Show Exercise Log
-    </li>
+    </ActionMenuEntry>
   </template>
 
 </DataTable>
@@ -99,6 +77,8 @@ import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 import { uiVisibilityHandler, updateValue } from "../../services/utils";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
+
+import ActionMenuEntry from "../ActionMenuEntry.vue";
 
   const title = "User List";
   const userList = reactive({ value: [] });
