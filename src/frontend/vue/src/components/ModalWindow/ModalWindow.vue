@@ -9,7 +9,7 @@
       @click="$emit('closeModal')"
       @keydown.esc="$emit('closeModal')"
     >
-      ✖
+      <IconX></IconX>
     </button>
     <slot></slot>
 
@@ -20,6 +20,7 @@
 
 <script setup>
 import { onMounted, ref } from "vue";
+import { IconX } from "@tabler/icons-vue";
 
   defineEmits(['closeModal']);
   const closeBtn = ref(null);
