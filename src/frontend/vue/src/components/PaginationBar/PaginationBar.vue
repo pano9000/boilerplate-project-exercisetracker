@@ -209,7 +209,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_nav ol {
   margin: 0;
-  text-align: left;
+  text-align: center;
 }
 
 .ui-pagination_nav label {
@@ -219,6 +219,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 .ui-pagination_entriesinfo {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: auto;
 }
 
@@ -261,6 +262,17 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_btn-arrow_left:hover svg {
   transform: translate(-.25rem, 0);
+}
+
+
+@media screen and (max-width: 600px)  {
+  .ui-pagination_nav {
+    flex-direction: column;
+  }
+  .ui-pagination_entriesinfo {
+    margin-left: 0;
+  }
+
 }
 
 </style>
