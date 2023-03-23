@@ -1,8 +1,11 @@
 <template>
   <MenuBar 
     :menuItems="menuItems"
+    :options="{ showLogin: true }"
   >
   </MenuBar>
+
+  <h1>Exercise Tracker</h1>
 
   <section class="ui_section" v-show="menuItems.userList.visible">
     <UserList/>
