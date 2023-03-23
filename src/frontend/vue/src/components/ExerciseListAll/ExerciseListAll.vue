@@ -27,8 +27,14 @@
     @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
   >
     <template v-slot:actionMenuEntries>
-      <li @click="uiVisibilityHandler(uiVisibility, 'exerciseDetails')" title="Edit Exercise"><IconPencil></IconPencil> Edit Exercise</li>
-      <li @click="deleteExerciseHandler([currentExercise.value], exerciseList.value)" title="Delete Exercise"><IconX></IconX> Delete Exercise</li>
+      <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
+        <IconPencil></IconPencil>
+        Edit Exercise
+      </ActionMenuEntry>
+      
+      <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
+        <IconX></IconX> Delete Exercise
+      </ActionMenuEntry>
     </template>
 
   </DataTable>
@@ -50,6 +56,7 @@
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
+  import ActionMenuEntry from "../ActionMenuEntry.vue";
 
 
   const title = "User Exercise Logs";
