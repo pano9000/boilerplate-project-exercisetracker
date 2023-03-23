@@ -74,7 +74,7 @@
   .ui-mainmenu_nav {
     border-radius: .5rem;
     box-shadow: 0px 0px 1px 2px rgba(0,0,0,0.2) inset;
-    background-color: bisque;
+    background-color: #f1f1f1;
     gap: 0rem;
     text-align: left;
     display: flex;
