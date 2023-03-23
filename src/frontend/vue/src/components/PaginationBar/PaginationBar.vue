@@ -242,13 +242,13 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_goToPage input {
-  padding: 0.6rem 0.8rem;
   width: 4rem;
-  margin: 0rem .5rem;
 }
 
-.ui-pagination_goToPage button, .ui-pagination_showEntryQty select {
+.ui-pagination_goToPage button,
+.ui-pagination_showEntryQty select {
   padding: 0.6rem 0.8rem;
+  margin: 0rem .5rem;
 }
 
 .ui-pagination_btn-arrow svg {
