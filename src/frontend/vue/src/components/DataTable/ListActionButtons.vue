@@ -43,6 +43,7 @@
 <style>
 .ui_list-action-btn_wrap {
   padding: 1rem;
+  background-color: hsl(33, 100%, 60%);
 }
 
 .ui_list-action-btn_wrap button {
