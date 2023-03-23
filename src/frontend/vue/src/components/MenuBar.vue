@@ -78,7 +78,6 @@
     gap: 0rem;
     text-align: left;
     display: flex;
-    align-items: center;
     gap: 1.5rem;
     padding: 1rem 1rem;
   }
@@ -88,6 +87,10 @@
     padding: 0rem;
     margin: 0rem;
     display: flex;
+  }
+
+  .ui-mainmenu_nav ul li a {
+    height: 100%;
   }
 
   .ui-mainmenu_nav-btn,
@@ -126,6 +129,7 @@
     cursor: pointer;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .ui-mainmenu_brand-icon div {
