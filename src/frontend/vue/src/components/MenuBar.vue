@@ -20,16 +20,25 @@
         </a>
       </li>
     </ul>
+
+    <button
+      v-if="props.options?.showLogin === true"
+      class="ui-mainmenu_login-icon"
+      title="Logout"
+      aria-label="Log out"
+    >
+      <IconUserCircle></IconUserCircle>
+    </button>
+
   </nav>
 
 </template>
 
 
 <script setup>
+  import { IconUserCircle, IconBarbell } from "@tabler/icons-vue"
 
-const props = defineProps({
-  menuItems: {}
-})
+  const props = defineProps(["menuItems", "options"])
 
 function toggleVisibleSection(clickedMenuItemId, menuItems) {
 
