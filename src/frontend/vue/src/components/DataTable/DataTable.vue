@@ -54,9 +54,6 @@
       </tr>
     </tbody>
   </table>
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
-    <slot name="actionMenuEntries"></slot>
-  </menu>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
@@ -73,6 +70,10 @@
   </ListActionButtons>
 
   </section>
+
+  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+    <slot name="actionMenuEntries"></slot>
+  </menu>
 </template>
 
 
@@ -226,19 +227,19 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     transition: background-color 0.2s;
   }
 
-  .ui-datatable tr:first-child th:first-child {
+  .ui-datatable_wrap > .ui-datatable:first-child tr:first-child th:first-child {
     border-radius: 8px 0px 0px 0px;
   }
 
-  .ui-datatable tr:first-child th:last-child {
+  .ui-datatable_wrap > .ui-datatable:first-child tr:first-child th:last-child {
     border-radius: 0px 8px 0px 0px;
   }
 
-  .ui-datatable tr:last-child td:last-child {
+  .ui-datatable_wrap > .ui-datatable:last-child tr:last-child td:last-child {
     border-radius: 0px 0px 8px 0px;
   }
 
-  .ui-datatable tr:last-child td:first-child {
+  .ui-datatable_wrap > .ui-datatable:last-child tr:last-child td:first-child {
     border-radius: 0px 0px 0px 8px;
   }
 
