@@ -51,13 +51,13 @@
 
   const props = defineProps(["menuItems", "options"])
 
-function toggleVisibleSection(clickedMenuItemId, menuItems) {
+  function toggleVisibleSection(clickedMenuItemId, menuItems) {
 
-  for (const menuItem in menuItems) {
-    menuItems[menuItem].visible = (menuItems[menuItem].id === clickedMenuItemId) ? true : false;
+    for (const menuItem in menuItems) {
+      menuItems[menuItem].visible = (menuItems[menuItem].id === clickedMenuItemId) ? true : false;
+    }
+
   }
-
-}
 
 </script>
 
