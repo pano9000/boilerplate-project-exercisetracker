@@ -62,17 +62,14 @@ function toggleVisibleSection(clickedMenuItemId, menuItems) {
 </script>
 
 <style>
- button {
-    box-shadow: 1px 1px 2px 2px rgba(0,0,0,0.2);
-    margin-right: .5rem;
-  }
-
+  /*
   nav {
     display: flex;
-    align-items: stretch  ;
+    align-items: stretch;
     justify-content: center;
     padding: 1rem 1rem;
   }
+  */
   
   .nav-btn_wrap {
     border-radius: .5rem;
