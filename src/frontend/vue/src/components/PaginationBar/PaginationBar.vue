@@ -197,7 +197,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   border-radius: var(--border-radius);
   box-shadow: inset var(--box-shadow);
   display: flex;
-  gap: 1.5rem;
+  gap: .75rem;
   justify-content: start;
   margin: 1rem 0rem;
   padding: 0.5rem;
