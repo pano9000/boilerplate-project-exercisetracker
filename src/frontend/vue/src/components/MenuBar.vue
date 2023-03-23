@@ -96,12 +96,10 @@
   .ui-mainmenu_nav-btn,
   .ui-mainmenu_brand-icon {
     padding: 1rem;
-    background-color: lightgray;
+    background-color: #f9f9f9;
     transition: background-color 0.3s;
     display: block;
   }
-
-  
 
   .ui-mainmenu_nav ul li:first-of-type a {
     border-radius: 5px 0 0 5px;
@@ -119,7 +117,8 @@
   }
 
   .ui-mainmenu_nav-btn-active {
-    background-color: burlywood;
+    background-color: hsl(33, 100%, 80%);
+    font-weight: 700;
   }
 
   .ui-mainmenu_login-icon {
