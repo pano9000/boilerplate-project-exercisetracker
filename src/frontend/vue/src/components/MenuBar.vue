@@ -4,6 +4,17 @@
     class="ui-mainmenu_nav nav-btn_wrap"
     aria-label="Primary Navigation"
   >
+    <a 
+      class="ui-mainmenu_brand-icon"
+      href="#"
+      aria-label="Go to homepage"
+    >
+      <div>
+        <IconBarbell></IconBarbell>
+        <span>Exercise Tracker</span>
+      </div>
+    </a>
+
     <ul>
       <li
         v-for="menuItem in menuItems"
