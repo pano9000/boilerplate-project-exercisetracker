@@ -7,6 +7,7 @@
    >
 
   </PaginationBar>
+  <section class="ui-datatable_wrap">
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
@@ -70,6 +71,8 @@
     }"
   >
   </ListActionButtons>
+
+  </section>
 </template>
 
 
