@@ -105,6 +105,18 @@ function toggleVisibleSection(clickedMenuItemId, menuItems) {
     border-radius: 0 5px 5px 0;
   }
 
+  .ui-mainmenu_login-icon {
+    margin-left: auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
 
+  .ui-mainmenu_brand-icon div {
+    display: flex;
+    gap: .5rem;
+  }
 
 </style>
