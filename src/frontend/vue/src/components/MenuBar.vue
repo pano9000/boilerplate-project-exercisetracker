@@ -1,7 +1,27 @@
 <template>
-  <nav class="nav-btn_wrap">
-    <a v-for="menuItem in menuItems" :key="menuItem.id" class="btn-nav" :class="(menuItem.visible) ? 'btn-nav-active' : ''" href="#" @click="toggleVisibleSection(menuItem.id, menuItems)"> {{ menuItem.title }} </a>
+
+  <nav 
+    class="ui-mainmenu_nav nav-btn_wrap"
+    aria-label="Primary Navigation"
+  >
+    <ul>
+      <li
+        v-for="menuItem in menuItems"
+        :key="menuItem.id"
+      >
+        <a
+          href="#"
+          class="btn-nav"
+          :class="(menuItem.visible) ? 'btn-nav-active' : ''"
+          :aria-current="menuItem.visible"
+          @click="toggleVisibleSection(menuItem.id, menuItems)"
+        > 
+          {{ menuItem.title }}
+        </a>
+      </li>
+    </ul>
   </nav>
+
 </template>
 
 
