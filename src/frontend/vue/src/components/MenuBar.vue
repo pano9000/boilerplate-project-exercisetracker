@@ -1,7 +1,7 @@
 <template>
 
   <nav 
-    class="ui-mainmenu_nav nav-btn_wrap"
+    class="ui-mainmenu_nav"
     aria-label="Primary Navigation"
   >
     <a 
@@ -22,8 +22,8 @@
       >
         <a
           href="#"
-          class="btn-nav"
-          :class="(menuItem.visible) ? 'btn-nav-active' : ''"
+          class="ui-mainmenu_nav-btn"
+          :class="(menuItem.visible) ? 'ui-mainmenu_nav-btn-active' : ''"
           :aria-current="menuItem.visible"
           @click="toggleVisibleSection(menuItem.id, menuItems)"
         > 
@@ -71,35 +71,55 @@
   }
   */
   
-  .nav-btn_wrap {
+  .ui-mainmenu_nav {
     border-radius: .5rem;
     box-shadow: 0px 0px 1px 2px rgba(0,0,0,0.2) inset;
-    display: inline-flex;
     background-color: bisque;
     gap: 0rem;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1rem;
   }
 
-  .btn-nav {
-    display: block;
+  .ui-mainmenu_nav ul {
+    list-style: none;
+    padding: 0rem;
+    margin: 0rem;
+  }
+
+  .ui-mainmenu_nav li {
+    display: inline-block;
+  }
+
+  .ui-mainmenu_nav-btn,
+  .ui-mainmenu_brand-icon {
+    padding: 1rem;
     background-color: lightgray;
-    padding: 2rem;
     transition: background-color 0.3s;
-
+    display: block;
   }
 
-  .btn-nav-active {
-    background-color: burlywood;
+  
 
-  }
-
-
-  .nav-btn_wrap .btn-nav:first-of-type {
+  .ui-mainmenu_nav ul li:first-of-type a {
     border-radius: 5px 0 0 5px;
-
   }
 
-  .nav-btn_wrap .btn-nav:last-of-type {
+  .ui-mainmenu_nav ul li:last-of-type a {
     border-radius: 0 5px 5px 0;
+  }
+
+  .ui-mainmenu_nav ul,
+  .ui-mainmenu_login-icon, 
+  .ui-mainmenu_brand-icon {
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+  }
+
+  .ui-mainmenu_nav-btn-active {
+    background-color: burlywood;
   }
 
   .ui-mainmenu_login-icon {
