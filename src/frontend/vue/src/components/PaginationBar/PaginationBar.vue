@@ -215,7 +215,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   display: inline-block
 }
 
-.pagination_entriesinfo {
+.ui-pagination_entriesinfo {
   display: flex;
   align-items: center;
 }
