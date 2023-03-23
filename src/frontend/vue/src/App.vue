@@ -1,7 +1,4 @@
 <template>
-  <h1>Exercise Tracker</h1>
-  
-
   <section v-if="active_ui==='admin'">
     <UiAdmin>
     </UiAdmin>
