@@ -43,7 +43,7 @@
   background-color: #f1f1f1;
   padding: 2rem;
   border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  box-shadow: inset var(--box-shadow);
   margin-top: 2rem;
 }
 
