@@ -87,10 +87,7 @@
     list-style: none;
     padding: 0rem;
     margin: 0rem;
-  }
-
-  .ui-mainmenu_nav li {
-    display: inline-block;
+    display: flex;
   }
 
   .ui-mainmenu_nav-btn,
