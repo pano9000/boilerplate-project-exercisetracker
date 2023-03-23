@@ -195,6 +195,20 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
 
 <style>
+
+  .ui-datatable_wrap {
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .ui-datatable_wrap > *:first-child {
+    border-radius: var(--border-radius-top);
+  }
+
+  .ui-datatable_wrap > *:last-child {
+    border-radius:  var(--border-radius-bottom);
+  }
+
   .ui-datatable {
     width: 100%;
     border-collapse: collapse;
