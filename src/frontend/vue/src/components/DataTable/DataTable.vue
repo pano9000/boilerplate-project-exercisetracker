@@ -214,8 +214,6 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     border-collapse: collapse;
     table-layout: fixed;
     word-break: break-all;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     text-align: left;
   }
 
