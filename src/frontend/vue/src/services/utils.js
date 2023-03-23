@@ -29,15 +29,22 @@ export async function submitFormHandler(event, usernameref, apiFunction, apiResp
       //TODO: add proper handling
     }
     alert("Success") //TODO: handle better
-    usernameref.value = "";
-    //event.target.disabled = false;
-
+    resetReactiveFormValues(usernameref);
   }
   catch(error) {
     console.log(error)
     alert(`something went wrong, ${error.message}`)
   }
 };
+
+function resetReactiveFormValues(reactiveForm) {
+  const formElementKeys = Object.keys(reactiveForm);
+  formElementKeys.forEach(formElementKey => {
+    console.log(reactiveForm[formElementKey], formElementKey)
+    reactiveForm[formElementKey]["value"] = "";
+  })
+
+}
 
 export async function uiVisibilityHandler(uiVisibility, uiElement) {
   uiVisibility.value[uiElement] = true;
