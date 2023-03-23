@@ -200,6 +200,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   gap: 1.5rem;
   justify-content: start;
   margin: 1rem 0rem;
+  padding: 0.5rem;
 }
 
 .ui-pagination_nav select, .ui-pagination_nav input, .ui-pagination_nav button {
@@ -224,7 +225,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 .ui-pagination_goToPage,
 .ui-pagination_showEntryQty,
 .ui-pagination_entriesinfo {
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background-color: azure;
