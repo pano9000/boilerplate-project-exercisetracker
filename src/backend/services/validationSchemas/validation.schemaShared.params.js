@@ -5,16 +5,19 @@ const queryParams = {
   "from":
     query("from", { errorHandling: "resetParamErrors" })
     .optional()
+    .escape()
     .isDate(),
 
   "to":
     query("to", { errorHandling: "resetParamErrors" })
     .optional()
+    .escape()
     .isDate(),
 
   "limit":
     query("limit", { errorHandling: "resetParamErrors" })
     .optional()
+    .escape()
     .isInt(),
 
   "sort":
