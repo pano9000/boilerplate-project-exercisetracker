@@ -1,8 +1,19 @@
 <template>
 
-  <h4>Filter for Exercises</h4>
-    <form class="ui-exercise-filter_wrap">
+  <section class="ui-exercise-filter_section">
+    <div
+      tabindex="0"
+      class="ui-exercise-filter_toggle"
+      :class="(filtersVisible) ? 'ui-exercise-filter_toggle-active' : null"
+      @click="filtersVisible = !filtersVisible"
+      @keydown.enter="filtersVisible = !filtersVisible"
+      @keydown.space="filtersVisible = !filtersVisible"
+    >
+      <h3>Filter</h3>
+      <IconChevronDown></IconChevronDown>
+    </div>
 
+    <form class="ui-exercise-filter_wrap" v-show="filtersVisible === true">
       
       <section class="ui-exercise-filter_section">
         
@@ -56,19 +67,20 @@
           
         </div>
       </section>
-
-    </form>
-    <div class="ui-exercise-filter-flex_wrap">
       
-      <button @click="$emit('clickLoadExercises', exerciseFilters)">Load Exercises</button>
-    </div>
+      <div class="ui-exercise-filter-flex_wrap">
+        
+        <button @click="() => { filtersVisible = false; $emit('clickLoadExercises', exerciseFilters) }">Load Exercises</button>
+      </div>
+    </form>
+  </section> 
     
-
 </template>
 
 
 <script setup>
 import { ref } from 'vue';
+import { IconChevronDown } from '@tabler/icons-vue';
   defineEmits(["clickLoadExercises"])
 
 
@@ -91,26 +103,28 @@ import { ref } from 'vue';
     }
   ]
 
+  const filtersVisible = ref(true)
+
 
 </script>
 
 <style>
 .ui-exercise-filter_wrap {
-  margin-bottom: 2rem;
   padding: 0.5rem;
   background-color: lightgrey;
   border-radius: var(--border-radius);
   box-shadow: inset var(--box-shadow);
   display: flex;
+  flex-wrap: wrap;
   gap: 1.5rem;
 }
 
 .ui-exercise-filter-flex_wrap {
-
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
 
 }
 
@@ -119,6 +133,25 @@ import { ref } from 'vue';
   padding: .75rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+}
+
+.ui-exercise-filter_toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ui-exercise-filter_toggle h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.ui-exercise-filter_toggle svg {
+  transition: transform 0.25s;
+}
+
+.ui-exercise-filter_toggle-active svg {
+  transform: rotate(-90deg);
 }
 
 </style>
