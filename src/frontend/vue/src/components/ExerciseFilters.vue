@@ -100,6 +100,12 @@ import { ref } from 'vue';
 <style>
 .ui-exercise-filter_wrap {
   margin-bottom: 2rem;
+  padding: 0.5rem;
+  background-color: lightgrey;
+  border-radius: var(--border-radius);
+  box-shadow: inset var(--box-shadow);
+  display: flex;
+  gap: 1.5rem;
 }
 
 .ui-exercise-filter-flex_wrap {
