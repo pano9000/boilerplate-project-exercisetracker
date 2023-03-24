@@ -72,6 +72,7 @@ import { IconX } from "@tabler/icons-vue";
   padding: .25rem;
   margin: 0.5rem;
   display: flex;
+  box-shadow: 0px 0px 9px 8px rgba(0, 0, 0, .3)
 }
 
 </style>
