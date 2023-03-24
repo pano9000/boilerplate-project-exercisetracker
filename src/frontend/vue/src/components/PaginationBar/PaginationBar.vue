@@ -18,7 +18,10 @@
           type="button"
           v-for="(pg) in visibleBtns"
           @click="ui_activePage=pg"
-          :class="(pg == ui_activePage) ? 'ui-pagination_btn-activePg' : ''"
+          :class="[
+            (pg == ui_activePage) ? 'ui-pagination_btn-activePg' : null, 
+            (pg == '…') ? 'ui-pagination_btn-placeholder' : null
+          ]"
           :aria-current="pg == ui_activePage"
           :disabled="pg == '…'"
           :title="`Go to Page ${pg}`"
