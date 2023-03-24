@@ -5,16 +5,15 @@
     <div class="ui-exercise-filter_wrap">
 
       <section class="ui-exercise-filter_section">
-        <h5>Date Range</h5>
 
         <div class="ui-exercise-filter-flex_wrap">
           <div>
-            <label for="filter-dateFrom">From</label>
+            <label for="filter-dateFrom">Date From</label>
             <input id="filter-dateFrom" type="date" v-model="exerciseFilters.dateFrom">
           </div>
 
           <div>
-            <label for="filter-dateTo">To</label>
+            <label for="filter-dateTo">Date To</label>
             <input id="filter-dateTo" type="date" v-model="exerciseFilters.dateTo">
           </div>
         </div>
@@ -31,7 +30,7 @@
 
 
       <section class="ui-exercise-filter_section">
-        <h5>Sorting</h5>
+
         <div class="ui-exercise-filter-flex_wrap">
 
           <div>
