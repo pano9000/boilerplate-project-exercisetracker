@@ -94,6 +94,7 @@ input, select {
   opacity: 0;
   transition: opacity .25s;
   cursor: default;
+  max-width: 60ch;
 }
 
 .ui-form input:focus + .ui-input-label_reqs {
