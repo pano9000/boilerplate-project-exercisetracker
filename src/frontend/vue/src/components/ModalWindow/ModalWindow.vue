@@ -60,8 +60,8 @@ import { IconX } from "@tabler/icons-vue";
   right: 0;
   top: 0;
   padding: .25rem;
-  line-height: 1rem;
   margin: 0.5rem;
+  display: flex;
 }
 
 </style>
