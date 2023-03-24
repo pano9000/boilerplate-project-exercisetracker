@@ -116,8 +116,11 @@ import { ref } from 'vue';
 
 }
 
-.ui-exercise-filter_section h5 {
-  margin: .75rem;
+.ui-exercise-filter_section {
+  background-color: azure;
+  padding: .75rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 </style>
