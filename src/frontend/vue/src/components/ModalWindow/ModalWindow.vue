@@ -51,7 +51,7 @@ import { IconX } from "@tabler/icons-vue";
   border-radius: .5rem;
   position: absolute;
   background-color: #f1f1f1;
-  max-width: calc(1280px - 4rem);
+  max-width: calc(1280px - 20vw);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -60,7 +60,7 @@ import { IconX } from "@tabler/icons-vue";
 
 .ui-modal_content {
   padding: 2rem;
-  max-height: calc(100vh - 10rem);
+  max-height: calc(100vh - 20vh);
   overflow-y: scroll;
   border-radius: var(--border-radius);
 }
