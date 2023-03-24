@@ -1,6 +1,7 @@
 <template>
   <div class="ui-modal_backdrop" @click="$emit('closeModal')"></div>
-  <section class="ui-modal">
+  <div class="ui-modal_wrap">
+
     <button 
       ref="closeBtn"
       class="ui-modal_btn-close"
@@ -11,9 +12,12 @@
     >
       <IconX></IconX>
     </button>
-    <slot></slot>
 
-  </section>
+    <section class="ui-modal_content">
+      <slot></slot>
+    </section>
+
+  </div>
 
 </template>
 
@@ -43,16 +47,22 @@ import { IconX } from "@tabler/icons-vue";
   backdrop-filter: blur(5px);
 }
 
-.ui-modal {
+.ui-modal_wrap {
   border-radius: .5rem;
-  position: fixed;
-  background-color: aliceblue;
-  padding: 2rem;
-  max-width: 50%;
-  top: 5rem;
+  position: absolute;
+  background-color: #f1f1f1;
+  max-width: calc(1280px - 4rem);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   box-shadow: 2px 2px 10px 8px rgb(0,0,0,0.2);
+}
+
+.ui-modal_content {
+  padding: 2rem;
+  max-height: calc(100vh - 10rem);
+  overflow-y: scroll;
+  border-radius: var(--border-radius);
 }
 
 .ui-modal_btn-close {
