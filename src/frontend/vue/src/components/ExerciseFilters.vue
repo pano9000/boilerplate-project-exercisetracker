@@ -197,7 +197,7 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
 
 .ui-exercise-filter_sortorder label {
   display: inline-flex;
-  padding: 1rem;
+  padding: 0rem .25rem;
   cursor: pointer;
 }
 
