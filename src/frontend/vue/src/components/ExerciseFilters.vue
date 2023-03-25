@@ -213,5 +213,10 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
   stroke-width: 2px;
 }
 
+@media screen and (max-width: 600px)  {
+  .ui-exercise-filter_wrap {
+    flex-direction: column;
+  }
+}
 
 </style>
