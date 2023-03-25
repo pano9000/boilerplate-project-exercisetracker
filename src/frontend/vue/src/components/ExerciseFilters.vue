@@ -51,13 +51,46 @@
             </select>
           </div>
 
-          <div> <!-- TODO: replace this with a button -->
-            <label for="filter-sortorder">Sort Order</label>
-            <select id="filter-sortorder" v-model="exerciseFilters.sortOrder">
-              <option v-for="sortOrder in sortOrders" :key="sortOrder" :value="sortOrder.value">{{ sortOrder.name }}</option>
-            </select>
+          <div>
+
+            <span>Sort Order</span>
+
+            <div class="ui-exercise-filter_sortorder">
+
+              <label 
+                for="ui-exercise-filter-sortorder_input-asc"
+                class="ui-exercise-filter_sortorder-asc"
+                title="Ascending"
+                aria-label="Sort Order: Ascending"
+              >
+                <IconSortDescending></IconSortDescending>
+              </label>
+              <input 
+                id="ui-exercise-filter-sortorder_input-asc"
+                type="radio"
+                v-model="exerciseFilters.sortOrder"
+                value="asc"
+              >
+  
+              <label 
+                for="ui-exercise-filter-sortorder_input-dsc"
+                class="ui-exercise-filter_sortorder-dsc"
+                title="Descending"
+                aria-label="Sort Order: Descending"
+              >
+                <IconSortDescending></IconSortDescending>
+              </label>
+              <input 
+                id="ui-exercise-filter-sortorder_input-dsc" 
+                type="radio"
+                v-model="exerciseFilters.sortOrder"
+                value="desc"
+              >
+
+            </div>
+
+
           </div>
-          
           <div>
             <label for="filter-limit">Limit</label>
             <select id="filter-limit" v-model="exerciseFilters.limit">
@@ -80,7 +113,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { IconChevronDown } from '@tabler/icons-vue';
+import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
   defineEmits(["clickLoadExercises"])
 
 
@@ -152,6 +185,24 @@ import { IconChevronDown } from '@tabler/icons-vue';
 
 .ui-exercise-filter_toggle-active svg {
   transform: rotate(-90deg);
+}
+
+.ui-exercise-filter_sortorder-asc svg {
+  transform: scaleY(-1);
+}
+
+.ui-exercise-filter_sortorder input[type=radio] {
+  display: none;
+}
+
+.ui-exercise-filter_sortorder label {
+  display: inline-flex;
+  padding: 1rem;
+}
+
+.ui-exercise-filter_sortorder label svg {
+  width: 2rem;
+  height: auto;
 }
 
 </style>
