@@ -57,6 +57,12 @@
 
             <div class="ui-exercise-filter_sortorder">
 
+              <input 
+                id="ui-exercise-filter-sortorder_input-asc"
+                type="radio"
+                v-model="exerciseFilters.sortOrder"
+                value="asc"
+              >
               <label 
                 for="ui-exercise-filter-sortorder_input-asc"
                 class="ui-exercise-filter_sortorder-asc"
@@ -65,13 +71,13 @@
               >
                 <IconSortDescending></IconSortDescending>
               </label>
+
               <input 
-                id="ui-exercise-filter-sortorder_input-asc"
+                id="ui-exercise-filter-sortorder_input-dsc" 
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="asc"
+                value="desc"
               >
-  
               <label 
                 for="ui-exercise-filter-sortorder_input-dsc"
                 class="ui-exercise-filter_sortorder-dsc"
@@ -80,12 +86,6 @@
               >
                 <IconSortDescending></IconSortDescending>
               </label>
-              <input 
-                id="ui-exercise-filter-sortorder_input-dsc" 
-                type="radio"
-                v-model="exerciseFilters.sortOrder"
-                value="desc"
-              >
 
             </div>
 
@@ -198,11 +198,20 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
 .ui-exercise-filter_sortorder label {
   display: inline-flex;
   padding: 1rem;
+  cursor: pointer;
 }
 
 .ui-exercise-filter_sortorder label svg {
   width: 2rem;
   height: auto;
+  stroke-width: 1px;
+  transition: all 0.25s;
 }
+
+.ui-exercise-filter_sortorder input:checked + label svg {
+  color: darkblue;
+  stroke-width: 2px;
+}
+
 
 </style>
