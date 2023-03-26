@@ -7,7 +7,9 @@ module.exports = {
     logsGet: require("./validation.schema.logsGet"),
     logsGetAll: require("./validation.schema.logsGetAll"),
     userIdGet: require("./validation.schema.userIdGet"),
-    exerciseGetOneSchema: require("./validation.schema.exerciseGetOne")
+    userIdPatch: require("./validation.schema.userIdPatch"),
+    exerciseGetOneSchema: require("./validation.schema.exerciseGetOne"),
+    userIdExercisePatch: require("./validation.schema.userIdExercisePatch")
   },
   handler: require("./validation.handler")
 

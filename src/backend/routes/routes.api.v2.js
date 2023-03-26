@@ -48,6 +48,12 @@ router.get(
   controllers.api.v2.users.userId.get
 );
 
+router.patch(
+  "/users/:userId",
+  validation.check.userIdPatch,
+  validation.handler,
+  controllers.api.v2.users.userId.patch
+);
 
 router.delete(
   "/users/:userId",
@@ -65,6 +71,13 @@ router.get(
   controllers.api.v2.users.userIdExerciseOne.get
 );
 
+router.patch(
+  "/users/:userId/exercises/:exerciseId",
+  validation.check.userIdExercisePatch,
+  validation.handler,
+  controllers.api.v2.users.userIdExerciseOne.patch
+);
+
 //get single user's single exercise
 router.delete(
   "/users/:userId/exercises/:exerciseId",
@@ -74,10 +87,6 @@ router.delete(
   controllers.api.v2.users.userIdExerciseOne.delete
 );
 
-
-/* future routes
-router.patch("/users/:userId", controllers.api.v2.users.userId.patch)
-*/
 
 //404 Handling
 router.get("*", controllers.unknown.get);
