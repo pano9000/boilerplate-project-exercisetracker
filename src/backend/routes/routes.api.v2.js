@@ -7,7 +7,9 @@ router.get("*", controllers.rateLimiter.get);
 router.post("*", controllers.rateLimiter.post);
 
 router.get(
-  "/users", 
+  "/users",
+  validation.check.usersGet,
+  validation.handler,
   controllers.api.v2.users.get
 );
 
