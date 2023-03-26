@@ -2,21 +2,40 @@ const { ExerciseModel } = require("../../db/").models;
 
 const findExercise = {
 
-  async findOne(searchObject) {
-    return await this.find("one", searchObject)
+  async findOne(searchQuery = null) {
+    return await this.find( {
+      mode: "one",
+      searchQuery: searchQuery,
+      sortOptions: null
+    })
   },
 
-  async findAll(searchObject, queryOptions) {
-    return await this.find("all", searchObject, queryOptions)
+  async findAll(searchQuery = null, sortOptions = null, queryOptions = null) {
+    return await this.find({
+      "mode": "all",
+      "searchQuery": searchQuery,
+      "sortOptions": sortOptions,
+      "queryOptions": queryOptions
+    })
   },
 
-  async find(mode = "all", searchObject, queryOptions) {
+  async find(options) {
 
     try {
-      const searchResult = (mode === "one") ? await ExerciseModel.findOne(searchObject).exec() : await ExerciseModel.find(searchObject, null, queryOptions).exec();
+      const { mode, searchQuery, sortOptions, queryOptions } = options
+
+      const searchResult = 
+        (mode === "one") 
+        ? await ExerciseModel.findOne(searchQuery).exec() 
+        : await ExerciseModel.find(searchQuery, null, queryOptions)
+                             .sort(sortOptions)
+                             .collation({"locale": "en"}) //for case insensitive sorting
+                             .exec();
+
       if (searchResult === undefined) {
         throw new Error("Db returned undefined")
       }
+
       return searchResult
     }
     catch(error) {
