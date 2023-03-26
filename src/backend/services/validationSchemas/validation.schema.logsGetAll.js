@@ -1,5 +1,5 @@
 const { queryParams }  = require("./validation.schemaShared.params")
-
+const { ExerciseSchema } = require("../../db/schemas")
 
 const logsGetAllSchema = [
 
@@ -7,6 +7,7 @@ const logsGetAllSchema = [
   queryParams.to,
   queryParams.limit,
   queryParams.sort,
+  queryParams.sortBy([...Object.keys(ExerciseSchema.paths)])
 
 ]
 

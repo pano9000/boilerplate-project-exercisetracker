@@ -23,7 +23,14 @@ const queryParams = {
   "sort":
     query("sort", { errorHandling: "resetParamErrors" })
     .optional()
-    .isIn(["asc", "dsc"]),
+    .isIn(["1", "-1"]),
+
+  "sortBy": (acceptedValues) => {
+    return query("sortBy", { errorHandling: "resetParamErrors" })
+    .optional()
+    .isIn(acceptedValues)
+  }
+
 }
 
 const pathParams = {

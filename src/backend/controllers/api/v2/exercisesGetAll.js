@@ -7,17 +7,18 @@ async function exercisesGetAll(req, res) {
 
   try {
     
-    const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sort: optionSort } = req.query
+    const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort } = req.query
     
     const queryOptions = {
-      sort: { date: optionSort || "asc" },
       limit: filterQty || 0
     }
 
-    const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo }
+    const sortOptions = [[sortBy || "date", sort || 1]];
+
+    const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
     delete searchObject.userId
-    const findResult = await findExercises.findAll(searchObject, queryOptions); //TODO: check if pagination of results should be a thing?
+    const findResult = await findExercises.findAll(searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {

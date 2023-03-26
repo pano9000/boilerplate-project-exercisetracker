@@ -47,7 +47,7 @@
           <div>
             <label for="filter-sortby">Sort By</label>
             <select id="filter-sortby" v-model="exerciseFilters.sortBy">
-              <option select v-for="sortby in ['Date']" :key="sortby">{{ sortby }}</option>
+              <option select v-for="sortBy in sortByOptions" :key="sortBy.value" :value="sortBy.value">{{ sortBy.name }}</option>
             </select>
           </div>
 
@@ -61,7 +61,7 @@
                 id="ui-exercise-filter-sortorder_input-asc"
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="asc"
+                value="1"
               >
               <label 
                 for="ui-exercise-filter-sortorder_input-asc"
@@ -76,7 +76,7 @@
                 id="ui-exercise-filter-sortorder_input-dsc" 
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="dsc"
+                value="-1"
               >
               <label 
                 for="ui-exercise-filter-sortorder_input-dsc"
@@ -121,11 +121,19 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
-    sortBy: "Date",
-    sortOrder: "asc"
+    sortBy: "date",
+    sortOrder: "1"
   });
 
-  const filtersVisible = ref(true)
+  const filtersVisible = ref(true);
+
+  const sortByOptions = [
+    { name: "Date", value: "date" },
+    { name: "Description", value: "description" },
+    { name: "Duration", value: "duration" },
+    { name: "User Id", value: "userId" },
+    { name: "Exercise Id", value: "_id" },
+  ]
 
 
 </script>
