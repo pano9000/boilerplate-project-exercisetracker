@@ -11,11 +11,11 @@ export async function getUserById(userId) {
 }
 
 export async function getAllExercises(params) {
-  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sort=${params.sortOrder}`)
+  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sortBy=${params.sortBy}&sort=${params.sortOrder}`)
 }
 
 export async function getExercisesByUserId(userId, params) {
-  return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}`)
+  return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sortBy=${params.sortBy}&sort=${params.sortOrder}`)
 }
 
 export async function getExerciseById(userId, exerciseId) {
