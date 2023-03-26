@@ -48,6 +48,12 @@ router.get(
   controllers.api.v2.users.userId.get
 );
 
+router.patch(
+  "/users/:userId",
+  validation.check.userIdPatch,
+  validation.handler,
+  controllers.api.v2.users.userId.patch
+);
 
 router.delete(
   "/users/:userId",
