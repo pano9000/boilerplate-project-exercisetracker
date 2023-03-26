@@ -61,12 +61,23 @@
       ></CreateExercise>
     </ModalWindow>
   </div>
+
+  <div v-if="uiVisibility.value.exerciseLog">
+    <ModalWindow @close-modal="uiVisibility.value.exerciseLog=false">
+      <ExerciseListAll></ExerciseListAll>
+    </ModalWindow>
+  </div>
+
+
+
+
 </template>
 
 
 <script setup>
 import CreateUser from "../Forms/CreateUser/CreateUser.vue";
 import UserDetails from "../Forms/UserDetails/UserDetails.vue";
+import ExerciseListAll from "../ExerciseListAll/ExerciseListAll.vue";
 
 import CreateExercise from "../Forms/CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
