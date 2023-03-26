@@ -88,10 +88,6 @@ router.delete(
 );
 
 
-/* future routes
-router.patch("/users/:userId", controllers.api.v2.users.userId.patch)
-*/
-
 //404 Handling
 router.get("*", controllers.unknown.get);
 
