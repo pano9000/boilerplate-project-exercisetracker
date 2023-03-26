@@ -61,7 +61,8 @@ import { IconX } from "@tabler/icons-vue";
 .ui-modal_content {
   padding: 2rem;
   max-height: calc(100vh - 20vh);
-  overflow-y: scroll;
+  overflow-y: auto;
+  scrollbar-gutter: stable both-edges;
   border-radius: var(--border-radius);
 }
 
