@@ -61,7 +61,7 @@
                 id="ui-exercise-filter-sortorder_input-asc"
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="asc"
+                value="1"
               >
               <label 
                 for="ui-exercise-filter-sortorder_input-asc"
@@ -76,7 +76,7 @@
                 id="ui-exercise-filter-sortorder_input-dsc" 
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="dsc"
+                value="-1"
               >
               <label 
                 for="ui-exercise-filter-sortorder_input-dsc"
@@ -122,7 +122,7 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
     sortBy: "Date",
-    sortOrder: "asc"
+    sortOrder: "1"
   });
 
   const filtersVisible = ref(true)
