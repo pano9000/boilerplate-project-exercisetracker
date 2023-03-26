@@ -60,6 +60,7 @@ module.exports = {
 
         userIdExerciseOne: {
           get: require("./api/v2/userIdExerciseGet"),
+          patch: require("./api/v2/userIdExercisePatch"),
           delete: require("./api/v2/userIdExerciseDelete"),
         },
 
