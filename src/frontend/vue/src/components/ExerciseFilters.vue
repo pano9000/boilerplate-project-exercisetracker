@@ -125,17 +125,6 @@ import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
     sortOrder: "asc"
   });
 
-  const sortOrders = [
-    {
-      value: "asc",
-      name: "Ascending"
-    },
-    {
-      value: "desc",
-      name: "Descending"
-    }
-  ]
-
   const filtersVisible = ref(true)
 
 
