@@ -124,9 +124,10 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  function actionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
+  async function actionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
     currentItem.value = currentData;
-
+    actionMenuVisible.value = true;
+    await nextTick();
     const actionButtonRect = event.target.getBoundingClientRect();
     const actionMenuRect = actionMenu.value.getBoundingClientRect();
 
