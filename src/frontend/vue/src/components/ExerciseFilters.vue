@@ -76,7 +76,7 @@
                 id="ui-exercise-filter-sortorder_input-dsc" 
                 type="radio"
                 v-model="exerciseFilters.sortOrder"
-                value="desc"
+                value="dsc"
               >
               <label 
                 for="ui-exercise-filter-sortorder_input-dsc"
