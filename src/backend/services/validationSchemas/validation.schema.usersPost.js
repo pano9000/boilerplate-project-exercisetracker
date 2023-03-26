@@ -1,4 +1,3 @@
-const { pathParams }  = require("./validation.schemaShared.params")
 const { body } = require("express-validator")
 
 
