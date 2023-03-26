@@ -138,8 +138,6 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
     actionMenu.value.style.left = `${x}px`;
     actionMenu.value.style.top = `${y}px`;
 
-    actionMenuVisible.value = true;
-
     actionMenu.value.firstElementChild.focus();
 
   }
