@@ -13,9 +13,9 @@ async function exercisesGetAll(req, res) {
       limit: filterQty || 0
     }
 
-    const sortOptions = [[sortBy, sort]];
+    const sortOptions = [[sortBy || "date", sort || 1]];
 
-    const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo }
+    const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
     delete searchObject.userId
     const findResult = await findExercises.findAll(searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
