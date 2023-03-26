@@ -5,7 +5,7 @@ async function usersGet(req, res) {
 
   try {
     const { sortBy, sort } = req.query;
-    const sortOptions = [[sortBy, sort]];
+    const sortOptions = [[sortBy || "username", sort || 1]];
 
     const findResult = await findUser.findAll(null, sortOptions); //TODO: check if pagination of results should be a thing?
 
