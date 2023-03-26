@@ -50,6 +50,7 @@ module.exports = {
 
         userId: {
           get: require("./api/v2/userIdGet"),
+          patch: require("./api/v2/userIdPatch"),
           delete: require("./api/v2/userIdDelete"),
         },
 
@@ -59,6 +60,7 @@ module.exports = {
 
         userIdExerciseOne: {
           get: require("./api/v2/userIdExerciseGet"),
+          patch: require("./api/v2/userIdExercisePatch"),
           delete: require("./api/v2/userIdExerciseDelete"),
         },
 
