@@ -71,6 +71,13 @@ router.get(
   controllers.api.v2.users.userIdExerciseOne.get
 );
 
+router.patch(
+  "/users/:userId/exercises/:exerciseId",
+  validation.check.userIdExercisePatch,
+  validation.handler,
+  controllers.api.v2.users.userIdExerciseOne.patch
+);
+
 //get single user's single exercise
 router.delete(
   "/users/:userId/exercises/:exerciseId",
