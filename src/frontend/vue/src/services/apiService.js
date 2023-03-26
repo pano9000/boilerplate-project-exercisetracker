@@ -12,8 +12,8 @@ export const sendToAPI = {
     return await this.fetchAPI(serverUrl, "DELETE", deleteData);
   },
 
-  async put(serverUrl, putData) {
-    return await this.fetchAPI(serverUrl, "PUT", putData);
+  async patch(serverUrl, patchData) {
+    return await this.fetchAPI(serverUrl, "patch", patchData);
   },
 
   async fetchAPI(serverUrl, httpMethod, sendData) {

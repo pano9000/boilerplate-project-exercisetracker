@@ -39,9 +39,9 @@ export async function addExercise(formData) {
 }
 
 export async function updateUserById(formData) {
-  return await sendToAPI.put(`${baseUrl}/users/${formData.get("userId")}`)
+  return await sendToAPI.patch(`${baseUrl}/users/${formData.get("userId")}`)
 }
 
 export async function updateExerciseById(formData) {
-  return await sendToAPI.put(`${baseUrl}/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`, formData)
+  return await sendToAPI.patch(`${baseUrl}/users/${formData.get("userId")}/exercises/${formData.get("exerciseId")}`, formData)
 }
