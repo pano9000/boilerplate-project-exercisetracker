@@ -50,6 +50,7 @@ module.exports = {
 
         userId: {
           get: require("./api/v2/userIdGet"),
+          patch: require("./api/v2/userIdPatch"),
           delete: require("./api/v2/userIdDelete"),
         },
 
