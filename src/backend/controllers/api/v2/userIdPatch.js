@@ -1,11 +1,14 @@
-const userUpdate = require("../../../services/db/userUpdate");
+const updateDoc = require("../../../services/db/updateDoc");
 
 module.exports = async function(req, res) {
 
   try {
-    const { userId } = req.params;
     const updatedData = req.body;
-    const saveResult = await userUpdate(userId, updatedData);
+    const filter = {
+      _id: req.params.userId
+    };
+
+    const saveResult = await updateDoc("UserModel", filter, updatedData);
     res.status(201).json( { username: saveResult.username, _id: saveResult._id});
   }
 
