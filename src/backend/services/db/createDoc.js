@@ -1,5 +1,5 @@
 const dbModels = require("../../db/").models;
-const getCustomObjectId = require("./getCustomObjectId");
+const getCustomObjectId = require("./utils/getCustomObjectId");
 const saveDoc = require("./saveDoc")
 
 
