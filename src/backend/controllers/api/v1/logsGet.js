@@ -1,6 +1,5 @@
-const findExercises = require("../../../services/db/findExercises");
-const findUser = require("../../../services/db/findUser");
-const createSearchObject = require("../../../services/db/createSearchObject")
+const createSearchObject = require("../../../services/db/createSearchObject");
+const findDoc = require("../../../services/db/findDoc");
 
 
 async function logs(req, res) {
@@ -46,7 +45,7 @@ async function logs(req, res) {
     // validate -> sort needs to be asc or desc -> alse set to undefined
     // validate -> date needs to be date format -> else set to undefined
 
-    const findUserResult = await findUser.findOne({ _id: userId })
+    const findUserResult = await findDoc.findOne("UserModel", { _id: userId })
 
     if (findUserResult === null) {
       throw new Error("user not found")
@@ -59,7 +58,7 @@ async function logs(req, res) {
 
     const searchObject = createSearchObject.exerciseLog( { userId, filterDateFrom, filterDateTo } )
 
-    const findResult = await findExercises.findAll(searchObject, queryOptions); //TODO: check if pagination of results should be a thing?
+    const findResult = await findDoc.findAll("ExerciseModel", searchObject, null, queryOptions); //TODO: check if pagination of results should be a thing?
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {

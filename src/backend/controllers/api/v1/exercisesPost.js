@@ -1,6 +1,5 @@
 const createExercise = require("../../../services/db/createExercise");
-const findUser = require("../../../services/db/findUser");
-
+const findDoc = require("../../../services/db/findDoc");
 
 async function exercisesPost(req, res) {
 
@@ -30,7 +29,7 @@ async function exercisesPost(req, res) {
       throw new Error("saving failed") //TODO: better error message handling
     }
 
-    const usernameResult = await findUser.findOne({_id: saveResult.userId})
+    const usernameResult = await findDoc.findOne("UserModel", {_id: saveResult.userId})
 
     if (usernameResult === null) {
       throw new Error(`Username not found`)
