@@ -1,5 +1,5 @@
 const findDoc = require("../../../services/db/findDoc");
-const createSearchObject = require("../../../services/db/createSearchObject");
+const createSearchObject = require("../../../services/db/utils/createSearchObject");
 
 
 async function userIdExercisesGetAll(req, res) {

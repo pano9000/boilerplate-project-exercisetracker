@@ -1,4 +1,4 @@
-const createSearchObject = require("../../../services/db/createSearchObject");
+const createSearchObject = require("../../../services/db/utils/createSearchObject");
 const findDoc = require("../../../services/db/findDoc");
 
 
