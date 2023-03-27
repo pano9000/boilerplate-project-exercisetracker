@@ -1,10 +1,11 @@
-const findExercises = require("../../../services/db/findExercises");
+const findDoc = require("../../../services/db/findDoc");
+
 
 module.exports = async function userIdExerciseGet(req, res) {
 
   try {
 
-    const findResult = await findExercises.findOne( {_id: req.params.exerciseId}); //TODO: check if pagination of results should be a thing?
+    const findResult = await findDoc.findOne("ExerciseModel", {_id: req.params.exerciseId}); //TODO: check if pagination of results should be a thing?
 
     if (findResult === undefined) {
       throw new Error(`Unknown error. Received 'undefined'`)

@@ -1,6 +1,5 @@
-const findExercises = require("../../../services/db/findExercises");
-const findUser = require("../../../services/db/findUser");
-const createSearchObject = require("../../../services/db/createSearchObject")
+const findDoc = require("../../../services/db/findDoc");
+const createSearchObject = require("../../../services/db/createSearchObject");
 
 
 async function userIdExercisesGetAll(req, res) {
@@ -14,7 +13,7 @@ async function userIdExercisesGetAll(req, res) {
 
     const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort } = req.query
 
-    const findUserResult = await findUser.findOne({ _id: userId })
+    const findUserResult = await findDoc.findOne("UserModel", { _id: userId })
 
     if (findUserResult === null) {
       throw new Error("user not found")
@@ -28,7 +27,7 @@ async function userIdExercisesGetAll(req, res) {
 
     const searchObject = createSearchObject.exerciseLog( { userId, filterDateFrom, filterDateTo } )
 
-    const findResult = await findExercises.findAll(searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
+    const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {

@@ -1,5 +1,4 @@
-const findUser = require("../../../services/db/findUser");
-
+const findDoc = require("../../../services/db/findDoc");
 
 async function usersGet(req, res) {
 
@@ -7,7 +6,7 @@ async function usersGet(req, res) {
     const { sortBy, sort } = req.query;
     const sortOptions = [[sortBy || "username", sort || 1]];
 
-    const findResult = await findUser.findAll(null, sortOptions); //TODO: check if pagination of results should be a thing?
+    const findResult = await findDoc.findAll("UserModel", null, sortOptions); //TODO: check if pagination of results should be a thing?
 
     res.status(200).json(findResult);
   }

@@ -1,14 +1,13 @@
-const findExercises = require("../../../services/db/findExercises");
-const findUser = require("../../../services/db/findUser");
+const findDoc = require("../../../services/db/findDoc");
 const createSearchObject = require("../../../services/db/createSearchObject")
 
 
 async function exercisesGetAll(req, res) {
 
   try {
-    
+
     const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort } = req.query
-    
+
     const queryOptions = {
       limit: filterQty || 0
     }
@@ -18,7 +17,7 @@ async function exercisesGetAll(req, res) {
     const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
     delete searchObject.userId
-    const findResult = await findExercises.findAll(searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
+    const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
