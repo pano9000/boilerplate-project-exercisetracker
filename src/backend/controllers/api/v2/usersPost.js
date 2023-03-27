@@ -1,11 +1,11 @@
-const createUser = require("../../../services/db/createUser");
+const createDoc = require("../../../services/db/createDoc");
 
 async function usersPost(req, res) {
 
   try {
     //TODO: validate req.body.username
     const username = req.body.username
-    const saveResult = await createUser({ username });
+    const saveResult = await createDoc("UserModel", { username });
 
     if (!saveResult) {
       throw new Error("saving failed")
