@@ -1,11 +1,10 @@
-const findUser = require("../../../services/db/findUser");
-
+const findDoc = require("../../../services/db/findDoc");
 
 async function userGet(req, res) {
 
   try {
     const { userId } = req.params
-    const findResult = await findUser.findOne( { _id: userId } );
+    const findResult = await findDoc.findOne( "UserModel", { _id: userId } );
 
     if (!findResult) {
       throw new Error()
