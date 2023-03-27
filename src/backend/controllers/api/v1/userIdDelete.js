@@ -1,16 +1,14 @@
-const deleteUser = require("../../../services/db/deleteUser");
+const deleteDoc = require("../../../services/db/deleteDoc");
 
 
 async function userDelete(req, res) {
 
   try {
     const { userId } = req.params
-    const findResult = await deleteUser.deleteOne( { _id: userId } );
+    const findResult = await deleteDoc.deleteOne( "UserModel", { _id: userId } );
 
     if (!findResult) {
-      //throw new Error("userId not found")
-      res.status(404).json({ "msg": "userId not found"})
-      return
+      return res.status(404).json({ "msg": "userId not found"})
     }
 
     res.sendStatus(204);

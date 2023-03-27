@@ -7,7 +7,7 @@ module.exports = {
       "searchQuery": searchQuery,
       "sortOptions": null,
       "queryOptions": null,
-      "dbModel": dbModels[dbModel]
+      "dbModel": dbModel
     })
   },
 
@@ -17,7 +17,7 @@ module.exports = {
       "searchQuery": searchQuery,
       "sortOptions": sortOptions,
       "queryOptions": queryOptions,
-      "dbModel": dbModels[dbModel]
+      "dbModel": dbModel
     })
   },
 
@@ -27,12 +27,12 @@ module.exports = {
       const { mode, searchQuery, sortOptions, queryOptions, dbModel } = options
 
       const searchResult = 
-        (mode === "one") 
-        ? await dbModel.findOne(searchQuery).exec() 
-        : await dbModel.find(searchQuery, null, queryOptions)
-                             .sort(sortOptions)
-                             .collation({"locale": "en"}) //for case insensitive sorting
-                             .exec();
+        (mode === "one")
+          ? await dbModels[dbModel]["model"].findOne(searchQuery).exec() 
+          : await dbModels[dbModel]["model"].find(searchQuery, null, queryOptions)
+                                            .sort(sortOptions)
+                                            .collation({"locale": "en"}) //for case insensitive sorting
+                                            .exec();
 
       if (searchResult === undefined) {
         throw new Error("Db returned undefined")

@@ -1,15 +1,13 @@
-const deleteExercise = require("../../../services/db/deleteExercise");
+const deleteDoc = require("../../../services/db/deleteDoc");
 
 module.exports = async function exerciseDelete(req, res) {
 
   try {
     const { exerciseId } = req.params
-    const findResult = await deleteExercise.deleteOne( { _id: exerciseId } );
+    const findResult = await deleteDoc.deleteOne( "ExerciseModel", { _id: exerciseId } );
 
     if (!findResult) {
-      //throw new Error("userId not found")
-      res.status(404).json({ "msg": "exercise not found"})
-      return
+      return res.status(404).json({ "msg": "exercise not found"})
     }
 
     res.sendStatus(204);

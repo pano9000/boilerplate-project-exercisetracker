@@ -1,4 +1,4 @@
-const { ObjectId } = require("../../db/dbConnection").Types
+const { ObjectId } = require("../../../db/dbConnection").Types
 
 function getCustomObjectId(prefix) {
   const objectId = ObjectId().toString()

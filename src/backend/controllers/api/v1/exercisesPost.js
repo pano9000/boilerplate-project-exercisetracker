@@ -1,4 +1,4 @@
-const createExercise = require("../../../services/db/createExercise");
+const createDoc = require("../../../services/db/createDoc");
 const findDoc = require("../../../services/db/findDoc");
 
 async function exercisesPost(req, res) {
@@ -23,7 +23,7 @@ async function exercisesPost(req, res) {
     }
     //TODO: Input validation/sanitation
 
-    const saveResult = await createExercise(exerciseDataForDB);
+    const saveResult = await createDoc("ExerciseModel", exerciseDataForDB);
 
     if (!saveResult) {
       throw new Error("saving failed") //TODO: better error message handling
