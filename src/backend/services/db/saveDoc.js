@@ -2,21 +2,14 @@
  * @param {MongooseDoc} doc 
  * @returns {Promise} 
  */
-async function saveDoc(doc) {
+module.exports = async function(doc) {
 
   try {
-
     return await doc.save();
-
   }
   catch(error) {
-
     //TODO: do some fancy error handling here, with more meaningful error messages
-    console.log("creating user failed", error)
-    throw new Error("creating user failed")
-
+    console.log("saving doc failed", error)
+    throw new Error("saving doc failed")
   }
-
 }
-
-module.exports = saveDoc
