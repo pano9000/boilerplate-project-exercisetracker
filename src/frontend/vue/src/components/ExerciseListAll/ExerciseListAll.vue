@@ -6,38 +6,44 @@
 
   </ExerciseFilters>
 
-  <section v-if="exerciseList.value.length > 0">
- 
-  <DataTable
-    :table-options="{showSelection: true, showAction: true}"
-    :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
-    :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-    :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
-    :data-list="exerciseList"
-    :dataKeys="[ 
-      'userId',
-      '_id',
-      'date',
-      'description',
-      'duration',
-    ]"
-    :dataKeyId="'_id'"
-    @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
-    @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-    @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
-  >
-    <template v-slot:actionMenuEntries>
-      <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
-        <IconPencil></IconPencil>
-        Edit Exercise
-      </ActionMenuEntry>
-      
-      <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
-        <IconX></IconX> Delete Exercise
-      </ActionMenuEntry>
-    </template>
 
-  </DataTable>
+  <LoadingSpinner v-if="isLoading"
+    :is-loading="isLoading"
+  >
+  </LoadingSpinner>
+
+  <section v-else>
+ 
+    <DataTable
+      :table-options="{showSelection: true, showAction: true}"
+      :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
+      :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
+      :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
+      :data-list="exerciseList"
+      :dataKeys="[ 
+        'userId',
+        '_id',
+        'date',
+        'description',
+        'duration',
+      ]"
+      :dataKeyId="'_id'"
+      @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
+      @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
+      @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
+    >
+      <template v-slot:actionMenuEntries>
+        <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
+          <IconPencil></IconPencil>
+          Edit Exercise
+        </ActionMenuEntry>
+        
+        <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
+          <IconX></IconX> Delete Exercise
+        </ActionMenuEntry>
+      </template>
+
+    </DataTable>
 
 
 
@@ -55,9 +61,11 @@
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
-  import { IconX, IconPencil } from "@tabler/icons-vue"
+  import { IconX, IconPencil, IconLoader } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
+import LoadingSpinner from "../Loading-Spinner.vue";
 
+  const isLoading = ref(false)
 
   const title = "User Exercise Logs";
 
@@ -83,7 +91,9 @@
   async function loadExerciseHandler(exerciseFilters, exerciseList) {
 
       try {
+        isLoading.value = true;
         const apiResponse = await getAllExercises(exerciseFilters);
+        isLoading.value = false;
         console.log(apiResponse)
         exerciseCount.value = apiResponse.data.count
         exerciseList.value = apiResponse.data.log.map(entry => {
