@@ -9,7 +9,7 @@
 
 <script setup>
 
-  import { IconX, IconPencil, IconLoader } from "@tabler/icons-vue"
+  import { IconLoader } from "@tabler/icons-vue"
 
 </script>
 
