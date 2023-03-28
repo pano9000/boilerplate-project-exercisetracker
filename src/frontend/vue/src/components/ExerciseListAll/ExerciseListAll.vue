@@ -6,6 +6,7 @@
 
   </ExerciseFilters>
 
+  <Transition mode="out-in">
 
   <LoadingSpinner v-if="isLoading">
   </LoadingSpinner>
@@ -46,10 +47,8 @@
 
 
 </section>
-
-
-
-
+  
+  </Transition>
 
 </template>
 
