@@ -8,45 +8,45 @@
 
   <Transition mode="out-in">
 
-  <LoadingSpinner v-if="isLoading">
-  </LoadingSpinner>
+    <LoadingSpinner v-if="isLoading">
+    </LoadingSpinner>
 
-  <section v-else>
- 
-    <DataTable
-      :table-options="{showSelection: true, showAction: true}"
-      :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
-      :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-      :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
-      :data-list="exerciseList"
-      :dataKeys="[ 
-        'userId',
-        '_id',
-        'date',
-        'description',
-        'duration',
-      ]"
-      :dataKeyId="'_id'"
-      @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
-      @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-      @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
-    >
-      <template v-slot:actionMenuEntries>
-        <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
-          <IconPencil></IconPencil>
-          Edit Exercise
-        </ActionMenuEntry>
-        
-        <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
-          <IconX></IconX> Delete Exercise
-        </ActionMenuEntry>
-      </template>
+    <section v-else>
+  
+      <DataTable
+        :table-options="{showSelection: true, showAction: true}"
+        :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
+        :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
+        :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
+        :data-list="exerciseList"
+        :dataKeys="[ 
+          'userId',
+          '_id',
+          'date',
+          'description',
+          'duration',
+        ]"
+        :dataKeyId="'_id'"
+        @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
+        @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
+        @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
+      >
+        <template v-slot:actionMenuEntries>
+          <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
+            <IconPencil></IconPencil>
+            Edit Exercise
+          </ActionMenuEntry>
+          
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
+            <IconX></IconX> Delete Exercise
+          </ActionMenuEntry>
+        </template>
 
-    </DataTable>
+      </DataTable>
 
 
 
-</section>
+    </section>
   
   </Transition>
 
