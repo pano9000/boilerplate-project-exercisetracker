@@ -7,9 +7,7 @@
   </ExerciseFilters>
 
 
-  <LoadingSpinner v-if="isLoading"
-    :is-loading="isLoading"
-  >
+  <LoadingSpinner v-if="isLoading">
   </LoadingSpinner>
 
   <section v-else>
