@@ -58,7 +58,7 @@
   import DataTable from "../DataTable/DataTable.vue";
   import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
-  import { IconX, IconPencil, IconLoader } from "@tabler/icons-vue"
+  import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
 import LoadingSpinner from "../Loading-Spinner.vue";
 
