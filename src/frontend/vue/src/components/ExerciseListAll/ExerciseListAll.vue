@@ -11,7 +11,7 @@
     <LoadingSpinner v-if="isLoading">
     </LoadingSpinner>
 
-    <section v-else>
+    <section v-else-if="exerciseList.value.length > 0">
   
       <DataTable
         :table-options="{showSelection: true, showAction: true}"
