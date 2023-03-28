@@ -2,6 +2,7 @@
 
   <div class="ui-loading">
     <IconLoader></IconLoader>
+    Loading...
   </div>
 
 </template>
@@ -20,6 +21,8 @@
     width: 5rem;
     height: auto;
     /*animation: rotate-spinner 20s linear infinite;*/
+    display: block;
+    margin: 0 auto;
   }
 
   .ui-loading svg path {
