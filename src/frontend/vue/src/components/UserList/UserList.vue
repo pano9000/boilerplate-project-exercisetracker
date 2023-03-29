@@ -1,6 +1,13 @@
 <template>
   <h2> {{ title }} </h2>
 
+
+  <Transition mode="out-in">
+
+  <LoadingSpinner v-if="isLoading">
+  </LoadingSpinner>
+  <section v-else>
+
 <DataTable
   :table-options="{showSelection: true, showAction: true}"
   :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
@@ -38,6 +45,7 @@
 
 </DataTable>
 
+
   <div v-if="uiVisibility.value.createUser">
     <ModalWindow @close-modal="uiVisibility.value.createUser=false">
       <CreateUser></CreateUser>
@@ -61,6 +69,10 @@
       ></CreateExercise>
     </ModalWindow>
   </div>
+
+</section>
+</Transition>
+
 </template>
 
 
@@ -77,6 +89,7 @@ import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 import { uiVisibilityHandler, updateValue } from "../../services/utils";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
+import LoadingSpinner from "../Loading-Spinner.vue";
 
 import ActionMenuEntry from "../ActionMenuEntry.vue";
 
@@ -84,6 +97,8 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
   const userList = reactive({ value: [] });
   const currentUser = reactive({ value: {} });
   const selectedUsers = reactive({ value: [] });
+
+  const isLoading = ref(true);
 
   const uiVisibility = reactive( {
     value: {
@@ -94,8 +109,10 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
     }
   });
 
+
   onMounted( async () => {
     userList.value = (await getAllUsers()).data;
+    isLoading.value = false;
   })
 
 </script>
