@@ -43,5 +43,11 @@ const pathParams = {
     .matches(/^exerc_[a-z0-9]{24}$/)
 }
 
+const regexps = {
 
-module.exports = { queryParams, pathParams}
+  username: /^[0-9a-z\-_]{3,30}$/
+
+}
+
+
+module.exports = { queryParams, pathParams, regexps}
