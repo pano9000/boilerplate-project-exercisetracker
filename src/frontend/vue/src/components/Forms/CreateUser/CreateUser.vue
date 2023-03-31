@@ -27,10 +27,10 @@
         >
         <span class="ui-input-label_hint ui-input-label_reqs">
           The username should have a length of minimum 3 and maximum 30 characters.
-          It can consist of <span class="spanhighlight">0-9</span> (Numbers),
-          <span class="spanhighlight">a-z</span> (lowercase letters),
-          <span class="spanhighlight">-</span> (minus) and 
-          <span class="spanhighlight">_</span> (underscore) characters.
+          It can consist of <span class="spanhighlight">0-9</span>&nbsp;(Numbers),
+          <span class="spanhighlight">a-z</span>&nbsp;(lowercase letters),
+          <span class="spanhighlight">-</span>&nbsp;(minus) and 
+          <span class="spanhighlight">_</span>&nbsp;(underscore) characters.
         </span>
       </div>
   </div>
