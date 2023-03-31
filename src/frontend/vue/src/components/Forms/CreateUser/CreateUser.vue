@@ -25,7 +25,10 @@
           v-model="createUserForm.username.value"
           @input="inputHandler($event, createUserForm, 'username')"
         >
-        <span class="ui-input-label_hint ui-input-label_reqs">
+        <span class="ui-input-label_hint ui-input-label_reqs" v-if="createUserForm.username.valid && !createUserForm.username.available">
+          The username is already taken. Please choose another one.
+        </span>
+        <span class="ui-input-label_hint ui-input-label_reqs" v-else>
           The username should have a length of minimum 3 and maximum 30 characters.
           It can consist of <span class="spanhighlight">0-9</span>&nbsp;(Numbers),
           <span class="spanhighlight">a-z</span>&nbsp;(lowercase letters),
