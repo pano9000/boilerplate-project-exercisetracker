@@ -8,9 +8,8 @@
       </label>
 
       <div class="ui-input_line">
-
         <InputStatusIcon
-          :isValid="createUserForm.username.valid"
+          :isValid="createUserForm.username.valid && createUserForm.username.available"
           :required="createUserForm.username.required"
         >
         </InputStatusIcon>
@@ -24,7 +23,7 @@
           pattern="^[a-z0-9_\-]{3,30}$"
           autocomplete="false"
           v-model="createUserForm.username.value"
-          @input="inputHandler($event, 'username', createUserForm)"
+          @input="inputHandler($event, createUserForm, 'username')"
         >
         <span class="ui-input-label_hint ui-input-label_reqs">
           The username should have a length of minimum 3 and maximum 30 characters.
@@ -50,9 +49,8 @@
   import { reactive, computed } from "vue";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
 
-  import { ReactiveFormItem } from "../../../services/utils"
-  import { submitFormHandler } from "../../../services/utils.js";
-  import { addUser } from "../../../services/apiEndpoints";
+  import { submitFormHandler, availabilityHandler, ReactiveFormItem } from "../../../services/utils";
+  import { addUser, checkUsernameAvailability } from "../../../services/apiEndpoints";
 
   const createUserForm = reactive( {
     username: ReactiveFormItem(),
@@ -60,19 +58,36 @@
 
   const isValidData = computed(() => {
     for (let item in createUserForm) {
-      if (createUserForm[item]["valid"] !== true) {
+      const isValid = (createUserForm[item]["valid"] === true);
+      const isAvailable = (createUserForm[item]["available"] !== false);
+      if ( !isValid || !isAvailable ) {
         return false
       };
     }
     return true
    });
 
-   function getInputStatus(elem, inputValue) {
+  function getInputStatus(elem, inputValue) {
     return (inputValue === "") ? null : elem?.validity?.valid
   }
 
-  function inputHandler(event, item, statusObj) {
-    statusObj[item].valid = getInputStatus(event.target, statusObj[item]["value"])
+  const inputTimeoutId = reactive( { value: "" } );
+
+  function inputHandler(event, reactiveForm, reactiveFormItem) {
+    const currentFormItem = reactiveForm[reactiveFormItem];
+
+    if (inputTimeoutId.value) {
+      clearTimeout(inputTimeoutId.value);
+    }
+
+    inputTimeoutId.value = setTimeout( async () => {
+      currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
+
+      await availabilityHandler(reactiveForm, reactiveFormItem, checkUsernameAvailability);
+
+      inputTimeoutId.value = null;
+    }, 600);
+
   }
 
 
