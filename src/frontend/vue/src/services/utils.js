@@ -63,3 +63,14 @@ export function ReactiveFormItem(value = "", required = true, available = null) 
     available
   }
 }
+
+export async function availabilityHandler(reactiveForm, reactiveFormItem, availabilityApiEndpoint) {
+  const currentFormItem = reactiveForm[reactiveFormItem]
+
+  if (currentFormItem.value == "" || currentFormItem.valid !== true) {
+    return
+  };
+
+  const availabilityResult = await availabilityApiEndpoint(currentFormItem.value);
+  currentFormItem.available = availabilityResult.data.available;
+}
