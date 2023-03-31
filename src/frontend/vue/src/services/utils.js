@@ -55,10 +55,11 @@ export function updateValue(newValue, itemToUpdate) {
 };
 
 
-export function ReactiveFormItem(value = "", required = true) {
+export function ReactiveFormItem(value = "", required = true, available = null) {
   return {
     value,
     valid: (value !== "") ? true : null,
-    required
+    required,
+    available
   }
 }
