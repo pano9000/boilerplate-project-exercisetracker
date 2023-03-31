@@ -39,7 +39,7 @@
   </div>
   <button 
     type="submit"
-    :disabled="!isValidData"
+    :disabled="!isValidData && inputTimeoutId !== null"
     @click="submitFormHandler($event, createUserForm, addUser)"
   >
     Add User
