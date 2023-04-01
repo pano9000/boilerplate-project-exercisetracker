@@ -8,9 +8,8 @@
       </label>
 
       <div class="ui-input_line">
-
         <InputStatusIcon
-          :isValid="createUserForm.username.valid"
+          :isValid="createUserForm.username.valid && createUserForm.username.available"
           :required="createUserForm.username.required"
         >
         </InputStatusIcon>
@@ -24,20 +23,23 @@
           pattern="^[a-z0-9_\-]{3,30}$"
           autocomplete="false"
           v-model="createUserForm.username.value"
-          @input="inputHandler($event, 'username', createUserForm)"
+          @input="inputHandler($event, createUserForm, 'username')"
         >
-        <span class="ui-input-label_hint ui-input-label_reqs">
+        <span class="ui-input-label_hint ui-input-label_reqs" v-if="createUserForm.username.valid && !createUserForm.username.available">
+          The username is already taken. Please choose another one.
+        </span>
+        <span class="ui-input-label_hint ui-input-label_reqs" v-else>
           The username should have a length of minimum 3 and maximum 30 characters.
-          It can consist of <span class="spanhighlight">0-9</span> (Numbers),
-          <span class="spanhighlight">a-z</span> (lowercase letters),
-          <span class="spanhighlight">-</span> (minus) and 
-          <span class="spanhighlight">_</span> (underscore) characters.
+          It can consist of <span class="spanhighlight">0-9</span>&nbsp;(Numbers),
+          <span class="spanhighlight">a-z</span>&nbsp;(lowercase letters),
+          <span class="spanhighlight">-</span>&nbsp;(minus) and 
+          <span class="spanhighlight">_</span>&nbsp;(underscore) characters.
         </span>
       </div>
   </div>
   <button 
     type="submit"
-    :disabled="!isValidData"
+    :disabled="!isValidData && inputTimeoutId !== null"
     @click="submitFormHandler($event, createUserForm, addUser)"
   >
     Add User
@@ -50,9 +52,8 @@
   import { reactive, computed } from "vue";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
 
-  import { ReactiveFormItem } from "../../../services/utils"
-  import { submitFormHandler } from "../../../services/utils.js";
-  import { addUser } from "../../../services/apiEndpoints";
+  import { submitFormHandler, availabilityHandler, ReactiveFormItem } from "../../../services/utils";
+  import { addUser, checkUsernameAvailability } from "../../../services/apiEndpoints";
 
   const createUserForm = reactive( {
     username: ReactiveFormItem(),
@@ -60,19 +61,36 @@
 
   const isValidData = computed(() => {
     for (let item in createUserForm) {
-      if (createUserForm[item]["valid"] !== true) {
+      const isValid = (createUserForm[item]["valid"] === true);
+      const isAvailable = (createUserForm[item]["available"] !== false);
+      if ( !isValid || !isAvailable ) {
         return false
       };
     }
     return true
    });
 
-   function getInputStatus(elem, inputValue) {
+  function getInputStatus(elem, inputValue) {
     return (inputValue === "") ? null : elem?.validity?.valid
   }
 
-  function inputHandler(event, item, statusObj) {
-    statusObj[item].valid = getInputStatus(event.target, statusObj[item]["value"])
+  const inputTimeoutId = reactive( { value: "" } );
+
+  function inputHandler(event, reactiveForm, reactiveFormItem) {
+    const currentFormItem = reactiveForm[reactiveFormItem];
+
+    if (inputTimeoutId.value) {
+      clearTimeout(inputTimeoutId.value);
+    }
+
+    inputTimeoutId.value = setTimeout( async () => {
+      currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
+
+      await availabilityHandler(reactiveForm, reactiveFormItem, checkUsernameAvailability);
+
+      inputTimeoutId.value = null;
+    }, 600);
+
   }
 
 

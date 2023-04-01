@@ -8,6 +8,10 @@ export const sendToAPI = {
     return await this.fetchAPI(serverUrl, "GET");
   },
 
+  async head(serverUrl) {
+    return await this.fetchAPI(serverUrl, "HEAD");
+  },
+
   async delete(serverUrl, deleteData) {
     return await this.fetchAPI(serverUrl, "DELETE", deleteData);
   },
@@ -19,7 +23,13 @@ export const sendToAPI = {
   async fetchAPI(serverUrl, httpMethod, sendData) {
 
     try {
-      const result = await fetch(serverUrl, createFetchOption(httpMethod, sendData))
+      const result = await fetch(serverUrl, createFetchOption(httpMethod, sendData));
+
+      if (httpMethod === "HEAD" && [204, 404].includes(result.status)) {
+        return new ApiResponseStatus(true, "", {available: (result.status === 404) ? true : false });
+        // 404 -> "Not Found", so the resource name is available, for creation
+        // 204 "No Content" -> resource name exists already, so name is not available
+      }
 
       if (result.ok !== true) {
         //ideally do some additional error handling for better error message here
@@ -56,7 +66,7 @@ function createFetchOption(httpMethod, sendData) {
     }
   }
 
-  if (httpMethod !== "GET") {
+  if (["GET", "HEAD"].includes(httpMethod) === false) {
     option.headers["Content-Type"] = "application/x-www-form-urlencoded"
     option.body = new URLSearchParams(sendData)
   }

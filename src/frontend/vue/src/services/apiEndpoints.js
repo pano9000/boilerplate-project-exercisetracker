@@ -30,6 +30,10 @@ export async function deleteExerciseById(userId, exerciseId) {
   return await sendToAPI.delete(`${baseUrl}/users/${userId}/exercises/${exerciseId}`)
 }
 
+export async function checkUsernameAvailability(username) {
+  return await sendToAPI.head(`${baseUrl}/users/available?username=${username}`)
+}
+
 export async function addUser(formData) {
   return await sendToAPI.post(`${baseUrl}/users/`, formData)
 }
