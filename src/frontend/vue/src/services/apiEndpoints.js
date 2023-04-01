@@ -3,7 +3,7 @@ import { sendToAPI } from "./apiService";
 const baseUrl = "http://localhost:3002/api/v2"
 
 export async function getAllUsers(params) {
-  return await sendToAPI.get(`${baseUrl}/users?limit=${params.limit}&sortBy=${params.sortBy}&sort=${params.sortOrder}`) //@TODO: add support for future pagination
+  return await sendToAPI.get(`${baseUrl}/users?limit=${params?.limit}&sortBy=${params?.sortBy}&sort=${params?.sortOrder}`) //@TODO: add support for future pagination
 }
 
 export async function getUserById(userId) {
@@ -11,11 +11,11 @@ export async function getUserById(userId) {
 }
 
 export async function getAllExercises(params) {
-  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sortBy=${params.sortBy}&sort=${params.sortOrder}`)
+  return await sendToAPI.get(`${baseUrl}/users/exercises?limit=${params?.limit}&from=${params?.dateFrom}&to=${params?.dateTo}&sortBy=${params?.sortBy}&sort=${params?.sortOrder}`)
 }
 
 export async function getExercisesByUserId(userId, params) {
-  return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises?limit=${params.limit}&from=${params.dateFrom}&to=${params.dateTo}&sortBy=${params.sortBy}&sort=${params.sortOrder}`)
+  return await sendToAPI.get(`${baseUrl}/users/${userId}/exercises?limit=${params?.limit}&from=${params?.dateFrom}&to=${params?.dateTo}&sortBy=${params?.sortBy}&sort=${params?.sortOrder}`)
 }
 
 export async function getExerciseById(userId, exerciseId) {
