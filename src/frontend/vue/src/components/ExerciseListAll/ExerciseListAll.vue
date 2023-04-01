@@ -1,10 +1,18 @@
 <template>
   <h2> {{ title }}</h2>
-  <ExerciseFilters
-    @click-load-exercises="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
-  >
 
-  </ExerciseFilters>
+  <DataTableFilters
+    :options="{
+      showDateRange: true,
+      showSortBy: true,
+      showSortOrder: true,
+      showLimit: true,
+      actionButtonText: 'Load Exercises',
+      sortByOptions: dataTableFiltersSortByOptions
+    }"
+    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
+  >
+  </DataTableFilters>
 
   <Transition mode="out-in">
 
