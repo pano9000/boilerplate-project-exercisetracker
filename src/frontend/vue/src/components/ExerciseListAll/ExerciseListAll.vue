@@ -64,7 +64,6 @@
   import { ref, reactive, onMounted, computed } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import DataTable from "../DataTable/DataTable.vue";
-  import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
