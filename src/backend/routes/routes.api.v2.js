@@ -13,6 +13,13 @@ router.get(
   controllers.api.v2.users.get
 );
 
+router.head(
+  "/users/available",
+  validation.check.usersAvailableHead,
+  validation.handler,
+  controllers.api.v2.users.available.head
+);
+
 //all user's exercises
 router.get(
   "/users/exercises",

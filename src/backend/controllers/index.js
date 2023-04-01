@@ -48,6 +48,10 @@ module.exports = {
         get: require("./api/v2/usersGet"),
         post: require("./api/v2/usersPost"),
 
+        available: {
+          head: require("./api/v2/usersAvailableHead")
+        },
+
         userId: {
           get: require("./api/v2/userIdGet"),
           patch: require("./api/v2/userIdPatch"),

@@ -55,10 +55,22 @@ export function updateValue(newValue, itemToUpdate) {
 };
 
 
-export function ReactiveFormItem(value = "", required = true) {
+export function ReactiveFormItem(value = "", required = true, available = null) {
   return {
     value,
     valid: (value !== "") ? true : null,
-    required
+    required,
+    available
   }
+}
+
+export async function availabilityHandler(reactiveForm, reactiveFormItem, availabilityApiEndpoint) {
+  const currentFormItem = reactiveForm[reactiveFormItem]
+
+  if (currentFormItem.value == "" || currentFormItem.valid !== true) {
+    return
+  };
+
+  const availabilityResult = await availabilityApiEndpoint(currentFormItem.value);
+  currentFormItem.available = availabilityResult.data.available;
 }
