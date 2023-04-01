@@ -1,14 +1,12 @@
 const { body } = require("express-validator")
-
+const { regexps } = require("./validation.schemaShared.params")
 
 const usersPostSchema = [
 
   body("username", { errorHandling: "fatalError" })
     .trim()
-    .matches(/^[0-9a-z\-_]{3,30}$/)
+    .matches(regexps.username)
 
 ]
-
-
 
 module.exports = usersPostSchema
