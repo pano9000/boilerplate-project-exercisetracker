@@ -1,4 +1,5 @@
-const { param, query } = require("express-validator")
+const { param, query } = require("express-validator");
+const dbSchemas = require("../../db/schemas/index")
 
 const queryParams = {
 
@@ -45,7 +46,7 @@ const pathParams = {
 
 const regexps = {
 
-  username: /^[0-9a-z\-_]{3,30}$/
+  username: dbSchemas.UserSchema.tree.username.match
 
 }
 
