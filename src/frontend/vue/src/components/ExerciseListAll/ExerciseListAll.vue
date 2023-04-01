@@ -3,10 +3,6 @@
 
   <DataTableFilters
     :options="{
-      showDateRange: true,
-      showSortBy: true,
-      showSortOrder: true,
-      showLimit: true,
       actionButtonText: 'Load Exercises',
       sortByOptions: dataTableFiltersSortByOptions
     }"
