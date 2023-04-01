@@ -41,7 +41,9 @@
 <script setup>
   import { IconSortDescending } from '@tabler/icons-vue';
   import { ref } from 'vue';
-  const props = defineProps(["currentValue"])
+
+  defineProps(["modelValue"]);
+  defineEmits(['update:modelValue']);
 
   const sortOrder = ref(1)
 

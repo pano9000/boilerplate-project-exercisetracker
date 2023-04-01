@@ -23,6 +23,11 @@
 <script setup>
   import { ref } from 'vue';
 
+  defineProps([
+    "dateFrom",
+    "dateTo"
+  ]);
+
   defineEmits([
     "update:dateFrom",
     "update:dateTo",

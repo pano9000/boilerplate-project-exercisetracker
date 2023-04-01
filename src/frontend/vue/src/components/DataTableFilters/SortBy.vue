@@ -14,7 +14,8 @@
 
 <script setup>
 
-  const props = defineProps(["sortByOptions"])
+  defineProps(["sortByOptions", "modelValue"])
+  defineEmits(['update:modelValue'])
 
 </script>
 
