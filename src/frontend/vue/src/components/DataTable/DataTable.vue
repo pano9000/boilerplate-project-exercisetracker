@@ -79,7 +79,7 @@
 
 <script setup>
 
-import { ref, reactive, watch, computed, onMounted, onBeforeUnmount } from "vue";
+import { ref, reactive, watch, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import ListActionButtons from "./ListActionButtons.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
