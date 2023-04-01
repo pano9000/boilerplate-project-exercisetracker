@@ -3,10 +3,13 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import './style.css'
 import App from './App.vue'
 import UiAdmin from "./UiAdmin.vue"
-
+import UserList from "./components/UserList/UserList.vue";
+import ExerciseListAll from "./components/ExerciseListAll/ExerciseListAll.vue";
 
 const routes = [
   { path: '/', component: UiAdmin },
+  { path: "/userlist", component: UserList },
+  { path: "/exerciselist", component: ExerciseListAll }
 ]
 
 const router = createRouter( {
