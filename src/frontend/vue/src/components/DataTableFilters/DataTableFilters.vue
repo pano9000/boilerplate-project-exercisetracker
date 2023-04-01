@@ -15,7 +15,7 @@
 
     <form class="ui-filter_wrap" v-show="filtersVisible === true">
 
-      <section class="ui-filter_section">
+      <section class="ui-filter_section" v-if="(options.showDateRange !==  undefined) ? options.showDateRange : true">
 
         <div class="ui-filter-flex_wrap">
           <DateRange
@@ -28,7 +28,7 @@
 
       </section>
 
-      <section class="ui-filter_section">
+      <section class="ui-filter_section" v-if="(options.showSort !== undefined) ? options.showSort : true">
 
         <div class="ui-filter-flex_wrap">
           <SortBy
@@ -39,21 +39,30 @@
 
 
           <div>
-
             <span>Sort Order</span>
             <SortOrder 
               v-model="filters.sortOrder"
             >
             </SortOrder>
-
-
           </div>
+
+
+
+        </div>
+      </section>
+
+      <section class="ui-filter_section" v-if="(options.showLimit !== undefined) ? options.showLimit : true">
+
+        <div class="ui-filter-flex_wrap">
+
           <div>
             <Limit v-model="filters.limit"></Limit>
           </div>
 
         </div>
+
       </section>
+
 
       <div class="ui-filter-flex_wrap">
 
