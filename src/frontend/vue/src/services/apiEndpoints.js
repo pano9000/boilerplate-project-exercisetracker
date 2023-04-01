@@ -2,8 +2,8 @@ import { sendToAPI } from "./apiService";
 
 const baseUrl = "http://localhost:3002/api/v2"
 
-export async function getAllUsers() {
-  return await sendToAPI.get(`${baseUrl}/users`) //@TODO: add support for future pagination
+export async function getAllUsers(params) {
+  return await sendToAPI.get(`${baseUrl}/users?limit=${params.limit}&sortBy=${params.sortBy}&sort=${params.sortOrder}`) //@TODO: add support for future pagination
 }
 
 export async function getUserById(userId) {
