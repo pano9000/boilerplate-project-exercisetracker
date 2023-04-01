@@ -37,10 +37,14 @@ const queryParams = {
   },
 
   "limitv1":
-  query("limit", { errorHandling: "resetParamErrors" })
-  .optional()
-  .isInt(),
+    query("limit", { errorHandling: "resetParamErrors" })
+    .optional()
+    .isInt(),
 
+  "query":
+    query("query", { errorHandling: "resetParamErrors" })
+    .optional()
+    .isString()
 }
 
 const pathParams = {

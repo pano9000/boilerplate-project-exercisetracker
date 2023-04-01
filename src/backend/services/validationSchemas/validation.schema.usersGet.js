@@ -5,5 +5,6 @@ module.exports = [
   queryParams.sortOrder,
   queryParams.sortBy([...Object.keys(UserSchema.paths)]),
   queryParams.limit,
-  queryParams.page
+  queryParams.page,
+  queryParams.query
 ]
