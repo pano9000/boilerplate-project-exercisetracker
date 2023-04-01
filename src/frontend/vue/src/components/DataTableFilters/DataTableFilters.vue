@@ -25,18 +25,19 @@
           </DateRange>
         </div>
 
-
       </section>
 
       <section class="ui-filter_section" v-if="(options.showSort !== undefined) ? options.showSort : true">
 
         <div class="ui-filter-flex_wrap">
-          <SortBy
-            v-model="filters.sortBy"
-            :sort-by-options="options.sortByOptions"
-          >
-          </SortBy>
 
+          <div>
+            <SortBy 
+              v-model="filters.sortBy"
+              :sort-by-options="options.sortByOptions"
+            >
+            </SortBy>
+          </div>
 
           <div>
             <span>Sort Order</span>
@@ -95,7 +96,6 @@
   });
 
   const filtersVisible = ref(true);
-
 
 </script>
 
