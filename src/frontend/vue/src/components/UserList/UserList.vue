@@ -1,6 +1,17 @@
 <template>
   <h2> {{ title }} </h2>
 
+  <DataTableFilters
+    :options="{
+      showDateRange: false,
+      showLimit: false,
+      actionButtonText: 'Load Users',
+      sortByOptions: dataTableFiltersSortByOptions,
+    }"
+    @click-action-button="(userFilters) => loadUsersHandler(userFilters, userList)"
+  >
+  </DataTableFilters>
+
   <Transition mode="out-in">
 
     <LoadingSpinner v-if="isLoading">
@@ -91,6 +102,7 @@ import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
 import ActionMenuEntry from "../ActionMenuEntry.vue";
+import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -108,6 +120,25 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
     }
   });
 
+  const dataTableFiltersSortByOptions = [
+    { name: "User Id", value: "_id" },
+    { name: "Username", value: "username" },
+  ]
+
+
+  async function loadUsersHandler(userFilters, userList) {
+    try {
+      isLoading.value = true;
+      const apiResponse = await getAllUsers(userFilters);
+      userList.value = apiResponse.data
+      isLoading.value = false;
+      console.log(apiResponse)
+      //return apiResponse.data
+    }
+    catch(error) {
+      console.log("error fetch users", error)
+    }
+  }
 
   onMounted( async () => {
     userList.value = (await getAllUsers()).data;

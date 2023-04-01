@@ -1,10 +1,14 @@
 <template>
   <h2> {{ title }}</h2>
-  <ExerciseFilters
-    @click-load-exercises="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
-  >
 
-  </ExerciseFilters>
+  <DataTableFilters
+    :options="{
+      actionButtonText: 'Load Exercises',
+      sortByOptions: dataTableFiltersSortByOptions
+    }"
+    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
+  >
+  </DataTableFilters>
 
   <Transition mode="out-in">
 
@@ -56,11 +60,20 @@
   import { ref, reactive, onMounted, computed } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import DataTable from "../DataTable/DataTable.vue";
-  import ExerciseFilters from "../ExerciseFilters.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
-import LoadingSpinner from "../Loading-Spinner.vue";
+  import LoadingSpinner from "../Loading-Spinner.vue";
+  import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
+
+  const dataTableFiltersSortByOptions = [
+    { name: "Date", value: "date" },
+    { name: "Description", value: "description" },
+    { name: "Duration", value: "duration" },
+    { name: "User Id", value: "userId" },
+    { name: "Exercise Id", value: "_id" },
+  ]
+
 
   const isLoading = ref(false)
 
@@ -85,6 +98,11 @@ import LoadingSpinner from "../Loading-Spinner.vue";
   });
 
 
+  /**
+   * 
+   * @param {*} exerciseFilters filters from DataTableFilters
+   * @param {*} exerciseList reactive list
+   */
   async function loadExerciseHandler(exerciseFilters, exerciseList) {
 
       try {
