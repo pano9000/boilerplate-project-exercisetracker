@@ -7,7 +7,7 @@
 
   <h1>Exercise Tracker</h1>
 
-  <section class="ui_section" v-show="menuItems.userList.visible">
+  <section class="ui_section" v-if="menuItems.userList.visible">
     <UserList/>
   </section>
 
