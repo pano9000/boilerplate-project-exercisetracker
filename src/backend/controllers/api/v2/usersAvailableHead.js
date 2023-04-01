@@ -1,27 +1,20 @@
-const findDoc = require("../../../services/db/findDoc")
+const existsDoc = require("../../../services/db/existsDoc");
 
 module.exports = async function(req, res) {
 
   try {
-    const queryUsername = req.query.username
-
+    const queryUsername = req.query.username;
     if (queryUsername === undefined) {
       return res.sendStatus(400);
     }
 
-    const result = await findDoc.findOne("UserModel", { username: queryUsername });
+    const existsResult = await existsDoc("UserModel", { username: queryUsername });
 
-    if (result !== null) {
-      return res.sendStatus(204);
-    }
+    return (existsResult === null) ? res.sendStatus(404) : res.sendStatus(204);
 
-    return res.sendStatus(404);
   }
   catch(error) {
-    return res.sendStatus(500)
+    return res.sendStatus(500);
   }
-
-
-
 
 }
