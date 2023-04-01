@@ -1,5 +1,5 @@
 const { body } = require("express-validator")
-const { queryParams, pathParams }  = require("./validation.schemaShared.params")
+const { pathParams }  = require("./validation.schemaShared.params")
 
 
 const exercisePostSchema = [
