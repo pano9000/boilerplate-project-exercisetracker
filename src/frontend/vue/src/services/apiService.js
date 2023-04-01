@@ -40,6 +40,12 @@ export const sendToAPI = {
 
 }
 
+
+/**
+* @param {Boolean} statusOK 
+* @param {String} msg 
+* @param { {} } data 
+*/
 function ApiResponseStatus(statusOK, msg, data) {
   this.statusOK = statusOK;
   this.msg = msg;
