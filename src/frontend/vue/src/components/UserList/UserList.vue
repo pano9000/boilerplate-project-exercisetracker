@@ -6,7 +6,7 @@
       showDateRange: false,
       showLimit: false,
       actionButtonText: 'Load Users',
-      sortByOptions: dataTableFiltersSortByOptions,
+      sortByOptions: dataTableKeys,
     }"
     @click-action-button="(userFilters) => loadUsersHandler(userFilters, userList)"
   >
@@ -24,7 +24,7 @@
         :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
         :data-list="userList"
-        :data-keys="[{name: 'User Id', key: '_id'}, {name: 'Username', key: 'username'}]"
+        :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
@@ -104,7 +104,7 @@ import { ref, reactive, onMounted } from "vue";
 import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
-import { uiVisibilityHandler, updateValue, tableHeadingSortHandler } from "../../services/utils";
+import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
@@ -132,21 +132,19 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
     }
   });
 
-  const dataTableFiltersSortByOptions = [
-    { name: "User Id", value: "_id", default: false },
-    { name: "Username", value: "username", default: true },
+  const dataTableKeys = [
+    new DataTableKey("User Id", "_id", false),
+    new DataTableKey("Username", "username", true)
   ]
 
 
   filtersStore.filters = {
-    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortBy: dataTableKeys.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
     sortOrder: "1"
   };
 
 
   const messageBoxOptions = reactive( { value: ""});
-
-
 
   async function loadUsersHandler(userFilters, userList) {
     try {
