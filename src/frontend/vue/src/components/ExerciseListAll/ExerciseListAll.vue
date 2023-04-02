@@ -64,7 +64,7 @@
   const dataTableKeys = ref([
     new DataTableKey("Exercise Id", "_id"),
     new DataTableKey("User Id", "userId"),
-    new DataTableKey("Date", "date", true),
+    new DataTableKey("Date", "date", true, true),
     new DataTableKey("Description", "description"),
     new DataTableKey("Duration (min)", "duration"),
   ])
