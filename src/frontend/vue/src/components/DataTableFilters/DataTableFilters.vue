@@ -83,7 +83,7 @@
   import DateRange from "./DateRange.vue";
   import Limit from "./Limit.vue";
 
-  defineProps(["options"])
+  const props = defineProps(["options"])
   defineEmits(["clickActionButton"])
 
 
@@ -91,7 +91,7 @@
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
-    sortBy: "date",
+    sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.default === true)?.value,
     sortOrder: "1"
   });
 
