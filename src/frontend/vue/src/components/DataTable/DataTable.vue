@@ -39,6 +39,8 @@
           v-for="dataKey in dataKeys" 
           :key="dataKey.key" 
           class="list-header list-header-flex list-header-sortable"
+          @click="$emit('clickTableHeading', dataKey.key)"
+
         >
           {{ dataKey.name }}
         </th>
@@ -113,7 +115,7 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     "paginationbarOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
+  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading"]);
 
   const actionMenu = reactive({ value: {} });
 
