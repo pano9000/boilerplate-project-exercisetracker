@@ -21,16 +21,15 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
         :data-list="exerciseList"
-        :dataKeys="[ 
-          'userId',
-          '_id',
-          'date',
-          'description',
-          'duration',
+        :data-keys="[
+          {name: 'User Id', key: 'userId'},
+          {name: 'Exercise Id', key: '_id'},
+          {name: 'Date', key: 'date'},
+          {name: 'Description', key: 'description'},
+          {name: 'Duration (min)', key: 'duration'},
         ]"
-        :dataKeyId="'_id'"
+        :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
         @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
