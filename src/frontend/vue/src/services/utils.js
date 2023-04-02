@@ -132,8 +132,8 @@ export function tableHeadingSortHandler(dataKeyId) {
  * @param {String} key 
  * @param { Boolean } defaultSortBy 
  */
-export function DataTableKey(name, key, defaultSortBy = false) {
+export function DataTableKey(name, key, defaultSortBy = false, currentActive = false) {
   return {
-    name, key, defaultSortBy
+    name, key, defaultSortBy, currentActive
   }
 }
