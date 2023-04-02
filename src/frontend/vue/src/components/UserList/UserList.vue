@@ -121,8 +121,8 @@ import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
   });
 
   const dataTableFiltersSortByOptions = [
-    { name: "User Id", value: "_id" },
-    { name: "Username", value: "username" },
+    { name: "User Id", value: "_id", default: false },
+    { name: "Username", value: "username", default: true },
   ]
 
 
