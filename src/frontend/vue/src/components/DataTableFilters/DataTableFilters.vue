@@ -76,7 +76,7 @@
 
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
   import SortOrder from './SortOrder.vue';
   import SortBy from "./SortBy.vue";
@@ -86,12 +86,15 @@
   const props = defineProps(["options"])
   defineEmits(["clickActionButton"])
 
+  const sortByCurrent = computed( () => {
+    return props.options?.sortByOptions?.find(sortByOption => sortByOption.currentActive === true)?.key
+  });
 
   const filters = ref({
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
-    sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.currentActive === true)?.key,
+    sortBy: sortByCurrent,
     sortOrder: "1"
   });
 
