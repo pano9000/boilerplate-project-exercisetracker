@@ -4,7 +4,7 @@
   <DataTableFilters
     :options="{
       actionButtonText: 'Load Exercises',
-      sortByOptions: dataTableFiltersSortByOptions
+      sortByOptions: dataTableKeys
     }"
     @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
@@ -22,13 +22,7 @@
         :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
         :data-list="exerciseList"
-        :data-keys="[
-          {name: 'User Id', key: 'userId'},
-          {name: 'Exercise Id', key: '_id'},
-          {name: 'Date', key: 'date'},
-          {name: 'Description', key: 'description'},
-          {name: 'Duration (min)', key: 'duration'},
-        ]"
+        :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
@@ -67,7 +61,7 @@
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import { handleApiResponse } from "../../services/apiService";
   import DataTable from "../DataTable/DataTable.vue";
-  import { uiVisibilityHandler, updateValue, tableHeadingSortHandler } from "../../services/utils";
+  import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
   import LoadingSpinner from "../Loading-Spinner.vue";
@@ -76,12 +70,12 @@
   import { MessageBoxOptions } from "../MessageBox.functions";
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
-  const dataTableFiltersSortByOptions = [
-    { name: "Date", value: "date", default: true },
-    { name: "Description", value: "description" },
-    { name: "Duration", value: "duration" },
-    { name: "Exercise Id", value: "_id" },
-    { name: "User Id", value: "userId" },
+  const dataTableKeys = [
+    new DataTableKey("Date", "date", true),
+    new DataTableKey("Description", "description"),
+    new DataTableKey("Duration (min)", "duration"),
+    new DataTableKey("Exercise Id", "_id"),
+    new DataTableKey("User Id", "userId"),
   ]
 
   const filtersStore = useDataTableFiltersStore();
@@ -90,7 +84,7 @@
     limit: 0,
     dateFrom: "",
     dateTo: "",
-    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortBy: dataTableKeys.find(sortByOption => sortByOption.default === true)?.value || dataTableKeys[0]?.value,
     sortOrder: "1"
   };
 
