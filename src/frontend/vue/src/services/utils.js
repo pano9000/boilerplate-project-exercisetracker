@@ -75,7 +75,6 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
   currentFormItem.available = availabilityResult.data.available;
 }
 
-
 export function getIsValidData(reactiveForm) {
   for (let item in reactiveForm) {
     const isValid = (reactiveForm[item]["valid"] === true);
@@ -120,5 +119,8 @@ export function inputHandler(event, options) {
   }
 
   updateFormItemValidity();
+}
 
+export function tableHeadingSortHandler(dataKeyId) {
+  console.log("clicked dataKeyId", dataKeyId)
 }
