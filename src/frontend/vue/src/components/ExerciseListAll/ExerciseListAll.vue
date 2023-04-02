@@ -70,13 +70,13 @@
   import { MessageBoxOptions } from "../MessageBox.functions";
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
-  const dataTableKeys = [
+  const dataTableKeys = ref([
     new DataTableKey("Date", "date", true),
     new DataTableKey("Description", "description"),
     new DataTableKey("Duration (min)", "duration"),
     new DataTableKey("Exercise Id", "_id"),
     new DataTableKey("User Id", "userId"),
-  ]
+  ])
 
   const filtersStore = useDataTableFiltersStore();
 
