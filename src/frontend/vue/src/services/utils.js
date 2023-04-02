@@ -74,3 +74,8 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
   const availabilityResult = await availabilityApiEndpoint(currentFormItem.value);
   currentFormItem.available = availabilityResult.data.available;
 }
+
+
+export function tableHeadingSortHandler(dataKeyId) {
+  console.log("clicked dataKeyId", dataKeyId)
+}
