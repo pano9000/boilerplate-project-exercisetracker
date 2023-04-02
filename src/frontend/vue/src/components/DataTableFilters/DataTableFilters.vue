@@ -91,7 +91,7 @@
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
-    sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.default === true)?.key,
+    sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.defaultSortBy === true)?.key,
     sortOrder: "1"
   });
 
