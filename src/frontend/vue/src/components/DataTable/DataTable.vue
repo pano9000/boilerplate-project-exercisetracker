@@ -34,14 +34,22 @@
             @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
           >
         </th>
-        <th v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</th>
+
+        <th 
+          v-for="dataKey in dataKeys" 
+          :key="dataKey.key" 
+          class="list-header list-header-flex list-header-sortable"
+        >
+          {{ dataKey.name }}
+        </th>
+
         <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
-        <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
+        <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
           <button 
             class="actionMenu_btn" 
@@ -85,7 +93,6 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const props = defineProps([
     "tableOptions", 
-    "tableHeadings", 
     "dataList", 
     "dataKeyId",
     "dataKeys", 
