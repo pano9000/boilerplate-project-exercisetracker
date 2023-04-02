@@ -27,7 +27,7 @@
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
         @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys)"
 
       >
         <template v-slot:actionMenuEntries>
