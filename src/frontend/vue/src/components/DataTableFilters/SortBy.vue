@@ -10,7 +10,7 @@
       v-for="sortBy in sortByOptions"
       :key="sortBy.key"
       :value="sortBy.key"
-      :selected="sortBy.defaultSortBy === true" 
+      :selected="sortBy.currentActive === true" 
       >
         {{ sortBy.name }}
     </option>
