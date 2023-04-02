@@ -61,13 +61,13 @@
   import LoadingSpinner from "../Loading-Spinner.vue";
   import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 
-  const dataTableKeys = [
+  const dataTableKeys = ref([
     new DataTableKey("Exercise Id", "_id"),
     new DataTableKey("User Id", "userId"),
     new DataTableKey("Date", "date", true),
     new DataTableKey("Description", "description"),
     new DataTableKey("Duration (min)", "duration"),
-  ]
+  ])
 
 
   const isLoading = ref(false)
