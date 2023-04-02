@@ -5,7 +5,7 @@
     id="ui-sortby_input"
     @change="$emit('update:modelValue', $event.target.value)"
   >
-    <option select v-for="sortBy in sortByOptions" :key="sortBy.value" :value="sortBy.value">{{ sortBy.name }}</option>
+    <option select v-for="sortBy in sortByOptions" :key="sortBy.key" :value="sortBy.key">{{ sortBy.name }}</option>
   </select>
 
 </template>
