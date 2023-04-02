@@ -76,8 +76,12 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
 }
 
 
-export function tableHeadingSortHandler(dataKeyId) {
+export function tableHeadingSortHandler(dataKeyId, dataTableItems) {
   console.log("clicked dataKeyId", dataKeyId)
+  
+  for (const dataTableItem in dataTableItems) {
+    dataTableItems[dataTableItem]["currentActive"] = (dataTableItems[dataTableItem]["key"] === dataKeyId) ? true : false;
+  }
 }
 
 
