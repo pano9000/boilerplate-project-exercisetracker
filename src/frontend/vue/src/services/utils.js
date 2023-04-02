@@ -79,3 +79,16 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
 export function tableHeadingSortHandler(dataKeyId) {
   console.log("clicked dataKeyId", dataKeyId)
 }
+
+
+/**
+ * 
+ * @param {String} name 
+ * @param {String} key 
+ * @param { Boolean } defaultSortBy 
+ */
+export function DataTableKey(name, key, defaultSortBy = false) {
+  return {
+    name, key, defaultSortBy
+  }
+}
