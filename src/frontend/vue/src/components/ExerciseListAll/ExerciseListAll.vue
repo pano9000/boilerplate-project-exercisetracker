@@ -33,6 +33,8 @@
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
         @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId)"
+
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
@@ -59,7 +61,7 @@
   import { ref, reactive, onMounted, computed } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import DataTable from "../DataTable/DataTable.vue";
-  import { uiVisibilityHandler, updateValue } from "../../services/utils";
+  import { uiVisibilityHandler, updateValue, tableHeadingSortHandler } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
   import LoadingSpinner from "../Loading-Spinner.vue";

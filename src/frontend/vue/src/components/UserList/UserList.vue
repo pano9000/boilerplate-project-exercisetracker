@@ -29,6 +29,7 @@
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
         @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId)"
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
@@ -96,7 +97,7 @@ import { ref, reactive, onMounted } from "vue";
 import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
-import { uiVisibilityHandler, updateValue } from "../../services/utils";
+import { uiVisibilityHandler, updateValue, tableHeadingSortHandler } from "../../services/utils";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
