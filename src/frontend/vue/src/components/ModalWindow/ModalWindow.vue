@@ -49,7 +49,7 @@ import { IconX } from "@tabler/icons-vue";
 
 .ui-modal_wrap {
   border-radius: .5rem;
-  position: absolute;
+  position: fixed;
   background-color: #f1f1f1;
   max-width: calc(1280px - 20vw);
   top: 50%;
