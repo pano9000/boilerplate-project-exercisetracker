@@ -266,6 +266,16 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     margin: 0 auto;
   }
 
+  .list-header-sortable {
+    cursor: pointer;
+    transition: all .25s;
+  }
+
+  .list-header-sortable:focus,
+  .list-header-sortable:hover {
+    color: #646cff;
+  }
+
   .actionMenu_btn {
     margin: 0;
     padding: 0.4rem 0.8rem;
