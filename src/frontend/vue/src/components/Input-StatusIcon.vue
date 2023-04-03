@@ -71,13 +71,20 @@
 
   .ui-input-label_reqs {
     opacity: 0;
+    visibility: hidden;
     transition: opacity .25s;
     cursor: default;
     max-width: 60ch;
+    position: absolute;
+    background-color: lightgray;
+    border-radius: var(--border-radius);
+    padding: .25rem;
+    box-shadow: var(--box-shadow);
   }
 
   .ui-form input:focus + .ui-input-label_reqs {
     opacity: 1;
+    visibility: visible;
   }
 
 
