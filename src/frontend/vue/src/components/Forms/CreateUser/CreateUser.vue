@@ -35,11 +35,11 @@
           The username is already taken. Please choose another one.
         </span>
         <span class="ui-input-label_hint ui-input-label_reqs" v-else>
-          The username should have a length of minimum 3 and maximum 30 characters.
-          It can consist of <span class="spanhighlight">0-9</span>&nbsp;(Numbers),
-          <span class="spanhighlight">a-z</span>&nbsp;(lowercase letters),
-          <span class="spanhighlight">-</span>&nbsp;(minus) and 
-          <span class="spanhighlight">_</span>&nbsp;(underscore) characters.
+          <b>Format</b>: Length minimum 3 and maximum 30.
+          <b>Allowed characters</b>: Numbers&nbsp;<span class="spanhighlight">0-9</span>,
+          lowercase letters&nbsp;<span class="spanhighlight">a-z</span>,
+          minus&nbsp;<span class="spanhighlight">-</span> and 
+          underscore&nbsp;<span class="spanhighlight">_</span>.
         </span>
       </div>
   </div>
