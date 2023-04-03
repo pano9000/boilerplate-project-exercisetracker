@@ -23,7 +23,13 @@
           pattern="^[a-z0-9_\-]{3,30}$"
           autocomplete="false"
           v-model="createUserForm.username.value"
-          @input="inputHandler($event, createUserForm, 'username')"
+          @input="inputHandler($event, {
+            'reactiveForm': createUserForm,
+            'reactiveFormItem': 'username',
+            'availabilityCheck': true,
+            'availabilityFunc': checkUsernameAvailability,
+            'inputTimeoutId': inputTimeoutId
+          })"
         >
         <span class="ui-input-label_hint ui-input-label_reqs" v-if="createUserForm.username.valid && !createUserForm.username.available">
           The username is already taken. Please choose another one.
@@ -52,7 +58,7 @@
   import { reactive, computed } from "vue";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
 
-  import { submitFormHandler, availabilityHandler, ReactiveFormItem, getIsValidData } from "../../../services/utils";
+  import { submitFormHandler, ReactiveFormItem, getIsValidData, inputHandler } from "../../../services/utils";
   import { addUser, checkUsernameAvailability } from "../../../services/apiEndpoints";
 
   const createUserForm = reactive( {
@@ -61,29 +67,7 @@
 
   const isValidData = computed( () => getIsValidData(createUserForm));
 
-
-  function getInputStatus(elem, inputValue) {
-    return (inputValue === "") ? null : elem?.validity?.valid
-  }
-
   const inputTimeoutId = reactive( { value: "" } );
-
-  function inputHandler(event, reactiveForm, reactiveFormItem) {
-    const currentFormItem = reactiveForm[reactiveFormItem];
-
-    if (inputTimeoutId.value) {
-      clearTimeout(inputTimeoutId.value);
-    }
-
-    inputTimeoutId.value = setTimeout( async () => {
-      currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
-
-      await availabilityHandler(reactiveForm, reactiveFormItem, checkUsernameAvailability);
-
-      inputTimeoutId.value = null;
-    }, 600);
-
-  }
 
 
 </script>
