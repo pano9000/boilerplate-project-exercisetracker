@@ -74,3 +74,15 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
   const availabilityResult = await availabilityApiEndpoint(currentFormItem.value);
   currentFormItem.available = availabilityResult.data.available;
 }
+
+
+export function getIsValidData(reactiveForm) {
+  for (let item in reactiveForm) {
+    const isValid = (reactiveForm[item]["valid"] === true);
+    const isAvailable = (reactiveForm[item]["available"] !== false);
+    if ( !isValid || !isAvailable ) {
+      return false
+    };
+  }
+  return true
+}
