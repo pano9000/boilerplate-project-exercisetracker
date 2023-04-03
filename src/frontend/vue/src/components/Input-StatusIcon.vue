@@ -1,6 +1,9 @@
 <template>
   <Transition mode="out-in">
-    <span class="ui-input-statusicon_wrap" v-if="isValid !== null">
+    <span 
+      class="ui-input-statusicon_wrap" 
+      :class="(isValid === true) ? 'ui-input-statusicon_wrap-valid' : (isValid === false) ? 'ui-input-statusicon_wrap-invalid' : 'ui-input-statusicon_wrap-empty'" 
+      v-if="isValid !== null">
       <Transition mode="out-in">
         <IconCircleCheck v-if="isValid"></IconCircleCheck>
         <IconCircleX v-else></IconCircleX>
@@ -40,4 +43,43 @@
     height: auto;
     width: 1.5rem;
   }
+
+  .ui-input-statusicon_wrap + input {
+    border-left: var(--input-border);
+    border-left-color: lightgray;
+  }
+
+  .ui-input-statusicon_wrap-valid + input:not(:focus) {
+    border-left: var(--input-border);
+    border-left-color: lightgreen;
+  }
+
+  .ui-input-statusicon_wrap-invalid + input:not(:focus) {
+    border-left: var(--input-border);
+    border-left-color: #fe5050;
+  }
+
+  .ui-input-statusicon_wrap-invalid + input:not(:focus) {
+    border-left: var(--input-border);
+    border-left-color: #fe5050;
+  }
+
+  .ui-input-statusicon_wrap-invalid + input + .ui-input-label_hint {
+    color: #fe5050;
+    opacity: 1;
+  }
+
+  .ui-input-label_reqs {
+    opacity: 0;
+    transition: opacity .25s;
+    cursor: default;
+    max-width: 60ch;
+  }
+
+  .ui-form input:focus + .ui-input-label_reqs {
+    opacity: 1;
+  }
+
+
+
 </style>

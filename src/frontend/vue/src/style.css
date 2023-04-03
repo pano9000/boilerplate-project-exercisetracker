@@ -73,53 +73,6 @@ input, select {
   box-shadow: var(--box-shadow);
 }
 
-.ui-form input:not(:focus):valid {
-  border-left: var(--input-border);
-  border-left-color: lightgreen;
-
-}
-
-.ui-form input:not(:focus):not(:placeholder-shown):invalid {
-  border-left: var(--input-border);
-  border-left-color: #fe5050;
-}
-
-.ui-form input:not(:focus):not(:placeholder-shown):invalid + .ui-input-label_hint {
-  font-weight: 700;
-  color: #fe5050;
-  opacity: 1;
-}
-
-.ui-input-label_reqs {
-  opacity: 0;
-  transition: opacity .25s;
-  cursor: default;
-  max-width: 60ch;
-}
-
-.ui-form input:focus + .ui-input-label_reqs {
-    opacity: 1;
-}
-
-.ui-form input:focus:invalid + .ui-input-label_reqs {
-  font-weight: 700;
-  color: #fe5050;
-}
-
-.ui-form input:focus:empty + .ui-input-label_reqs {
-  font-weight: inherit;
-  color: inherit;
-}
-
-.ui-form input:placeholder-shown {
-  border-left: var(--input-border);
-  border-left-color: lightgray;
-}
-
-.ui-form input:focus {
-  border-left: var(--input-border);
-  border-left-color: darkgrey;
-}
 
 input[type="number"] {
   appearance: textfield;
