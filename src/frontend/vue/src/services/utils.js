@@ -86,3 +86,34 @@ export function getIsValidData(reactiveForm) {
   }
   return true
 }
+
+
+export function getInputStatus(elem, inputValue) {
+  return (inputValue === "") ? null : elem?.validity?.valid
+}
+
+
+/**
+* 
+* @param {$event} event 
+* @param { { reactiveForm: {}, reactiveFormItem: '', availabilityCheck: Bool, availabilityFunc: (), inputTimeoutId: {} } } options 
+*/
+export function inputHandler(event, options) {
+  const { reactiveForm, reactiveFormItem, availabilityCheck, availabilityFunc, inputTimeoutId } = options;
+  const currentFormItem = reactiveForm[reactiveFormItem];
+
+  if (availabilityCheck === true) {
+    if (inputTimeoutId.value) {
+      clearTimeout(inputTimeoutId.value);
+    }
+
+    inputTimeoutId.value = setTimeout( async () => {
+      currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
+
+      await availabilityHandler(reactiveForm, reactiveFormItem, availabilityFunc);
+
+      inputTimeoutId.value = null;
+    }, 600);
+  }
+
+}
