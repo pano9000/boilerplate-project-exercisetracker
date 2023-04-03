@@ -67,6 +67,7 @@
   .ui-input-statusicon_wrap-invalid + input + .ui-input-label_hint {
     color: #fe5050;
     opacity: 1;
+    visibility: visible;
   }
 
   .ui-input-label_reqs {
@@ -75,6 +76,7 @@
     transition: opacity .25s;
     cursor: default;
     max-width: 60ch;
+    width: 100%;
     position: absolute;
     background-color: lightgray;
     border-radius: var(--border-radius);
