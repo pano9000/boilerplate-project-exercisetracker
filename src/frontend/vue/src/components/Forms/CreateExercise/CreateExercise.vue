@@ -36,7 +36,7 @@
           minlength="3"
           maxlength="50"
           v-model="createExerciseForm.description.value"
-          @input="inputHandler($event, 'description', createExerciseForm)"
+          @input="inputHandler($event, { reactiveForm: createExerciseForm, reactiveFormItem: 'description' })"
         >
 
         <span class="ui-input-label_hint ui-input-label_reqs">Format: minimum length 3, maximum length 50</span>
@@ -64,7 +64,8 @@
           placeholder=""
           pattern="\d{1,3}"
           v-model="createExerciseForm.duration.value"
-          @input="inputHandler($event, 'duration', createExerciseForm)"
+          @input="inputHandler($event, { reactiveForm: createExerciseForm, reactiveFormItem: 'duration' })"
+          
         >
 
         <span class="ui-input-label_hint ui-input-label_reqs">Format: A number between 1 and 999</span>
@@ -92,7 +93,7 @@
           placeholder=""
           required
           v-model="createExerciseForm.date.value"
-          @input="inputHandler($event, 'date', createExerciseForm)"
+          @input="inputHandler($event, { reactiveForm: createExerciseForm, reactiveFormItem: 'date' })"
         >
         <span class="ui-input-label_hint ui-input-label_reqs">Format: A valid date</span>
 
@@ -109,7 +110,7 @@
 
 <script setup>
   import { ref, reactive, computed } from "vue";
-  import { submitFormHandler, ReactiveFormItem, getIsValidData } from "../../../services/utils";
+  import { submitFormHandler, ReactiveFormItem, getIsValidData, inputHandler } from "../../../services/utils";
   import { addExercise } from "../../../services/apiEndpoints";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
   const props = defineProps(["currentUser"]);
@@ -124,14 +125,6 @@
 
   const isValidData = computed( () => getIsValidData(createExerciseForm));
 
-
-  function getInputStatus(elem, inputValue) {
-    return (inputValue === "") ? null : elem?.validity?.valid
-  }
-
-  function inputHandler(event, item, statusObj) {
-    statusObj[item].valid = getInputStatus(event.target, statusObj[item]["value"])
-  }
 
 
 
