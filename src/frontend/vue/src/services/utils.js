@@ -102,18 +102,23 @@ export function inputHandler(event, options) {
   const { reactiveForm, reactiveFormItem, availabilityCheck, availabilityFunc, inputTimeoutId } = options;
   const currentFormItem = reactiveForm[reactiveFormItem];
 
+  const updateFormItemValidity = () => {
+    currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
+  }
+
   if (availabilityCheck === true) {
     if (inputTimeoutId.value) {
       clearTimeout(inputTimeoutId.value);
     }
 
     inputTimeoutId.value = setTimeout( async () => {
-      currentFormItem.valid = getInputStatus(event.target, currentFormItem.value);
-
+      updateFormItemValidity()
       await availabilityHandler(reactiveForm, reactiveFormItem, availabilityFunc);
-
       inputTimeoutId.value = null;
     }, 600);
+    return
   }
+
+  updateFormItemValidity();
 
 }
