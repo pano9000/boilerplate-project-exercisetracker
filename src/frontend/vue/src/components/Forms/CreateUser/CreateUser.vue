@@ -52,23 +52,15 @@
   import { reactive, computed } from "vue";
   import InputStatusIcon from "../../Input-StatusIcon.vue";
 
-  import { submitFormHandler, availabilityHandler, ReactiveFormItem } from "../../../services/utils";
+  import { submitFormHandler, availabilityHandler, ReactiveFormItem, getIsValidData } from "../../../services/utils";
   import { addUser, checkUsernameAvailability } from "../../../services/apiEndpoints";
 
   const createUserForm = reactive( {
     username: ReactiveFormItem(),
   });
 
-  const isValidData = computed(() => {
-    for (let item in createUserForm) {
-      const isValid = (createUserForm[item]["valid"] === true);
-      const isAvailable = (createUserForm[item]["available"] !== false);
-      if ( !isValid || !isAvailable ) {
-        return false
-      };
-    }
-    return true
-   });
+  const isValidData = computed( () => getIsValidData(createUserForm));
+
 
   function getInputStatus(elem, inputValue) {
     return (inputValue === "") ? null : elem?.validity?.valid
