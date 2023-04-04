@@ -4,7 +4,18 @@
     class="ui-mainmenu_nav"
     aria-label="Primary Navigation"
   >
-    <a 
+    <RouterLink 
+      to="/"
+      class="ui-mainmenu_brand-icon"
+      aria-label="Go to homepage"
+    >
+      <div>
+        <IconBarbell></IconBarbell>
+        <span>Exercise Tracker</span>
+      </div>
+    </RouterLink>
+
+  <!--  <a 
       class="ui-mainmenu_brand-icon"
       href="#"
       aria-label="Go to homepage"
@@ -14,13 +25,23 @@
         <span>Exercise Tracker</span>
       </div>
     </a>
-
+-->
     <ul>
       <li
         v-for="menuItem in menuItems"
         :key="menuItem.id"
       >
-        <a
+        <RouterLink
+          :to="menuItem.path"
+          class="ui-mainmenu_nav-btn"
+          active-class="ui-mainmenu_nav-btn-active"
+          :aria-current="menuItem.visible"
+          @click="toggleVisibleSection(menuItem.id, menuItems)"
+
+        > 
+          {{ menuItem.title }}
+        </RouterLink>
+ <!--       <a
           href="#"
           class="ui-mainmenu_nav-btn"
           :class="(menuItem.visible) ? 'ui-mainmenu_nav-btn-active' : ''"
@@ -28,7 +49,7 @@
           @click="toggleVisibleSection(menuItem.id, menuItems)"
         > 
           {{ menuItem.title }}
-        </a>
+        </a>-->
       </li>
     </ul>
 

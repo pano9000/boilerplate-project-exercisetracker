@@ -5,8 +5,9 @@
   >
   </MenuBar>
 
+  
+  <!--
   <h1>Exercise Tracker</h1>
-
   <section class="ui_section" v-if="menuItems.userList.visible">
     <UserList/>
   </section>
@@ -14,6 +15,10 @@
   <section class="ui_section" v-if="menuItems.exerciseList.visible">
     <ExerciseListAll>
     </ExerciseListAll>
+  </section>
+-->
+  <section class="ui_section">
+    <RouterView></RouterView>
   </section>
 
 </template>
@@ -28,11 +33,13 @@
       title: "User List",
       visible: true,
       id: "userList",
+      path: "/userlist"
     },
     exerciseList: {
       title: "Exercise List",
       visible: false,
       id: "exerciseList",
+      path: "/exerciselist"
     }
   })
 

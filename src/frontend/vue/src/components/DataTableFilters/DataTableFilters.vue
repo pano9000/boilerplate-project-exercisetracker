@@ -67,7 +67,7 @@
 
       <div class="ui-filter-flex_wrap">
 
-        <button @click="() => { filtersVisible = false; $emit('clickActionButton', filters) }">{{ options.actionButtonText }}</button>
+        <button @click.prevent="() => { filtersVisible = false; $emit('clickActionButton', filters) }">{{ options.actionButtonText }}</button>
       </div>
     </form>
   </section> 
