@@ -5,8 +5,9 @@
   >
   </MenuBar>
 
+  
+  <!--
   <h1>Exercise Tracker</h1>
-<!--
   <section class="ui_section" v-if="menuItems.userList.visible">
     <UserList/>
   </section>
