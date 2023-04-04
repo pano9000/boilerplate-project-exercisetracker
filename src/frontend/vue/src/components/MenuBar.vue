@@ -20,7 +20,17 @@
         v-for="menuItem in menuItems"
         :key="menuItem.id"
       >
-        <a
+        <RouterLink
+          :to="menuItem.path"
+          class="ui-mainmenu_nav-btn"
+          :class="(menuItem.visible) ? 'ui-mainmenu_nav-btn-active' : ''"
+          :aria-current="menuItem.visible"
+          @click="toggleVisibleSection(menuItem.id, menuItems)"
+
+        > 
+          {{ menuItem.title }}
+        </RouterLink>
+ <!--       <a
           href="#"
           class="ui-mainmenu_nav-btn"
           :class="(menuItem.visible) ? 'ui-mainmenu_nav-btn-active' : ''"
@@ -28,7 +38,7 @@
           @click="toggleVisibleSection(menuItem.id, menuItems)"
         > 
           {{ menuItem.title }}
-        </a>
+        </a>-->
       </li>
     </ul>
 
