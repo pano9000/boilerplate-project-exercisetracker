@@ -21,6 +21,11 @@ const queryParams = {
     .escape()
     .isInt(),
 
+  "skip":
+    query("skip", { errorHandling: "resetParamErrors" })
+    .optional()
+    .isInt({ min: 0, max: 9999999 }),
+
   "sort":
     query("sort", { errorHandling: "resetParamErrors" })
     .optional()
