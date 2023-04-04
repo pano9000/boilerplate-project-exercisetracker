@@ -4,7 +4,18 @@
     class="ui-mainmenu_nav"
     aria-label="Primary Navigation"
   >
-    <a 
+    <RouterLink 
+      to="/"
+      class="ui-mainmenu_brand-icon"
+      aria-label="Go to homepage"
+    >
+      <div>
+        <IconBarbell></IconBarbell>
+        <span>Exercise Tracker</span>
+      </div>
+    </RouterLink>
+
+  <!--  <a 
       class="ui-mainmenu_brand-icon"
       href="#"
       aria-label="Go to homepage"
@@ -14,7 +25,7 @@
         <span>Exercise Tracker</span>
       </div>
     </a>
-
+-->
     <ul>
       <li
         v-for="menuItem in menuItems"
