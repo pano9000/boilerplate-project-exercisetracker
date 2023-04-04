@@ -34,7 +34,7 @@
         <RouterLink
           :to="menuItem.path"
           class="ui-mainmenu_nav-btn"
-          :class="(menuItem.visible) ? 'ui-mainmenu_nav-btn-active' : ''"
+          active-class="ui-mainmenu_nav-btn-active"
           :aria-current="menuItem.visible"
           @click="toggleVisibleSection(menuItem.id, menuItems)"
 
