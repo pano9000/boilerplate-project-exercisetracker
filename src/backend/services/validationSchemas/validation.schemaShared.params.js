@@ -24,7 +24,8 @@ const queryParams = {
   "skip":
     query("skip", { errorHandling: "resetParamErrors" })
     .optional()
-    .isInt({ min: 0, max: 9999999 }),
+    .isInt({ min: 0, max: 9999990 })
+    .custom( (skipValue) => skipValue % 5 === 0 ),
 
   "sort":
     query("sort", { errorHandling: "resetParamErrors" })
