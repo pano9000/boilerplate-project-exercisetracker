@@ -19,7 +19,7 @@ const queryParams = {
     query("limit", { errorHandling: "resetParamErrors" })
     .optional()
     .escape()
-    .isInt(),
+    .isInt( { min: 1, max: 100 }),
 
   "skip":
     query("skip", { errorHandling: "resetParamErrors" })
