@@ -6,7 +6,7 @@ async function exercisesGetAll(req, res) {
 
   try {
 
-    const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort } = req.query
+    const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort, skip } = req.query
 
     const queryOptions = {
       limit: filterQty || 10,
