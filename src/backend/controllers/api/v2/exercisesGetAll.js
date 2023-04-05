@@ -6,15 +6,19 @@ const createSearchObject = require("../../../services/db/utils/createSearchObjec
 async function exercisesGetAll(req, res) {
 
   try {
+    const { from: filterDateFrom, to: filterDateTo } = req.query;
 
-    const { from: filterDateFrom, to: filterDateTo, limit: filterQty, sortBy, sort, skip } = req.query
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const sortBy = req.query.sortBy || "date";
+    const sort = parseInt(req.query.sort) || 1;
 
     const queryOptions = {
-      limit: filterQty || 10,
-      skip: skip || 0
+      limit,
+      skip: ((page - 1) * limit)
     }
 
-    const sortOptions = [[sortBy || "date", sort || 1]];
+    const sortOptions = [ [sortBy, sort] ];
 
     const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
