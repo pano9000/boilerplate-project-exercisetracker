@@ -1,4 +1,5 @@
 const findDoc = require("../../../services/db/findDoc");
+const countDoc = require("../../../services/db/countDoc");
 const createSearchObject = require("../../../services/db/utils/createSearchObject");
 
 
@@ -20,6 +21,7 @@ async function exercisesGetAll(req, res) {
     delete searchObject.userId
     const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
+    const totalEntries = await countDoc("ExerciseModel");
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
       count: findResult.length,
