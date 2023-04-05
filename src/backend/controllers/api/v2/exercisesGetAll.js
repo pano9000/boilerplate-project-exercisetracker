@@ -26,6 +26,13 @@ async function exercisesGetAll(req, res) {
     const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
     const totalEntries = await countDoc("ExerciseModel");
+
+    const pagination = {
+      "currentPage": page,
+      "totalPages": Math.ceil(totalEntries / limit),
+      totalEntries,
+    }
+
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
       count: findResult.length,
@@ -38,7 +45,8 @@ async function exercisesGetAll(req, res) {
           duration, 
           date
         }
-      })
+      }),
+      pagination
     }
 
     res.status(200).json(response);
