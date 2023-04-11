@@ -124,12 +124,31 @@
     padding: .75rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
+    position: relative;
   }
 
   .ui-filter_toggle {
     display: flex;
     align-items: center;
     cursor: pointer;
+  }
+
+  /** increase hit area via ::after/::before */
+  .ui-filter_toggle::after,
+  .ui-filter_toggle::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1rem;
+    left: 0;
+  }
+
+  .ui-filter_toggle::after {
+    bottom: 0;
+  }
+
+  .ui-filter_toggle::before {
+    top: 0;
   }
 
   .ui-filter_toggle h3 {
