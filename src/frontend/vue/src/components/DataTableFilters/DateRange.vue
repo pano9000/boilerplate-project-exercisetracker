@@ -10,10 +10,15 @@
   </div>
 
   <div>
-    <button type="button" title="Quick Set Date Range"  aria-label="Quick Set Date Range">
+    <button
+      type="button"
+      title="Quick Set Date Range"
+      aria-label="Quick Set Date Range"
+      @click="() => showQuickDateMenu.value = !showQuickDateMenu.value"
+    >
       <IconCalendarCode></IconCalendarCode>
     </button>
-    <menu class="actionMenu_menu">
+    <menu class="actionMenu_menu" v-show="showQuickDateMenu.value === true">
       <li @click="quickDateButtonsHandler('currentDay')"><IconCalendarCode></IconCalendarCode>Today</li>
       <li @click.prevent="quickDateButtonsHandler('currentWeek')"><IconCalendarCode></IconCalendarCode>This Week</li>
       <li @click.prevent="quickDateButtonsHandler('currentMonth')"><IconCalendarCode></IconCalendarCode>This Month</li>
