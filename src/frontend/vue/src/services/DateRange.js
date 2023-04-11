@@ -4,6 +4,10 @@ export default class DateRange {
     this.date = new Date(date)
   }
 
+  get currentDay() {
+    return this.#format(() => this.date, () => this.date, this.date)
+  }
+
   get currentWeek() {
     return this.#format(this.firstDayOfWeek, this.lastDayOfWeek, this.date)
   }
