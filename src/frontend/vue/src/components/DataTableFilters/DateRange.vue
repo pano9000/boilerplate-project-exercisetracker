@@ -19,11 +19,25 @@
       <IconCalendarCode></IconCalendarCode>
     </button>
     <menu class="actionMenu_menu" v-show="showQuickDateMenu.value === true">
-      <li @click="quickDateButtonsHandler('currentDay')"><IconCalendarCode></IconCalendarCode>Today</li>
-      <li @click.prevent="quickDateButtonsHandler('currentWeek')"><IconCalendarCode></IconCalendarCode>This Week</li>
-      <li @click.prevent="quickDateButtonsHandler('currentMonth')"><IconCalendarCode></IconCalendarCode>This Month</li>
-      <li @click.prevent="quickDateButtonsHandler('currentYear')"><IconCalendarCode></IconCalendarCode>This Year</li>
-      <li @click.prevent="quickDateButtonsHandler('showAll')"><IconCalendarCode></IconCalendarCode>Show All</li>
+      <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentDay')">
+        <IconCalendarCode></IconCalendarCode> Today
+      </ActionMenuEntry>
+
+      <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentWeek')">
+        <IconCalendarCode></IconCalendarCode> This Week
+      </ActionMenuEntry>
+
+      <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentMonth')">
+        <IconCalendarCode></IconCalendarCode> This Month
+      </ActionMenuEntry>
+
+      <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentYear')">
+        <IconCalendarCode></IconCalendarCode> This Year
+      </ActionMenuEntry>
+
+      <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('showAll')">
+        <IconCalendarCode></IconCalendarCode> Show All
+      </ActionMenuEntry>
     </menu>
 
   </div>
@@ -33,6 +47,7 @@
   import { reactive } from 'vue';
   import DateRange from '../../services/DateRange';
   import { IconCalendarCode } from '@tabler/icons-vue';
+  import ActionMenuEntry from '../ActionMenuEntry.vue';
 
   const dateRange = new DateRange();
 
@@ -48,6 +63,8 @@
 
   const dateFrom = reactive({});
   const dateTo = reactive({});
+
+  const showQuickDateMenu = reactive({value: false});
 
 
   function quickDateButtonsHandler(mode, dateFromP = dateFrom, dateToP = dateTo, dateRangeP = dateRange) {
