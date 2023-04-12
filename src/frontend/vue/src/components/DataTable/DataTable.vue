@@ -45,7 +45,7 @@
         <td class="list-cell_center" @click="currentItem.value = data">
           <button 
             class="actionMenu_btn" 
-            @click="actionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+            @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
             title="Show Actions"
           >
             ☰
@@ -71,9 +71,13 @@
 
   </section>
 
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+  <ActionMenu
+    @update-actionMenuRef="(ref) => actionMenu.value = ref"
+    :action-menu-visible="actionMenuVisible"
+  >
     <slot name="actionMenuEntries"></slot>
-  </menu>
+  </ActionMenu>
+
 </template>
 
 
@@ -82,6 +86,9 @@
 import { ref, reactive, watch, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import ListActionButtons from "./ListActionButtons.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
+import ActionMenu from "../ActionMenu.vue";
+import { actionButtonHandler } from "../ActionMenu.functions.js";
+
 
   const props = defineProps([
     "tableOptions", 
@@ -95,7 +102,8 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
 
-  const actionMenu = ref(null);
+  const actionMenu = reactive({ value: {} });
+
   const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
 
@@ -124,24 +132,12 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  async function actionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
+  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
     currentItem.value = currentData;
-    actionMenuVisible.value = true;
-    await nextTick();
-    const actionButtonRect = event.target.getBoundingClientRect();
-    const actionMenuRect = actionMenu.value.getBoundingClientRect();
-
-    const x = (actionButtonRect.left - actionMenuRect.width + window.scrollX).toFixed();
-    const y = (actionButtonRect.top + window.scrollY).toFixed();
-
-    // Set the position for menu
-    actionMenu.value.style.left = `${x}px`;
-    actionMenu.value.style.top = `${y}px`;
-
-    actionMenu.value.firstElementChild.focus();
-
+    actionButtonHandler(event, actionMenuVisible, actionMenu)
   }
-  
+
+
   watch(currentItem, () => {
     emit("updateCurrentItem", currentItem)
   });
