@@ -71,9 +71,13 @@
 
   </section>
 
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+  <ActionMenu
+    @update-actionMenuRef="(ref) => actionMenu.value = ref"
+    :action-menu-visible="actionMenuVisible"
+  >
     <slot name="actionMenuEntries"></slot>
-  </menu>
+  </ActionMenu>
+
 </template>
 
 
@@ -82,6 +86,9 @@
 import { ref, reactive, watch, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
 import ListActionButtons from "./ListActionButtons.vue";
 import PaginationBar from "../PaginationBar/PaginationBar.vue";
+import ActionMenu from "../ActionMenu.vue";
+import { actionButtonHandler } from "../ActionMenu.functions.js";
+
 
   const props = defineProps([
     "tableOptions", 
@@ -95,7 +102,8 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
 
   const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
 
-  const actionMenu = ref(null);
+  const actionMenu = reactive({ value: {} });
+
   const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
 
