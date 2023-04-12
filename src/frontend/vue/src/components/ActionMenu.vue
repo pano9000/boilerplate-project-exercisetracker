@@ -1,5 +1,5 @@
 <template>
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+  <menu ref="actionMenu" class="actionMenu_menu" v-show="props.actionMenuVisible.value === true">
     <slot></slot>
   </menu>
 </template>
