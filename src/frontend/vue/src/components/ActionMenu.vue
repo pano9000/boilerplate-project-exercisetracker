@@ -1,6 +1,6 @@
 <template>
   <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
-    <slot name="actionMenuEntries"></slot>
+    <slot></slot>
   </menu>
 </template>
 
