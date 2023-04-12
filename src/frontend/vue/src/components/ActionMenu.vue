@@ -6,10 +6,12 @@
 
 
 <script setup>
+  import { ref, onMounted, onBeforeUnmount } from "vue";
+  const actionMenu = ref(null);
 
 
-
-
+  const emit = defineEmits(["updateActionMenuRef"])
+  const props = defineProps(["actionMenuVisible"])
 
 
   function actionMenuDisableVisibility(actionMenuVisible) {
@@ -39,6 +41,7 @@
     for (const eventListener in windowEventListeners) {
       window.addEventListener(...windowEventListeners[eventListener])
     }
+    emit("updateActionMenuRef", actionMenu);
   });
 
   onBeforeUnmount( () => {
