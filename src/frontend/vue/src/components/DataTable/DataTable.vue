@@ -45,7 +45,7 @@
         <td class="list-cell_center" @click="currentItem.value = data">
           <button 
             class="actionMenu_btn" 
-            @click="actionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+            @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
             title="Show Actions"
           >
             ☰
@@ -124,24 +124,27 @@ import PaginationBar from "../PaginationBar/PaginationBar.vue";
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  async function actionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
+  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
     currentItem.value = currentData;
+    actionButtonHandler(event, actionMenuVisible, actionMenu)
+  }
+
+  async function actionButtonHandler(event, actionMenuVisible, actionMenuRef) {
     actionMenuVisible.value = true;
     await nextTick();
     const actionButtonRect = event.target.getBoundingClientRect();
-    const actionMenuRect = actionMenu.value.getBoundingClientRect();
+    const actionMenuRect = actionMenuRef.value.getBoundingClientRect();
 
     const x = (actionButtonRect.left - actionMenuRect.width + window.scrollX).toFixed();
     const y = (actionButtonRect.top + window.scrollY).toFixed();
 
     // Set the position for menu
-    actionMenu.value.style.left = `${x}px`;
-    actionMenu.value.style.top = `${y}px`;
+    actionMenuRef.value.style.left = `${x}px`;
+    actionMenuRef.value.style.top = `${y}px`;
 
-    actionMenu.value.firstElementChild.focus();
+    actionMenuRef.value.firstElementChild.focus();
+  };
 
-  }
-  
   watch(currentItem, () => {
     emit("updateCurrentItem", currentItem)
   });
