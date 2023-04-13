@@ -18,7 +18,10 @@
     >
       <IconCalendarCode></IconCalendarCode>
     </button>
-    <menu class="actionMenu_menu" v-show="showQuickDateMenu.value === true">
+    <ActionMenu
+      @update-actionMenuRef="(ref) => actionMenu.value = ref"
+      :action-menu-visible="actionMenuVisible"
+    >
       <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentDay')">
         <IconCalendarCode></IconCalendarCode> Today
       </ActionMenuEntry>
@@ -38,7 +41,8 @@
       <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('showAll')">
         <IconCalendarCode></IconCalendarCode> Show All
       </ActionMenuEntry>
-    </menu>
+    </ActionMenu>
+
 
   </div>
 </template>
@@ -48,6 +52,12 @@
   import DateRange from '../../services/DateRange';
   import { IconCalendarCode } from '@tabler/icons-vue';
   import ActionMenuEntry from '../ActionMenuEntry.vue';
+  import ActionMenu from '../ActionMenu.vue';
+
+
+  const actionMenu = reactive({ value: {} });
+  const actionMenuVisible = reactive({ value: false });
+
 
   const dateRange = new DateRange();
 
