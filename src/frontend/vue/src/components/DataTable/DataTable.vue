@@ -278,6 +278,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     width: 6rem;
   }
 
+  .actionMenu_wrap {
+    position: relative;
+  }
+
   .actionMenu_btn {
     margin: 0;
     padding: 0.4rem 0.8rem;
@@ -296,6 +300,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     margin: 0;
     padding: 0.5rem;
     position: absolute;
+    right: 0;
+    top: 0;
+    width: max-content;
+    z-index: 999;
   }
 
   .actionMenu_menu li {
