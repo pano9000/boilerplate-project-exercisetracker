@@ -75,6 +75,7 @@
 
   <ActionMenu
     @update-actionMenuRef="(ref) => actionMenu.value = ref"
+    @update-actionMenuVisible="(value) => actionMenuVisible.value = value"
     :action-menu-visible="actionMenuVisible"
   >
     <slot name="actionMenuEntries"></slot>
