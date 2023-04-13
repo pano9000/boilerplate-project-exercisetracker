@@ -43,13 +43,15 @@
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
-          <button 
-            class="actionMenu_btn" 
-            @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
-            title="Show Actions"
-          >
-            ☰
-          </button>
+          <div class="actionMenu_wrap">
+            <button 
+              class="actionMenu_btn" 
+              @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+              title="Show Actions"
+            >
+              ☰
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
