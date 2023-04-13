@@ -11,6 +11,7 @@
 
   <div>
     <button
+      class="actionMenu_btn"
       type="button"
       title="Quick Set Date Range"
       aria-label="Quick Set Date Range"
