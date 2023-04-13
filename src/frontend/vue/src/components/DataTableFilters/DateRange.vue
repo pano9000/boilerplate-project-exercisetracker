@@ -21,6 +21,7 @@
     </button>
     <ActionMenu
       @update-actionMenuRef="(ref) => actionMenu.value = ref"
+      @update-actionMenuVisible="(value) => actionMenuVisible.value = value"
       :action-menu-visible="actionMenuVisible"
     >
       <ActionMenuEntry @action-menu-event="quickDateButtonsHandler('currentDay')">
@@ -80,9 +81,6 @@
 
   const dateFrom = reactive({});
   const dateTo = reactive({});
-
-  const showQuickDateMenu = reactive({value: false});
-
 
   function quickDateButtonsHandler(mode, dateFromP = dateFrom, dateToP = dateTo, dateRangeP = dateRange) {
     dateFromP.value = (mode !== "showAll") ? dateRangeP[mode].start.toISOString().slice(0,10) : '';
