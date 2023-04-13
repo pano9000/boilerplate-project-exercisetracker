@@ -12,14 +12,13 @@
   const actionMenu = ref(null);
 
 
-  const emit = defineEmits(["updateActionMenuRef"])
+  const emit = defineEmits(["updateActionMenuRef", "updateActionMenuVisible"])
   const props = defineProps(["actionMenuVisible"])
 
 
-  function actionMenuDisableVisibility(actionMenuVisible = props.actionMenuVisible) {
-    if (actionMenuVisible.value !== false) {
-      actionMenuVisible.value = false
-    }
+  async function actionMenuDisableVisibility(actionMenuVisible = props.actionMenuVisible) {
+
+    emit("updateActionMenuVisible", !actionMenuVisible);
   }
 
   function actionMenuHandleEscKey(event) {
