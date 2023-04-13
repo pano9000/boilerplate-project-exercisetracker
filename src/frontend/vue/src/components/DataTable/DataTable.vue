@@ -280,6 +280,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     padding: 0.4rem 0.8rem;
   }
 
+  .actionMenu_btn > * {
+    pointer-events: none;
+  }
+
   .actionMenu_menu {
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
