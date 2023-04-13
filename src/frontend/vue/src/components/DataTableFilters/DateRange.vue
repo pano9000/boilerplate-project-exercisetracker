@@ -14,7 +14,7 @@
       type="button"
       title="Quick Set Date Range"
       aria-label="Quick Set Date Range"
-      @click="() => showQuickDateMenu.value = !showQuickDateMenu.value"
+      @click="DateRangeActionButtonHandler($event, actionMenuVisible)"
     >
       <IconCalendarCode></IconCalendarCode>
     </button>
@@ -53,11 +53,17 @@
   import { IconCalendarCode } from '@tabler/icons-vue';
   import ActionMenuEntry from '../ActionMenuEntry.vue';
   import ActionMenu from '../ActionMenu.vue';
+  import { actionButtonHandler } from '../ActionMenu.functions';
 
 
   const actionMenu = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
 
+  function DateRangeActionButtonHandler(event, actionMenuVisible) {
+
+    actionButtonHandler(event, actionMenuVisible, actionMenu)
+
+  };
 
   const dateRange = new DateRange();
 
