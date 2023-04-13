@@ -1,7 +1,9 @@
 <template>
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="props.actionMenuVisible.value === true">
-    <slot></slot>
-  </menu>
+  <Transition>
+    <menu ref="actionMenu" class="actionMenu_menu" v-show="props.actionMenuVisible.value === true">
+      <slot></slot>
+    </menu>
+  </Transition>
 </template>
 
 
