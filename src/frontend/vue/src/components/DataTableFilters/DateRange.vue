@@ -9,7 +9,7 @@
     <input id="ui-dateTo_input" type="date" :value="dateTo.value" @input="updateDateValue($event, 'update:dateTo', dateTo)">
   </div>
 
-  <div>
+  <div class="actionMenu_wrap">
     <button
       class="actionMenu_btn"
       type="button"
