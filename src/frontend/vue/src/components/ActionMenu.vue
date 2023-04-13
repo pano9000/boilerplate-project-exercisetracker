@@ -1,7 +1,9 @@
 <template>
-  <menu ref="actionMenu" class="actionMenu_menu" v-show="props.actionMenuVisible.value === true">
-    <slot></slot>
-  </menu>
+  <Transition>
+    <menu ref="actionMenu" class="actionMenu_menu" v-show="props.actionMenuVisible.value === true">
+      <slot></slot>
+    </menu>
+  </Transition>
 </template>
 
 
@@ -10,14 +12,13 @@
   const actionMenu = ref(null);
 
 
-  const emit = defineEmits(["updateActionMenuRef"])
+  const emit = defineEmits(["updateActionMenuRef", "updateActionMenuVisible"])
   const props = defineProps(["actionMenuVisible"])
 
 
-  function actionMenuDisableVisibility(actionMenuVisible = props.actionMenuVisible) {
-    if (actionMenuVisible.value !== false) {
-      actionMenuVisible.value = false
-    }
+  async function actionMenuDisableVisibility(actionMenuVisible = props.actionMenuVisible) {
+
+    emit("updateActionMenuVisible", !actionMenuVisible);
   }
 
   function actionMenuHandleEscKey(event) {

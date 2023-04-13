@@ -43,13 +43,15 @@
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
-          <button 
-            class="actionMenu_btn" 
-            @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
-            title="Show Actions"
-          >
-            ☰
-          </button>
+          <div class="actionMenu_wrap">
+            <button 
+              class="actionMenu_btn" 
+              @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+              title="Show Actions"
+            >
+              ☰
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
@@ -73,6 +75,7 @@
 
   <ActionMenu
     @update-actionMenuRef="(ref) => actionMenu.value = ref"
+    @update-actionMenuVisible="(value) => actionMenuVisible.value = value"
     :action-menu-visible="actionMenuVisible"
   >
     <slot name="actionMenuEntries"></slot>
@@ -150,42 +153,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
   function updatePaginatedListFunc(updatedValue) {
     paginatedList.value = updatedValue
   };
-
-
-  function actionMenuDisableVisibility(actionMenuVisible) {
-    if (actionMenuVisible.value !== false) {
-      actionMenuVisible.value = false
-    }
-  }
-
-  function actionMenuHandleEscKey(event) {
-    if (event.key === "Escape") {
-      actionMenuDisableVisibility(actionMenuVisible)
-    }
-  }
-
-  function actionMenuHandleEmptyClick(event) {
-    if (!event.target.classList.contains("actionMenu_btn")) {
-      actionMenuDisableVisibility(actionMenuVisible)
-    }
-  }
-
-  const windowEventListeners = {
-    escapeKey: ["keydown", actionMenuHandleEscKey],
-    emptyClick: ["click", actionMenuHandleEmptyClick]
-  };
-
-  onMounted( () => {
-    for (const eventListener in windowEventListeners) {
-      window.addEventListener(...windowEventListeners[eventListener])
-    }
-  });
-
-  onBeforeUnmount( () => {
-    for (const eventListener in windowEventListeners) {
-      window.removeEventListener(...windowEventListeners[eventListener])
-    }
-  });
 
 </script>
 
@@ -275,9 +242,19 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     width: 6rem;
   }
 
+  .actionMenu_wrap {
+    position: relative;
+    width: max-content;
+    margin: 0 auto;
+  }
+
   .actionMenu_btn {
     margin: 0;
     padding: 0.4rem 0.8rem;
+  }
+
+  .actionMenu_btn > * {
+    pointer-events: none;
   }
 
   .actionMenu_menu {
@@ -289,6 +266,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     margin: 0;
     padding: 0.5rem;
     position: absolute;
+    right: 0;
+    top: 0;
+    width: max-content;
+    z-index: 999;
   }
 
   .actionMenu_menu li {
