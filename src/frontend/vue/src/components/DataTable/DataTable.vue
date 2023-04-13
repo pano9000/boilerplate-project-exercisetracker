@@ -244,6 +244,8 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   .actionMenu_wrap {
     position: relative;
+    width: max-content;
+    margin: 0 auto;
   }
 
   .actionMenu_btn {
