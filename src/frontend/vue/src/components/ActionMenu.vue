@@ -14,7 +14,7 @@
   const props = defineProps(["actionMenuVisible"])
 
 
-  function actionMenuDisableVisibility(actionMenuVisible) {
+  function actionMenuDisableVisibility(actionMenuVisible = props.actionMenuVisible) {
     if (actionMenuVisible.value !== false) {
       actionMenuVisible.value = false
     }
@@ -22,13 +22,13 @@
 
   function actionMenuHandleEscKey(event) {
     if (event.key === "Escape") {
-      actionMenuDisableVisibility(actionMenuVisible)
+      actionMenuDisableVisibility()
     }
   }
 
   function actionMenuHandleEmptyClick(event) {
     if (!event.target.classList.contains("actionMenu_btn")) {
-      actionMenuDisableVisibility(actionMenuVisible)
+      actionMenuDisableVisibility()
     }
   }
 
