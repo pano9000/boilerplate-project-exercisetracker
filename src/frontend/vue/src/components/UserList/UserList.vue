@@ -55,6 +55,12 @@
 
       </DataTable>
 
+      <div class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
+        <MessageBox
+          :options="messageBoxOptions.value"
+          >
+        </MessageBox>
+      </div>
 
       <div v-if="uiVisibility.value.createUser">
         <ModalWindow @close-modal="uiVisibility.value.createUser=false">
@@ -103,6 +109,8 @@ import LoadingSpinner from "../Loading-Spinner.vue";
 
 import ActionMenuEntry from "../ActionMenuEntry.vue";
 import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
+import MessageBox from "../MessageBox.vue";
+import { MessageBoxOptions } from "../MessageBox.functions";
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -125,6 +133,9 @@ import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
     { name: "Username", value: "username", default: true },
   ]
 
+  const messageBoxOptions = reactive( { value: ""});
+
+
 
   async function loadUsersHandler(userFilters, userList) {
     try {
@@ -137,6 +148,7 @@ import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
     }
     catch(error) {
       console.log("error fetch users", error)
+      messageBoxOptions.value = MessageBoxOptions("Getting UserList failed", "Error fetching users" + apiResponse.msg);
     }
   }
 
