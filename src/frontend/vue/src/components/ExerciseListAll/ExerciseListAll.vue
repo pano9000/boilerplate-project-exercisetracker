@@ -15,7 +15,7 @@
     <LoadingSpinner v-if="isLoading">
     </LoadingSpinner>
 
-    <section v-else-if="exerciseList.value.length > 0">
+    <section v-else>
   
       <DataTable
         :table-options="{showSelection: true, showAction: true}"
@@ -47,8 +47,13 @@
         </template>
 
       </DataTable>
-
-
+      
+      <div class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
+        <MessageBox
+          :options="messageBoxOptions.value"
+          >
+        </MessageBox>
+      </div>
 
     </section>
   
@@ -65,6 +70,8 @@
   import ActionMenuEntry from "../ActionMenuEntry.vue";
   import LoadingSpinner from "../Loading-Spinner.vue";
   import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
+  import MessageBox from "../MessageBox.vue";
+  import { MessageBoxOptions } from "../MessageBox.functions";
 
   const dataTableFiltersSortByOptions = [
     { name: "Date", value: "date" },
@@ -97,6 +104,8 @@
     }
   });
 
+  const messageBoxOptions = reactive({value: ""});
+
 
   /**
    * 
@@ -106,6 +115,7 @@
   async function loadExerciseHandler(exerciseFilters, exerciseList) {
 
       try {
+        messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
         isLoading.value = true;
         const apiResponse = await getAllExercises(exerciseFilters);
         isLoading.value = false;
@@ -115,10 +125,15 @@
           entry.date = new Date(entry.date).toLocaleDateString()
           return entry
         });
+        if (apiResponse.data.log.length < 1) {
+          messageBoxOptions.value = MessageBoxOptions("No Exercises Found", "There were no exercises found with your current filters", "info");
+          return
+        }
         //return apiResponse.data
       }
       catch(error) {
         console.log("error fetchexercise", error)
+        messageBoxOptions.value = MessageBoxOptions("Getting ExerciseList failed", "Error fetching ExerciseList " + error);
       }
   }
 
