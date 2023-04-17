@@ -64,6 +64,7 @@
 <script setup>
   import { ref, reactive, onMounted, computed } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
+  import { handleApiResponse } from "../../services/apiService";
   import DataTable from "../DataTable/DataTable.vue";
   import { uiVisibilityHandler, updateValue } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
@@ -82,7 +83,7 @@
   ]
 
 
-  const isLoading = ref(false)
+  const isLoading = ref(true)
 
   const title = "User Exercise Logs";
 
@@ -96,7 +97,6 @@
   const exerciseList = reactive({
     value: []
   });
-
 
   const uiVisibility = reactive( {
     value: {
@@ -120,6 +120,7 @@
         const apiResponse = await getAllExercises(exerciseFilters);
         isLoading.value = false;
         console.log(apiResponse)
+        handleApiResponse(apiResponse);
         exerciseCount.value = apiResponse.data.count
         exerciseList.value = apiResponse.data.log.map(entry => {
           entry.date = new Date(entry.date).toLocaleDateString()
