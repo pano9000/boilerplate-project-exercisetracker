@@ -47,7 +47,7 @@
         </template>
 
       </DataTable>
-      
+
       <div class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
         <MessageBox
           :options="messageBoxOptions.value"
@@ -161,6 +161,11 @@
 
     }
   }
+
+  onMounted( async () => {
+    await loadExerciseHandler("", exerciseList);
+    isLoading.value = false;
+  })
 
 
 
