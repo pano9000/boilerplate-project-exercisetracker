@@ -153,7 +153,7 @@ import { MessageBoxOptions } from "../MessageBox.functions";
   }
 
   onMounted( async () => {
-    userList.value = (await getAllUsers()).data;
+    await loadUsersHandler("", userList);
     isLoading.value = false;
   })
 
