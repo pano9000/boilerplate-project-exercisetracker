@@ -60,7 +60,13 @@
     </menu>
   </table>
 
-  
+  <ActionMenu
+    @update-actionMenuRef="(ref) => actionMenu.value = ref"
+    @update-actionMenuVisible="(value) => actionMenuVisible.value = value"
+    :action-menu-visible="actionMenuVisible"
+  >
+    <slot name="actionMenuEntries"></slot>
+  </ActionMenu>
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
@@ -75,22 +81,6 @@
     }"
   >
   </ListActionButtons>
-
-  </section>
-
-  <ActionMenu
-    @update-actionMenuRef="(ref) => actionMenu.value = ref"
-    @update-actionMenuVisible="(value) => actionMenuVisible.value = value"
-    :action-menu-visible="actionMenuVisible"
-  >
-    <slot name="actionMenuEntries"></slot>
-  </ActionMenu>
-
-  <section class="ui-datatable_wrap">
-
-    <div class="ui-datatable_message">
-      No Data Found
-    </div>
 
   </section>
 
