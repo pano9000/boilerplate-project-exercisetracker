@@ -1,13 +1,13 @@
 <template>
   <PaginationBar
-   v-if="paginationbarOptions.showTop === true"
+   v-if="paginationbarOptions.showTop === true && dataList.value.length > 0"
    :list-to-paginate="dataList.value"
    :allow-selection="paginationbarOptions.allowSelection"
    @update-paginated-list="updatePaginatedListFunc"
    >
 
   </PaginationBar>
-  <section class="ui-datatable_wrap">
+  <section class="ui-datatable_wrap" v-if="dataList.value.length > 0">
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
@@ -55,7 +55,12 @@
         </td>
       </tr>
     </tbody>
+    <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
+      <slot name="actionMenuEntries"></slot>
+    </menu>
   </table>
+
+  
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
@@ -80,6 +85,14 @@
   >
     <slot name="actionMenuEntries"></slot>
   </ActionMenu>
+
+  <section class="ui-datatable_wrap">
+
+    <div class="ui-datatable_message">
+      No Data Found
+    </div>
+
+  </section>
 
 </template>
 
@@ -170,6 +183,12 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   .ui-datatable_wrap > *:last-child {
     border-radius:  var(--border-radius-bottom);
+  }
+
+  .ui-datatable_message {
+    padding: 2rem;
+    font-weight: 400;
+    background-color: azure;
   }
 
   .ui-datatable {
