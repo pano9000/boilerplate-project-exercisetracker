@@ -1,6 +1,6 @@
 <template>
 
-  <section class="ui-filter_section">
+  <section class="ui-filter_section ui-filter_section-wrap">
     <div
       tabindex="0"
       class="ui-filter_toggle"
@@ -125,6 +125,12 @@
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     position: relative;
+  }
+
+  .ui-filter_section-wrap {
+
+    margin: .75rem 0rem;
+
   }
 
   .ui-filter_toggle {
