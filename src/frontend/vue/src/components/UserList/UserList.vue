@@ -16,6 +16,7 @@
 
     <LoadingSpinner v-if="isLoading">
     </LoadingSpinner>
+
     <section v-else>
 
       <DataTable
@@ -139,11 +140,15 @@ import { MessageBoxOptions } from "../MessageBox.functions";
 
   async function loadUsersHandler(userFilters, userList) {
     try {
+      messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
       isLoading.value = true;
       const apiResponse = await getAllUsers(userFilters);
       userList.value = apiResponse.data
       isLoading.value = false;
       console.log(apiResponse)
+      if (userList.value.length < 1) {
+        messageBoxOptions.value = MessageBoxOptions("No Users Found", "Sorry, there are no users to be displayed", "info");
+      }
       //return apiResponse.data
     }
     catch(error) {
