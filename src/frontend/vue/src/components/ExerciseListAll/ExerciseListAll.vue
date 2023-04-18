@@ -76,11 +76,11 @@
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const dataTableFiltersSortByOptions = [
-    { name: "Date", value: "date" },
+    { name: "Date", value: "date", default: true },
     { name: "Description", value: "description" },
     { name: "Duration", value: "duration" },
-    { name: "User Id", value: "userId" },
     { name: "Exercise Id", value: "_id" },
+    { name: "User Id", value: "userId" },
   ]
 
   const filtersStore = useDataTableFiltersStore();
