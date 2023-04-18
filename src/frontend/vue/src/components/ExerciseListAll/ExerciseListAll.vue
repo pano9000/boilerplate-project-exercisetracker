@@ -85,6 +85,14 @@
 
   const filtersStore = useDataTableFiltersStore();
 
+  filtersStore.filters = {
+    limit: 0,
+    dateFrom: "",
+    dateTo: "",
+    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortOrder: "1"
+  };
+
   const isLoading = ref(true)
 
   const title = "User Exercise Logs";

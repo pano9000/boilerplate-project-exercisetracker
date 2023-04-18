@@ -88,15 +88,6 @@
 
   const filtersStore = useDataTableFiltersStore();
 
-  filtersStore.filters = {
-    limit: 0,
-    dateFrom: "",
-    dateTo: "",
-    sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.default === true)?.value || props.options?.sortByOptions[0]?.value,
-    sortOrder: "1"
-  };
-
-
   const filtersVisible = ref(true);
 
 </script>

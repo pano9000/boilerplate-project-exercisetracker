@@ -137,6 +137,13 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
     { name: "Username", value: "username", default: true },
   ]
 
+
+  filtersStore.filters = {
+    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortOrder: "1"
+  };
+
+
   const messageBoxOptions = reactive( { value: ""});
 
 
