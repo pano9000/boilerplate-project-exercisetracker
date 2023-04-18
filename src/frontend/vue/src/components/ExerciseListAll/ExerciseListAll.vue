@@ -6,7 +6,7 @@
       actionButtonText: 'Load Exercises',
       sortByOptions: dataTableFiltersSortByOptions
     }"
-    @click-action-button="(exerciseFilters) => loadExerciseHandler(filtersStore.filters, exerciseList)"
+    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
   </DataTableFilters>
 
