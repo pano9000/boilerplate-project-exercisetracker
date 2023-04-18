@@ -19,8 +19,8 @@
 
         <div class="ui-filter-flex_wrap">
           <DateRange
-            v-model:dateFrom="filters.dateFrom"
-            v-model:dateTo="filters.dateTo"
+            v-model:dateFrom="filtersStore.filters.dateFrom"
+            v-model:dateTo="filtersStore.filters.dateTo"
           >
           </DateRange>
         </div>
@@ -33,7 +33,7 @@
 
           <div>
             <SortBy 
-              v-model="filters.sortBy"
+              v-model="filtersStore.filters.sortBy"
               :sort-by-options="options.sortByOptions"
             >
             </SortBy>
@@ -42,7 +42,7 @@
           <div>
             <span>Sort Order</span>
             <SortOrder 
-              v-model="filters.sortOrder"
+              v-model="filtersStore.filters.sortOrder"
             >
             </SortOrder>
           </div>
@@ -57,7 +57,7 @@
         <div class="ui-filter-flex_wrap">
 
           <div>
-            <Limit v-model="filters.limit"></Limit>
+            <Limit v-model="filtersStore.filters.limit"></Limit>
           </div>
 
         </div>
@@ -66,7 +66,6 @@
 
 
       <div class="ui-filter-flex_wrap">
-
         <button @click.prevent="() => { filtersVisible = false; $emit('clickActionButton', filters) }">{{ options.actionButtonText }}</button>
       </div>
     </form>
@@ -82,18 +81,21 @@
   import SortBy from "./SortBy.vue";
   import DateRange from "./DateRange.vue";
   import Limit from "./Limit.vue";
+  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const props = defineProps(["options"])
   defineEmits(["clickActionButton"])
 
+  const filtersStore = useDataTableFiltersStore();
 
-  const filters = ref({
+  filtersStore.filters = {
     limit: 0,
     dateFrom: "",
     dateTo: (new Date()).toISOString().slice(0,10),
     sortBy: props.options?.sortByOptions?.find(sortByOption => sortByOption.default === true)?.value,
     sortOrder: "1"
-  });
+  };
+
 
   const filtersVisible = ref(true);
 
