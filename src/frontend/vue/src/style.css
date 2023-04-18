@@ -125,6 +125,23 @@ label {
   text-align: center;
 }
 
+/*
+.ui_section section {
+  background-color: azure;
+  padding: .75rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  position: relative;
+}
+*/
+.ui_section .ui-section-bgwrap {
+  background-color: lightgray;
+  padding: .75rem;
+  border-radius: var(--border-radius);
+  box-shadow: inset var(--box-shadow);
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

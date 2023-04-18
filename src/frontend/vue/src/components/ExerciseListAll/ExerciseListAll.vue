@@ -73,6 +73,7 @@
   import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
   import MessageBox from "../MessageBox.vue";
   import { MessageBoxOptions } from "../MessageBox.functions";
+  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const dataTableFiltersSortByOptions = [
     { name: "Date", value: "date" },
@@ -82,6 +83,15 @@
     { name: "Exercise Id", value: "_id" },
   ]
 
+  const filtersStore = useDataTableFiltersStore();
+
+  filtersStore.filters = {
+    limit: 0,
+    dateFrom: "",
+    dateTo: "",
+    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortOrder: "1"
+  };
 
   const isLoading = ref(true)
 
@@ -163,7 +173,7 @@
   }
 
   onMounted( async () => {
-    await loadExerciseHandler("", exerciseList);
+    await loadExerciseHandler(filtersStore.filters, exerciseList);
     isLoading.value = false;
   })
 

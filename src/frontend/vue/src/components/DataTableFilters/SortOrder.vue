@@ -5,8 +5,7 @@
   <input 
     id="ui-sortorder_input-asc"
     type="radio"
-    @change="$emit('update:modelValue', sortOrder)"
-    v-model="sortOrder"
+    v-model="filtersStore.filters.sortOrder"
     value="1"
   >
   <label 
@@ -21,8 +20,7 @@
   <input 
     id="ui-sortorder_input-dsc" 
     type="radio"
-    @change="$emit('update:modelValue', sortOrder)"
-    v-model="sortOrder"
+    v-model="filtersStore.filters.sortOrder"
     value="-1"
   >
   <label 
@@ -40,12 +38,13 @@
 
 <script setup>
   import { IconSortDescending } from '@tabler/icons-vue';
-  import { ref } from 'vue';
+  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+
+  const filtersStore = useDataTableFiltersStore(); //check if we can get around needing to import this here?
 
   defineProps(["modelValue"]);
   defineEmits(['update:modelValue']);
 
-  const sortOrder = ref(1)
 
 </script>
 
