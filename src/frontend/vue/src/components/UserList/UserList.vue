@@ -112,6 +112,9 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
 import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 import MessageBox from "../MessageBox.vue";
 import { MessageBoxOptions } from "../MessageBox.functions";
+import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+
+  const filtersStore = useDataTableFiltersStore();
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -158,7 +161,7 @@ import { MessageBoxOptions } from "../MessageBox.functions";
   }
 
   onMounted( async () => {
-    await loadUsersHandler("", userList);
+    await loadUsersHandler(filtersStore.filters, userList);
     isLoading.value = false;
   })
 
