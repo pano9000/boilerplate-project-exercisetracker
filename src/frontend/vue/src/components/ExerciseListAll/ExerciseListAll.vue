@@ -6,7 +6,7 @@
       actionButtonText: 'Load Exercises',
       sortByOptions: dataTableFiltersSortByOptions
     }"
-    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
+    @click-action-button="(exerciseFilters) => loadExerciseHandler(filtersStore.filters, exerciseList)"
   >
   </DataTableFilters>
 
@@ -73,6 +73,7 @@
   import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
   import MessageBox from "../MessageBox.vue";
   import { MessageBoxOptions } from "../MessageBox.functions";
+  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const dataTableFiltersSortByOptions = [
     { name: "Date", value: "date" },
@@ -82,6 +83,7 @@
     { name: "Exercise Id", value: "_id" },
   ]
 
+  const filtersStore = useDataTableFiltersStore();
 
   const isLoading = ref(true)
 
@@ -163,7 +165,7 @@
   }
 
   onMounted( async () => {
-    await loadExerciseHandler("", exerciseList);
+    await loadExerciseHandler(filtersStore.filters, exerciseList);
     isLoading.value = false;
   })
 
