@@ -78,14 +78,18 @@
     new DataTableKey("User Id", "userId"),
   ])
 
+  const sortByCurrent = computed( () => {
+    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
+  });
+
   const filtersStore = useDataTableFiltersStore();
 
   filtersStore.filters = {
     limit: 0,
     dateFrom: "",
     dateTo: "",
-    sortBy: dataTableKeys.find(sortByOption => sortByOption.default === true)?.value || dataTableKeys[0]?.value,
-    sortOrder: "1"
+    sortBy: sortByCurrent,
+    sortOrder: "1",
   };
 
   const isLoading = ref(true)
