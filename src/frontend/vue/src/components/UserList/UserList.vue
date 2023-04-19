@@ -30,7 +30,8 @@
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
         @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys, filtersStore.filters, userList, loadUsersHandler)"
+
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
