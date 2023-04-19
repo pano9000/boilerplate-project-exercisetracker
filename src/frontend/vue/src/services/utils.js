@@ -121,12 +121,28 @@ export function inputHandler(event, options) {
   updateFormItemValidity();
 }
 
-export function tableHeadingSortHandler(dataKeyId, dataTableItems) {
-  console.log("clicked dataKeyId", dataKeyId)
-  
-  for (const dataTableItem in dataTableItems) {
-    dataTableItems[dataTableItem]["currentActive"] = (dataTableItems[dataTableItem]["key"] === dataKeyId) ? true : false;
+/**
+ * 
+ * @param {String} dataKeyId 
+ * @param {[{}]} dataTableItems 
+ * @param {{}} dataTableFilters 
+ * @param {[{}]} dataList 
+ * @param {()} dataLoadHandler 
+ */
+export function tableHeadingSortHandler(dataKeyId, dataTableItems, dataTableFilters, dataList, dataLoadHandler) {
+
+  const previousActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.currentActive === true);
+  const newActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.key === dataKeyId);
+  dataTableItems[previousActiveIndex].currentActive = false;
+  dataTableItems[newActiveIndex].currentActive = true;
+
+  if (previousActiveIndex === newActiveIndex) {
+    dataTableFilters.sortOrder *= -1
+  } else {
+    dataTableFilters.sortOrder = 1
   }
+
+  dataLoadHandler(dataTableFilters, dataList);
 }
 
 
