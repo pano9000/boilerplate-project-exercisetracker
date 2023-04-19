@@ -4,7 +4,7 @@
   <DataTableFilters
     :options="{
       actionButtonText: 'Load Exercises',
-      sortByOptions: dataTableKeys
+      sortByOptions: sortedDataTableKeys
     }"
     @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
@@ -77,6 +77,17 @@
     new DataTableKey("Description", "description"),
     new DataTableKey("Duration (min)", "duration"),
   ]);
+
+  const sortedDataTableKeys = [...dataTableKeys.value].sort( (a, b) => {
+
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+
+  });
 
   const sortByCurrent = computed( () => {
     return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
