@@ -4,7 +4,7 @@
   <DataTableFilters
     :options="{
       actionButtonText: 'Load Exercises',
-      sortByOptions: dataTableFiltersSortByOptions
+      sortByOptions: sortedDataTableKeys
     }"
     @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
@@ -21,19 +21,14 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :tableHeadings="['User Id', 'Exercise Id', 'Date', 'Description', 'Duration (min)']"
         :data-list="exerciseList"
-        :dataKeys="[ 
-          'userId',
-          '_id',
-          'date',
-          'description',
-          'duration',
-        ]"
-        :dataKeyId="'_id'"
+        :data-keys="dataTableKeys"
+        :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
         @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys, filtersStore.filters, exerciseList, loadExerciseHandler)"
+
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
@@ -66,7 +61,7 @@
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import { handleApiResponse } from "../../services/apiService";
   import DataTable from "../DataTable/DataTable.vue";
-  import { uiVisibilityHandler, updateValue } from "../../services/utils";
+  import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
   import { IconX, IconPencil } from "@tabler/icons-vue"
   import ActionMenuEntry from "../ActionMenuEntry.vue";
   import LoadingSpinner from "../Loading-Spinner.vue";
@@ -75,13 +70,28 @@
   import { MessageBoxOptions } from "../MessageBox.functions";
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
-  const dataTableFiltersSortByOptions = [
-    { name: "Date", value: "date", default: true },
-    { name: "Description", value: "description" },
-    { name: "Duration", value: "duration" },
-    { name: "Exercise Id", value: "_id" },
-    { name: "User Id", value: "userId" },
-  ]
+  const dataTableKeys = ref([
+    new DataTableKey("Exercise Id", "_id"),
+    new DataTableKey("User Id", "userId"),
+    new DataTableKey("Date", "date", true, true),
+    new DataTableKey("Description", "description"),
+    new DataTableKey("Duration (min)", "duration"),
+  ]);
+
+  const sortedDataTableKeys = [...dataTableKeys.value].sort( (a, b) => {
+
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+
+  });
+
+  const sortByCurrent = computed( () => {
+    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
+  });
 
   const filtersStore = useDataTableFiltersStore();
 
@@ -89,8 +99,8 @@
     limit: 0,
     dateFrom: "",
     dateTo: "",
-    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
-    sortOrder: "1"
+    sortBy: sortByCurrent,
+    sortOrder: "1",
   };
 
   const isLoading = ref(true)

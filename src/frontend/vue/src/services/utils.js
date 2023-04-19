@@ -75,7 +75,6 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
   currentFormItem.available = availabilityResult.data.available;
 }
 
-
 export function getIsValidData(reactiveForm) {
   for (let item in reactiveForm) {
     const isValid = (reactiveForm[item]["valid"] === true);
@@ -120,5 +119,41 @@ export function inputHandler(event, options) {
   }
 
   updateFormItemValidity();
+}
 
+/**
+ * 
+ * @param {String} dataKeyId 
+ * @param {[{}]} dataTableItems 
+ * @param {{}} dataTableFilters 
+ * @param {[{}]} dataList 
+ * @param {()} dataLoadHandler 
+ */
+export function tableHeadingSortHandler(dataKeyId, dataTableItems, dataTableFilters, dataList, dataLoadHandler) {
+
+  const previousActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.currentActive === true);
+  const newActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.key === dataKeyId);
+  dataTableItems[previousActiveIndex].currentActive = false;
+  dataTableItems[newActiveIndex].currentActive = true;
+
+  if (previousActiveIndex === newActiveIndex) {
+    dataTableFilters.sortOrder *= -1
+  } else {
+    dataTableFilters.sortOrder = 1
+  }
+
+  dataLoadHandler(dataTableFilters, dataList);
+}
+
+
+/**
+ * 
+ * @param {String} name 
+ * @param {String} key 
+ * @param { Boolean } defaultSortBy 
+ */
+export function DataTableKey(name, key, defaultSortBy = false, currentActive = false) {
+  return {
+    name, key, defaultSortBy, currentActive
+  }
 }

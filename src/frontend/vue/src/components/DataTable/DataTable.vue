@@ -34,14 +34,24 @@
             @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
           >
         </th>
-        <th v-for="tableHeading in tableHeadings" :key="tableHeading" class="list-header list-header-flex">{{ tableHeading }}</th>
+
+        <th 
+          v-for="dataKey in dataKeys" 
+          :key="dataKey.key" 
+          class="list-header list-header-flex list-header-sortable"
+          @click="$emit('clickTableHeading', dataKey.key)"
+
+        >
+          {{ dataKey.name }}
+        </th>
+
         <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
-        <td v-for="dataKey in dataKeys" :key="dataKey">{{ data[dataKey] }}</td>
+        <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
           <div class="actionMenu_wrap">
             <button 
@@ -98,7 +108,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const props = defineProps([
     "tableOptions", 
-    "tableHeadings", 
     "dataList", 
     "dataKeyId",
     "dataKeys", 
@@ -106,7 +115,7 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     "paginationbarOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected"]);
+  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading"]);
 
   const actionMenu = reactive({ value: {} });
 
@@ -255,6 +264,16 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     position: relative;
     width: max-content;
     margin: 0 auto;
+  }
+
+  .list-header-sortable {
+    cursor: pointer;
+    transition: all .25s;
+  }
+
+  .list-header-sortable:focus,
+  .list-header-sortable:hover {
+    color: #646cff;
   }
 
   .actionMenu_btn {

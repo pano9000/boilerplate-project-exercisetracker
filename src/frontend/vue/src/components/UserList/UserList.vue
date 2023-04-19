@@ -6,7 +6,7 @@
       showDateRange: false,
       showLimit: false,
       actionButtonText: 'Load Users',
-      sortByOptions: dataTableFiltersSortByOptions,
+      sortByOptions: sortedDataTableKeys,
     }"
     @click-action-button="(userFilters) => loadUsersHandler(userFilters, userList)"
   >
@@ -23,14 +23,15 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :table-headings="['UserId', 'Username']"
         :data-list="userList"
-        :data-keys="['_id', 'username']"
+        :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
         @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys, filtersStore.filters, userList, loadUsersHandler)"
+
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
@@ -100,11 +101,11 @@ import UserDetails from "../Forms/UserDetails/UserDetails.vue";
 import CreateExercise from "../Forms/CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
-import { uiVisibilityHandler, updateValue } from "../../services/utils";
+import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
@@ -132,21 +133,33 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
     }
   });
 
-  const dataTableFiltersSortByOptions = [
-    { name: "User Id", value: "_id", default: false },
-    { name: "Username", value: "username", default: true },
-  ]
+  const dataTableKeys = ref([
+    new DataTableKey("User Id", "_id", false),
+    new DataTableKey("Username", "username", true, true)
+  ]);
 
+  const sortedDataTableKeys = [...dataTableKeys.value].sort( (a, b) => {
+
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    return 0;
+
+  });
+
+  const sortByCurrent = computed( () => {
+    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
+  });
 
   filtersStore.filters = {
-    sortBy: dataTableFiltersSortByOptions.find(sortByOption => sortByOption.default === true)?.value || dataTableFiltersSortByOptions[0]?.value,
+    sortBy: sortByCurrent,
     sortOrder: "1"
   };
 
 
   const messageBoxOptions = reactive( { value: ""});
-
-
 
   async function loadUsersHandler(userFilters, userList) {
     try {
