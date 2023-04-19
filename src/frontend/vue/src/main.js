@@ -5,13 +5,13 @@ import './style.css'
 import App from './App.vue'
 import UiAdmin from "./UiAdmin.vue"
 import UserList from "./components/UserList/UserList.vue";
-import ExerciseListAll from "./components/ExerciseListAll/ExerciseListAll.vue";
+import ExerciseList from "./pages/ExerciseList.vue";
 import Start from "./pages/Start.vue";
 
 const routes = [
   { path: '/', component: Start },
   { path: "/userlist", component: UserList },
-  { path: "/exerciselist", component: ExerciseListAll }
+  { path: "/exerciselist", component: ExerciseList }
 ]
 
 const router = createRouter( {
