@@ -71,12 +71,12 @@
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const dataTableKeys = ref([
+    new DataTableKey("Exercise Id", "_id"),
+    new DataTableKey("User Id", "userId"),
     new DataTableKey("Date", "date", true, true),
     new DataTableKey("Description", "description"),
     new DataTableKey("Duration (min)", "duration"),
-    new DataTableKey("Exercise Id", "_id"),
-    new DataTableKey("User Id", "userId"),
-  ])
+  ]);
 
   const sortByCurrent = computed( () => {
     return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
