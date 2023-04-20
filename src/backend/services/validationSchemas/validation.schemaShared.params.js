@@ -18,7 +18,6 @@ const queryParams = {
   "limit":
     query("limit", { errorHandling: "resetParamErrors" })
     .optional()
-    .escape()
     .isIn([5, 10, 25, 50, 100]),
 
   "page":
