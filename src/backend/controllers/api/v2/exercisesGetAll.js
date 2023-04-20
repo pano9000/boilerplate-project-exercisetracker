@@ -1,6 +1,7 @@
 const findDoc = require("../../../services/db/findDoc");
 const createSearchObject = require("../../../services/db/utils/createSearchObject");
 const getPaginationData = require("../../../services/getPaginationData");
+const getQueryOptions = require("../../../services/getQueryOptions");
 
 
 async function exercisesGetAll(req, res) {
@@ -13,10 +14,7 @@ async function exercisesGetAll(req, res) {
     const sortBy = req.query.sortBy || "date";
     const sort = parseInt(req.query.sort) || 1;
 
-    const queryOptions = {
-      limit,
-      skip: ((page - 1) * limit)
-    }
+    const queryOptions = getQueryOptions(page, limit)
 
     const sortOptions = [ [sortBy, sort] ];
 
