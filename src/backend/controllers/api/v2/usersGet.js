@@ -1,17 +1,25 @@
 const findDoc = require("../../../services/db/findDoc");
+const getPaginationData = require("../../../services/getPaginationData");
+const getQueryOptions = require("../../../services/getQueryOptions");
 
 async function usersGet(req, res) {
 
   try {
-    const { sortBy, sort } = req.query;
-    const sortOptions = [[sortBy || "username", sort || 1]];
+    const { page, limit, sortBy, sort } = req.query;
 
-    const findResult = await findDoc.findAll("UserModel", null, sortOptions); //TODO: check if pagination of results should be a thing?
+    const sortOptions = [[ sortBy, sort ]];
+    const queryOptions = getQueryOptions(page, limit)
 
-    res.status(200).json(findResult);
+    const dbModelName = req._dbModelName
+
+    const findResult = await findDoc.findAll(dbModelName, null, sortOptions, queryOptions);
+    const pagination = await getPaginationData(page, limit, dbModelName)
+
+    res.status(200).json({ data: findResult, pagination });
   }
   catch(error) {
-    res.status(500).json({"error": "Getting User List Failed, Please try again later"});
+    console.log(error)
+    res.status(500).json({"error": `Getting User List Failed, Reason: ${error.message}`});
   }
 
 }

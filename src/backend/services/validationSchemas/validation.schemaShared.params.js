@@ -18,13 +18,17 @@ const queryParams = {
   "limit":
     query("limit", { errorHandling: "resetParamErrors" })
     .optional()
-    .escape()
-    .isInt(),
+    .isIn([5, 10, 25, 50, 100]),
+
+  "page":
+    query("page", { errorHandling: "resetParamErrors" })
+    .optional()
+    .isInt({ min: 1, max: 99999 }),
 
   "sort":
     query("sort", { errorHandling: "resetParamErrors" })
     .optional()
-    .isIn(["1", "-1"]),
+    .isIn([1, -1]),
 
   "sortBy": (acceptedValues) => {
     return query("sortBy", { errorHandling: "resetParamErrors" })

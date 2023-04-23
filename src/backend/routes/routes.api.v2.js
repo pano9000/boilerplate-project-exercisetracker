@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
 const validation = require("../services/validationSchemas/validation.index");
+const setDefaultParams = require("../middleware/setDefaultParams");
 
 
 router.get("*", controllers.rateLimiter.get);
@@ -10,6 +11,7 @@ router.get(
   "/users",
   validation.check.usersGet,
   validation.handler,
+  setDefaultParams("UserModel"),
   controllers.api.v2.users.get
 );
 
@@ -25,6 +27,7 @@ router.get(
   "/users/exercises",
   validation.check.logsGetAll,
   validation.handler,
+  setDefaultParams("ExerciseModel"),
   controllers.api.v2.users.exercisesGetAll.get
 );
 
