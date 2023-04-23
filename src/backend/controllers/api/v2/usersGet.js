@@ -19,7 +19,7 @@ async function usersGet(req, res) {
   }
   catch(error) {
     console.log(error)
-    res.status(500).json({"error": "Getting User List Failed, Please try again later"});
+    res.status(500).json({"error": `Getting User List Failed, Reason: ${error.message}`});
   }
 
 }
