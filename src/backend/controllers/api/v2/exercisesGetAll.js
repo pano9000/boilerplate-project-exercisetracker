@@ -7,23 +7,19 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function exercisesGetAll(req, res) {
 
   try {
-    const { from: filterDateFrom, to: filterDateTo } = req.query;
-
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const sortBy = req.query.sortBy || "date";
-    const sort = parseInt(req.query.sort) || 1;
+    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sort } = req.query;
 
     const queryOptions = getQueryOptions(page, limit)
-
     const sortOptions = [ [sortBy, sort] ];
 
     const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
     delete searchObject.userId
-    const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
 
-    const pagination = await getPaginationData(page, limit, "ExerciseModel")
+    const dbModelName = req._dbModelName
+
+    const findResult = await findDoc.findAll(dbModelName, searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
+    const pagination = await getPaginationData(page, limit, dbModelName)
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
