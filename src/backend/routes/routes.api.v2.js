@@ -36,6 +36,7 @@ router.get(
   "/users/:userId/exercises",
   validation.check.logsGet,
   validation.handler,
+  setDefaultParams("ExerciseModel"),
   controllers.api.v2.users.userIdExercisesAll.get
 );
 
