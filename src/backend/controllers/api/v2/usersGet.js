@@ -5,16 +5,12 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function usersGet(req, res) {
 
   try {
-
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const sortBy = req.query.sortBy || "username";
-    const sort = parseInt(req.query.sort) || 1;
+    const { page, limit, sortBy, sort } = req.query;
 
     const sortOptions = [[ sortBy, sort ]];
-    const queryOptions = getQueryOptions(page, limit ||10)
+    const queryOptions = getQueryOptions(page, limit)
 
-    const dbModelName = "UserModel"
+    const dbModelName = req._dbModelName
 
     const findResult = await findDoc.findAll(dbModelName, null, sortOptions, queryOptions);
     const pagination = await getPaginationData(page, limit, dbModelName)
