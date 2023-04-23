@@ -23,17 +23,19 @@ async function exercisesGetAll(req, res) {
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
-      count: findResult.length,
-      log: findResult.map(result => {
-        const { description, duration, date, _id, userId } = result;
-        return { 
-          _id,
-          userId,
-          description, 
-          duration, 
-          date
-        }
-      }),
+      data: {
+        count: findResult.length,
+        log: findResult.map(result => {
+          const { description, duration, date, _id, userId } = result;
+          return { 
+            _id,
+            userId,
+            description, 
+            duration, 
+            date
+          }
+        }),
+      },
       pagination
     }
 
