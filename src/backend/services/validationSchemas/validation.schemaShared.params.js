@@ -28,7 +28,7 @@ const queryParams = {
   "sort":
     query("sort", { errorHandling: "resetParamErrors" })
     .optional()
-    .isIn(["1", "-1"]),
+    .isIn([1, -1]),
 
   "sortBy": (acceptedValues) => {
     return query("sortBy", { errorHandling: "resetParamErrors" })
