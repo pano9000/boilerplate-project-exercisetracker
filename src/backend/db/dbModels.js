@@ -3,12 +3,14 @@ const dbSchemas = require("./schemas")
 
 const UserModel = { 
   model: dbConnection.model("UserDoc", dbSchemas.UserSchema),
-  idPrefix: "user"
+  idPrefix: "user",
+  sortByDefault: "username"
 };
 
 const ExerciseModel = {
   model: dbConnection.model("ExerciseDoc", dbSchemas.ExerciseSchema),
-  idPrefix: "exerc"
+  idPrefix: "exerc",
+  sortByDefault: "date"
 };
 
 module.exports = { UserModel, ExerciseModel }
