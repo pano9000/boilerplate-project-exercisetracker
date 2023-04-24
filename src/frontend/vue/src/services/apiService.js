@@ -59,7 +59,7 @@ export const sendToAPI = {
 function ApiResponseStatus(statusOK, msg, data) {
   this.statusOK = statusOK;
   this.msg = msg;
-  this.data = data;
+  this.response = data;
 }
 
 
