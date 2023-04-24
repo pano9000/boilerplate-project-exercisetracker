@@ -78,7 +78,7 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate", "allowSelection"]);
-  const emit = defineEmits(["updatePaginatedList"]);
+  const emit = defineEmits(["updateCurrentPage"]);
   const { listToPaginate, allowSelection } = toRefs(props);
 
 
