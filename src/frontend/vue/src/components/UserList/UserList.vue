@@ -23,7 +23,7 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :data-list="userList"
+        :data-list="dataListStore"
         :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
@@ -113,9 +113,11 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
 import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 import MessageBox from "../MessageBox.vue";
 import { MessageBoxOptions } from "../MessageBox.functions";
-import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore";
+import { useDataListStore } from "../../stores/DataListStore";
 
   const filtersStore = useDataTableFiltersStore();
+  const dataListStore = useDataListStore();
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -161,18 +163,19 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const messageBoxOptions = reactive( { value: ""});
 
-  async function loadUsersHandler(userFilters, userList) {
+  async function loadUsersHandler(userFilters, store) {
     try {
       messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
       isLoading.value = true;
       const apiResponse = await getAllUsers(userFilters);
-      userList.value = apiResponse.data
+      store.data = apiResponse.response.data
+      store.pagination = apiResponse.response.pagination
       isLoading.value = false;
       console.log(apiResponse)
-      if (userList.value.length < 1) {
+      if (store.data.length < 1) {
         messageBoxOptions.value = MessageBoxOptions("No Users Found", "Sorry, there are no users to be displayed", "info");
       }
-      //return apiResponse.data
+      //return apiResponse.response
     }
     catch(error) {
       console.log("error fetch users", error)
@@ -181,8 +184,7 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
   }
 
   onMounted( async () => {
-    await loadUsersHandler(filtersStore.filters, userList);
-    isLoading.value = false;
+    await loadUsersHandler(filtersStore.filters, dataListStore);
   })
 
 </script>
