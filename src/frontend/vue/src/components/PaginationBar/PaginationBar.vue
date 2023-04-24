@@ -8,7 +8,7 @@
           :disabled="!ui_previousPossible"
           title="Previous Page"
           aria-label="Previous Page"
-          @click="ui_activePage--"
+          @click="props.listToPaginate.currentPage--"
         >
           <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
         </button>
@@ -17,15 +17,15 @@
           class="ui-pagination_btn"
           type="button"
           v-for="(pg) in visibleBtns"
-          @click="ui_activePage=pg"
+          @click="props.listToPaginate.currentPage=pg"
           :class="[
-            (pg == ui_activePage) ? 'ui-pagination_btn-activePg' : null, 
+            (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
             (pg == '…') ? 'ui-pagination_btn-placeholder' : null
           ]"
-          :aria-current="pg == ui_activePage"
+          :aria-current="pg == props.listToPaginate.currentPage"
           :disabled="pg == '…'"
           :title="`Go to Page ${pg}`"
-          :aria-label="(pg == ui_activePage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
+          :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
         >
           {{ pg }}
         </button>
@@ -35,7 +35,7 @@
           :disabled="!ui_forwardPossible"
           title="Next Page"
           aria-label="Next Page"
-          @click="ui_activePage++"
+          @click="props.listToPaginate.currentPage++"
         >
           <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
         </button>
@@ -47,7 +47,7 @@
         id="ui-pagination_goToPage-input"
         type="number"
         min="1"
-        :max="totalPages"
+        :max="props.listToPaginate.totalPages"
         @keydown.enter="goToPageHandler"
         v-model="ui_goToPage"
         aria-label="Enter the page number to go to"
@@ -62,7 +62,7 @@
       </select>
     </div>
     <div class="ui-pagination_entriesinfo">
-      <span>{{ ui_qtyVisible }} of {{ listToPaginate.length }} entries</span>
+      <span>{{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }} entries</span>
     </div>
 
 
@@ -82,24 +82,21 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   const { listToPaginate, allowSelection } = toRefs(props);
 
 
-
-  const ui_activePage = ref(1);
   const ui_goToPage = ref(1)
   const ui_showentryqty = ref(5);
-  const ui_forwardPossible = computed( () => (ui_activePage.value < totalPages.value) ? true : false);
-  const ui_previousPossible = computed( () => (ui_activePage.value > 1) ? true : false); 
-  const totalPages = computed( () => Math.ceil(listToPaginate.value.length / ui_showentryqty.value));
+  const ui_forwardPossible = computed( () => (props.listToPaginate.currentPage < props.listToPaginate.totalPages) ? true : false);
+  const ui_previousPossible = computed( () => (props.listToPaginate.currentPage > 1) ? true : false); 
 
   const validPageSelection = computed( () => {
     return (Number.isInteger(ui_goToPage.value) 
-            && ui_goToPage.value <= totalPages.value 
+            && ui_goToPage.value <= props.listToPaginate.totalPages 
             && ui_goToPage.value > 0) ? true : false
   });
 
   const ui_qtyVisible = computed( () => {
-    const from = (ui_showentryqty.value * (ui_activePage.value-1)) + 1;
-    const calcTo = ui_showentryqty.value * ui_activePage.value;
-    const to = (calcTo > listToPaginate.value.length) ? listToPaginate.value.length : calcTo;
+    const from = (ui_showentryqty.value * (props.listToPaginate.currentPage-1)) + 1;
+    const calcTo = ui_showentryqty.value * props.listToPaginate.currentPage;
+    const to = (calcTo > props.listToPaginate.totalEntries) ? props.listToPaginate.totalEntries : calcTo;
     return `${from}–${to}`
   });
 
@@ -119,7 +116,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const totalBtns = computed( () => {
     const totalBtns = [];
-    for (let i=1; i<=totalPages.value; i++) {
+    for (let i=1; i<=props.listToPaginate.totalPages; i++) {
       totalBtns.push(i);
     };
     return totalBtns;
@@ -134,26 +131,26 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
      */
     //TODO: Refactor and simplify - looks ugly and hackish
     const visibleBtns = [[], [], []];
-    if (totalPages.value < 7) {
-      visibleBtns[0] = totalBtns.value.slice(0, (totalPages.value>5) ? 6 : totalPages.value)
+    if (props.listToPaginate.totalPages < 7) {
+      visibleBtns[0] = totalBtns.value.slice(0, (props.listToPaginate.totalPages>5) ? 6 : props.listToPaginate.totalPages)
       return visibleBtns.flatMap(elem => elem);
 
     }
-    if (ui_activePage.value < 5) {
-      visibleBtns[0] = totalBtns.value.slice(0, (totalPages.value>5) ? 6 : totalPages.value)
+    if (props.listToPaginate.currentPage < 5) {
+      visibleBtns[0] = totalBtns.value.slice(0, (props.listToPaginate.totalPages>5) ? 6 : props.listToPaginate.totalPages)
       visibleBtns[1] = ["…"]
-      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages-1, props.listToPaginate.totalPages)
     }
-    else if (ui_activePage.value > totalPages.value-4) {
+    else if (props.listToPaginate.currentPage > props.listToPaginate.totalPages-4) {
       visibleBtns[0] = totalBtns.value.slice(0, 1);
       visibleBtns[1] = ["…"]
-      visibleBtns[2] = totalBtns.value.slice(totalPages.value - 6, totalPages.value)
+      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages - 6, props.listToPaginate.totalPages)
 
     } else {
 
       visibleBtns[0] = totalBtns.value.slice(0, 1)
-      visibleBtns[1] = totalBtns.value.slice(ui_activePage.value - 3, ui_activePage.value + 2)
-      visibleBtns[2] = totalBtns.value.slice(totalPages.value-1, totalPages.value)
+      visibleBtns[1] = totalBtns.value.slice(props.listToPaginate.currentPage - 3, props.listToPaginate.currentPage + 2)
+      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages-1, props.listToPaginate.totalPages)
       visibleBtns[1].push("…");
       visibleBtns[1].unshift("…");
 
@@ -163,8 +160,8 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   })
 
   function updateActivePage() {
-    if (ui_activePage.value > totalPages.value) {
-      ui_activePage.value = totalPages.value
+    if (props.listToPaginate.currentPage > props.listToPaginate.totalPages) {
+      props.listToPaginate.currentPage = props.listToPaginate.totalPages
     }
   }
 
@@ -172,16 +169,16 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   //TODO: add arguments -> caution: refs pass values only, reactive pass the proxy object, which is what we want here
   function goToPageHandler() {
     if (validPageSelection.value) {
-      ui_activePage.value = ui_goToPage.value
+      props.listToPaginate.currentPage = ui_goToPage.value
     }
   }
 
-  watch(ui_activePage, () => {
-    emit("updatePaginatedList", paginatedListComp)
+  watch(props.listToPaginate.currentPage, () => {
+    emit("updateCurrentPage", props.listToPaginate.currentPage)
   })
 
   onMounted( () => {
-    emit("updatePaginatedList", paginatedListComp)
+
   })
 
 
