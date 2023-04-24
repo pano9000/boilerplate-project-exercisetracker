@@ -7,11 +7,12 @@
    >
 
   </PaginationBar>
-  <section class="ui-datatable_wrap" v-if="dataList.value.length > 0">
+
+  <section class="ui-datatable_wrap" v-if="props.dataList.data.length > 0">
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
@@ -31,7 +32,7 @@
             :checked="hasSelectedItems"
             :key="toggleSelection"
             :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
-            @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+            @click.prevent="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
           >
         </th>
 
@@ -49,7 +50,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
+      <tr v-for="(data, index) in props.dataList.data" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
@@ -80,7 +81,7 @@
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
@@ -126,8 +127,8 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const paginatedList = reactive({ value: [] });
 
-  const selectedItems = computed( () => paginatedList.value.filter(item => item.selected === true) );
-  const allItemsSelected = computed( () => (selectedItems.value.length === paginatedList.value.length) ? true : false )
+  const selectedItems = computed( () => props.dataList.data.filter(item => item.selected === true) );
+  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.data.length) ? true : false )
   const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
 
   watch( hasSelectedItems, () => {
