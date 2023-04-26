@@ -18,8 +18,8 @@ async function exercisesGetAll(req, res) {
 
     const dbModelName = req._dbModelName
 
-    const findResult = await findDoc.findAll(dbModelName, searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
-    const pagination = await getPaginationData(page, limit, dbModelName)
+    const findResult = await findDoc.findAll(dbModelName, searchObject, sortOptions, queryOptions);
+    const pagination = await getPaginationData(page, limit, dbModelName, searchObject);
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
