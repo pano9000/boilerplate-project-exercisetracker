@@ -8,7 +8,7 @@ module.exports = function(dbModelName) {
       req.query.page = parseInt(req.query.page) || 1;
       req.query.limit = parseInt(req.query.limit) || 10;
       req.query.sortBy = req.query.sortBy || dbModel[dbModelName]["sortByDefault"];
-      req.query.sort = parseInt(req.query.sort) || 1;
+      req.query.sortOrder = parseInt(req.query.sortOrder) || 1;
   
       req._dbModelName = dbModelName
   

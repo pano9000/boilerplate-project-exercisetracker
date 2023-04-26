@@ -14,7 +14,7 @@ async function userIdExercisesGetAll(req, res) {
       throw new Error("userId undefined/null is invalid")
     }
 
-    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sort } = req.query;
+    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder } = req.query;
 
     const findUserResult = await findDoc.findOne("UserModel", { _id: userId })
 
@@ -23,7 +23,7 @@ async function userIdExercisesGetAll(req, res) {
     }
 
     const queryOptions = getQueryOptions(page, limit)
-    const sortOptions = [ [sortBy, sort] ];
+    const sortOptions = [ [sortBy, sortOrder] ];
 
     const dbModelName = req._dbModelName
 

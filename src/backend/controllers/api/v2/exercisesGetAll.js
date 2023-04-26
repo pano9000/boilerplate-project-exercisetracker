@@ -7,10 +7,10 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function exercisesGetAll(req, res) {
 
   try {
-    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sort } = req.query;
+    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder } = req.query;
 
     const queryOptions = getQueryOptions(page, limit)
-    const sortOptions = [ [sortBy, sort] ];
+    const sortOptions = [ [sortBy, sortOrder] ];
 
     const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt )
