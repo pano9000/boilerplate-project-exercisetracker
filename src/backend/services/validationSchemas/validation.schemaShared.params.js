@@ -25,8 +25,8 @@ const queryParams = {
     .optional()
     .isInt({ min: 1, max: 99999 }),
 
-  "sort":
-    query("sort", { errorHandling: "resetParamErrors" })
+  "sortOrder":
+    query("sortOrder", { errorHandling: "resetParamErrors" })
     .optional()
     .isIn([1, -1]),
 

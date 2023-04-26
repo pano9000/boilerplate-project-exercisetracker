@@ -7,7 +7,7 @@ const logsGetAllSchema = [
   queryParams.to,
   queryParams.limit,
   queryParams.page,
-  queryParams.sort,
+  queryParams.sortOrder,
   queryParams.sortBy([...Object.keys(ExerciseSchema.paths)])
 
 ]

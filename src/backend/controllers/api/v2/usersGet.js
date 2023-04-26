@@ -5,9 +5,9 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function usersGet(req, res) {
 
   try {
-    const { page, limit, sortBy, sort } = req.query;
+    const { page, limit, sortBy, sortOrder } = req.query;
 
-    const sortOptions = [[ sortBy, sort ]];
+    const sortOptions = [[ sortBy, sortOrder ]];
     const queryOptions = getQueryOptions(page, limit)
 
     const dbModelName = req._dbModelName
