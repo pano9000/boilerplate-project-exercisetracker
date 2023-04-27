@@ -184,7 +184,6 @@
 
   onMounted( async () => {
     await loadExerciseHandler(filtersStore.filters, exerciseList);
-    isLoading.value = false;
   })
 
 
