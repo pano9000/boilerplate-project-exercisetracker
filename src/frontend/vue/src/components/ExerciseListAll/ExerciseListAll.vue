@@ -57,7 +57,7 @@
 </template>
 
 <script setup>
-  import { ref, reactive, onMounted, computed } from "vue";
+  import { ref, reactive, onMounted, watch } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import { handleApiResponse } from "../../services/apiService";
   import DataTable from "../DataTable/DataTable.vue";
