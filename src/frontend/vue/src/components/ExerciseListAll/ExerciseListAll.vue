@@ -3,10 +3,8 @@
 
   <DataTableFilters
     :options="{
-      actionButtonText: 'Load Exercises',
       sortByOptions: sortedDataTableKeys
     }"
-    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
   </DataTableFilters>
 
