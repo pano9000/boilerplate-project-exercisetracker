@@ -21,7 +21,7 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :data-list="exerciseList"
+        :data-list="dataListStore"
         :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
@@ -69,6 +69,9 @@
   import MessageBox from "../MessageBox.vue";
   import { MessageBoxOptions } from "../MessageBox.functions";
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+  import { useDataListStore } from "../../stores/DataListStore";
+
+  const dataListStore = useDataListStore();
 
   const dataTableKeys = ref([
     new DataTableKey("Exercise Id", "_id"),
@@ -132,7 +135,7 @@
    * @param {*} exerciseFilters filters from DataTableFilters
    * @param {*} exerciseList reactive list
    */
-  async function loadExerciseHandler(exerciseFilters, exerciseList) {
+  async function loadExerciseHandler(exerciseFilters, store) {
 
       try {
         messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
@@ -183,7 +186,7 @@
   }
 
   onMounted( async () => {
-    await loadExerciseHandler(filtersStore.filters, exerciseList);
+    await loadExerciseHandler(filtersStore.filters, dataListStore);
   })
 
 
