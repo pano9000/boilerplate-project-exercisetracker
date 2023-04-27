@@ -129,20 +129,17 @@ export function inputHandler(event, options) {
  * @param {[{}]} dataList 
  * @param {()} dataLoadHandler 
  */
-export function tableHeadingSortHandler(dataKeyId, dataTableItems, dataTableFilters, dataList, dataLoadHandler) {
+export function tableHeadingSortHandler(dataKeyId, dataTableFilters) {
 
-  const previousActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.currentActive === true);
-  const newActiveIndex = dataTableItems.findIndex(dataTableItem => dataTableItem.key === dataKeyId);
-  dataTableItems[previousActiveIndex].currentActive = false;
-  dataTableItems[newActiveIndex].currentActive = true;
-
-  if (previousActiveIndex === newActiveIndex) {
-    dataTableFilters.sortOrder *= -1
+  if (dataKeyId !== dataTableFilters.filters.sortBy) {
+    dataTableFilters.$patch(state => {
+      state.filters.sortOrder = 1,
+      state.filters.sortBy = dataKeyId
+    })
   } else {
-    dataTableFilters.sortOrder = 1
+    dataTableFilters.filters.sortOrder *= -1
   }
 
-  dataLoadHandler(dataTableFilters, dataList);
 }
 
 
