@@ -203,6 +203,13 @@
   });
 
 
+  watch( () => dataListStore.pagination.currentPage, async (newValue, oldValue) => {
+      if (newValue > dataListStore.pagination.totalPages) {
+        return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
+      }
+      await loadExerciseHandler(filtersStore.filters, dataListStore);
+    }
+  );
 
 </script>
 
