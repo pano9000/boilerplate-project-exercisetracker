@@ -92,9 +92,6 @@
 
   });
 
-  const sortByCurrent = computed( () => {
-    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
-  });
 
   const filtersStore = useDataTableFiltersStore();
 
@@ -102,7 +99,7 @@
     limit: 0,
     dateFrom: "",
     dateTo: "",
-    sortBy: sortByCurrent,
+    sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1",
   };
 
