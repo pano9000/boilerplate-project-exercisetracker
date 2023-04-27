@@ -97,8 +97,8 @@
 
   filtersStore.filters = {
     limit: 0,
-    dateFrom: "",
-    dateTo: "",
+    from: "",
+    to: "",
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1",
   };
