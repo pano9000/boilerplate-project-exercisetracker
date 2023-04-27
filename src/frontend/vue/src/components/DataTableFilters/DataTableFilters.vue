@@ -19,8 +19,8 @@
 
         <div class="ui-filter-flex_wrap">
           <DateRange
-            v-model:dateFrom="filtersStore.filters.dateFrom"
-            v-model:dateTo="filtersStore.filters.dateTo"
+            v-model:dateFrom="filtersStore.filters.from"
+            v-model:dateTo="filtersStore.filters.to"
           >
           </DateRange>
         </div>
