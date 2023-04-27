@@ -192,6 +192,16 @@
     await loadExerciseHandler(filtersStore.filters, dataListStore);
   })
 
+  const filtersStoreWatchList = (() => {
+    const filterKeys = Object.keys(filtersStore.filters);
+    return filterKeys.map(filter => () => filtersStore.filters[filter])
+  })();
+
+  watch([...filtersStoreWatchList], async (newValue, oldValue) => {
+    dataListStore.pagination.currentPage = 1;
+    await loadExerciseHandler(filtersStore.filters, dataListStore);
+  });
+
 
 
 </script>
