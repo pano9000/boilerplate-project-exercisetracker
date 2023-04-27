@@ -140,16 +140,19 @@
       try {
         messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
         isLoading.value = true;
-        const apiResponse = await getAllExercises(exerciseFilters);
+        const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: filtersStore.filters.limit}) //todo: limit - find a place for it
+        const filterParams = new URLSearchParams(exerciseFilters);
+        const apiResponse = await getAllExercises(paginationParams+'&'+filterParams);
         isLoading.value = false;
         console.log(apiResponse)
         handleApiResponse(apiResponse);
-        exerciseCount.value = apiResponse.data.count
-        exerciseList.value = apiResponse.data.log.map(entry => {
+        exerciseCount.value = apiResponse.response.data.count
+        store.data = apiResponse.response.data.log.map(entry => {
           entry.date = new Date(entry.date).toLocaleDateString()
           return entry
         });
-        if (apiResponse.data.log.length < 1) {
+        store.pagination = apiResponse.response.pagination;
+        if (store.data.length < 1) {
           messageBoxOptions.value = MessageBoxOptions("No Exercises Found", "There were no exercises found with your current filters", "info");
           return
         }
