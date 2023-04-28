@@ -24,7 +24,7 @@
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore)"
+        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore, filtersStore, loadExerciseHandler)"
         @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
 
       >
@@ -34,7 +34,7 @@
             Edit Exercise
           </ActionMenuEntry>
           
-          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore)">
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler(selectedExercises.value, dataListStore, filtersStore, loadExerciseHandler)">
             <IconX></IconX> Delete Exercise
           </ActionMenuEntry>
         </template>
@@ -150,7 +150,7 @@
       }
   }
 
-  async function deleteExerciseHandler(selectedExercisesP, store) {
+  async function deleteExerciseHandler(selectedExercisesP, store, filtersStoreP, loadDataHandler) {
 
     const confirmMessage = (!(selectedExercisesP.length > 1)) ?
     `Are you sure you want to delete the exercise '${selectedExercisesP[0]._id}' of '${selectedExercisesP[0].userId}'` :
@@ -170,7 +170,7 @@
       );
 
       if (deleteStatus.includes(true)){
-        await loadExerciseHandler(filtersStore.filters, dataListStore);
+        await loadDataHandler(filtersStoreP.filters, store);
       }
     }
   }
