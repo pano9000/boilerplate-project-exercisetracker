@@ -123,8 +123,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const toggleSelection = ref(Date.now());
 
-  const paginatedList = reactive({ value: [] });
-
   const selectedItems = computed( () => {
     if (!Array.isArray(props.dataList.data)) return [];
     return props.dataList.data.filter(item => item.selected === true)
