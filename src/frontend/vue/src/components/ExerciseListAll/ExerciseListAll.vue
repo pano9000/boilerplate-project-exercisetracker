@@ -163,7 +163,7 @@
 
     const confirmMessage = (!(selectedExercisesP.length > 1)) ?
     `Are you sure you want to delete the exercise '${selectedExercisesP[0]._id}' of '${selectedExercisesP[0].userId}'` :
-    `Are you sure you want to delete the ${selectedExercisesP.length} selected users?`;
+    `Are you sure you want to delete the ${selectedExercisesP.length} selected exercises?`;
     //TODO: replace by some fancy "popup"
     if (confirm(confirmMessage)) {
 
