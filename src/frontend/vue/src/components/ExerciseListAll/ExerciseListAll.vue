@@ -24,7 +24,7 @@
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-        @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
+        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore)"
         @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
 
       >
@@ -34,7 +34,7 @@
             Edit Exercise
           </ActionMenuEntry>
           
-          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore)">
             <IconX></IconX> Delete Exercise
           </ActionMenuEntry>
         </template>
@@ -150,27 +150,28 @@
       }
   }
 
-  async function deleteExerciseHandler(selectedExercisesP, exerciseListP) {
+  async function deleteExerciseHandler(selectedExercisesP, store) {
 
     const confirmMessage = (!(selectedExercisesP.length > 1)) ?
     `Are you sure you want to delete the exercise '${selectedExercisesP[0]._id}' of '${selectedExercisesP[0].userId}'` :
     `Are you sure you want to delete the ${selectedExercisesP.length} selected exercises?`;
     //TODO: replace by some fancy "popup"
+
     if (confirm(confirmMessage)) {
 
-      await Promise.all(
+      const deleteStatus = await Promise.all(
         selectedExercisesP.map(async (selectedItem) => {
-          const indexToDelete = exerciseListP.findIndex( (listEntry) => listEntry["_id"] === selectedItem["_id"]);
-          
-          const { _id: exercIdForDeletion, userId } = exerciseListP[indexToDelete];
+          const indexToDelete = store.data.findIndex( (listEntry) => listEntry["_id"] === selectedItem["_id"]);
+          const { _id: exercIdForDeletion, userId } = store.data[indexToDelete];
           //console.log(exercIdForDeletion, userId, indexToDelete, exerciseListP)
           const apiResponse = await deleteExerciseById(userId, exercIdForDeletion);
-          if (apiResponse.statusOK) {
-            exerciseListP.splice(indexToDelete, 1);
-          }
+          return apiResponse.statusOK
         })
       );
 
+      if (deleteStatus.includes(true)){
+        await loadExerciseHandler(filtersStore.filters, dataListStore);
+      }
     }
   }
 
