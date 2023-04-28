@@ -5,7 +5,7 @@
     :options="{
       showDateRange: false,
       showLimit: false,
-      sortByOptions: dataTableKeys,
+      sortByOptions: sortedDataTableKeys,
     }"
   >
   </DataTableFilters>
@@ -149,12 +149,9 @@ import { useDataListStore } from "../../stores/DataListStore";
 
   });
 
-  const sortByCurrent = computed( () => {
-    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
-  });
 
   filtersStore.filters = {
-    sortBy: sortByCurrent,
+    sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1"
   };
 
