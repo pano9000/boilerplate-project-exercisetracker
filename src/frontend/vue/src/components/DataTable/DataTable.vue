@@ -163,10 +163,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     emit("updateSelectedItems", selectedItems)
   });
 
-  //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
-  function updatePaginatedListFunc(updatedValue) {
-    paginatedList.value = updatedValue
-  };
 
 </script>
 
