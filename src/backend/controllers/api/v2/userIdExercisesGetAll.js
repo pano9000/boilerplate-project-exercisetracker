@@ -10,10 +10,6 @@ async function userIdExercisesGetAll(req, res) {
 
     const { userId } = req.params
 
-    if (userId === undefined || userId === null) {
-      throw new Error("userId undefined/null is invalid")
-    }
-
     const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder } = req.query;
 
     const findUserResult = await findDoc.findOne("UserModel", { _id: userId })
