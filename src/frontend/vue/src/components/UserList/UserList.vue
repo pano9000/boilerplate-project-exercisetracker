@@ -164,7 +164,9 @@ import { useDataListStore } from "../../stores/DataListStore";
     try {
       messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
       isLoading.value = true;
-      const apiResponse = await getAllUsers(userFilters);
+      const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: 25}) //todo: limit - find a place for it
+      const filterParams = new URLSearchParams(userFilters);
+      const apiResponse = await getAllUsers(paginationParams+'&'+filterParams);
       store.data = apiResponse.response.data
       store.pagination = apiResponse.response.pagination
       isLoading.value = false;
