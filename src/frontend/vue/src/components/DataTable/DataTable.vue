@@ -64,9 +64,7 @@
         </td>
       </tr>
     </tbody>
-    <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
-      <slot name="actionMenuEntries"></slot>
-    </menu>
+
   </table>
 
   <ActionMenu
