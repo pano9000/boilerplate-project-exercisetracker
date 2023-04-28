@@ -77,10 +77,7 @@
 import { ref, onMounted, computed, toRefs, watch } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
-  const props = defineProps(["listToPaginate", "allowSelection"]);
-
-  const { listToPaginate, allowSelection } = toRefs(props);
-
+  const props = defineProps(["listToPaginate"]);
 
   const ui_goToPage = ref(1)
   const ui_showentryqty = ref(5);
