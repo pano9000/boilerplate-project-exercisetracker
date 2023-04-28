@@ -23,7 +23,7 @@
             (pg == '…') ? 'ui-pagination_btn-placeholder' : null
           ]"
           :aria-current="pg == props.listToPaginate.currentPage"
-          :disabled="pg == '…'"
+          :disabled="pg == '…' || pg == props.listToPaginate.currentPage"
           :title="`Go to Page ${pg}`"
           :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
         >
