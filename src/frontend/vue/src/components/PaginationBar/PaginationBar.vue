@@ -100,20 +100,6 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
     return `${from}–${to}`
   });
 
-  //@TODO: move this to DataTable instead?
-  const paginatedListComp = computed( () => {
-    const listStart = ui_showentryqty.value*(ui_activePage.value-1);
-    const listEnd = ui_showentryqty.value*ui_activePage.value;
-    const paginatedList = listToPaginate.value.slice(listStart,listEnd)
-    if (allowSelection.value!==true) {
-      return paginatedList
-    }
-    return paginatedList.map(elem => { 
-      elem.selected = false;
-      return elem
-    })
-  });
-
   const totalBtns = computed( () => {
     const totalBtns = [];
     for (let i=1; i<=props.listToPaginate.totalPages; i++) {
