@@ -74,7 +74,7 @@
 <script setup>
 
 
-import { ref, onMounted, computed, toRefs, watch } from "vue";
+import { ref, computed } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate"]);
