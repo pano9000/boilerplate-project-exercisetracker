@@ -180,7 +180,7 @@ import { useDataListStore } from "../../stores/DataListStore";
     }
     catch(error) {
       console.log("error fetch users", error)
-      messageBoxOptions.value = MessageBoxOptions("Getting UserList failed", "Error fetching users" + apiResponse.msg);
+      messageBoxOptions.value = MessageBoxOptions("Getting UserList failed", "Error fetching users" + error);
     }
   }
 
