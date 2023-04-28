@@ -5,10 +5,8 @@
     :options="{
       showDateRange: false,
       showLimit: false,
-      actionButtonText: 'Load Users',
-      sortByOptions: sortedDataTableKeys,
+      sortByOptions: dataTableKeys,
     }"
-    @click-action-button="(userFilters) => loadUsersHandler(userFilters, userList)"
   >
   </DataTableFilters>
 
