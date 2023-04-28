@@ -1,9 +1,7 @@
 <template>
   <PaginationBar
-   v-if="paginationbarOptions.showTop === true && dataList.value.length > 0"
-   :list-to-paginate="dataList.value"
-   :allow-selection="paginationbarOptions.allowSelection"
-   @update-paginated-list="updatePaginatedListFunc"
+    v-if="paginationbarOptions.showTop === true && props.dataList.data.length > 0"
+    :list-to-paginate="dataList.pagination"
    >
 
   </PaginationBar>
