@@ -103,6 +103,7 @@ import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
+import { handleApiResponse } from "../../services/apiService";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
@@ -167,6 +168,7 @@ import { useDataListStore } from "../../stores/DataListStore";
       const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: 25}) //todo: limit - find a place for it
       const filterParams = new URLSearchParams(userFilters);
       const apiResponse = await getAllUsers(paginationParams+'&'+filterParams);
+      handleApiResponse(apiResponse);
       store.data = apiResponse.response.data
       store.pagination = apiResponse.response.pagination
       isLoading.value = false;
