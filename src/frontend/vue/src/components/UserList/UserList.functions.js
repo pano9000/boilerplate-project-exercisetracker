@@ -1,6 +1,6 @@
 import { deleteUserById } from "../../services/apiEndpoints.js";
 
-export async function deleteUserHandler(selectedUsers, userList) {
+export async function deleteUserHandler(selectedUsers, store, filtersStore, loadDataHandler) {
 
   const confirmMessage = (!(selectedUsers.length > 1)) ?
     `Are you sure you want to delete the user '${selectedUsers[0].username}'` :
@@ -8,14 +8,17 @@ export async function deleteUserHandler(selectedUsers, userList) {
   //TODO: replace by some fancy "popup"
   if (confirm(confirmMessage)) {
 
-    await Promise.all(selectedUsers.map(async (selectedUser) => {
-      const indexToDelete = userList.findIndex( (userEntry) => userEntry.username === selectedUser.username);
-      const userIdForDeletion = userList[indexToDelete]["_id"];
-      const apiResponse = await deleteUserById(userIdForDeletion);
-      if (apiResponse.statusOK) {
-        userList.splice(indexToDelete, 1);
-      }
+    const deleteStatus = await Promise.all(
+      selectedUsers.map(async (selectedUser) => {
+        const indexToDelete = store.data.findIndex( (userEntry) => userEntry.username === selectedUser.username);
+        const userIdForDeletion = store.data[indexToDelete]["_id"];
+        const apiResponse = await deleteUserById(userIdForDeletion);
+        return apiResponse.statusOK;
     }));
+
+    if (deleteStatus.includes(true)){
+      await loadDataHandler(filtersStore.filters, store);
+    }
 
   }
 }

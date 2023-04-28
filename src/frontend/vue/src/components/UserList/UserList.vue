@@ -27,7 +27,7 @@
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
-        @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
+        @click-del-selected="deleteUserHandler(selectedUsers.value, dataListStore, filtersStore, loadUsersHandler)"
         @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
       >
         <template v-slot:actionMenuEntries>
@@ -36,7 +36,7 @@
             Edit User
           </ActionMenuEntry>
 
-          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], userList.value)">
+          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], dataListStore, filtersStore, loadUsersHandler)">
             <IconX></IconX>
             Delete User
           </ActionMenuEntry>
