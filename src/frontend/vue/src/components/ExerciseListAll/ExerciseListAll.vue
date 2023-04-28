@@ -108,14 +108,6 @@
   const currentExercise = reactive({ value: {} });
   const selectedExercises = reactive({ value: [] });
 
-  const exerciseCount = reactive({
-    value: ""
-  });
-
-  const exerciseList = reactive({
-    value: []
-  });
-
   const uiVisibility = reactive( {
     value: {
       exerciseDetails: false,
@@ -141,7 +133,6 @@
         isLoading.value = false;
         console.log(apiResponse)
         handleApiResponse(apiResponse);
-        exerciseCount.value = apiResponse.response.data.count
         store.data = apiResponse.response.data.log.map(entry => {
           entry.date = new Date(entry.date).toLocaleDateString()
           return entry
