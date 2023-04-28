@@ -168,10 +168,10 @@ import { useDataListStore } from "../../stores/DataListStore";
       const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: 25}) //todo: limit - find a place for it
       const filterParams = new URLSearchParams(userFilters);
       const apiResponse = await getAllUsers(paginationParams+'&'+filterParams);
+      isLoading.value = false;
       handleApiResponse(apiResponse);
       store.data = apiResponse.response.data
       store.pagination = apiResponse.response.pagination
-      isLoading.value = false;
       console.log(apiResponse)
       if (store.data.length < 1) {
         messageBoxOptions.value = MessageBoxOptions("No Users Found", "Sorry, there are no users to be displayed", "info");
