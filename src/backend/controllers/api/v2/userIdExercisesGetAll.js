@@ -7,10 +7,9 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function userIdExercisesGetAll(req, res) {
 
   try {
-
     const { userId } = req.params
-
     const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder } = req.query;
+    const dbModelName = req._dbModelName
 
     const findUserResult = await findDoc.findOne("UserModel", { _id: userId })
 
@@ -18,15 +17,13 @@ async function userIdExercisesGetAll(req, res) {
       throw new Error("user not found")
     }
 
-    const queryOptions = getQueryOptions(page, limit)
+    const searchObject = createSearchObject.exerciseLog( { userId, filterDateFrom, filterDateTo } )
+    const pagination = await getPaginationData(page, limit, dbModelName, searchObject)
+
+    const queryOptions = getQueryOptions(pagination.currentPage, limit)
     const sortOptions = [ [sortBy, sortOrder] ];
 
-    const dbModelName = req._dbModelName
-
-    const searchObject = createSearchObject.exerciseLog( { userId, filterDateFrom, filterDateTo } )
-
     const findResult = await findDoc.findAll("ExerciseModel", searchObject, sortOptions, queryOptions); //TODO: check if pagination of results should be a thing?
-    const pagination = await getPaginationData(page, limit, dbModelName, searchObject)
 
     //findResult is always an array it, either empty or filled - undefined errors are caught in findExercises already, so no need to handle them here anymore
     const response = {
