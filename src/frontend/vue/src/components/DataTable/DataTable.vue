@@ -127,7 +127,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const paginatedList = reactive({ value: [] });
 
-  const selectedItems = computed( () => props.dataList.data.filter(item => item.selected === true) );
+  const selectedItems = computed( () => {
+    if (!Array.isArray(props.dataList.data)) return [];
+    return props.dataList.data.filter(item => item.selected === true)
+  });
   const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.data.length) ? true : false )
   const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
 
