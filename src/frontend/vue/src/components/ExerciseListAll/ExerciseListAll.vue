@@ -34,7 +34,7 @@
             Edit Exercise
           </ActionMenuEntry>
           
-          <ActionMenuEntry @action-menu-event="deleteExerciseHandler(selectedExercises.value, dataListStore, filtersStore, loadExerciseHandler)">
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, filtersStore, loadExerciseHandler)">
             <IconX></IconX> Delete Exercise
           </ActionMenuEntry>
         </template>
