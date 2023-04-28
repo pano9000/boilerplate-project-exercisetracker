@@ -98,7 +98,7 @@ import UserDetails from "../Forms/UserDetails/UserDetails.vue";
 import CreateExercise from "../Forms/CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
-import { ref, reactive, onMounted, computed } from "vue";
+import { ref, reactive, onMounted, computed, watch } from "vue";
 import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
@@ -184,6 +184,25 @@ import { useDataListStore } from "../../stores/DataListStore";
   onMounted( async () => {
     await loadUsersHandler(filtersStore.filters, dataListStore);
   })
+
+  const filtersStoreWatchList = (() => {
+    const filterKeys = Object.keys(filtersStore.filters);
+    return filterKeys.map(filter => () => filtersStore.filters[filter])
+  })();
+
+  watch([...filtersStoreWatchList], async (newValue, oldValue) => {
+    dataListStore.pagination.currentPage = 1;
+    await loadUsersHandler(filtersStore.filters, dataListStore);
+  });
+
+
+  watch( () => dataListStore.pagination.currentPage, async (newValue, oldValue) => {
+      if (newValue > dataListStore.pagination.totalPages) {
+        return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
+      }
+      await loadUsersHandler(filtersStore.filters, dataListStore);
+    }
+  );
 
 </script>
 
