@@ -78,7 +78,7 @@ import { ref, onMounted, computed, toRefs, watch } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate", "allowSelection"]);
-  const emit = defineEmits(["updateCurrentPage"]);
+
   const { listToPaginate, allowSelection } = toRefs(props);
 
 
@@ -158,14 +158,6 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
       props.listToPaginate.currentPage = ui_goToPage.value
     }
   }
-
-  watch(props.listToPaginate.currentPage, () => {
-    emit("updateCurrentPage", props.listToPaginate.currentPage)
-  })
-
-  onMounted( () => {
-
-  })
 
 
 </script>
