@@ -1,17 +1,16 @@
 <template>
   <PaginationBar
-   v-if="paginationbarOptions.showTop === true && dataList.value.length > 0"
-   :list-to-paginate="dataList.value"
-   :allow-selection="paginationbarOptions.allowSelection"
-   @update-paginated-list="updatePaginatedListFunc"
+    v-if="paginationbarOptions.showTop === true && props.dataList.data.length > 0"
+    :list-to-paginate="dataList.pagination"
    >
 
   </PaginationBar>
-  <section class="ui-datatable_wrap" v-if="dataList.value.length > 0">
+
+  <section class="ui-datatable_wrap" v-if="props.dataList.data.length > 0">
 
   <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
@@ -31,7 +30,7 @@
             :checked="hasSelectedItems"
             :key="toggleSelection"
             :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
-            @click.prevent="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+            @click.prevent="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
           >
         </th>
 
@@ -49,14 +48,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(data, index) in paginatedList.value" :key="data[dataKeyId]">
+      <tr v-for="(data, index) in props.dataList.data" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
         <td class="list-cell_center" @click="currentItem.value = data">
           <div class="actionMenu_wrap">
             <button 
               class="actionMenu_btn" 
-              @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data)" 
+              @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data, actionMenu)" 
               title="Show Actions"
             >
               ☰
@@ -65,9 +64,7 @@
         </td>
       </tr>
     </tbody>
-    <menu ref="actionMenu" class="actionMenu_menu" v-show="actionMenuVisible.value === true">
-      <slot name="actionMenuEntries"></slot>
-    </menu>
+
   </table>
 
   <ActionMenu
@@ -80,7 +77,7 @@
 
   <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
     @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(paginatedList.value, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
@@ -124,10 +121,11 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const toggleSelection = ref(Date.now());
 
-  const paginatedList = reactive({ value: [] });
-
-  const selectedItems = computed( () => paginatedList.value.filter(item => item.selected === true) );
-  const allItemsSelected = computed( () => (selectedItems.value.length === paginatedList.value.length) ? true : false )
+  const selectedItems = computed( () => {
+    if (!Array.isArray(props.dataList.data)) return [];
+    return props.dataList.data.filter(item => item.selected === true)
+  });
+  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.data.length) ? true : false )
   const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
 
   watch( hasSelectedItems, () => {
@@ -147,7 +145,7 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
    * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
    * @param {String} dataKeyId the data lists key Id prop name
    */
-  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData) {
+  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData, actionMenu) {
     currentItem.value = currentData;
     actionButtonHandler(event, actionMenuVisible, actionMenu)
   }
@@ -161,10 +159,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     emit("updateSelectedItems", selectedItems)
   });
 
-  //TODO: Check if we can change it to work with the value instead, then we could use the "updateValue" func here as well
-  function updatePaginatedListFunc(updatedValue) {
-    paginatedList.value = updatedValue
-  };
 
 </script>
 

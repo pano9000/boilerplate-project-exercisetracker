@@ -3,10 +3,8 @@
 
   <DataTableFilters
     :options="{
-      actionButtonText: 'Load Exercises',
       sortByOptions: sortedDataTableKeys
     }"
-    @click-action-button="(exerciseFilters) => loadExerciseHandler(exerciseFilters, exerciseList)"
   >
   </DataTableFilters>
 
@@ -21,13 +19,13 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, showAdd: false}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :data-list="exerciseList"
+        :data-list="dataListStore"
         :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-        @click-del-selected="deleteExerciseHandler(selectedExercises.value, exerciseList.value)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys, filtersStore.filters, exerciseList, loadExerciseHandler)"
+        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore, filtersStore, loadExerciseHandler)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
 
       >
         <template v-slot:actionMenuEntries>
@@ -36,7 +34,7 @@
             Edit Exercise
           </ActionMenuEntry>
           
-          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], exerciseList.value)">
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, filtersStore, loadExerciseHandler)">
             <IconX></IconX> Delete Exercise
           </ActionMenuEntry>
         </template>
@@ -57,7 +55,7 @@
 </template>
 
 <script setup>
-  import { ref, reactive, onMounted, computed } from "vue";
+  import { ref, reactive, onMounted, watch } from "vue";
   import { getAllExercises, deleteExerciseById } from "../../services/apiEndpoints";
   import { handleApiResponse } from "../../services/apiService";
   import DataTable from "../DataTable/DataTable.vue";
@@ -69,6 +67,9 @@
   import MessageBox from "../MessageBox.vue";
   import { MessageBoxOptions } from "../MessageBox.functions";
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+  import { useDataListStore } from "../../stores/DataListStore";
+
+  const dataListStore = useDataListStore();
 
   const dataTableKeys = ref([
     new DataTableKey("Exercise Id", "_id"),
@@ -89,17 +90,14 @@
 
   });
 
-  const sortByCurrent = computed( () => {
-    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
-  });
 
   const filtersStore = useDataTableFiltersStore();
 
   filtersStore.filters = {
     limit: 0,
-    dateFrom: "",
-    dateTo: "",
-    sortBy: sortByCurrent,
+    from: "",
+    to: "",
+    sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1",
   };
 
@@ -109,14 +107,6 @@
 
   const currentExercise = reactive({ value: {} });
   const selectedExercises = reactive({ value: [] });
-
-  const exerciseCount = reactive({
-    value: ""
-  });
-
-  const exerciseList = reactive({
-    value: []
-  });
 
   const uiVisibility = reactive( {
     value: {
@@ -132,21 +122,23 @@
    * @param {*} exerciseFilters filters from DataTableFilters
    * @param {*} exerciseList reactive list
    */
-  async function loadExerciseHandler(exerciseFilters, exerciseList) {
+  async function loadExerciseHandler(exerciseFilters, store) {
 
       try {
         messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
         isLoading.value = true;
-        const apiResponse = await getAllExercises(exerciseFilters);
+        const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: filtersStore.filters.limit}) //todo: limit - find a place for it
+        const filterParams = new URLSearchParams(exerciseFilters);
+        const apiResponse = await getAllExercises(paginationParams+'&'+filterParams);
         isLoading.value = false;
         console.log(apiResponse)
         handleApiResponse(apiResponse);
-        exerciseCount.value = apiResponse.data.count
-        exerciseList.value = apiResponse.data.log.map(entry => {
+        store.data = apiResponse.response.data.log.map(entry => {
           entry.date = new Date(entry.date).toLocaleDateString()
           return entry
         });
-        if (apiResponse.data.log.length < 1) {
+        store.pagination = apiResponse.response.pagination;
+        if (store.data.length < 1) {
           messageBoxOptions.value = MessageBoxOptions("No Exercises Found", "There were no exercises found with your current filters", "info");
           return
         }
@@ -158,36 +150,53 @@
       }
   }
 
-  async function deleteExerciseHandler(selectedExercisesP, exerciseListP) {
+  async function deleteExerciseHandler(selectedExercisesP, store, filtersStoreP, loadDataHandler) {
 
     const confirmMessage = (!(selectedExercisesP.length > 1)) ?
     `Are you sure you want to delete the exercise '${selectedExercisesP[0]._id}' of '${selectedExercisesP[0].userId}'` :
-    `Are you sure you want to delete the ${selectedExercisesP.length} selected users?`;
+    `Are you sure you want to delete the ${selectedExercisesP.length} selected exercises?`;
     //TODO: replace by some fancy "popup"
+
     if (confirm(confirmMessage)) {
 
-      await Promise.all(
+      const deleteStatus = await Promise.all(
         selectedExercisesP.map(async (selectedItem) => {
-          const indexToDelete = exerciseListP.findIndex( (listEntry) => listEntry["_id"] === selectedItem["_id"]);
-          
-          const { _id: exercIdForDeletion, userId } = exerciseListP[indexToDelete];
+          const indexToDelete = store.data.findIndex( (listEntry) => listEntry["_id"] === selectedItem["_id"]);
+          const { _id: exercIdForDeletion, userId } = store.data[indexToDelete];
           //console.log(exercIdForDeletion, userId, indexToDelete, exerciseListP)
           const apiResponse = await deleteExerciseById(userId, exercIdForDeletion);
-          if (apiResponse.statusOK) {
-            exerciseListP.splice(indexToDelete, 1);
-          }
+          return apiResponse.statusOK
         })
       );
 
+      if (deleteStatus.includes(true)){
+        await loadDataHandler(filtersStoreP.filters, store);
+      }
     }
   }
 
   onMounted( async () => {
-    await loadExerciseHandler(filtersStore.filters, exerciseList);
-    isLoading.value = false;
+    await loadExerciseHandler(filtersStore.filters, dataListStore);
   })
 
+  const filtersStoreWatchList = (() => {
+    const filterKeys = Object.keys(filtersStore.filters);
+    return filterKeys.map(filter => () => filtersStore.filters[filter])
+  })();
 
+  watch([...filtersStoreWatchList], async (newValue, oldValue) => {
+    dataListStore.pagination.currentPage = 1;
+    await loadExerciseHandler(filtersStore.filters, dataListStore);
+  });
+
+
+  watch( () => dataListStore.pagination.currentPage, async (newValue, oldValue) => {
+      if (newValue > dataListStore.pagination.totalPages) {
+        return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
+      }
+      await loadExerciseHandler(filtersStore.filters, dataListStore);
+    }
+  );
 
 </script>
 

@@ -19,8 +19,8 @@
 
         <div class="ui-filter-flex_wrap">
           <DateRange
-            v-model:dateFrom="filtersStore.filters.dateFrom"
-            v-model:dateTo="filtersStore.filters.dateTo"
+            v-model:dateFrom="filtersStore.filters.from"
+            v-model:dateTo="filtersStore.filters.to"
           >
           </DateRange>
         </div>
@@ -64,10 +64,6 @@
 
       </section>
 
-
-      <div class="ui-filter-flex_wrap">
-        <button @click.prevent="() => { filtersVisible = false; $emit('clickActionButton', filtersStore.filters) }">{{ options.actionButtonText }}</button>
-      </div>
     </form>
   </section> 
     
@@ -84,10 +80,8 @@
   import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   const props = defineProps(["options"])
-  defineEmits(["clickActionButton"])
 
   const filtersStore = useDataTableFiltersStore();
-
   const filtersVisible = ref(true);
 
 </script>

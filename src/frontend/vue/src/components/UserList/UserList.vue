@@ -5,10 +5,8 @@
     :options="{
       showDateRange: false,
       showLimit: false,
-      actionButtonText: 'Load Users',
       sortByOptions: sortedDataTableKeys,
     }"
-    @click-action-button="(userFilters) => loadUsersHandler(userFilters, userList)"
   >
   </DataTableFilters>
 
@@ -23,15 +21,14 @@
         :table-options="{showSelection: true, showAction: true}"
         :list-action-buttons-options="{showBottom: true, showTop: false, textAddNew: 'Add New User'}"
         :paginationbar-options="{allowSelection: true, showTop: true, showBottom: false}"
-        :data-list="userList"
+        :data-list="dataListStore"
         :data-keys="dataTableKeys"
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
-        @click-del-selected="deleteUserHandler(selectedUsers.value, userList.value)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataTableKeys, filtersStore.filters, userList, loadUsersHandler)"
-
+        @click-del-selected="deleteUserHandler(selectedUsers.value, dataListStore, filtersStore, loadUsersHandler)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
@@ -39,7 +36,7 @@
             Edit User
           </ActionMenuEntry>
 
-          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], userList.value)">
+          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], dataListStore, filtersStore, loadUsersHandler)">
             <IconX></IconX>
             Delete User
           </ActionMenuEntry>
@@ -101,11 +98,12 @@ import UserDetails from "../Forms/UserDetails/UserDetails.vue";
 import CreateExercise from "../Forms/CreateExercise/CreateExercise.vue";
 import DataTable from "../DataTable/DataTable.vue";
 
-import { ref, reactive, onMounted, computed } from "vue";
+import { ref, reactive, onMounted, computed, watch } from "vue";
 import { deleteUserHandler } from "./UserList.functions";
 import { getAllUsers } from "../../services/apiEndpoints";
 import ModalWindow from "../ModalWindow/ModalWindow.vue";
 import { uiVisibilityHandler, updateValue, tableHeadingSortHandler, DataTableKey } from "../../services/utils";
+import { handleApiResponse } from "../../services/apiService";
 import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
 import LoadingSpinner from "../Loading-Spinner.vue";
 
@@ -113,9 +111,11 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
 import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 import MessageBox from "../MessageBox.vue";
 import { MessageBoxOptions } from "../MessageBox.functions";
-import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore";
+import { useDataListStore } from "../../stores/DataListStore";
 
   const filtersStore = useDataTableFiltersStore();
+  const dataListStore = useDataListStore();
 
   const title = "User List";
   const userList = reactive({ value: [] });
@@ -149,41 +149,60 @@ import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
 
   });
 
-  const sortByCurrent = computed( () => {
-    return dataTableKeys.value.find(sortByOption => sortByOption.currentActive === true)?.key || dataTableKeys["value"][0]["key"]
-  });
 
   filtersStore.filters = {
-    sortBy: sortByCurrent,
+    sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1"
   };
 
 
   const messageBoxOptions = reactive( { value: ""});
 
-  async function loadUsersHandler(userFilters, userList) {
+  async function loadUsersHandler(userFilters, store) {
     try {
       messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
       isLoading.value = true;
-      const apiResponse = await getAllUsers(userFilters);
-      userList.value = apiResponse.data
+      const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: 25}) //todo: limit - find a place for it
+      const filterParams = new URLSearchParams(userFilters);
+      const apiResponse = await getAllUsers(paginationParams+'&'+filterParams);
       isLoading.value = false;
+      handleApiResponse(apiResponse);
+      store.data = apiResponse.response.data
+      store.pagination = apiResponse.response.pagination
       console.log(apiResponse)
-      if (userList.value.length < 1) {
+      if (store.data.length < 1) {
         messageBoxOptions.value = MessageBoxOptions("No Users Found", "Sorry, there are no users to be displayed", "info");
       }
-      //return apiResponse.data
+      //return apiResponse.response
     }
     catch(error) {
       console.log("error fetch users", error)
-      messageBoxOptions.value = MessageBoxOptions("Getting UserList failed", "Error fetching users" + apiResponse.msg);
+      messageBoxOptions.value = MessageBoxOptions("Getting UserList failed", "Error fetching users" + error);
     }
   }
 
   onMounted( async () => {
-    await loadUsersHandler(filtersStore.filters, userList);
-    isLoading.value = false;
+    await loadUsersHandler(filtersStore.filters, dataListStore);
   })
+
+  const filtersStoreWatchList = (() => {
+    const filterKeys = Object.keys(filtersStore.filters);
+    return filterKeys.map(filter => () => filtersStore.filters[filter])
+  })();
+
+  watch([...filtersStoreWatchList], async (newValue, oldValue) => {
+    dataListStore.pagination.currentPage = 1;
+    await loadUsersHandler(filtersStore.filters, dataListStore);
+  });
+
+
+  watch( () => dataListStore.pagination.currentPage, async (newValue, oldValue) => {
+      if (newValue > dataListStore.pagination.totalPages) {
+        return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
+      }
+      await loadUsersHandler(filtersStore.filters, dataListStore);
+    }
+  );
 
 </script>
 
