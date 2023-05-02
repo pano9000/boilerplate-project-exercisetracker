@@ -55,12 +55,15 @@
       <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
     </div>
 
+
     <div class="ui-pagination_showEntryQty">
       <label for="ui-pagination_showEntryQty-select">Show</label>
-      <select id="ui-pagination_showEntryQty-select" v-model="ui_showentryqty" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
+      <select id="ui-pagination_showEntryQty-select" v-model="props.listFilters.limit" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
         <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
       </select>
     </div>
+
+
     <div class="ui-pagination_entriesinfo">
       <span>{{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }} entries</span>
     </div>
@@ -77,10 +80,9 @@
 import { ref, computed } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
-  const props = defineProps(["listToPaginate"]);
+  const props = defineProps(["listToPaginate", "listFilters"]);
 
   const ui_goToPage = ref(1)
-  const ui_showentryqty = ref(5);
   const ui_forwardPossible = computed( () => (props.listToPaginate.currentPage < props.listToPaginate.totalPages) ? true : false);
   const ui_previousPossible = computed( () => (props.listToPaginate.currentPage > 1) ? true : false); 
 
@@ -91,8 +93,8 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   });
 
   const ui_qtyVisible = computed( () => {
-    const from = (ui_showentryqty.value * (props.listToPaginate.currentPage-1)) + 1;
-    const calcTo = ui_showentryqty.value * props.listToPaginate.currentPage;
+    const from = (props.listFilters.limit * (props.listToPaginate.currentPage-1)) + 1;
+    const calcTo = props.listFilters.limit * props.listToPaginate.currentPage;
     const to = (calcTo > props.listToPaginate.totalEntries) ? props.listToPaginate.totalEntries : calcTo;
     return `${from}–${to}`
   });
