@@ -4,7 +4,8 @@ export const useDataListStore = defineStore("DataList", {
 
   state: () => ({
     data: {},
-    pagination: {}
+    pagination: {},
+    filters: {}
   }),
 
   actions: {
