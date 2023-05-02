@@ -1,6 +1,6 @@
 import { deleteUserById } from "../../services/apiEndpoints.js";
 
-export async function deleteUserHandler(selectedUsers, store, filtersStore, loadDataHandler) {
+export async function deleteUserHandler(selectedUsers, store, loadDataHandler) {
 
   const confirmMessage = (!(selectedUsers.length > 1)) ?
     `Are you sure you want to delete the user '${selectedUsers[0].username}'` :
@@ -17,7 +17,7 @@ export async function deleteUserHandler(selectedUsers, store, filtersStore, load
     }));
 
     if (deleteStatus.includes(true)){
-      await loadDataHandler(filtersStore.filters, store);
+      await loadDataHandler(store);
     }
 
   }
