@@ -2,6 +2,7 @@
   <PaginationBar
     v-if="paginationbarOptions.showTop === true && props.dataList.data.length > 0"
     :list-to-paginate="dataList.pagination"
+    :list-filters="dataList.filters"
    >
 
   </PaginationBar>

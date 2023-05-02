@@ -91,7 +91,7 @@
 
 
   dataListStore.filters = {
-    limit: 0,
+    limit: 10,
     from: "",
     to: "",
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],

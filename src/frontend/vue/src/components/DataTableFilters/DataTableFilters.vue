@@ -47,21 +47,7 @@
             </SortOrder>
           </div>
 
-
-
         </div>
-      </section>
-
-      <section class="ui-filter_section" v-if="(options.showLimit !== undefined) ? options.showLimit : true">
-
-        <div class="ui-filter-flex_wrap">
-
-          <div>
-            <Limit v-model="dataListStore.filters.limit"></Limit>
-          </div>
-
-        </div>
-
       </section>
 
     </form>
@@ -76,7 +62,6 @@
   import SortOrder from './SortOrder.vue';
   import SortBy from "./SortBy.vue";
   import DateRange from "./DateRange.vue";
-  import Limit from "./Limit.vue";
   import { useDataListStore } from '../../stores/DataListStore';
 
   const props = defineProps(["options"])
