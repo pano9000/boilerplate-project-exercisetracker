@@ -19,8 +19,8 @@
 
         <div class="ui-filter-flex_wrap">
           <DateRange
-            v-model:dateFrom="filtersStore.filters.from"
-            v-model:dateTo="filtersStore.filters.to"
+            v-model:dateFrom="dataListStore.filters.from"
+            v-model:dateTo="dataListStore.filters.to"
           >
           </DateRange>
         </div>
@@ -33,7 +33,7 @@
 
           <div>
             <SortBy 
-              v-model="filtersStore.filters.sortBy"
+              v-model="dataListStore.filters.sortBy"
               :sort-by-options="options.sortByOptions"
             >
             </SortBy>
@@ -42,7 +42,7 @@
           <div>
             <span>Sort Order</span>
             <SortOrder 
-              v-model="filtersStore.filters.sortOrder"
+              v-model="dataListStore.filters.sortOrder"
             >
             </SortOrder>
           </div>
@@ -57,7 +57,7 @@
         <div class="ui-filter-flex_wrap">
 
           <div>
-            <Limit v-model="filtersStore.filters.limit"></Limit>
+            <Limit v-model="dataListStore.filters.limit"></Limit>
           </div>
 
         </div>
@@ -77,11 +77,11 @@
   import SortBy from "./SortBy.vue";
   import DateRange from "./DateRange.vue";
   import Limit from "./Limit.vue";
-  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
+  import { useDataListStore } from '../../stores/DataListStore';
 
   const props = defineProps(["options"])
 
-  const filtersStore = useDataTableFiltersStore();
+  const dataListStore = useDataListStore();
   const filtersVisible = ref(true);
 
 </script>
