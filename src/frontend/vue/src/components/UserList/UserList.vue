@@ -27,8 +27,8 @@
         @update-current-item="(newValue) => updateValue(newValue, currentUser)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedUsers)"
         @click-add-new="uiVisibility.value.createUser = true"
-        @click-del-selected="deleteUserHandler(selectedUsers.value, dataListStore, filtersStore, loadUsersHandler)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
+        @click-del-selected="deleteUserHandler(selectedUsers.value, dataListStore, loadUsersHandler)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataListStore)"
       >
         <template v-slot:actionMenuEntries>
           <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'userDetails')">
@@ -36,7 +36,7 @@
             Edit User
           </ActionMenuEntry>
 
-          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], dataListStore, filtersStore, loadUsersHandler)">
+          <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], dataListStore, loadUsersHandler)">
             <IconX></IconX>
             Delete User
           </ActionMenuEntry>
@@ -111,10 +111,8 @@ import ActionMenuEntry from "../ActionMenuEntry.vue";
 import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
 import MessageBox from "../MessageBox.vue";
 import { MessageBoxOptions } from "../MessageBox.functions";
-import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore";
 import { useDataListStore } from "../../stores/DataListStore";
 
-  const filtersStore = useDataTableFiltersStore();
   const dataListStore = useDataListStore();
 
   const title = "User List";
@@ -150,7 +148,7 @@ import { useDataListStore } from "../../stores/DataListStore";
   });
 
 
-  filtersStore.filters = {
+  dataListStore.filters = {
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1"
   };
@@ -158,12 +156,12 @@ import { useDataListStore } from "../../stores/DataListStore";
 
   const messageBoxOptions = reactive( { value: ""});
 
-  async function loadUsersHandler(userFilters, store) {
+  async function loadUsersHandler(store) {
     try {
       messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
       isLoading.value = true;
       const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: 25}) //todo: limit - find a place for it
-      const filterParams = new URLSearchParams(userFilters);
+      const filterParams = new URLSearchParams(store.filters);
       const apiResponse = await getAllUsers(paginationParams+'&'+filterParams);
       isLoading.value = false;
       handleApiResponse(apiResponse);
@@ -182,17 +180,17 @@ import { useDataListStore } from "../../stores/DataListStore";
   }
 
   onMounted( async () => {
-    await loadUsersHandler(filtersStore.filters, dataListStore);
+    await loadUsersHandler(dataListStore);
   })
 
   const filtersStoreWatchList = (() => {
-    const filterKeys = Object.keys(filtersStore.filters);
-    return filterKeys.map(filter => () => filtersStore.filters[filter])
+    const filterKeys = Object.keys(dataListStore.filters);
+    return filterKeys.map(filter => () => dataListStore.filters[filter])
   })();
 
   watch([...filtersStoreWatchList], async (newValue, oldValue) => {
     dataListStore.pagination.currentPage = 1;
-    await loadUsersHandler(filtersStore.filters, dataListStore);
+    await loadUsersHandler(dataListStore);
   });
 
 
@@ -200,7 +198,7 @@ import { useDataListStore } from "../../stores/DataListStore";
       if (newValue > dataListStore.pagination.totalPages) {
         return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
       }
-      await loadUsersHandler(filtersStore.filters, dataListStore);
+      await loadUsersHandler(dataListStore);
     }
   );
 
