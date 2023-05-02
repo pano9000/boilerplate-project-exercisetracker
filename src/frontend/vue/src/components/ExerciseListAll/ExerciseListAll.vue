@@ -24,8 +24,8 @@
         :data-key-id="'_id'"
         @update-current-item="(newValue) => updateValue(newValue, currentExercise)"
         @update-selected-items="(newValue) => updateValue(newValue, selectedExercises)"
-        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore, filtersStore, loadExerciseHandler)"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, filtersStore)"
+        @click-del-selected="deleteExerciseHandler(selectedExercises.value, dataListStore, loadExerciseHandler)"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, dataListStore)"
 
       >
         <template v-slot:actionMenuEntries>
@@ -34,7 +34,7 @@
             Edit Exercise
           </ActionMenuEntry>
           
-          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, filtersStore, loadExerciseHandler)">
+          <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, loadExerciseHandler)">
             <IconX></IconX> Delete Exercise
           </ActionMenuEntry>
         </template>
@@ -66,7 +66,6 @@
   import DataTableFilters from "../DataTableFilters/DataTableFilters.vue";
   import MessageBox from "../MessageBox.vue";
   import { MessageBoxOptions } from "../MessageBox.functions";
-  import { useDataTableFiltersStore } from "../../stores/DataTableFilterStore"
   import { useDataListStore } from "../../stores/DataListStore";
 
   const dataListStore = useDataListStore();
@@ -91,9 +90,7 @@
   });
 
 
-  const filtersStore = useDataTableFiltersStore();
-
-  filtersStore.filters = {
+  dataListStore.filters = {
     limit: 0,
     from: "",
     to: "",
@@ -119,16 +116,15 @@
 
   /**
    * 
-   * @param {*} exerciseFilters filters from DataTableFilters
-   * @param {*} exerciseList reactive list
+   * @param {*} store 
    */
-  async function loadExerciseHandler(exerciseFilters, store) {
+  async function loadExerciseHandler(store) {
 
       try {
         messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
         isLoading.value = true;
-        const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: filtersStore.filters.limit}) //todo: limit - find a place for it
-        const filterParams = new URLSearchParams(exerciseFilters);
+        const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: store.filters.limit}) //todo: limit - find a place for it
+        const filterParams = new URLSearchParams(store.filters);
         const apiResponse = await getAllExercises(paginationParams+'&'+filterParams);
         isLoading.value = false;
         console.log(apiResponse)
@@ -150,7 +146,7 @@
       }
   }
 
-  async function deleteExerciseHandler(selectedExercisesP, store, filtersStoreP, loadDataHandler) {
+  async function deleteExerciseHandler(selectedExercisesP, store, loadDataHandler) {
 
     const confirmMessage = (!(selectedExercisesP.length > 1)) ?
     `Are you sure you want to delete the exercise '${selectedExercisesP[0]._id}' of '${selectedExercisesP[0].userId}'` :
@@ -170,23 +166,23 @@
       );
 
       if (deleteStatus.includes(true)){
-        await loadDataHandler(filtersStoreP.filters, store);
+        await loadDataHandler(store);
       }
     }
   }
 
   onMounted( async () => {
-    await loadExerciseHandler(filtersStore.filters, dataListStore);
+    await loadExerciseHandler(dataListStore);
   })
 
   const filtersStoreWatchList = (() => {
-    const filterKeys = Object.keys(filtersStore.filters);
-    return filterKeys.map(filter => () => filtersStore.filters[filter])
+    const filterKeys = Object.keys(dataListStore.filters);
+    return filterKeys.map(filter => () => dataListStore.filters[filter])
   })();
 
   watch([...filtersStoreWatchList], async (newValue, oldValue) => {
     dataListStore.pagination.currentPage = 1;
-    await loadExerciseHandler(filtersStore.filters, dataListStore);
+    await loadExerciseHandler(dataListStore);
   });
 
 
@@ -194,7 +190,7 @@
       if (newValue > dataListStore.pagination.totalPages) {
         return dataListStore.pagination.currentPage = dataListStore.pagination.totalPages
       }
-      await loadExerciseHandler(filtersStore.filters, dataListStore);
+      await loadExerciseHandler(dataListStore);
     }
   );
 
