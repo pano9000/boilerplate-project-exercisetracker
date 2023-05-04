@@ -28,6 +28,17 @@
 
   >
 
+    <template v-slot:actionMenuEntries>
+      <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseDetails')">
+        <IconPencil></IconPencil> Edit Exercise
+      </ActionMenuEntry>
+
+      <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, loadExerciseHandler)">
+        <IconX></IconX> Delete Exercise
+      </ActionMenuEntry>
+
+    </template>
+
   </DataTablePage>
 
 
@@ -39,6 +50,8 @@
   import DataTablePage from '../components/DataTablePage.vue';
   import { DataTableKey } from "../services/utils";
   import { useDataListStore } from "../stores/DataListStore";
+  import ActionMenuEntry from "../components/ActionMenuEntry.vue";
+  import { IconX, IconPencil } from "@tabler/icons-vue"
 
   import { getAllExercises, deleteExerciseById } from '../services/apiEndpoints';
   const dataListStore = useDataListStore();
