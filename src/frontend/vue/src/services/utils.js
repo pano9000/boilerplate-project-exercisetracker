@@ -129,15 +129,15 @@ export function inputHandler(event, options) {
  * @param {[{}]} dataList 
  * @param {()} dataLoadHandler 
  */
-export function tableHeadingSortHandler(dataKeyId, dataTableFilters) {
+export function tableHeadingSortHandler(dataKeyId, dataStore) {
 
-  if (dataKeyId !== dataTableFilters.filters.sortBy) {
-    dataTableFilters.$patch(state => {
+  if (dataKeyId !== dataStore.filters.sortBy) {
+    dataStore.$patch(state => {
       state.filters.sortOrder = 1,
       state.filters.sortBy = dataKeyId
     })
   } else {
-    dataTableFilters.filters.sortOrder *= -1
+    dataStore.filters.sortOrder *= -1
   }
 
 }
