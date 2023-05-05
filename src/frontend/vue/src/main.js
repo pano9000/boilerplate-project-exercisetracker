@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import UiAdmin from "./UiAdmin.vue"
-import UserList from "./components/UserList/UserList.vue";
+import UserList from "./pages/UserList.vue";
 import ExerciseList from "./pages/ExerciseList.vue";
 import Start from "./pages/Start.vue";
 
