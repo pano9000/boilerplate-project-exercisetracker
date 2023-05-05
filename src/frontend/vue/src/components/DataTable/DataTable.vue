@@ -1,27 +1,4 @@
 <template>
-  <PaginationBar
-    v-if="paginationbarOptions.showTop === true && props.dataList.data.length > 0"
-    :list-to-paginate="dataList.pagination"
-    :list-filters="dataList.filters"
-   >
-
-  </PaginationBar>
-
-  <section class="ui-datatable_wrap" v-if="props.dataList.data.length > 0">
-
-  <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: listActionButtonsOptions.textAddNew, 
-      showAdd: listActionButtonsOptions.showAdd,
-      showSelect: listActionButtonsOptions.showSelect,
-      showDelete: listActionButtonsOptions.showDelete
-    }"
-  >
-  </ListActionButtons>
   <table class="ui-datatable">
     <thead>
       <tr>
@@ -75,22 +52,6 @@
   >
     <slot name="actionMenuEntries"></slot>
   </ActionMenu>
-
-  <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: listActionButtonsOptions.textAddNew, 
-      showAdd: listActionButtonsOptions.showAdd,
-      showSelect: listActionButtonsOptions.showSelect,
-      showDelete: listActionButtonsOptions.showDelete
-    }"
-  >
-  </ListActionButtons>
-
-  </section>
 
 </template>
 
