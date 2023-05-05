@@ -72,7 +72,7 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     "paginationbarOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading"]);
+  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading", "clickSelection"]);
 
   const actionMenu = reactive({ value: {} });
 
