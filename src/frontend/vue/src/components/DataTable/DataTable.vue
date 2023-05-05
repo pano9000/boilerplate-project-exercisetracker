@@ -8,7 +8,7 @@
             :checked="hasSelectedItems"
             :key="toggleSelection"
             :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
-            @click.prevent="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
+            @click.prevent="$emit('clickSelection')"
           >
         </th>
 
@@ -29,7 +29,7 @@
       <tr v-for="(data, index) in props.dataList.data" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
-        <td class="list-cell_center" @click="currentItem.value = data">
+        <td class="list-cell_center" @click="$emit('updateCurrentItem', data)">
           <div class="actionMenu_wrap">
             <button 
               class="actionMenu_btn" 
