@@ -58,9 +58,7 @@
 
 <script setup>
 
-import { ref, reactive, watch, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
-import ListActionButtons from "./ListActionButtons.vue";
-import PaginationBar from "../PaginationBar/PaginationBar.vue";
+import { ref, reactive, watch, computed } from "vue";
 import ActionMenu from "../ActionMenu.vue";
 import { actionButtonHandler } from "../ActionMenu.functions.js";
 
