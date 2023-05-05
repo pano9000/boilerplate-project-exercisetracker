@@ -46,7 +46,7 @@
 
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref } from 'vue';
   import DataTablePage from '../components/DataTablePage.vue';
   import { DataTableKey } from "../services/utils";
   import { useDataListStore } from "../stores/DataListStore";
