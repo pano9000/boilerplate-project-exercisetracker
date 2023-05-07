@@ -80,31 +80,7 @@ import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
   const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading", "clickSelection"]);
 
   const actionMenu = reactive({ value: {} });
-
   const actionMenuVisible = reactive({ value: false });
-
-  const toggleSelection = ref(Date.now());
-
-  const selectedItems = computed( () => {
-    if (!Array.isArray(props.dataList.data)) return [];
-    return props.dataList.data.filter(item => item.selected === true)
-  });
-  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.data.length) ? true : false )
-  const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
-
-  watch( hasSelectedItems, () => {
-    toggleSelection.value = Date.now();
-    //https://michaelnthiessen.com/force-re-render/
-  });
-
-
-
-  
-
-  watch(selectedItems, () => {
-    emit("updateSelectedItems", selectedItems)
-  });
-
 
 </script>
 
