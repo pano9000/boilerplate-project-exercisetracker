@@ -72,6 +72,8 @@
       items: "Exercises"
     };
 
+  dataListStore.pagination.currentPage = 1;
+
   dataListStore.filters = {
     limit: 10,
     from: "",
