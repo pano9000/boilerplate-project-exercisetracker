@@ -119,6 +119,9 @@
       items: "Users"
     };
 
+  // @todo: fix - currently might cause infinite loop
+  // dataListStore.pagination.currentPage = 1;
+
   dataListStore.filters = {
     limit: 10,
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
