@@ -15,7 +15,6 @@
       listActionButtons: {
         showTop: true,
         textAddNew: `Add New User`,
-        showAdd: true,
         showSelect: true,
         showDelete: true,
       },
@@ -44,6 +43,15 @@
       <ActionMenuEntry @action-menu-event="uiVisibilityHandler(uiVisibility, 'exerciseLog')">
         <IconListDetails></IconListDetails> Show Exercise Log
       </ActionMenuEntry>
+    </template>
+
+
+    <template v-slot:listActionButtons>
+      <ListActionButtonEntry @list-action-button-event="uiVisibilityHandler(uiVisibility, 'createUser')">
+        <IconUserPlus></IconUserPlus>
+        Add New User
+      </ListActionButtonEntry>
+
     </template>
 
   </DataTablePage>
@@ -81,7 +89,8 @@
     import { DataTableKey, uiVisibilityHandler } from "../services/utils";
     import { useDataListStore } from "../stores/DataListStore";
     import ActionMenuEntry from "../components/ActionMenuEntry.vue";
-    import { IconX, IconPlus, IconPencil, IconListDetails } from "@tabler/icons-vue"
+    import ListActionButtonEntry from '../components/ListActionButtonEntry.vue';
+    import { IconX, IconPlus, IconPencil, IconListDetails, IconUserPlus } from "@tabler/icons-vue"
     import ModalWindow from '../components/ModalWindow/ModalWindow.vue';
     import { getAllUsers, deleteUserById } from '../services/apiEndpoints';
 
