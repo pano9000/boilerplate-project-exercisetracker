@@ -5,12 +5,12 @@
         <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
           <div class="list-selection-toggle"
             tabindex="0"
-            :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
+            :title="(!props.dataList.allItemsSelected) ? 'Select All' : 'Deselect All'"
             @keyup.enter="$emit('clickSelection')"
             @keyup.space="$emit('clickSelection')"
             @click.prevent="$emit('clickSelection')"
           >
-            <IconSquareCheck v-if="!hasSelectedItems"></IconSquareCheck>
+            <IconSquareCheck v-if="!props.dataList.hasSelectedItems"></IconSquareCheck>
             <IconSquareOff v-else></IconSquareOff>  
 
           </div>
