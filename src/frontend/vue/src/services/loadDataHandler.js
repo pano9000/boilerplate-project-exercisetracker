@@ -8,7 +8,7 @@ export default async function loadDataHandler(store, messageBox, apiFunc, dataPr
 
     messageBox.value = MessageBoxOptions(null, null, null, false);
     store.isLoading = true;
-    const paginationParams = new URLSearchParams({page: store.pagination.currentPage, limit: store.filters.limit}) //todo: limit - find a place for it
+    const paginationParams = new URLSearchParams({page: store.pagination.currentPage})
     const filterParams = new URLSearchParams(store.filters);
     const apiResponse = await apiFunc(paginationParams+'&'+filterParams)
     store.isLoading = false;
