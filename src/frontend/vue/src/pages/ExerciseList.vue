@@ -39,6 +39,18 @@
 
     </template>
 
+    <template v-slot:listActionButtons>
+
+      <ListActionButtonEntry
+        :options="{disabled: !dataListStore.hasSelectedItems}"
+        @list-action-button-event="'#todo'"
+      >
+        <IconX></IconX>
+        Delete Selected Exercises
+      </ListActionButtonEntry>
+
+    </template>
+
   </DataTablePage>
 
 
