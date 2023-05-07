@@ -19,8 +19,6 @@
   </LoadingSpinner>
 
   <ListActionButtons v-if="options.listActionButtons.showTop === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(options.dataStore.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
@@ -53,8 +51,6 @@
   </DataTable>
 
   <ListActionButtons v-if="options.listActionButtons.showBottom === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(options.dataStore.data, allItemsSelected)"
     @click-del-selected="$emit('clickDelSelected')"
     :hasSelection="hasSelectedItems"
     :options="{ 
