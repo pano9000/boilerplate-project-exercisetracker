@@ -68,7 +68,7 @@
 
 
 <script setup>
-  import { computed, reactive, onMounted, watch } from 'vue';
+  import { reactive, onMounted, watch } from 'vue';
   import DataTableFilters from './DataTableFilters/DataTableFilters.vue';
   import PaginationBar from './PaginationBar/PaginationBar.vue';
   import ListActionButtons from './DataTable/ListActionButtons.vue';
