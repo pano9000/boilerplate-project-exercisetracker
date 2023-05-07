@@ -4,14 +4,6 @@
     <slot name="listActionButtons">
 
     </slot>
-    <button v-if="(options.showSelect !== undefined) ? options.showSelect : true" 
-      type="button"
-      @click="$emit('clickSelection')"
-    >
-      <IconSquareCheck v-if="!hasSelection"></IconSquareCheck>
-      <IconSquareOff v-else></IconSquareOff> 
-      {{ (!hasSelection) ? "Select All" : "Clear Selection" }}
-    </button>
 
     <button 
       v-if="(options.showDelete !== undefined) ? options.showDelete : true" 
