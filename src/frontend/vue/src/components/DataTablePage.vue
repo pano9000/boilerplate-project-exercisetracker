@@ -30,6 +30,9 @@
       showDelete: options.listActionButtons.showDelete
     }"
   >
+    <template v-slot:listActionButtons>
+      <slot name="listActionButtons"></slot>
+    </template>
   </ListActionButtons>
 
   <DataTable
@@ -61,6 +64,9 @@
       showDelete: options.listActionButtons.showDelete
     }"
   >
+    <template v-slot:actionMenuEntries>
+      <slot name="listActionButtons"></slot>
+    </template>
   </ListActionButtons>
 
 
