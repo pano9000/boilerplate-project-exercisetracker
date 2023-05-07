@@ -93,9 +93,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     //https://michaelnthiessen.com/force-re-render/
   });
 
-  function toggleSelectionHandler(dataList, allItemsSelected) {
-    dataList.forEach(item => item.selected = !allItemsSelected);
-  }
 
 
   /**
