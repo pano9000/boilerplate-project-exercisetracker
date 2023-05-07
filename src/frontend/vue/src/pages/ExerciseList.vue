@@ -58,7 +58,8 @@
   import { DataTableKey } from "../services/utils";
   import { useDataListStore } from "../stores/DataListStore";
   import ActionMenuEntry from "../components/ActionMenuEntry.vue";
-  import { IconX, IconPencil } from "@tabler/icons-vue"
+  import ListActionButtonEntry from '../components/ListActionButtonEntry.vue';
+  import { IconX, IconPencil,  } from "@tabler/icons-vue"
 
   import { getAllExercises, deleteExerciseById } from '../services/apiEndpoints';
   const dataListStore = useDataListStore();
