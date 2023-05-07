@@ -33,7 +33,7 @@
     @update-selected-items="(newValue) => props.options.dataStore.selectedItems = newValue"
     @click-del-selected="deleteExerciseHandler(props.options.dataStore.selectedItems, props.options.dataStore, loadExerciseHandler)"
     @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
-    @click-selection="toggleSelectionHandler(props.options.dataStore.data, allItemsSelected)"
+    @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
   >
     <template v-slot:actionMenuEntries>
       <slot name="actionMenuEntries"></slot>
