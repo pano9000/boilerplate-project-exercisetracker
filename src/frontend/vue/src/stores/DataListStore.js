@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useDataListStore = defineStore("DataList", {
 
   state: () => ({
-    data: {},
+    data: [],
     pagination: {},
     filters: {},
     currentItem: {},
