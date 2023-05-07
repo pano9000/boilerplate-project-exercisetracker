@@ -77,7 +77,7 @@ import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
     "paginationbarOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading", "clickSelection"]);
+  const emit = defineEmits(["updateCurrentItem", "clickTableHeading", "clickSelection"]);
 
   const actionMenu = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
