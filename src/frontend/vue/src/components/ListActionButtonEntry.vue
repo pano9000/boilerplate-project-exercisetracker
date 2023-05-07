@@ -1,6 +1,7 @@
 <template>
   <button
     @click="$emit('listActionButtonEvent')"
+    :disabled="props.options?.disabled === true"
   >
     <slot></slot>
 </button>
