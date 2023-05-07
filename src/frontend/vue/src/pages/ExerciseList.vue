@@ -66,6 +66,12 @@
     new DataTableKey("Duration (min)", "duration"),
   ]);
 
+  dataListStore.name  = {
+      list: "Exercise List",
+      item: "Exercise",
+      items: "Exercises"
+    };
+
   dataListStore.filters = {
     limit: 10,
     from: "",
