@@ -3,7 +3,6 @@
 <h2> {{ title }}</h2>
   <DataTablePage
     :options="{
-      listName: `Exercises`,
       dataTableKeys: dataTableKeys,
       dataStore: dataListStore,
       tableFilters: {
@@ -14,10 +13,6 @@
       },
       listActionButtons: {
         showTop: true,
-        textAddNew: `Add New Exercise`,
-        showAdd: true,
-        showSelect: true,
-        showDelete: true,
       },
       apiFunc: {
         load: getAllExercises,
