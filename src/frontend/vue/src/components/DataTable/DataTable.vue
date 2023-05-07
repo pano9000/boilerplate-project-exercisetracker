@@ -76,7 +76,6 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
   const actionMenu = reactive({ value: {} });
 
-  const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
 
   const toggleSelection = ref(Date.now());
