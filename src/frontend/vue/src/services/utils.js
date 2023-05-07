@@ -124,10 +124,7 @@ export function inputHandler(event, options) {
 /**
  * 
  * @param {String} dataKeyId 
- * @param {[{}]} dataTableItems 
- * @param {{}} dataTableFilters 
- * @param {[{}]} dataList 
- * @param {()} dataLoadHandler 
+ * @param {} dataStore
  */
 export function tableHeadingSortHandler(dataKeyId, dataStore) {
 
