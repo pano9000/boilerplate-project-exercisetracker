@@ -80,7 +80,8 @@
       items: "Exercises"
     };
 
-  dataListStore.pagination.currentPage = 1;
+  // @todo: fix - currently might cause infinite loop
+  // dataListStore.pagination.currentPage = 1;
 
   dataListStore.filters = {
     limit: 10,
