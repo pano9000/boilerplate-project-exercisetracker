@@ -40,16 +40,22 @@ export const useDataListStore = defineStore("DataList", {
 
     async deleteData(itemsToDelete, deleteApiEndpoint) {
 
-      const deleteStatus = await Promise.all(
+      try {
 
-        itemsToDelete.map(async (itemToDelete) => {
-          const apiResponse = await deleteApiEndpoint(itemToDelete["_id"]);
-          return apiResponse.statusOK;
-      }));
-  
-      if (deleteStatus.includes(true)){
-        console.log("deleting success", deleteStatus)
-        //reload page here;
+        const deleteStatus = await Promise.all(
+          
+          itemsToDelete.map(async (itemToDelete) => {
+            const apiResponse = await deleteApiEndpoint(itemToDelete["_id"]);
+            return apiResponse.statusOK;
+          }));
+          
+        if (deleteStatus.includes(true)){
+          console.log("deleting success", deleteStatus)
+          //reload page here;
+        }
+      }
+      catch(error) {
+        console.log(error)
       }
 
 
