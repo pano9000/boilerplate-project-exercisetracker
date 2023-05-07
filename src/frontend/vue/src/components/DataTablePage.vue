@@ -100,7 +100,6 @@
 
   onMounted( async () => {
     await loadDataHandler(
-      props.options.listName, 
       props.options.dataStore, 
       messageBoxOptions, 
       props.options.apiFunc.load, 
@@ -118,7 +117,6 @@
   watch([...filtersStoreWatchList], async (newValue, oldValue) => {
     props.options.dataStore.pagination.currentPage = 1;
     await loadDataHandler(
-      props.options.listName, 
       props.options.dataStore, 
       messageBoxOptions, 
       props.options.apiFunc.load, 
@@ -132,7 +130,6 @@
         return props.options.dataStore.pagination.currentPage = props.options.dataStore.pagination.totalPages
       }
       await loadDataHandler(
-        props.options.listName,
         props.options.dataStore,
         messageBoxOptions,
         props.options.apiFunc.load,
