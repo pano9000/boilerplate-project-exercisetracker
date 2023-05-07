@@ -11,7 +11,8 @@ export const useDataListStore = defineStore("DataList", {
       list: "",
       item: "",
       items: ""
-    }
+    },
+    isLoading: false
   }),
 
   actions: {
