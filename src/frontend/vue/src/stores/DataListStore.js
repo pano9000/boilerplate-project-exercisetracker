@@ -17,6 +17,28 @@ export const useDataListStore = defineStore("DataList", {
 
   actions: {
 
+    async loadData(apiFunc, dataProcessingFunc) {
+      
+      try {
+
+        this.isLoading = true;
+        const paginationParams = new URLSearchParams({page: this.pagination.currentPage})
+        const filterParams = new URLSearchParams(this.filters);
+        const apiResponse = await apiFunc(paginationParams+'&'+filterParams);
+        this.isLoading = false;
+        handleApiResponse(apiResponse);
+        dataProcessingFunc(this, apiResponse);
+        this.pagination = apiResponse.response.pagination;
+        return true;
+      }
+      catch(error) {
+        console.log(error)
+        return false;
+      }
+    }
+
+
+
   },
 
   getters: {
