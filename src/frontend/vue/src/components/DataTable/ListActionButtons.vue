@@ -22,7 +22,7 @@
 <script setup>
 
   import { IconSquareCheck, IconSquareOff, IconPlus, IconX } from '@tabler/icons-vue';
-  defineEmits(["clickAddNew", "clickSelection", "clickDelSelected" ]);
+  defineEmits(["clickDelSelected"]);
   defineProps(["hasSelection", "options"]);
 
 </script>
