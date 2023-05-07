@@ -3,7 +3,6 @@
   <h2> {{ title }}</h2>
   <DataTablePage
     :options="{
-      listName: `Users`,
       dataTableKeys: dataTableKeys,
       dataStore: dataListStore,
       tableFilters: {
@@ -113,7 +112,13 @@
     new DataTableKey("User Id", "_id", false),
     new DataTableKey("Username", "username", true, true)
   ]);
-  
+
+  dataListStore.name  = {
+      list: "User List",
+      item: "User",
+      items: "Users"
+    };
+
   dataListStore.filters = {
     limit: 10,
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
