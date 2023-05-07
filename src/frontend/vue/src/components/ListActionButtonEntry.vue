@@ -8,5 +8,7 @@
 </template>
 
 <script setup>
+  defineEmits(["listActionButtonEvent"])
+  const props = defineProps(["options"])
 
 </script>
