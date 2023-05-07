@@ -116,10 +116,10 @@
   ]);
 
   dataListStore.name  = {
-      list: "User List",
-      item: "User",
-      items: "Users"
-    };
+    list: "User List",
+    item: "User",
+    items: "Users"
+  };
 
   // @todo: fix - currently might cause infinite loop
   // dataListStore.pagination.currentPage = 1;
