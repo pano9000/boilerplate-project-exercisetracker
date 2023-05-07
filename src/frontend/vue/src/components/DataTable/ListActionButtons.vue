@@ -1,14 +1,9 @@
 <template>
   <section class="ui_list-action-btn_wrap">
 
-    <button v-if="(options.showAdd !== undefined) ? options.showAdd : true"
-      type="button" 
-      @click="$emit('clickAddNew')"
-    >
-      <IconPlus></IconPlus>
-      {{ (options.textAddNew) ? options.textAddNew : 'Add New'}}
-    </button>
+    <slot name="listActionButtons">
 
+    </slot>
     <button v-if="(options.showSelect !== undefined) ? options.showSelect : true" 
       type="button"
       @click="$emit('clickSelection')"
