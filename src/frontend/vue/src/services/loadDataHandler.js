@@ -2,7 +2,7 @@ import { handleApiResponse } from "./apiService"
 import { MessageBoxOptions } from "../components/MessageBox.functions";
 
 
-export default async function loadDataHandler(listName, store, messageBox, apiFunc, dataProcessingFunc) {
+export default async function loadDataHandler(store, messageBox, apiFunc, dataProcessingFunc) {
   
   try {
 
@@ -16,14 +16,14 @@ export default async function loadDataHandler(listName, store, messageBox, apiFu
     dataProcessingFunc(store, apiResponse);
     store.pagination = apiResponse.response.pagination;
     if (store.data.length < 1) {
-      messageBox.value = MessageBoxOptions(`No ${listName} Found`, `There were no ${listName} found with your current filters`, "info");
+      messageBox.value = MessageBoxOptions(`No ${store.name.items} Found`, `There were no ${store.name.items} found with your current filters`, "info");
       return
     }
   }
 
   catch (error) {
     console.log("error in loadDataHandler", error)
-    messageBox.value = MessageBoxOptions(`Loading ${listName} failed", "Error fetching ${listName}: ${error}`);
+    messageBox.value = MessageBoxOptions(`Loading ${store.name.list} failed", "Error fetching ${store.name.list}: ${error}`);
   }
 
 }
