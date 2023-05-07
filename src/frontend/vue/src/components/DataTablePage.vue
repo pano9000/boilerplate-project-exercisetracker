@@ -18,16 +18,7 @@
   <LoadingSpinner v-if="options.dataStore.isLoading">
   </LoadingSpinner>
 
-  <ListActionButtons v-if="options.listActionButtons.showTop === true"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: options.listActionButtons.textAddNew, 
-      showAdd: options.listActionButtons.showAdd,
-      showSelect: options.listActionButtons.showSelect,
-      showDelete: options.listActionButtons.showDelete
-    }"
-  >
+  <ListActionButtons v-if="options.listActionButtons.showTop === true">
     <template v-slot:listActionButtons>
       <slot name="listActionButtons"></slot>
     </template>
@@ -50,16 +41,7 @@
 
   </DataTable>
 
-  <ListActionButtons v-if="options.listActionButtons.showBottom === true"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: options.listActionButtons.textAddNew, 
-      showAdd: options.listActionButtons.showAdd,
-      showSelect: options.listActionButtons.showSelect,
-      showDelete: options.listActionButtons.showDelete
-    }"
-  >
+  <ListActionButtons v-if="options.listActionButtons.showBottom === true">
     <template v-slot:actionMenuEntries>
       <slot name="listActionButtons"></slot>
     </template>
