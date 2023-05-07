@@ -29,7 +29,7 @@
   });
 
   onBeforeMount( async () => {
-    userData.value = (await getUserById(props.currentUser.value._id)).data;
+    userData.value = (await getUserById(props.currentUser._id)).response;
   });
 
 </script>
