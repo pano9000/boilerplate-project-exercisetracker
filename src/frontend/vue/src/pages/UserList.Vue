@@ -58,7 +58,7 @@
   <div v-if="uiVisibility.value.userDetails">
     <ModalWindow @close-modal="uiVisibility.value.userDetails = false">
       <UserDetails
-        :current-user="dataListStore.currentListItem"
+        :current-user="dataListStore.currentItem"
       ></UserDetails>
     </ModalWindow>
   </div>
@@ -66,7 +66,7 @@
   <div v-if="uiVisibility.value.createExercise">
     <ModalWindow @close-modal="uiVisibility.value.createExercise = false">
       <CreateExercise
-        :current-user="dataListStore.currentListItem"
+        :current-user="dataListStore.currentItem"
       ></CreateExercise>
     </ModalWindow>
   </div>
