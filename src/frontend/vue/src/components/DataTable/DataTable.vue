@@ -3,13 +3,17 @@
     <thead>
       <tr>
         <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
-          <input
-            type="checkbox"
-            :checked="hasSelectedItems"
-            :key="toggleSelection"
+          <div class="list-selection-toggle"
+            tabindex="0"
             :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
+            @keyup.enter="$emit('clickSelection')"
+            @keyup.space="$emit('clickSelection')"
             @click.prevent="$emit('clickSelection')"
           >
+            <IconSquareCheck v-if="!hasSelectedItems"></IconSquareCheck>
+            <IconSquareOff v-else></IconSquareOff>  
+
+          </div>
         </th>
 
         <th 
@@ -61,6 +65,7 @@
 import { ref, reactive, watch, computed } from "vue";
 import ActionMenu from "../ActionMenu.vue";
 import { actionButtonHandler } from "../ActionMenu.functions.js";
+import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
 
 
   const props = defineProps([
@@ -194,6 +199,22 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
   .list-header-medium {
     width: 6rem;
   }
+
+  .list-selection-toggle {
+    cursor: pointer;
+  }
+
+  .list-selection-toggle:focus,
+  .list-selection-toggle:hover {
+    color:#646cff;
+  }
+
+  .list-selection-toggle svg {
+    width: 100%;
+    height: auto;
+    transition: all 0.25s;
+  }
+
 
   .actionMenu_wrap {
     position: relative;
