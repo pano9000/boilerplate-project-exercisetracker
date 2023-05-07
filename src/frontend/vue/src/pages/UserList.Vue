@@ -47,11 +47,20 @@
 
 
     <template v-slot:listActionButtons>
-      <ListActionButtonEntry @list-action-button-event="uiVisibilityHandler(uiVisibility, 'createUser')">
+      <ListActionButtonEntry 
+        @list-action-button-event="uiVisibilityHandler(uiVisibility, 'createUser')"
+      >
         <IconUserPlus></IconUserPlus>
         Add New User
       </ListActionButtonEntry>
 
+      <ListActionButtonEntry
+        :options="{disabled: !dataListStore.hasSelectedItems}"
+        @list-action-button-event="deleteUserHandler([currentUser.value], dataListStore, loadUsersHandler)"
+      >
+        <IconUserMinus></IconUserMinus>
+        Delete Selected Users
+      </ListActionButtonEntry>
     </template>
 
   </DataTablePage>
@@ -90,7 +99,7 @@
     import { useDataListStore } from "../stores/DataListStore";
     import ActionMenuEntry from "../components/ActionMenuEntry.vue";
     import ListActionButtonEntry from '../components/ListActionButtonEntry.vue';
-    import { IconX, IconPlus, IconPencil, IconListDetails, IconUserPlus } from "@tabler/icons-vue"
+    import { IconX, IconPlus, IconPencil, IconListDetails, IconUserPlus, IconUserMinus } from "@tabler/icons-vue"
     import ModalWindow from '../components/ModalWindow/ModalWindow.vue';
     import { getAllUsers, deleteUserById } from '../services/apiEndpoints';
 
