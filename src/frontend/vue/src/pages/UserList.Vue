@@ -84,7 +84,9 @@
     </ModalWindow>
   </div>
 
-
+<button
+@click="dataListStore.loadData(getAllUsers, dataProcessing)"
+>test load</button>
   </template>
 
 
