@@ -14,9 +14,6 @@
       },
       listActionButtons: {
         showTop: true,
-        textAddNew: `Add New User`,
-        showSelect: true,
-        showDelete: true,
       },
       apiFunc: {
         load: getAllUsers,
