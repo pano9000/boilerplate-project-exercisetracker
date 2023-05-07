@@ -30,8 +30,6 @@
     :data-key-id="'_id'"
     :data-keys="options.dataTableKeys"
     @update-current-item="(newValue) => props.options.dataStore.currentItem = newValue"
-    @update-selected-items="(newValue) => props.options.dataStore.selectedItems = newValue"
-    @click-del-selected="deleteExerciseHandler(props.options.dataStore.selectedItems, props.options.dataStore, loadExerciseHandler)"
     @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
     @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
   >
