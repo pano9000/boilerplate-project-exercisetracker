@@ -72,7 +72,7 @@ export async function availabilityHandler(reactiveForm, reactiveFormItem, availa
   };
 
   const availabilityResult = await availabilityApiEndpoint(currentFormItem.value);
-  currentFormItem.available = availabilityResult.data.available;
+  currentFormItem.available = availabilityResult.response.available;
 }
 
 export function getIsValidData(reactiveForm) {
