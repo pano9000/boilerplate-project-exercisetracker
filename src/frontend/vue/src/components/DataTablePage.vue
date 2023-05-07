@@ -40,7 +40,7 @@
   </DataTable>
 
   <ListActionButtons v-if="options.listActionButtons.showBottom === true">
-    <template v-slot:actionMenuEntries>
+    <template v-slot:listActionButtons>
       <slot name="listActionButtons"></slot>
     </template>
   </ListActionButtons>
