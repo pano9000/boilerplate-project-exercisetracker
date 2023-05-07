@@ -33,7 +33,7 @@
           <div class="actionMenu_wrap">
             <button 
               class="actionMenu_btn" 
-              @click="DataTableActionButtonHandler($event, actionMenuVisible, props.dataList.currentItem, data, actionMenu)" 
+              @click="actionButtonHandler($event, actionMenuVisible, actionMenu)" 
               title="Show Actions"
             >
               ☰
@@ -95,17 +95,7 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
 
 
 
-  /**
-   * 
-   * @param {Object} currentItem - reactive object to store the currently selected/active data to
-   * @param {Object} data - data object from the data list of the current row
-   * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
-   * @param {String} dataKeyId the data lists key Id prop name
-   */
-  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData, actionMenu) {
-    currentItem = currentData;
-    actionButtonHandler(event, actionMenuVisible, actionMenu)
-  }
+  
 
   watch(selectedItems, () => {
     emit("updateSelectedItems", selectedItems)
