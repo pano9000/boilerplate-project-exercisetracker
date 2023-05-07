@@ -28,7 +28,7 @@
         <IconPencil></IconPencil> Edit User
       </ActionMenuEntry>
 
-      <ActionMenuEntry @action-menu-event="deleteUserHandler([currentUser.value], dataListStore, loadUsersHandler)">
+      <ActionMenuEntry @action-menu-event="deleteUserHandler([dataListStore.currentItem], dataListStore, loadDataHandler)">
         <IconX></IconX> Delete User
       </ActionMenuEntry>
 
@@ -52,7 +52,7 @@
 
       <ListActionButtonEntry
         :options="{disabled: !dataListStore.hasSelectedItems}"
-        @list-action-button-event="deleteUserHandler([currentUser.value], dataListStore, loadUsersHandler)"
+        @list-action-button-event="deleteUserHandler(dataListStore.selectedItems, dataListStore, loadDataHandler)"
       >
         <IconUserMinus></IconUserMinus>
         Delete Selected Users
