@@ -96,14 +96,6 @@
   });
 
 
-  const selectedItems = computed( () => {
-    if (!Array.isArray(props.options.dataStore?.data)) return [];
-    return props.options.dataStore.data.filter(item => item.selected === true)
-  });
-
-  const allItemsSelected = computed( () => (selectedItems.value.length === props.options.dataStore.data.length) ? true : false )
-  const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
-
   function toggleSelectionHandler(dataList, allItemsSelected) {
     dataList.forEach(item => item.selected = !allItemsSelected);
   }
