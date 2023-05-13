@@ -75,8 +75,6 @@
   import MessageBox from "./MessageBox.vue";
   import LoadingSpinner from './Loading-Spinner.vue';
   import { MessageBoxOptions } from "./MessageBox.functions";
-
-  import loadDataHandler from "../services/loadDataHandler";
   import { tableHeadingSortHandler } from "../services/utils";
 
   const props = defineProps(["options"]);
