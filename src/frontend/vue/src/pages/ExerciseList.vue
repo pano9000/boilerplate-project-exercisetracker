@@ -81,8 +81,8 @@
       items: "Exercises"
     };
 
-  // @todo: fix - currently might cause infinite loop
-  // dataListStore.pagination.currentPage = 1;
+
+  dataListStore.pagination = { currentPage: 1, totalEntries: undefined };
 
   dataListStore.filters = {
     limit: 10,
