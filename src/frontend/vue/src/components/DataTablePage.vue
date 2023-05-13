@@ -8,60 +8,57 @@
   >
   </DataTableFilters>
 
-  <PaginationBar
-    v-if="options.paginationBar.showTop === true && options.dataStore.data.length > 0"
-    :list-to-paginate="options.dataStore.pagination"
-    :list-filters="options.dataStore.filters"
-  >
-  </PaginationBar>
-
-  <LoadingSpinner v-if="options.dataStore.isLoading">
-  </LoadingSpinner>
-
-  <ListActionButtons v-if="options.listActionButtons.showTop === true">
-    <template v-slot:listActionButtons>
-      <slot name="listActionButtons"></slot>
-    </template>
-  </ListActionButtons>
-
-  <DataTable
-    :table-options="{showSelection: true, showAction: true}"
-    :data-list="options.dataStore"
-    :data-key-id="'_id'"
-    :data-keys="options.dataTableKeys"
-    @update-current-item="(newValue) => props.options.dataStore.currentItem = newValue"
-    @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
-    @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
-  >
-    <template v-slot:actionMenuEntries>
-      <slot name="actionMenuEntries"></slot>
-    </template>
-
-  </DataTable>
-
-  <ListActionButtons v-if="options.listActionButtons.showBottom === true">
-    <template v-slot:listActionButtons>
-      <slot name="listActionButtons"></slot>
-    </template>
-  </ListActionButtons>
-
-
-  <section class="ui-datatable_wrap" v-if="options.dataStore.data.length > 0">
-
-  
-  
-  
-  
-  </section>
-
-
-  <div class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
+  <section class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
     <MessageBox
       :options="messageBoxOptions.value"
       >
     </MessageBox>
-  </div>
+  </section>
 
+
+  <section v-else>
+
+    <PaginationBar
+      v-if="options.paginationBar.showTop === true && options.dataStore.data.length > 0"
+      :list-to-paginate="options.dataStore.pagination"
+      :list-filters="options.dataStore.filters"
+      >
+    </PaginationBar>
+
+    <LoadingSpinner v-if="options.dataStore.isLoading">
+    </LoadingSpinner>
+
+    <section class="ui-datatable_wrap" v-else-if="options.dataStore.data.length > 0">
+
+      <ListActionButtons v-if="options.listActionButtons.showTop === true">
+        <template v-slot:listActionButtons>
+          <slot name="listActionButtons"></slot>
+        </template>
+      </ListActionButtons>
+
+      <DataTable
+        :table-options="{showSelection: true, showAction: true}"
+        :data-list="options.dataStore"
+        :data-key-id="'_id'"
+        :data-keys="options.dataTableKeys"
+        @update-current-item="(newValue) => props.options.dataStore.currentItem = newValue"
+        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
+        @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
+      >
+        <template v-slot:actionMenuEntries>
+          <slot name="actionMenuEntries"></slot>
+        </template>
+      </DataTable>
+
+      <ListActionButtons v-if="options.listActionButtons.showBottom === true">
+        <template v-slot:listActionButtons>
+          <slot name="listActionButtons"></slot>
+        </template>
+      </ListActionButtons>
+
+    </section>
+
+  </section>
 
 </template>
 
