@@ -76,6 +76,7 @@
 
   import MessageBox from "./MessageBox.vue";
   import LoadingSpinner from './Loading-Spinner.vue';
+  import { MessageBoxOptions } from "./MessageBox.functions";
 
   import loadDataHandler from "../services/loadDataHandler";
   import { tableHeadingSortHandler } from "../services/utils";
@@ -96,6 +97,23 @@
 
   function toggleSelectionHandler(dataList, allItemsSelected) {
     dataList.forEach(item => item.selected = !allItemsSelected);
+  }
+
+  function messageBoxHandler(loadDataResp, messageBoxOptions, store) {
+    messageBoxOptions.value = MessageBoxOptions(null, null, null, false);
+
+    if (loadDataResp[0] === false) {
+      messageBoxOptions.value = MessageBoxOptions(`Loading ${store.name.list} failed`, `Error fetching ${store.name.list}: ${loadDataResp[1]}`);
+      return;
+    }
+    if (store.data.length < 1) {
+      messageBoxOptions.value = MessageBoxOptions(`No ${store.name.items} Found`, `There were no ${store.name.items} found with your current filters`, "info");
+    }
+  }
+
+  async function loadDataAndHandleMessage() {
+    const loadStatus = await props.options.dataStore.loadData(props.options.apiFunc.load, props.options.dataProcessing);
+    messageBoxHandler(loadStatus, messageBoxOptions, props.options.dataStore)
   }
 
   onMounted( async () => {
