@@ -72,9 +72,9 @@
 <script setup>
   import { reactive, onMounted, watch } from 'vue';
   import DataTableFilters from './DataTableFilters/DataTableFilters.vue';
-  import PaginationBar from './PaginationBar/PaginationBar.vue';
-  import ListActionButtons from './DataTable/ListActionButtons.vue';
-  import DataTable from './DataTable/DataTable.vue'
+  import PaginationBar from './PaginationBar.vue';
+  import ListActionButtons from './ListActionButtons.vue';
+  import DataTable from './DataTable.vue'
 
   import MessageBox from "./MessageBox.vue";
   import LoadingSpinner from './Loading-Spinner.vue';
