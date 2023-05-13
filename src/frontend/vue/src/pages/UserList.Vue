@@ -84,13 +84,6 @@
     </ModalWindow>
   </div>
 
-<button
-@click="dataListStore.loadData(getAllUsers, dataProcessing)"
->test load</button>
-
-<button
-@click="dataListStore.deleteData(dataListStore.selectedItems, deleteUserById)"
->test delete</button>
 
   </template>
 
