@@ -145,17 +145,10 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   })
 
-  function updateActivePage() {
-    if (props.listToPaginate.currentPage > props.listToPaginate.totalPages) {
-      props.listToPaginate.currentPage = props.listToPaginate.totalPages
-    }
-  }
-
-
-  //TODO: add arguments -> caution: refs pass values only, reactive pass the proxy object, which is what we want here
-  function goToPageHandler() {
+  function updateActivePage(pageNumber, listToPaginate = props.listToPaginate) {
     if (validPageSelection.value) {
-      props.listToPaginate.currentPage = ui_goToPage.value
+      listToPaginate.currentPage = (pageNumber > listToPaginate.totalPages) ? listToPaginate.totalPages : pageNumber;
+      emits("updateCurrentPage");
     }
   }
 
