@@ -5,18 +5,6 @@
   >
   </MenuBar>
 
-  
-  <!--
-  <h1>Exercise Tracker</h1>
-  <section class="ui_section" v-if="menuItems.userList.visible">
-    <UserList/>
-  </section>
-
-  <section class="ui_section" v-if="menuItems.exerciseList.visible">
-    <ExerciseListAll>
-    </ExerciseListAll>
-  </section>
--->
   <section class="ui_section">
     <RouterView></RouterView>
   </section>
@@ -25,9 +13,8 @@
 
 <script setup>
   import MenuBar from "./components/MenuBar.vue";
-  import UserList from "./components/UserList/UserList.vue";
-  import ExerciseListAll from "./components/ExerciseListAll/ExerciseListAll.vue";
   import { ref } from 'vue';
+
   const menuItems = ref({
     userList: {
       title: "User List",
@@ -41,7 +28,7 @@
       id: "exerciseList",
       path: "/exerciselist"
     }
-  })
+  });
 
 </script>
 
