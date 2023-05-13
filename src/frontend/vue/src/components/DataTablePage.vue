@@ -131,15 +131,5 @@
   });
 
 
-  watch( () => props.options.dataStore.pagination.currentPage, async (newValue, oldValue) => {
-      if (newValue > props.options.dataStore.pagination.totalPages) {
-        return props.options.dataStore.pagination.currentPage = props.options.dataStore.pagination.totalPages
-      }
-
-      await loadDataAndHandleMessage();
-
-    }
-
-  );
 
 </script>
