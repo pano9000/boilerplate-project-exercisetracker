@@ -86,7 +86,7 @@
   </div>
 
 
-  </template>
+</template>
 
 
 <script setup>
@@ -141,7 +141,5 @@
   function dataProcessing(store, apiResponse) {
     store.data = apiResponse.response.data
   }
-  
-  
-  
-  </script>
+
+</script>
