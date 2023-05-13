@@ -117,12 +117,7 @@
   }
 
   onMounted( async () => {
-    await loadDataHandler(
-      props.options.dataStore, 
-      messageBoxOptions, 
-      props.options.apiFunc.load, 
-      props.options.dataProcessing
-    );
+    await loadDataAndHandleMessage()
   })
 
 
@@ -134,12 +129,7 @@
 
   watch([...filtersStoreWatchList], async (newValue, oldValue) => {
     props.options.dataStore.pagination.currentPage = 1;
-    await loadDataHandler(
-      props.options.dataStore, 
-      messageBoxOptions, 
-      props.options.apiFunc.load, 
-      props.options.dataProcessing
-    );
+    await loadDataAndHandleMessage();
   });
 
 
@@ -147,13 +137,11 @@
       if (newValue > props.options.dataStore.pagination.totalPages) {
         return props.options.dataStore.pagination.currentPage = props.options.dataStore.pagination.totalPages
       }
-      await loadDataHandler(
-        props.options.dataStore,
-        messageBoxOptions,
-        props.options.apiFunc.load,
-        props.options.dataProcessing
-      );
+
+      await loadDataAndHandleMessage();
+
     }
+
   );
 
 </script>
