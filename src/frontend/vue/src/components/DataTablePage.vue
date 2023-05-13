@@ -22,7 +22,8 @@
       v-if="options.paginationBar.showTop === true && options.dataStore.data.length > 0"
       :list-to-paginate="options.dataStore.pagination"
       :list-filters="options.dataStore.filters"
-      >
+      @update-current-page="loadDataAndHandleMessage()"
+    >
     </PaginationBar>
 
     <LoadingSpinner v-if="options.dataStore.isLoading">
