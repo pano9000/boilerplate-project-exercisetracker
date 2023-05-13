@@ -7,6 +7,7 @@
     }"
   >
   </DataTableFilters>
+  <Transition mode="out-in">
 
   <section class="ui-section-bgwrap"  v-if="messageBoxOptions.value.visible === true">
     <MessageBox
@@ -26,40 +27,43 @@
     >
     </PaginationBar>
 
-    <LoadingSpinner v-if="options.dataStore.isLoading">
-    </LoadingSpinner>
+    <Transition mode="out-in">
+      <LoadingSpinner v-if="options.dataStore.isLoading">
+      </LoadingSpinner>
 
-    <section class="ui-datatable_wrap" v-else-if="options.dataStore.data.length > 0">
+      <section class="ui-datatable_wrap" v-else-if="options.dataStore.data.length > 0">
 
-      <ListActionButtons v-if="options.listActionButtons.showTop === true">
-        <template v-slot:listActionButtons>
-          <slot name="listActionButtons"></slot>
-        </template>
-      </ListActionButtons>
+        <ListActionButtons v-if="options.listActionButtons.showTop === true">
+          <template v-slot:listActionButtons>
+            <slot name="listActionButtons"></slot>
+          </template>
+        </ListActionButtons>
 
-      <DataTable
-        :table-options="{showSelection: true, showAction: true}"
-        :data-list="options.dataStore"
-        :data-key-id="'_id'"
-        :data-keys="options.dataTableKeys"
-        @update-current-item="(newValue) => props.options.dataStore.currentItem = newValue"
-        @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
-        @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
-      >
-        <template v-slot:actionMenuEntries>
-          <slot name="actionMenuEntries"></slot>
-        </template>
-      </DataTable>
+        <DataTable
+          :table-options="{showSelection: true, showAction: true}"
+          :data-list="options.dataStore"
+          :data-key-id="'_id'"
+          :data-keys="options.dataTableKeys"
+          @update-current-item="(newValue) => props.options.dataStore.currentItem = newValue"
+          @click-table-heading="(dataKeyId) => tableHeadingSortHandler(dataKeyId, options.dataStore)"
+          @click-selection="toggleSelectionHandler(props.options.dataStore.data, props.options.dataStore.allItemsSelected)"
+        >
+          <template v-slot:actionMenuEntries>
+            <slot name="actionMenuEntries"></slot>
+          </template>
+        </DataTable>
 
-      <ListActionButtons v-if="options.listActionButtons.showBottom === true">
-        <template v-slot:listActionButtons>
-          <slot name="listActionButtons"></slot>
-        </template>
-      </ListActionButtons>
+        <ListActionButtons v-if="options.listActionButtons.showBottom === true">
+          <template v-slot:listActionButtons>
+            <slot name="listActionButtons"></slot>
+          </template>
+        </ListActionButtons>
 
-    </section>
+      </section>
+  </Transition>
 
   </section>
+</Transition>
 
 </template>
 
