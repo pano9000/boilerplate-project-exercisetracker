@@ -28,7 +28,7 @@
         <IconPencil></IconPencil> Edit Exercise
       </ActionMenuEntry>
 
-      <ActionMenuEntry @action-menu-event="deleteExerciseHandler([currentExercise.value], dataListStore, loadExerciseHandler)">
+      <ActionMenuEntry @action-menu-event="dataListStore.deleteData([dataListStore.currentItem], '_id', deleteExerciseById, ['userId', '_id'])">
         <IconX></IconX> Delete Exercise
       </ActionMenuEntry>
 
@@ -38,7 +38,7 @@
 
       <ListActionButtonEntry
         :options="{disabled: !dataListStore.hasSelectedItems}"
-        @list-action-button-event="'#todo'"
+        @list-action-button-event="dataListStore.deleteData(dataListStore.selectedItems, '_id', deleteExerciseById, ['userId', '_id'])"
       >
         <IconX></IconX>
         Delete Selected Exercises
