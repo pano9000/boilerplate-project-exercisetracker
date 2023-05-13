@@ -62,9 +62,9 @@
 
 <script setup>
 
-import { ref, reactive, watch, computed } from "vue";
-import ActionMenu from "../ActionMenu.vue";
-import { actionButtonHandler } from "../ActionMenu.functions.js";
+import { reactive } from "vue";
+import ActionMenu from "./ActionMenu.vue";
+import { actionButtonHandler } from "./ActionMenu.functions.js";
 import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
 
 
