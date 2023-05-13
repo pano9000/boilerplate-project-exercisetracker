@@ -130,6 +130,11 @@
     await loadDataAndHandleMessage();
   });
 
+  watch(() => props.options.dataStore.pagination.totalEntries, async (newValue, oldValue) => {
+    if (oldValue !== undefined) {
+      await loadDataAndHandleMessage();
+    }
+  });
 
 
 </script>
