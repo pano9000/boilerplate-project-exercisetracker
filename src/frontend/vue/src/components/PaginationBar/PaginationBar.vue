@@ -81,6 +81,7 @@ import { ref, computed } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate", "listFilters"]);
+  const emits = defineEmits(["updateCurrentPage"]);
 
   const ui_goToPage = ref(1)
   const ui_forwardPossible = computed( () => (props.listToPaginate.currentPage < props.listToPaginate.totalPages) ? true : false);
