@@ -13,6 +13,7 @@
       },
       listActionButtons: {
         showTop: true,
+        showBottom: true
       },
       apiFunc: {
         load: getAllUsers,
