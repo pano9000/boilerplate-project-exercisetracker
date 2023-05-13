@@ -1,38 +1,19 @@
 <template>
-  <PaginationBar
-    v-if="paginationbarOptions.showTop === true && props.dataList.data.length > 0"
-    :list-to-paginate="dataList.pagination"
-    :list-filters="dataList.filters"
-   >
-
-  </PaginationBar>
-
-  <section class="ui-datatable_wrap" v-if="props.dataList.data.length > 0">
-
-  <ListActionButtons v-if="listActionButtonsOptions.showTop === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: listActionButtonsOptions.textAddNew, 
-      showAdd: listActionButtonsOptions.showAdd,
-      showSelect: listActionButtonsOptions.showSelect,
-      showDelete: listActionButtonsOptions.showDelete
-    }"
-  >
-  </ListActionButtons>
   <table class="ui-datatable">
     <thead>
       <tr>
         <th v-if="tableOptions.showSelection === true" class="list-header list-header-narrow list-cell_center">
-          <input
-            type="checkbox"
-            :checked="hasSelectedItems"
-            :key="toggleSelection"
-            :title="(!allItemsSelected) ? 'Select All' : 'Deselect All'"
-            @click.prevent="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
+          <div class="list-selection-toggle"
+            tabindex="0"
+            :title="(!props.dataList.allItemsSelected) ? 'Select All' : 'Deselect All'"
+            @keyup.enter="$emit('clickSelection')"
+            @keyup.space="$emit('clickSelection')"
+            @click.prevent="$emit('clickSelection')"
           >
+            <IconSquareCheck v-if="!props.dataList.hasSelectedItems"></IconSquareCheck>
+            <IconSquareOff v-else></IconSquareOff>  
+
+          </div>
         </th>
 
         <th 
@@ -52,11 +33,11 @@
       <tr v-for="(data, index) in props.dataList.data" :key="data[dataKeyId]">
         <td v-if="tableOptions.showSelection === true" class="list-cell_center"><input type="checkbox" v-model="data.selected"></td>
         <td v-for="dataKey in dataKeys" :key="dataKey.key">{{ data[dataKey.key] }}</td>
-        <td class="list-cell_center" @click="currentItem.value = data">
+        <td class="list-cell_center" @click="$emit('updateCurrentItem', data)">
           <div class="actionMenu_wrap">
             <button 
               class="actionMenu_btn" 
-              @click="DataTableActionButtonHandler($event, actionMenuVisible, currentItem, data, actionMenu)" 
+              @click="actionButtonHandler($event, actionMenuVisible, actionMenu)" 
               title="Show Actions"
             >
               ☰
@@ -76,32 +57,15 @@
     <slot name="actionMenuEntries"></slot>
   </ActionMenu>
 
-  <ListActionButtons v-if="listActionButtonsOptions.showBottom === true"
-    @click-add-new="$emit('clickAddNew')"
-    @click-selection="toggleSelectionHandler(props.dataList.data, allItemsSelected)"
-    @click-del-selected="$emit('clickDelSelected')"
-    :hasSelection="hasSelectedItems"
-    :options="{ 
-      textAddNew: listActionButtonsOptions.textAddNew, 
-      showAdd: listActionButtonsOptions.showAdd,
-      showSelect: listActionButtonsOptions.showSelect,
-      showDelete: listActionButtonsOptions.showDelete
-    }"
-  >
-  </ListActionButtons>
-
-  </section>
-
 </template>
 
 
 <script setup>
 
-import { ref, reactive, watch, computed, onMounted, onBeforeUnmount, nextTick } from "vue";
-import ListActionButtons from "./ListActionButtons.vue";
-import PaginationBar from "../PaginationBar/PaginationBar.vue";
+import { ref, reactive, watch, computed } from "vue";
 import ActionMenu from "../ActionMenu.vue";
 import { actionButtonHandler } from "../ActionMenu.functions.js";
+import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
 
 
   const props = defineProps([
@@ -113,53 +77,10 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
     "paginationbarOptions"
   ]);
 
-  const emit = defineEmits(["updateCurrentItem", "updateSelectedItems", "clickAddNew", "clickDelSelected", "clickTableHeading"]);
+  const emit = defineEmits(["updateCurrentItem", "clickTableHeading", "clickSelection"]);
 
   const actionMenu = reactive({ value: {} });
-
-  const currentItem = reactive({ value: {} });
   const actionMenuVisible = reactive({ value: false });
-
-  const toggleSelection = ref(Date.now());
-
-  const selectedItems = computed( () => {
-    if (!Array.isArray(props.dataList.data)) return [];
-    return props.dataList.data.filter(item => item.selected === true)
-  });
-  const allItemsSelected = computed( () => (selectedItems.value.length === props.dataList.data.length) ? true : false )
-  const hasSelectedItems = computed( () => (selectedItems.value.length > 0) ? true : false );
-
-  watch( hasSelectedItems, () => {
-    toggleSelection.value = Date.now();
-    //https://michaelnthiessen.com/force-re-render/
-  });
-
-  function toggleSelectionHandler(dataList, allItemsSelected) {
-    dataList.forEach(item => item.selected = !allItemsSelected);
-  }
-
-
-  /**
-   * 
-   * @param {Object} currentItem - reactive object to store the currently selected/active data to
-   * @param {Object} data - data object from the data list of the current row
-   * @param {Object} actionMenuVisible - reactive object to toggle which action menu is currently visible
-   * @param {String} dataKeyId the data lists key Id prop name
-   */
-  function DataTableActionButtonHandler(event, actionMenuVisible, currentItem, currentData, actionMenu) {
-    currentItem.value = currentData;
-    actionButtonHandler(event, actionMenuVisible, actionMenu)
-  }
-
-
-  watch(currentItem, () => {
-    emit("updateCurrentItem", currentItem)
-  });
-
-  watch(selectedItems, () => {
-    emit("updateSelectedItems", selectedItems)
-  });
-
 
 </script>
 
@@ -254,6 +175,22 @@ import { actionButtonHandler } from "../ActionMenu.functions.js";
   .list-header-medium {
     width: 6rem;
   }
+
+  .list-selection-toggle {
+    cursor: pointer;
+  }
+
+  .list-selection-toggle:focus,
+  .list-selection-toggle:hover {
+    color:#646cff;
+  }
+
+  .list-selection-toggle svg {
+    width: 100%;
+    height: auto;
+    transition: all 0.25s;
+  }
+
 
   .actionMenu_wrap {
     position: relative;

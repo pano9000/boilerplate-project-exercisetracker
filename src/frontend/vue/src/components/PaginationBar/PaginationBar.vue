@@ -17,7 +17,7 @@
           class="ui-pagination_btn"
           type="button"
           v-for="(pg) in visibleBtns"
-          @click="props.listToPaginate.currentPage=pg"
+          @click="updateActivePage(pg)"
           :class="[
             (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
             (pg == '…') ? 'ui-pagination_btn-placeholder' : null
@@ -48,17 +48,17 @@
         type="number"
         min="1"
         :max="props.listToPaginate.totalPages"
-        @keydown.enter="goToPageHandler"
+        @keydown.enter="updateActivePage(ui_goToPage)"
         v-model="ui_goToPage"
         aria-label="Enter the page number to go to"
       >
-      <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
+      <button :disabled="!validPageSelection" @click="updateActivePage(ui_goToPage)" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
     </div>
 
 
     <div class="ui-pagination_showEntryQty">
       <label for="ui-pagination_showEntryQty-select">Show</label>
-      <select id="ui-pagination_showEntryQty-select" v-model="props.listFilters.limit" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
+      <select id="ui-pagination_showEntryQty-select" v-model="props.listFilters.limit" title="Number of entries to show per page" aria-label="Number of entries to show per page">
         <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
       </select>
     </div>
@@ -81,6 +81,7 @@ import { ref, computed } from "vue";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   const props = defineProps(["listToPaginate", "listFilters"]);
+  const emits = defineEmits(["updateCurrentPage"]);
 
   const ui_goToPage = ref(1)
   const ui_forwardPossible = computed( () => (props.listToPaginate.currentPage < props.listToPaginate.totalPages) ? true : false);
@@ -144,17 +145,10 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
   })
 
-  function updateActivePage() {
-    if (props.listToPaginate.currentPage > props.listToPaginate.totalPages) {
-      props.listToPaginate.currentPage = props.listToPaginate.totalPages
-    }
-  }
-
-
-  //TODO: add arguments -> caution: refs pass values only, reactive pass the proxy object, which is what we want here
-  function goToPageHandler() {
+  function updateActivePage(pageNumber, listToPaginate = props.listToPaginate) {
     if (validPageSelection.value) {
-      props.listToPaginate.currentPage = ui_goToPage.value
+      listToPaginate.currentPage = (pageNumber > listToPaginate.totalPages) ? listToPaginate.totalPages : pageNumber;
+      emits("updateCurrentPage");
     }
   }
 
