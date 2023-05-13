@@ -58,7 +58,7 @@
 
     <div class="ui-pagination_showEntryQty">
       <label for="ui-pagination_showEntryQty-select">Show</label>
-      <select id="ui-pagination_showEntryQty-select" v-model="props.listFilters.limit" @change="updateActivePage" title="Number of entries to show per page" aria-label="Number of entries to show per page">
+      <select id="ui-pagination_showEntryQty-select" v-model="props.listFilters.limit" title="Number of entries to show per page" aria-label="Number of entries to show per page">
         <option v-for="value in [5, 10, 25, 50, 100]" :key="value"> {{value}}</option>
       </select>
     </div>
