@@ -19,9 +19,7 @@ export const useDataListStore = defineStore("DataList", {
   actions: {
 
     async loadData(apiFunc, dataProcessingFunc) {
-      
       try {
-
         this.isLoading = true;
         const paginationParams = new URLSearchParams({page: this.pagination.currentPage})
         const filterParams = new URLSearchParams(this.filters);
