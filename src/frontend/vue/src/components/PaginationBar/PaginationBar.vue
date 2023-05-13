@@ -17,7 +17,7 @@
           class="ui-pagination_btn"
           type="button"
           v-for="(pg) in visibleBtns"
-          @click="props.listToPaginate.currentPage=pg"
+          @click="updateActivePage(pg)"
           :class="[
             (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
             (pg == '…') ? 'ui-pagination_btn-placeholder' : null
@@ -48,11 +48,11 @@
         type="number"
         min="1"
         :max="props.listToPaginate.totalPages"
-        @keydown.enter="goToPageHandler"
+        @keydown.enter="updateActivePage(ui_goToPage)"
         v-model="ui_goToPage"
         aria-label="Enter the page number to go to"
       >
-      <button :disabled="!validPageSelection" @click="goToPageHandler" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
+      <button :disabled="!validPageSelection" @click="updateActivePage(ui_goToPage)" :aria-label="`Go to Page ${ui_goToPage}`">Go</button>
     </div>
 
 
