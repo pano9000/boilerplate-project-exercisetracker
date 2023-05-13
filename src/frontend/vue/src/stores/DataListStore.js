@@ -30,11 +30,11 @@ export const useDataListStore = defineStore("DataList", {
         handleApiResponse(apiResponse);
         dataProcessingFunc(this, apiResponse);
         this.pagination = apiResponse.response.pagination;
-        return true;
+        return [true, undefined];
       }
       catch(error) {
         console.log(error)
-        return false;
+        return [false, error];
       }
     },
 
