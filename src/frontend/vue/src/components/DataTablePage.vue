@@ -112,13 +112,11 @@
   async function loadDataAndHandleMessage() {
     const loadStatus = await props.options.dataStore.loadData(props.options.apiFunc.load, props.options.dataProcessing);
     messageBoxHandler(loadStatus, messageBoxOptions, props.options.dataStore)
-  }
+  };
 
   onMounted( async () => {
-    await loadDataAndHandleMessage()
-  })
-
-
+    await loadDataAndHandleMessage();
+  });
 
   const filtersStoreWatchList = (() => {
     const filterKeys = Object.keys(props.options.dataStore.filters);
