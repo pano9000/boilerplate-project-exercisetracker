@@ -95,27 +95,27 @@
   </template>
 
 
-  <script setup>
-    import { ref, reactive } from 'vue';
-    import DataTablePage from '../components/DataTablePage.vue';
-    import { DataTableKey, uiVisibilityHandler } from "../services/utils";
-    import { useDataListStore } from "../stores/DataListStore";
-    import ActionMenuEntry from "../components/ActionMenuEntry.vue";
-    import ListActionButtonEntry from '../components/ListActionButtonEntry.vue';
-    import { IconX, IconPlus, IconPencil, IconListDetails, IconUserPlus, IconUserMinus } from "@tabler/icons-vue"
-    import ModalWindow from '../components/ModalWindow/ModalWindow.vue';
-    import { getAllUsers, deleteUserById } from '../services/apiEndpoints';
+<script setup>
+  import { ref, reactive } from 'vue';
+  import DataTablePage from '../components/DataTablePage.vue';
+  import { DataTableKey, uiVisibilityHandler } from "../services/utils";
+  import { useDataListStore } from "../stores/DataListStore";
+  import ActionMenuEntry from "../components/ActionMenuEntry.vue";
+  import ListActionButtonEntry from '../components/ListActionButtonEntry.vue';
+  import { IconX, IconPlus, IconPencil, IconListDetails, IconUserPlus, IconUserMinus } from "@tabler/icons-vue"
+  import ModalWindow from '../components/ModalWindow/ModalWindow.vue';
+  import { getAllUsers, deleteUserById } from '../services/apiEndpoints';
 
-    import CreateUser from "../components/Forms/CreateUser/CreateUser.vue";
-    import UserDetails from "../components/Forms/UserDetails/UserDetails.vue";
-    import CreateExercise from "../components/Forms/CreateExercise/CreateExercise.vue";
+  import CreateUser from "../components/Forms/CreateUser/CreateUser.vue";
+  import UserDetails from "../components/Forms/UserDetails/UserDetails.vue";
+  import CreateExercise from "../components/Forms/CreateExercise/CreateExercise.vue";
 
 
-    const dataListStore = useDataListStore();
-    
-    const title = "User List";
-  
-    const dataTableKeys = ref([
+  const dataListStore = useDataListStore();
+
+  const title = "User List";
+
+  const dataTableKeys = ref([
     new DataTableKey("User Id", "_id", false),
     new DataTableKey("Username", "username", true, true)
   ]);
