@@ -8,7 +8,7 @@
           :disabled="!ui_previousPossible"
           title="Previous Page"
           aria-label="Previous Page"
-          @click="props.listToPaginate.currentPage--"
+          @click="updateActivePage(props.listToPaginate.currentPage - 1)"
         >
           <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
         </button>
@@ -35,7 +35,7 @@
           :disabled="!ui_forwardPossible"
           title="Next Page"
           aria-label="Next Page"
-          @click="props.listToPaginate.currentPage++"
+          @click="updateActivePage(props.listToPaginate.currentPage + 1)"
         >
           <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
         </button>
