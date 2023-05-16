@@ -228,11 +228,19 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_btn-activePg {
   font-weight: 700;
+  background-color: #646cff;
+  color: #fff;
 }
 
 .ui-pagination_btn {
   /*min-width: 4.25rem;*/
-  padding: 0.6rem 0.8rem;
+  padding: 0.6rem 0.6rem;
+}
+
+.ui-pagination_btn-placeholder {
+  opacity: .3;
+  font-weight: 700;
+  font-size: .8rem;
 }
 
 .ui-pagination_goToPage input {
@@ -256,6 +264,15 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_btn-arrow_left:hover svg {
   transform: translate(-.25rem, 0);
+}
+
+.ui-pagination_btn-arrow:hover {
+  background-color: #646cff !important;
+  color: #fff;
+}
+
+.ui-pagination_btn-arrow {
+  transition: all .25s;
 }
 
 
