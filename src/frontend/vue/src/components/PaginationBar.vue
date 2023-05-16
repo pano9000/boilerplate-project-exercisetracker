@@ -19,17 +19,17 @@
           <template v-for="pg in visibleBtns">
 
             <button v-if="pg !== '…'"
-            class="ui-pagination_btn"
-            type="button"
-            @click="updateActivePage(pg)"
+              class="ui-pagination_btn"
+              type="button"
+              @click="updateActivePage(pg)"
               :class="(pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null"
-            :aria-current="pg == props.listToPaginate.currentPage"
+              :aria-current="pg == props.listToPaginate.currentPage"
               :disabled="pg == props.listToPaginate.currentPage"
-            :title="`Go to Page ${pg}`"
-            :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
-          >
-            {{ pg }}
-          </button>
+              :title="`Go to Page ${pg}`"
+              :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
+            >
+              {{ pg }}
+            </button>
             <span v-else
               aria-hidden="true"
               class="ui-pagination_btn-placeholder"
