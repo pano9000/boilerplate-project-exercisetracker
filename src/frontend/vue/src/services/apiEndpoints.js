@@ -1,6 +1,8 @@
 import { sendToAPI } from "./apiService";
 
-const baseUrl = "http://localhost:3002/api/v2"
+const { VITE_API_HOST, VITE_API_PORT, VITE_API_PATH } = import.meta.env;
+
+const baseUrl = VITE_API_HOST + ":" + VITE_API_PORT + VITE_API_PATH;
 
 export async function getAllUsers(params) {
   return await sendToAPI.get(`${baseUrl}/users?${params}`)
