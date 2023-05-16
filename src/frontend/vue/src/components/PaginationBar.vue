@@ -16,22 +16,27 @@
         </div>
 
         <div class="ui-pagination_btn_wrap">
-          <button 
+          <template v-for="pg in visibleBtns">
+
+            <button v-if="pg !== '…'"
             class="ui-pagination_btn"
             type="button"
-            v-for="(pg) in visibleBtns"
             @click="updateActivePage(pg)"
-            :class="[
-              (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
-              (pg == '…') ? 'ui-pagination_btn-placeholder' : null
-            ]"
+              :class="(pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null"
             :aria-current="pg == props.listToPaginate.currentPage"
-            :disabled="pg == '…' || pg == props.listToPaginate.currentPage"
+              :disabled="pg == props.listToPaginate.currentPage"
             :title="`Go to Page ${pg}`"
             :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
           >
             {{ pg }}
           </button>
+            <span v-else
+              aria-hidden="true"
+              class="ui-pagination_btn-placeholder"
+            >…</span>
+
+          </template>
+
         </div>
 
         <div class="ui-pagination_btn-arrow_wrap">
