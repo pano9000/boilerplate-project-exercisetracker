@@ -3,42 +3,48 @@
 
   <nav class="ui-pagination_nav" aria-label="Pagination Navigation">
       <ol class="ui-pagination_pagebuttons">
-        <button 
-          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left"
-          :disabled="!ui_previousPossible"
-          title="Previous Page"
-          aria-label="Previous Page"
-          @click="updateActivePage(props.listToPaginate.currentPage - 1)"
-        >
-          <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
-        </button>
+        <div class="ui-pagination_btn-arrow_wrap">
+          <button 
+            class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left"
+            :disabled="!ui_previousPossible"
+            title="Previous Page"
+            aria-label="Previous Page"
+            @click="updateActivePage(props.listToPaginate.currentPage - 1)"
+          >
+            <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
+          </button>
+        </div>
 
-        <button 
-          class="ui-pagination_btn"
-          type="button"
-          v-for="(pg) in visibleBtns"
-          @click="updateActivePage(pg)"
-          :class="[
-            (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
-            (pg == '…') ? 'ui-pagination_btn-placeholder' : null
-          ]"
-          :aria-current="pg == props.listToPaginate.currentPage"
-          :disabled="pg == '…' || pg == props.listToPaginate.currentPage"
-          :title="`Go to Page ${pg}`"
-          :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
-        >
-          {{ pg }}
-        </button>
+        <div class="ui-pagination_btn_wrap">
+          <button 
+            class="ui-pagination_btn"
+            type="button"
+            v-for="(pg) in visibleBtns"
+            @click="updateActivePage(pg)"
+            :class="[
+              (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
+              (pg == '…') ? 'ui-pagination_btn-placeholder' : null
+            ]"
+            :aria-current="pg == props.listToPaginate.currentPage"
+            :disabled="pg == '…' || pg == props.listToPaginate.currentPage"
+            :title="`Go to Page ${pg}`"
+            :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
+          >
+            {{ pg }}
+          </button>
+        </div>
 
-        <button
-          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right"
-          :disabled="!ui_forwardPossible"
-          title="Next Page"
-          aria-label="Next Page"
-          @click="updateActivePage(props.listToPaginate.currentPage + 1)"
-        >
-          <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
-        </button>
+        <div class="ui-pagination_btn-arrow_wrap">
+          <button
+            class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right"
+            :disabled="!ui_forwardPossible"
+            title="Next Page"
+            aria-label="Next Page"
+            @click="updateActivePage(props.listToPaginate.currentPage + 1)"
+          >
+            <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
+          </button>
+        </div>
       </ol>
 
     <div class="ui-pagination_goToPage">
@@ -202,6 +208,17 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background-color: azure;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-pagination_goToPage,
+.ui-pagination_showEntryQty,
+.ui-pagination_entriesinfo {
+  flex-wrap: wrap;
+
 }
 
 .ui-pagination_btn-activePg {
@@ -214,13 +231,14 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_goToPage input {
-  width: 4rem;
+  width: 3rem;
+  padding: 0.5rem 0.25rem;
 }
 
 .ui-pagination_goToPage button,
 .ui-pagination_showEntryQty select {
-  padding: 0.6rem 0.8rem;
-  margin: 0rem .5rem;
+  padding: 0.6rem 0.4rem;
+  margin: 0rem;
 }
 
 .ui-pagination_btn-arrow svg {
