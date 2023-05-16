@@ -5,7 +5,7 @@ const logsGetSchema = [
 
   queryParams.from,
   queryParams.to,
-  queryParams.limit,
+  queryParams.limitv1,
   queryParams.sortOrder,
   pathParams.userId
 

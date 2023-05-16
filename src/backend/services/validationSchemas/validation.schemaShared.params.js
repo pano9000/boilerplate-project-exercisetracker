@@ -34,7 +34,12 @@ const queryParams = {
     return query("sortBy", { errorHandling: "resetParamErrors" })
     .optional()
     .isIn(acceptedValues)
-  }
+  },
+
+  "limitv1":
+  query("limit", { errorHandling: "resetParamErrors" })
+  .optional()
+  .isInt(),
 
 }
 
