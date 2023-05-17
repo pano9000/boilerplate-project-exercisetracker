@@ -232,7 +232,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_btn-activePg {
-  font-weight: 700;
+  /*font-weight: 700;*/
   background-color: #646cff;
   color: #fff;
 }
@@ -240,6 +240,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 .ui-pagination_btn {
   /*min-width: 4.25rem;*/
   padding: 0.6rem 0.6rem;
+  transition: all .25s;
 }
 
 .ui-pagination_btn-placeholder {
