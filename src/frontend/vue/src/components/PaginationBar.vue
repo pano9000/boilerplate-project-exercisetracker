@@ -76,7 +76,12 @@
 
 
     <div class="ui-pagination_entriesinfo">
-      <span>{{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }} entries</span>
+      <span 
+        :aria-description="`Currently showing entries ${ui_qtyVisible} of a total of ${props.listToPaginate.totalEntries} entries`"
+        :title="`Currently showing entries ${ui_qtyVisible} of a total of ${props.listToPaginate.totalEntries} entries`"
+      >
+        {{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }}
+      </span>
     </div>
 
 
