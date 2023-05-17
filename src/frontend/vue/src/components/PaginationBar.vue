@@ -125,6 +125,10 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   });
 
   const visibleBtns = computed( () => {
+    return getVisibleBtns(totalBtns.value, props.listToPaginate.totalPages, props.listToPaginate.currentPage)
+  });
+
+  function getVisibleBtns(totalBtns, totalPages, currentPage) {
 
     /**
      * always show: "<" | "first page" | "last page" | ">" 
@@ -132,34 +136,34 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
      * e.g.: < 1 ... 3 4 `5` 6 7 ... 10 >
      */
     //TODO: Refactor and simplify - looks ugly and hackish
-    const visibleBtns = [[], [], []];
-    if (props.listToPaginate.totalPages < 7) {
-      visibleBtns[0] = totalBtns.value.slice(0, (props.listToPaginate.totalPages>5) ? 6 : props.listToPaginate.totalPages)
-      return visibleBtns.flatMap(elem => elem);
-
+    const tempVisibleBtns = [[], [], []];
+    if (totalPages < 7) {
+      tempVisibleBtns[0] = totalBtns.slice(0, (totalPages>5) ? 6 : totalPages)
+      return tempVisibleBtns.flatMap(elem => elem);
     }
-    if (props.listToPaginate.currentPage < 5) {
-      visibleBtns[0] = totalBtns.value.slice(0, (props.listToPaginate.totalPages>5) ? 6 : props.listToPaginate.totalPages)
-      visibleBtns[1] = ["…"]
-      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages-1, props.listToPaginate.totalPages)
+    if (currentPage < 5) {
+      tempVisibleBtns[0] = totalBtns.slice(0, (totalPages>5) ? 6 : totalPages)
+      tempVisibleBtns[1] = ["…"]
+      tempVisibleBtns[2] = totalBtns.slice(totalPages-1, totalPages)
     }
-    else if (props.listToPaginate.currentPage > props.listToPaginate.totalPages-4) {
-      visibleBtns[0] = totalBtns.value.slice(0, 1);
-      visibleBtns[1] = ["…"]
-      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages - 6, props.listToPaginate.totalPages)
+    else if (currentPage > totalPages-4) {
+      tempVisibleBtns[0] = totalBtns.slice(0, 1);
+      tempVisibleBtns[1] = ["…"]
+      tempVisibleBtns[2] = totalBtns.slice(totalPages - 6, totalPages)
 
     } else {
-
-      visibleBtns[0] = totalBtns.value.slice(0, 1)
-      visibleBtns[1] = totalBtns.value.slice(props.listToPaginate.currentPage - 3, props.listToPaginate.currentPage + 2)
-      visibleBtns[2] = totalBtns.value.slice(props.listToPaginate.totalPages-1, props.listToPaginate.totalPages)
-      visibleBtns[1].push("…");
-      visibleBtns[1].unshift("…");
-
+      tempVisibleBtns[0] = totalBtns.slice(0, 1)
+      tempVisibleBtns[1] = totalBtns.slice(currentPage - 3, currentPage + 2)
+      tempVisibleBtns[2] = totalBtns.slice(totalPages-1, totalPages)
+      tempVisibleBtns[1].push("…");
+      tempVisibleBtns[1].unshift("…");
     }
-    return visibleBtns.flatMap(elem => elem);
+    return tempVisibleBtns.flatMap(elem => elem);
 
-  })
+  }
+
+
+
 
   function updateActivePage(pageNumber, listToPaginate = props.listToPaginate) {
     if (validPageSelection.value) {
