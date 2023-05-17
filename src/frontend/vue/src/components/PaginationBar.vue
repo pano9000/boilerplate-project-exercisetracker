@@ -3,42 +3,53 @@
 
   <nav class="ui-pagination_nav" aria-label="Pagination Navigation">
       <ol class="ui-pagination_pagebuttons">
-        <button 
-          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left"
-          :disabled="!ui_previousPossible"
-          title="Previous Page"
-          aria-label="Previous Page"
-          @click="props.listToPaginate.currentPage--"
-        >
-          <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
-        </button>
+        <div class="ui-pagination_btn-arrow_wrap">
+          <button 
+            class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_left"
+            :disabled="!ui_previousPossible"
+            title="Previous Page"
+            aria-label="Previous Page"
+            @click="updateActivePage(props.listToPaginate.currentPage - 1)"
+          >
+            <IconChevronLeft size="16" stroke-width="4"></IconChevronLeft>
+          </button>
+        </div>
 
-        <button 
-          class="ui-pagination_btn"
-          type="button"
-          v-for="(pg) in visibleBtns"
-          @click="updateActivePage(pg)"
-          :class="[
-            (pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null, 
-            (pg == '…') ? 'ui-pagination_btn-placeholder' : null
-          ]"
-          :aria-current="pg == props.listToPaginate.currentPage"
-          :disabled="pg == '…' || pg == props.listToPaginate.currentPage"
-          :title="`Go to Page ${pg}`"
-          :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
-        >
-          {{ pg }}
-        </button>
+        <div class="ui-pagination_btn_wrap">
+          <template v-for="pg in visibleBtns">
 
-        <button
-          class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right"
-          :disabled="!ui_forwardPossible"
-          title="Next Page"
-          aria-label="Next Page"
-          @click="props.listToPaginate.currentPage++"
-        >
-          <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
-        </button>
+            <button v-if="pg !== '…'"
+              class="ui-pagination_btn"
+              type="button"
+              @click="updateActivePage(pg)"
+              :class="(pg == props.listToPaginate.currentPage) ? 'ui-pagination_btn-activePg' : null"
+              :aria-current="pg == props.listToPaginate.currentPage"
+              :disabled="pg == props.listToPaginate.currentPage"
+              :title="`Go to Page ${pg}`"
+              :aria-label="(pg == props.listToPaginate.currentPage) ? `Current Page, Page ${pg}` : `Go to Page ${pg}`"
+            >
+              {{ pg }}
+            </button>
+
+            <span v-else
+              aria-hidden="true"
+              class="ui-pagination_btn-placeholder"
+            >…</span>
+
+          </template>
+        </div>
+
+        <div class="ui-pagination_btn-arrow_wrap">
+          <button
+            class="ui-pagination_btn ui-pagination_btn-arrow ui-pagination_btn-arrow_right"
+            :disabled="!ui_forwardPossible"
+            title="Next Page"
+            aria-label="Next Page"
+            @click="updateActivePage(props.listToPaginate.currentPage + 1)"
+          >
+            <IconChevronRight size="16" stroke-width="4"></IconChevronRight>
+          </button>
+        </div>
       </ol>
 
     <div class="ui-pagination_goToPage">
@@ -65,7 +76,12 @@
 
 
     <div class="ui-pagination_entriesinfo">
-      <span>{{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }} entries</span>
+      <span 
+        :aria-description="`Currently showing entries ${ui_qtyVisible} of a total of ${props.listToPaginate.totalEntries} entries`"
+        :title="`Currently showing entries ${ui_qtyVisible} of a total of ${props.listToPaginate.totalEntries} entries`"
+      >
+        {{ ui_qtyVisible }} of {{ props.listToPaginate.totalEntries }}
+      </span>
     </div>
 
 
@@ -202,25 +218,47 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   background-color: azure;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-pagination_goToPage,
+.ui-pagination_showEntryQty,
+.ui-pagination_entriesinfo {
+  flex-wrap: wrap;
+  flex-shrink: 5;
+
 }
 
 .ui-pagination_btn-activePg {
-  font-weight: 700;
+  /*font-weight: 700;*/
+  background-color: #646cff;
+  color: #fff;
 }
 
 .ui-pagination_btn {
   /*min-width: 4.25rem;*/
-  padding: 0.6rem 0.8rem;
+  padding: 0.6rem 0.6rem;
+  transition: all .25s;
+}
+
+.ui-pagination_btn-placeholder {
+  opacity: .3;
+  font-weight: 700;
+  font-size: .8rem;
 }
 
 .ui-pagination_goToPage input {
-  width: 4rem;
+  width: 3rem;
+  padding: 0.5rem 0.25rem;
 }
 
 .ui-pagination_goToPage button,
 .ui-pagination_showEntryQty select {
-  padding: 0.6rem 0.8rem;
-  margin: 0rem .5rem;
+  padding: 0.6rem 0.4rem;
+  margin: 0rem;
 }
 
 .ui-pagination_btn-arrow svg {
@@ -233,6 +271,15 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 
 .ui-pagination_btn-arrow_left:hover svg {
   transform: translate(-.25rem, 0);
+}
+
+.ui-pagination_btn-arrow:hover {
+  background-color: #646cff !important;
+  color: #fff;
+}
+
+.ui-pagination_btn-arrow {
+  transition: all .25s;
 }
 
 
