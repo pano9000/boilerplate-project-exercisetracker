@@ -27,11 +27,11 @@
           :title="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ', Ascending' : ', Descending' : ''}`"
           :aria-description="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ': Currently sorted by, Ascending Order' : ': Currently sorted by, Descending Order' : ''}`"
         >
-          <span>{{ dataKey.name }}</span>
+          <span class="list-header-name">{{ dataKey.name }}</span>
           <span v-if="(dataKey.key == props.dataList.filters.sortBy)"
             :class="[
-             'list-header-sorting',
-             (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_asc' : 'list-header-sorting_dsc'
+              'list-header-sorting',
+              (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_asc' : 'list-header-sorting_dsc'
             ]"
           >
             <IconSortDescending></IconSortDescending>
@@ -222,6 +222,16 @@ import { IconSquareCheck, IconSquareOff, IconSortDescending } from '@tabler/icon
 
   .list-header-sorting_asc svg {
     transform: scaleY(-1);
+  }
+
+  .list-header-name,
+  .list-header-sorting {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .list-header-name {
+    margin-right: .25rem;
   }
 
   .actionMenu_btn {
