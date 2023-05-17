@@ -28,7 +28,7 @@
           <span v-if="(dataKey.key == props.dataList.filters.sortBy)"
             :class="[
              'list-header-sorting',
-             (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_dsc' : 'list-header-sorting_asc'
+             (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_asc' : 'list-header-sorting_dsc'
             ]"
           >
             <IconSortDescending></IconSortDescending>
