@@ -21,7 +21,8 @@
           :key="dataKey.key" 
           class="list-header list-header-flex list-header-sortable"
           @click="$emit('clickTableHeading', dataKey.key)"
-
+          :title="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ', Ascending' : ', Descending' : ''}`"
+          :aria-description="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ': Currently sorted by, Ascending Order' : ': Currently sorted by, Descending Order' : ''}`"
         >
           <span>{{ dataKey.name }}</span>
           <span v-if="(dataKey.key == props.dataList.filters.sortBy)"
