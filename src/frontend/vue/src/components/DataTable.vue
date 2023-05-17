@@ -19,7 +19,10 @@
         <th 
           v-for="dataKey in dataKeys" 
           :key="dataKey.key" 
+          tabindex="0"
           class="list-header list-header-flex list-header-sortable"
+          @keyup.enter="$emit('clickTableHeading', dataKey.key)"
+          @keyup.space="$emit('clickTableHeading', dataKey.key)"
           @click="$emit('clickTableHeading', dataKey.key)"
           :title="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ', Ascending' : ', Descending' : ''}`"
           :aria-description="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ': Currently sorted by, Ascending Order' : ': Currently sorted by, Descending Order' : ''}`"
