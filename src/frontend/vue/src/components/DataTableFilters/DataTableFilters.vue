@@ -58,7 +58,7 @@
 
 <script setup>
   import { ref } from 'vue';
-  import { IconChevronDown, IconSortDescending } from '@tabler/icons-vue';
+  import { IconChevronDown } from '@tabler/icons-vue';
   import SortOrder from './SortOrder.vue';
   import SortBy from "./SortBy.vue";
   import DateRange from "./DateRange.vue";
