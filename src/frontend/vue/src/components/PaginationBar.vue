@@ -228,6 +228,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 .ui-pagination_showEntryQty,
 .ui-pagination_entriesinfo {
   flex-wrap: wrap;
+  flex-shrink: 5;
 
 }
 
