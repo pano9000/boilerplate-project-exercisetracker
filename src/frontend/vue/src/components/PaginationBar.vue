@@ -30,13 +30,13 @@
             >
               {{ pg }}
             </button>
+
             <span v-else
               aria-hidden="true"
               class="ui-pagination_btn-placeholder"
             >…</span>
 
           </template>
-
         </div>
 
         <div class="ui-pagination_btn-arrow_wrap">
