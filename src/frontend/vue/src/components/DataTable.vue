@@ -19,11 +19,23 @@
         <th 
           v-for="dataKey in dataKeys" 
           :key="dataKey.key" 
+          tabindex="0"
           class="list-header list-header-flex list-header-sortable"
+          @keyup.enter="$emit('clickTableHeading', dataKey.key)"
+          @keyup.space="$emit('clickTableHeading', dataKey.key)"
           @click="$emit('clickTableHeading', dataKey.key)"
-
+          :title="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ', Ascending' : ', Descending' : ''}`"
+          :aria-description="`${dataKey.name}${(dataKey.key == props.dataList.filters.sortBy) ? (props.dataList.filters.sortOrder == '1') ? ': Currently sorted by, Ascending Order' : ': Currently sorted by, Descending Order' : ''}`"
         >
-          {{ dataKey.name }}
+          <span class="list-header-name">{{ dataKey.name }}</span>
+          <span v-if="(dataKey.key == props.dataList.filters.sortBy)"
+            :class="[
+              'list-header-sorting',
+              (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_asc' : 'list-header-sorting_dsc'
+            ]"
+          >
+            <IconSortDescending></IconSortDescending>
+          </span>
         </th>
 
         <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
@@ -65,7 +77,7 @@
 import { reactive } from "vue";
 import ActionMenu from "./ActionMenu.vue";
 import { actionButtonHandler } from "./ActionMenu.functions.js";
-import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
+import { IconSquareCheck, IconSquareOff, IconSortDescending } from '@tabler/icons-vue';
 
 
   const props = defineProps([
@@ -206,6 +218,20 @@ import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
   .list-header-sortable:focus,
   .list-header-sortable:hover {
     color: #646cff;
+  }
+
+  .list-header-sorting_asc svg {
+    transform: scaleY(-1);
+  }
+
+  .list-header-name,
+  .list-header-sorting {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .list-header-name {
+    margin-right: .25rem;
   }
 
   .actionMenu_btn {
