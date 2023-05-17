@@ -116,19 +116,12 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
     return `${from}–${to}`
   });
 
-  const totalBtns = computed( () => {
-    const totalBtns = [];
-    for (let i=1; i<=props.listToPaginate.totalPages; i++) {
-      totalBtns.push(i);
-    };
-    return totalBtns;
-  });
 
   const visibleBtns = computed( () => {
-    return getVisibleBtns(totalBtns.value, props.listToPaginate.totalPages, props.listToPaginate.currentPage)
+    return getVisibleBtns(props.listToPaginate.totalPages, props.listToPaginate.currentPage)
   });
 
-  function getVisibleBtns(totalBtns, totalPages, currentPage) {
+  function getVisibleBtns(totalPages, currentPage) {
 
     /**
      * always show: "<" | "first page" | "last page" | ">" 
@@ -136,6 +129,16 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
      * e.g.: < 1 ... 3 4 `5` 6 7 ... 10 >
      */
     //TODO: Refactor and simplify - looks ugly and hackish
+
+    const totalBtns = (() => {
+      const totalBtns = [];
+      for (let i=1; i<=totalPages; i++) {
+        totalBtns.push(i);
+      };
+      return totalBtns;
+    })();
+
+
     const tempVisibleBtns = [[], [], []];
     if (totalPages < 7) {
       tempVisibleBtns[0] = totalBtns.slice(0, (totalPages>5) ? 6 : totalPages)
