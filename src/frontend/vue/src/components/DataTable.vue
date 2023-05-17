@@ -23,7 +23,15 @@
           @click="$emit('clickTableHeading', dataKey.key)"
 
         >
-          {{ dataKey.name }}
+          <span>{{ dataKey.name }}</span>
+          <span v-if="(dataKey.key == props.dataList.filters.sortBy)"
+            :class="[
+             'list-header-sorting',
+             (props.dataList.filters.sortOrder == '1') ? 'list-header-sorting_dsc' : 'list-header-sorting_asc'
+            ]"
+          >
+            <IconSortDescending></IconSortDescending>
+          </span>
         </th>
 
         <th v-if="tableOptions.showAction === true" class="list-header list-header-medium list-cell_center">Actions</th>
@@ -65,7 +73,7 @@
 import { reactive } from "vue";
 import ActionMenu from "./ActionMenu.vue";
 import { actionButtonHandler } from "./ActionMenu.functions.js";
-import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
+import { IconSquareCheck, IconSquareOff, IconSortDescending } from '@tabler/icons-vue';
 
 
   const props = defineProps([
@@ -206,6 +214,10 @@ import { IconSquareCheck, IconSquareOff } from '@tabler/icons-vue';
   .list-header-sortable:focus,
   .list-header-sortable:hover {
     color: #646cff;
+  }
+
+  .list-header-sorting_asc svg {
+    transform: scaleY(-1);
   }
 
   .actionMenu_btn {
