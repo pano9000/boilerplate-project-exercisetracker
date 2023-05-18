@@ -41,11 +41,11 @@ const queryParams = {
     .optional()
     .isInt(),
 
-  "query":
-    query("query", { errorHandling: "resetParamErrors" })
+  "query": (regexp) => {
+    return query("query", { errorHandling: "resetParamErrors" })
     .optional()
-    .isString()
-    .matches(/^[a-z0-9\-_]{0,50}$/i)
+    .matches(new RegExp(regexp, "i"))
+  }
 }
 
 const pathParams = {
