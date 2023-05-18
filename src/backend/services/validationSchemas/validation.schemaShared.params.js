@@ -45,6 +45,7 @@ const queryParams = {
     query("query", { errorHandling: "resetParamErrors" })
     .optional()
     .isString()
+    .matches(/^[a-z0-9\-_]{0,50}$/i)
 }
 
 const pathParams = {
