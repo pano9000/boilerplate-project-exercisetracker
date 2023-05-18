@@ -12,10 +12,10 @@ async function usersGet(req, res) {
 
     const queryOptions = getQueryOptions(pagination.currentPage, limit)
     const sortOptions = [[ sortBy, sortOrder ]];
-    const searchQuery = (req.query.query === undefined) ? null : new RegExp(req.query.query, "i")
+    const searchQuery = (req.query.query === undefined) ? null : { username: new RegExp(req.query.query, "i") };
     console.log("reqquery", req.query.query, searchQuery, typeof(req.query.query), new RegExp(req.query.query, "i"))
 
-    const findResult = await findDoc.findAll(dbModelName, {username: searchQuery}, sortOptions, queryOptions);
+    const findResult = await findDoc.findAll(dbModelName, searchQuery, sortOptions, queryOptions);
 
     res.status(200).json({ data: findResult, pagination });
   }
