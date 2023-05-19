@@ -18,8 +18,6 @@ async function usersGet(req, res) {
     const pagination = await getPaginationData(page, limit, dbModelName, searchQuery);
     const queryOptions = getQueryOptions(pagination.currentPage, limit)
 
-    console.log("reqquery", req.query.query, searchQuery, typeof(req.query.query), new RegExp(req.query.query, "i"))
-
     const findResult = await findDoc.findAll(dbModelName, searchQuery, sortOptions, queryOptions);
 
     res.status(200).json({ data: findResult, pagination });
