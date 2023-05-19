@@ -42,7 +42,7 @@ const queryParams = {
     .isInt(),
 
   "query": (regexp) => {
-    return query("query", { errorHandling: "resetParamErrors" })
+    return query("query", { errorHandling: "resetParamErrors", resetValue: null })
     .optional()
     .matches(new RegExp(regexp, "i"))
   }

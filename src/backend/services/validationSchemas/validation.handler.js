@@ -55,10 +55,10 @@ function handler(req, res, next) {
 
   }
 
-
   if (mappedErrors.resetParamErrors.length > 0) {
+
     mappedErrors.resetParamErrors.forEach(elem => {
-      req[elem.location][elem.param] = undefined
+      req[elem.location][elem.param] = elem.msg.resetValue //if no resetValue provided it falls back to "undefined" automatically
     });
 
   }
