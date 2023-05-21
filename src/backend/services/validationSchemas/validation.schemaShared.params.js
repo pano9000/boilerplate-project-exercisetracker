@@ -41,8 +41,8 @@ const queryParams = {
     .optional()
     .isInt(),
 
-  "query": (regexp) => {
-    return query("query", { errorHandling: "resetParamErrors", resetValue: null })
+  "searchFor": (regexp) => {
+    return query("searchFor", { errorHandling: "resetParamErrors", resetValue: null })
     .optional()
     .matches(new RegExp(regexp, "i"))
   },
