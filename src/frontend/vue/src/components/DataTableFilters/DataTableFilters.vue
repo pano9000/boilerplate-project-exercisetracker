@@ -55,7 +55,9 @@
         <div class="ui-filter-flex_wrap">
 
           <Search
-            v-model="dataListStore.filters.query">
+            v-model="dataListStore.filters.query"
+            :search-in-options="options.sortByOptions"
+          >
           </Search>
 
         </div>
