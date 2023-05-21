@@ -7,14 +7,24 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function exercisesGetAll(req, res) {
 
   try {
-    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder } = req.query;
+    const { from: filterDateFrom, to: filterDateTo, page, limit, sortBy, sortOrder, searchFor, searchIn } = req.query;
     const dbModelName = req._dbModelName
 
 
     const opt = { userId: undefined, filterDateFrom: filterDateFrom, filterDateTo: filterDateTo };
     const searchObject = createSearchObject.exerciseLog( opt );
     delete searchObject.userId
-  
+
+    const searchQuery = (() => {
+      const searchKey = ([undefined, null].includes(searchIn) === true) ? "description" : searchIn; //@TODO: do not hardcode 'description' here?
+
+      if ([undefined, null].includes(searchFor) === false) {
+        searchObject[searchKey] = new RegExp(searchFor, "i");
+        return;
+      }
+      searchObject[searchKey] = null
+    })()
+
     const pagination = await getPaginationData(page, limit, dbModelName, searchObject);
 
     const queryOptions = getQueryOptions(pagination.currentPage, limit)
