@@ -10,12 +10,15 @@
     >
   </div>
 
+  <button type="button">
+    <IconSearch></IconSearch>
+  </button>
 
 </template>
 
 <script setup>
 
-  defineProps(["modelValue"])
+  import { IconSearch } from '@tabler/icons-vue';
   defineEmits(['update:modelValue'])
 
 </script>
