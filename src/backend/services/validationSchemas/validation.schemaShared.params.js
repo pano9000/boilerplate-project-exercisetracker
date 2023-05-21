@@ -45,6 +45,12 @@ const queryParams = {
     return query("query", { errorHandling: "resetParamErrors", resetValue: null })
     .optional()
     .matches(new RegExp(regexp, "i"))
+  },
+
+  "searchIn": (acceptedValues) => {
+    return query("searchIn", { errorHandling: "resetParamErrors", resetValue: null })
+    .optional()
+    .isIn(acceptedValues)
   }
 }
 
