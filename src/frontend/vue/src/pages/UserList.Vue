@@ -126,7 +126,8 @@
     limit: 10,
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1",
-    query: ""
+    searchFor: "",
+    searchIn: "username"
   };
 
   const uiVisibility = reactive( {
