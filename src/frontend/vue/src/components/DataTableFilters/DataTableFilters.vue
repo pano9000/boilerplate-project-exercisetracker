@@ -50,6 +50,17 @@
         </div>
       </section>
 
+      <section class="ui-filter_section" v-if="(options.showSearch !== undefined) ? options.showSearch : true">
+
+        <div class="ui-filter-flex_wrap">
+
+          <Search
+            v-model="dataListStore.filters.query">
+          </Search>
+
+        </div>
+
+      </section>
     </form>
   </section> 
     
@@ -62,6 +73,7 @@
   import SortOrder from './SortOrder.vue';
   import SortBy from "./SortBy.vue";
   import DateRange from "./DateRange.vue";
+  import Search from './Search.vue';
   import { useDataListStore } from '../../stores/DataListStore';
 
   const props = defineProps(["options"])
