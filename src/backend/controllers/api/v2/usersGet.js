@@ -5,14 +5,17 @@ const getQueryOptions = require("../../../services/getQueryOptions");
 async function usersGet(req, res) {
 
   try {
-    const { page, limit, sortBy, sortOrder, query } = req.query;
+    const { page, limit, sortBy, sortOrder, searchFor, searchIn } = req.query;
     const dbModelName = req._dbModelName
     const sortOptions = [[ sortBy, sortOrder ]];
+
     const searchQuery = (() => {
-      if ([undefined, null].includes(query) === false) {
-        return { username: new RegExp(query, "i") };
+      const searchKey = ([undefined, null].includes(searchIn) === true) ? "username" : searchIn; //@TODO: do not hardcode 'username' here?
+
+      if ([undefined, null].includes(searchFor) === false) {
+        return { [searchKey]: new RegExp(searchFor, "i") };
       }
-      return (query === undefined) ? null : { username: null }
+      return (searchFor === undefined) ? null : { [searchKey]: null }
     })()
 
     const pagination = await getPaginationData(page, limit, dbModelName, searchQuery);
