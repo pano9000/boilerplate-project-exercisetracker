@@ -14,11 +14,20 @@
     <IconSearch></IconSearch>
   </button>
 
+  <div>
+    <label for="ui-searchFor">Search In</label>
+    <select>
+      <option v-for="option in searchInOptions"> {{ option.name }}</option>
+    </select>
+  </div>
+
 </template>
 
 <script setup>
 
   import { IconSearch } from '@tabler/icons-vue';
+
+  defineProps(["modelValue", "searchInOptions"])
   defineEmits(['update:modelValue'])
 
 </script>
