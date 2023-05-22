@@ -13,6 +13,12 @@ const UserSchema = new dbConnection.Schema({
     match: /^[0-9a-z-_]{3,30}$/
   },
 
+  isAdmin: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+
   _id: {
     type: String,
     required: true,
