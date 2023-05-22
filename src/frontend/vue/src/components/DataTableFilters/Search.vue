@@ -5,21 +5,29 @@
     <input 
       id="ui-searchFor" 
       type="search" 
-      :value="modelValue"
-      @change="$emit('update:modelValue', $event.target.value)"
+      :value="searchForValue"
+      @change="$emit('update:searchForValue', $event.target.value)"
     >
+  </div>
+
+  <div>
+    <label for="ui-searchIn">Search In</label>
+    <select
+      id="ui-searchFor"
+      :value="searchInValue"
+      @change="$emit('update:searchInValue', $event.target.value)"
+    >
+      <option 
+        v-for="option in searchInOptions"
+        :value="option.key"
+        :key="option.key"
+      > {{ option.name }}</option>
+    </select>
   </div>
 
   <button type="button">
     <IconSearch></IconSearch>
   </button>
-
-  <div>
-    <label for="ui-searchFor">Search In</label>
-    <select>
-      <option v-for="option in searchInOptions"> {{ option.name }}</option>
-    </select>
-  </div>
 
 </template>
 
@@ -27,8 +35,8 @@
 
   import { IconSearch } from '@tabler/icons-vue';
 
-  defineProps(["modelValue", "searchInOptions"])
-  defineEmits(['update:modelValue'])
+  defineProps(["searchInOptions", "searchForValue", "searchInValue"])
+  defineEmits(["update:searchForValue", "update:searchInValue"])
 
 </script>
 
