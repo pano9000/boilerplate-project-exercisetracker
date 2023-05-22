@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { handleApiResponse } from "../services/apiService";
+import { getActiveFilters } from "../services/utils";
 
 export const useDataListStore = defineStore("DataList", {
 
@@ -22,7 +23,8 @@ export const useDataListStore = defineStore("DataList", {
       try {
         this.isLoading = true;
         const paginationParams = new URLSearchParams({page: this.pagination.currentPage})
-        const filterParams = new URLSearchParams(this.filters);
+        const activeFilters = getActiveFilters(this.filters);
+        const filterParams = new URLSearchParams(activeFilters);
         const apiResponse = await apiFunc(paginationParams+'&'+filterParams);
         this.isLoading = false;
         handleApiResponse(apiResponse);

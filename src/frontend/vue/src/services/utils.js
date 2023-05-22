@@ -151,3 +151,14 @@ export function DataTableKey(name, key, defaultSortBy = false, currentActive = f
     name, key, defaultSortBy, currentActive
   }
 }
+
+
+export function getActiveFilters(filtersStore) {
+  const activeFilters = {};
+  for (const filter in filtersStore) {
+    if (["", undefined, null].includes(filtersStore[filter]) === false) {
+      activeFilters[filter] = filtersStore[filter];
+    }
+  }
+  return activeFilters;
+}
