@@ -22,7 +22,10 @@ async function exercisesGetAll(req, res) {
         searchObject[searchKey] = new RegExp(searchFor, "i");
         return;
       }
-      searchObject[searchKey] = null
+
+      if (searchFor === null) {
+        searchObject[searchKey] = null
+      }
     })()
 
     const pagination = await getPaginationData(page, limit, dbModelName, searchObject);
