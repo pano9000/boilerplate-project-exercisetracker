@@ -55,8 +55,11 @@
         <div class="ui-filter-flex_wrap">
 
           <Search
-            v-model="dataListStore.filters.query"
             :search-in-options="options.sortByOptions"
+            :searchForValue="dataListStore.filters.searchFor"
+            @update:searchForValue="newValue => dataListStore.filters.searchFor = newValue"
+            :searchInValue="dataListStore.filters.searchIn"
+            @update:searchInValue="newValue => dataListStore.filters.searchIn = newValue"
           >
           </Search>
 
