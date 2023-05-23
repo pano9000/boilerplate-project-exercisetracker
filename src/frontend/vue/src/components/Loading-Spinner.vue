@@ -26,7 +26,7 @@
   }
 
   .ui-loading svg path {
-    transition: all .25s;
+    transition: all var(--transition-time-short);
     animation-name: pulsate;
     animation-duration: 1s;
     animation-direction: alternate;
