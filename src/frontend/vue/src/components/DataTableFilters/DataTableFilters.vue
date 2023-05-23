@@ -109,6 +109,12 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: all var(--transition-time-short);
+  }
+
+  .ui-filter_toggle:hover,
+  .ui-filter_toggle:focus  {
+    color: #646cff;
   }
 
   /** increase hit area via ::after/::before */
