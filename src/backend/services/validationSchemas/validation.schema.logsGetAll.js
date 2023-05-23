@@ -12,7 +12,7 @@ const logsGetAllSchema = [
   queryParams.page,
   queryParams.sortOrder,
   queryParams.sortBy(exerciseSchemaFields),
-  queryParams.searchFor(/^[a-z0-9]{0,30}$/i),
+  queryParams.searchFor(/^[a-z0-9_\-+]{0,30}$/i),
   queryParams.searchIn(exerciseSchemaFields, "description"), //@TODO: some way to not hardcode that here, but maybe in the Schema instead?
 ]
 
