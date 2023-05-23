@@ -90,6 +90,8 @@
     to: "",
     sortBy: dataTableKeys.value.find(sortByOption => sortByOption.defaultSortBy === true)?.key || dataTableKeys["value"][0]["key"],
     sortOrder: "1",
+    searchFor: "",
+    searchIn: "description"
   };
 
   function dataProcessing(store, apiResponse) {
