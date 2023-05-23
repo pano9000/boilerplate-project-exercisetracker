@@ -100,9 +100,7 @@
   }
 
   .ui-filter_section-wrap {
-
     margin: .75rem 0rem;
-
   }
 
   .ui-filter_toggle {
