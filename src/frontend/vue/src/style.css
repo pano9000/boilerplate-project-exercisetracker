@@ -21,6 +21,7 @@
   --border-radius-left: 8px 0px 0px 8px;
   --border-radius-right: 0px 8px 8px 0px;
   --input-border: 2rem solid;
+  --transition-time-short: .25s;
 }
 
 
