@@ -14,7 +14,8 @@ export const useDataListStore = defineStore("DataList", {
       item: "",
       items: ""
     },
-    isLoading: false
+    isLoading: false,
+    reloadData: false
   }),
 
   actions: {
@@ -58,7 +59,7 @@ export const useDataListStore = defineStore("DataList", {
           if (deleteStatus.includes(true)) {
             console.log("deleting success", deleteStatus.length);
             // trigger the watcher to reload the page
-            this.pagination.totalEntries -= deleteStatus.length;
+            this.reloadData = true;
            // return [true, undefined];
           }
         }
