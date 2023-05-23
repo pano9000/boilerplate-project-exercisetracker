@@ -130,9 +130,10 @@
     await loadDataAndHandleMessage();
   });
 
-  watch(() => props.options.dataStore.pagination.totalEntries, async (newValue, oldValue) => {
-    if (oldValue !== undefined) {
+  watch(() => props.options.dataStore.reloadData, async (newValue, oldValue) => {
+    if (newValue === true) {
       await loadDataAndHandleMessage();
+      props.options.dataStore.reloadData = false;
     }
   });
 
