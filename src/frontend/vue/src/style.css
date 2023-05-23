@@ -70,7 +70,7 @@ input, select {
   font-family: inherit;
   background-color: #fdfdfd;
   /*cursor: pointer;*/
-  transition: border-color 0.25s;
+  transition: border-color var(--transition-time-short);
   box-shadow: var(--box-shadow);
 }
 
@@ -93,7 +93,7 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color var(--transition-time-short);
 }
 
 button {

@@ -200,7 +200,7 @@ import { IconSquareCheck, IconSquareOff, IconSortDescending } from '@tabler/icon
   .list-selection-toggle svg {
     width: 100%;
     height: auto;
-    transition: all 0.25s;
+    transition: all var(--transition-time-short);
   }
 
 
@@ -212,7 +212,7 @@ import { IconSquareCheck, IconSquareOff, IconSortDescending } from '@tabler/icon
 
   .list-header-sortable {
     cursor: pointer;
-    transition: all .25s;
+    transition: all var(--transition-time-short);
   }
 
   .list-header-sortable:focus,

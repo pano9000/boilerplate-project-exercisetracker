@@ -252,7 +252,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 .ui-pagination_btn {
   /*min-width: 4.25rem;*/
   padding: 0.6rem 0.6rem;
-  transition: all .25s;
+  transition: all var(--transition-time-short);
 }
 
 .ui-pagination_btn-placeholder {
@@ -273,7 +273,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_btn-arrow svg {
-  transition: transform 0.25s;
+  transition: transform var(--transition-time-short);
 }
 
 .ui-pagination_btn-arrow_right:hover svg {
@@ -290,7 +290,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 }
 
 .ui-pagination_btn-arrow {
-  transition: all .25s;
+  transition: all var(--transition-time-short);
 }
 
 

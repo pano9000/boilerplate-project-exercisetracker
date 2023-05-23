@@ -27,7 +27,7 @@
 <style>
 
   .v-enter-active, .v-leave-active {
-    transition: all .25s ease;
+    transition: all var(--transition-time-short) ease;
   }
 
   .v-enter-from, .v-leave-to {
@@ -73,7 +73,7 @@
   .ui-input-label_reqs {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .25s;
+    transition: opacity var(--transition-time-short);
     cursor: default;
     max-width: 60ch;
     width: 100%;

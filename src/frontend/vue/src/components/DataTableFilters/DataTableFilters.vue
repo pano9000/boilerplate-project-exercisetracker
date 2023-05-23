@@ -135,7 +135,7 @@
   }
 
   .ui-filter_toggle svg {
-    transition: transform 0.25s;
+    transition: transform var(--transition-time-short);
   }
 
   .ui-filter_toggle-active svg {

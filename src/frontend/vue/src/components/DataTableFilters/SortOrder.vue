@@ -69,7 +69,7 @@
     width: 2rem;
     height: auto;
     stroke-width: 1px;
-    transition: all 0.25s;
+    transition: all var(--transition-time-short);
   }
 
   .ui-sortorder input:checked + label svg {
