@@ -191,7 +191,7 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   border-radius: var(--border-radius);
   box-shadow: inset var(--box-shadow);
   display: flex;
-  gap: .75rem;
+  gap: .5rem;
   justify-content: start;
   margin: 1rem 0rem;
   padding: 0.5rem;
@@ -229,6 +229,10 @@ import { IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
   gap: .5rem;
   align-items: center;
   justify-content: center;
+}
+
+.ui-pagination_pagebuttons {
+  gap: 0rem;
 }
 
 .ui-pagination_goToPage,
