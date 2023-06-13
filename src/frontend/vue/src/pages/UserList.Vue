@@ -111,7 +111,8 @@
 
   const dataTableKeys = ref([
     new DataTableKey("User Id", "_id", false),
-    new DataTableKey("Username", "username", true, true)
+    new DataTableKey("Username", "username", true, true),
+    new DataTableKey("Is Admin", "isAdmin", false)
   ]);
 
   dataListStore.name  = {
